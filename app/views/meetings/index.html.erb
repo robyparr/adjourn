@@ -1,0 +1,20 @@
+<h1>Meetings</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @meetings.each do |meeting| %>
+            <tr>
+                <td><%= meeting.title %></td>
+                <td><%= meeting.start_date %></td>
+                <td><%= meeting.end_date %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

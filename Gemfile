@@ -7,14 +7,15 @@ end
 
 ruby '~> 2.4.1'
 
-gem 'rails',          '~> 5.1.1'
-gem 'puma',           '~> 3.7'
-gem 'sass-rails',     '~> 5.0'
-gem 'uglifier',       '>= 1.3.0'
+gem 'rails',            '~> 5.1.1'
+gem 'puma',             '~> 3.7'
+gem 'sass-rails',       '~> 5.0'
+gem 'uglifier',         '>= 1.3.0'
 gem 'webpacker'
-gem 'turbolinks',     '~> 5'
-gem 'jbuilder',       '~> 2.5'
+gem 'turbolinks',       '~> 5'
+gem 'jbuilder',         '~> 2.5'
 gem 'rubocop'
+gem 'materialize-sass', '~> 0.98.2'
 
 group :development, :test do
   gem 'sqlite3'
@@ -32,7 +33,8 @@ group :development do
 end
 
 group :test do
-  gem "minitest-reporters"
+  gem 'minitest-reporters'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
