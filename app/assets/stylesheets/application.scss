@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+@import "materialize/components/color"; 
+
+$primary-color: #2196f3 !default;
+
+@import "materialize";
+
+body {
+    background-color: rgb(229, 229, 229);
+}
+
+.fab-fixed {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+}
+
+.card-panel.overlap {
+    margin-top: -18px;
+}

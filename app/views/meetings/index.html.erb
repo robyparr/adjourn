@@ -1,20 +1,27 @@
-<h1>Meetings</h1>
+<a class="btn-floating btn-large waves-effect waves-light red fab-fixed" href="<%= new_meeting_path %>">
+    <i class="material-icons">add</i>
+</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @meetings.each do |meeting| %>
+<div class="card-panel overlap">
+
+    <h4>Meetings</h4>
+
+    <table class="striped">
+        <thead>
             <tr>
-                <td><%= meeting.title %></td>
-                <td><%= meeting.start_date %></td>
-                <td><%= meeting.end_date %></td>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>End Date</th>
             </tr>
-        <% end %>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <% @meetings.each do |meeting| %>
+                <tr>
+                    <td><%= meeting.title %></td>
+                    <td><%= meeting.start_date %></td>
+                    <td><%= meeting.end_date %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>
