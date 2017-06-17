@@ -1,0 +1,17 @@
+/*
+ * Base stylesheet
+ */
+body {
+    background-color: rgb(229, 229, 229);
+}
+
+.fab-fixed {
+    position: fixed !important;
+    right: 50px;
+    bottom: 50px;
+}
+
+/* Pull .card-panel up onto the Navigation bar */
+.card-panel.overlap {
+    margin-top: -18px;
+}
