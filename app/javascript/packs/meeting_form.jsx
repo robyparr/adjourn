@@ -148,17 +148,13 @@ class MeetingForm extends Component {
   }
 }
 
-function onLoad() {
-  var rootNode = document.getElementById('react-root');
-  var meeting = JSON.parse(rootNode.getAttribute('data-meeting'));
 
-  ReactDOM.render(
-    <MuiThemeProvider>
-      <MeetingForm meeting={meeting} />
-    </MuiThemeProvider>,
-    document.getElementById('react-root'),
-  );
-}
+var rootNode = document.getElementById('react-root');
+var meeting = JSON.parse(rootNode.getAttribute('data-meeting'));
 
-document.addEventListener('turbolinks:load', () => onLoad());
-document.addEventListener('DOMContentLoaded', () => onLoad());
+ReactDOM.render(
+  <MuiThemeProvider>
+    <MeetingForm meeting={meeting} />
+  </MuiThemeProvider>,
+  document.getElementById('react-root'),
+);
