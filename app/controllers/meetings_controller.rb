@@ -6,6 +6,13 @@ class MeetingsController < ApplicationController
     @meetings = Meeting.all
   end
 
+  # GET /meetings/:id
+  # Show a specific meeting
+  def show
+    @meeting = Meeting.find(params[:id])
+  end
+  
+
   # GET /meetings/new
   # New meeting form.
   def new
@@ -13,7 +20,7 @@ class MeetingsController < ApplicationController
   end
 
   # POST /meetings
-  # Create a new meeting
+  # Create a new meeting.
   def create
     meeting = Meeting.new(meeting_params)
 
@@ -23,6 +30,20 @@ class MeetingsController < ApplicationController
       render json: meeting.errors, status: :unprocessable_entity
     end
   end
+
+  # PATCH /meetings/:id
+  # Update an existing meeting.
+  def update
+    meeting = Meeting.find(params[:id])
+
+    if meeting.update_attributes(meeting_params)
+      render json: meeting
+    else
+      render json: meeting.errors, status: :unprocessable_entity
+    end
+    
+  end
+  
 
   private
   

@@ -22,7 +22,7 @@ export default class Utils {
             return dateTimeString;
         }
 
-        return new Date(dateTimeString.replace(' ', 'T'));
+        return new Date(dateTimeString.replace(' ', 'T').replace('Z', ''));
     }
 
     /*

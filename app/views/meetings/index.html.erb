@@ -17,7 +17,7 @@
         <tbody>
             <% @meetings.each do |meeting| %>
                 <tr>
-                    <td><%= meeting.title %></td>
+                    <td><%= link_to meeting.title, meeting_path(meeting) %></td>
                     <td><%= meeting.start_date %></td>
                     <td><%= meeting.end_date %></td>
                 </tr>

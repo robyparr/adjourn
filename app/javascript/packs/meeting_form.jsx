@@ -85,9 +85,13 @@ class MeetingForm extends Component {
    * Saves the meeting.
    */
   saveMeeting = (field) => {
-    axios.post('/meetings',this.state)
-      .then(response => {
-        window.location.href = '/meetings';
+    axios({
+      method: this.state.meeting.id ? 'PATCH' : 'POST',
+      url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
+      data: this.state
+    }).then(response => {
+      window.location.href = '/meetings';
+      console.log(response);
     });
   }
 
@@ -131,14 +135,16 @@ class MeetingForm extends Component {
               id="start_time"
               hintText="Start time"
               onChange={() => this.handleDateTimeUpdate('start')}
-              defaultTime={this.state.meeting.start_date} />
+              defaultTime={this.state.meeting.start_date}
+              format="24hr" />
           </div>
           <div className="col m4 offset-m4 text-right">
             <TimePicker 
               id="end_time"
               hintText="End time"
               onChange={() => this.handleDateTimeUpdate('end')}
-              defaultTime={this.state.meeting.end_date} />
+              defaultTime={this.state.meeting.end_date}
+              format="24hr" />
           </div>
         </div>
 
