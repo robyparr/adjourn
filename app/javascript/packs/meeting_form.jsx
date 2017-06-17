@@ -22,6 +22,11 @@ class MeetingForm extends Component {
 
   constructor(props) {
     super(props);
+
+    props.meeting.title =  props.meeting.title || 'New Meeting';
+    props.meeting.start_date = Utils.dateFromString(props.meeting.start_date || new Date()); 
+    props.meeting.end_date = Utils.dateFromString(props.meeting.end_date || new Date());
+
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
       meeting: props.meeting
@@ -87,11 +92,6 @@ class MeetingForm extends Component {
   }
 
   render() {
-    var meetingTitle = this.state.meeting.title || 'New Meeting';
-
-    var start_date = Utils.dateFromString(this.state.meeting.start_date || new Date()); 
-    var end_date = Utils.dateFromString(this.state.meeting.end_date || new Date());
-
     return (
       <div>
         {/* Title */}
@@ -99,7 +99,7 @@ class MeetingForm extends Component {
           <div className="col m6">
             <RIEInput
               change={this.handleFieldUpdate}
-              value={meetingTitle}
+              value={this.state.meeting.title}
               propName="title"
               className="inline-header" />
           </div>
@@ -112,7 +112,7 @@ class MeetingForm extends Component {
               id="start_date"
               hintText="Start date"
               onChange={() => this.handleDateTimeUpdate('start')}
-              defaultDate={start_date} />
+              defaultDate={this.state.meeting.start_date} />
           </div>
           <div className="col m4 text-center">to</div>
           <div className="col m4 text-right">
@@ -120,7 +120,7 @@ class MeetingForm extends Component {
               id="end_date"
               hintText="End date"
               onChange={() => this.handleDateTimeUpdate('end')}
-              defaultDate={end_date} />
+              defaultDate={this.state.meeting.end_date} />
           </div>
         </div>
 
@@ -131,14 +131,14 @@ class MeetingForm extends Component {
               id="start_time"
               hintText="Start time"
               onChange={() => this.handleDateTimeUpdate('start')}
-              defaultTime={start_date} />
+              defaultTime={this.state.meeting.start_date} />
           </div>
           <div className="col m4 offset-m4 text-right">
             <TimePicker 
               id="end_time"
               hintText="End time"
               onChange={() => this.handleDateTimeUpdate('end')}
-              defaultTime={end_date} />
+              defaultTime={this.state.meeting.end_date} />
           </div>
         </div>
 
