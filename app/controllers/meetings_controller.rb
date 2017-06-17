@@ -27,7 +27,7 @@ class MeetingsController < ApplicationController
     if meeting.save
       render json: meeting
     else
-      render json: meeting.errors, status: :unprocessable_entity
+      render json: meeting.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class MeetingsController < ApplicationController
     if meeting.update_attributes(meeting_params)
       render json: meeting
     else
-      render json: meeting.errors, status: :unprocessable_entity
+      render json: meeting.errors.full_messages, status: :unprocessable_entity
     end
     
   end

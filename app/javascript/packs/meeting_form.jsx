@@ -29,7 +29,8 @@ class MeetingForm extends Component {
 
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
-      meeting: props.meeting
+      meeting: props.meeting,
+      errors: null
     };
   }
 
@@ -90,12 +91,33 @@ class MeetingForm extends Component {
       url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
       data: this.state
     }).then(response => {
-      window.location.href = '/meetings';
+      //window.location.href = '/meetings';
       console.log(response);
+    }).catch(error => {
+      console.log(error.response);
+      if (error.response) {
+        var errors = error.response.data;
+        this.setState({ errors: errors });
+      } else {
+        console.log(error.message);
+      }
     });
   }
 
   render() {
+    var errorsHTML = this.state.errors ? (
+      <div className="col m6 error text-right">
+        <h5>Oops! We've got a problem!</h5>
+        <ul>
+          { 
+            this.state.errors.map((e, key) => {
+              return <li key={key}>{e}</li>
+            }) 
+          }
+        </ul>
+      </div>
+    ) : "";
+
     return (
       <div>
         {/* Title */}
@@ -107,6 +129,7 @@ class MeetingForm extends Component {
               propName="title"
               className="inline-header" />
           </div>
+          {errorsHTML}
         </div>
 
         {/* Start date & end date */}

@@ -14,6 +14,6 @@ class Meeting < ApplicationRecord
         is_valid = self.end_date && self.start_date && 
           self.end_date > self.start_date
       
-        errors.add(:end_date, 'must be after #{:start_date}') unless is_valid
+        errors.add(:end_date, "must be after #{start_date}") unless is_valid
     end
 end
