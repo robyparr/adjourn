@@ -106,6 +106,21 @@ class MeetingForm extends Component {
     });
   }
 
+  /*
+   * Handles the addition of a new adgendum.
+   * This will add the new agendum to the meeting agenda,
+   * causing a state update.
+   */
+  handleNewAgendum = (agendum) => {
+    var meeting = this.state.meeting;
+    var agenda = meeting.agenda;
+    agenda.push(agendum);
+    
+    meeting.agenda = agenda;
+
+    this.setState({ meeting: meeting });
+  }
+
   render() {
     var errorsHTML = this.state.errors ? (
       <div className="col m6 error text-right">
@@ -174,7 +189,11 @@ class MeetingForm extends Component {
         </div>
 
         <h5>Agenda</h5>
-        <AgendumList agenda={this.state.meeting.agenda} />
+        <hr />
+        <AgendumList 
+          agenda={this.state.meeting.agenda} 
+          meetingID={this.state.meeting.id}
+          handleNewAgendum={this.handleNewAgendum} />
 
         <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
       </div>

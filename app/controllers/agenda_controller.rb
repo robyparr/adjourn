@@ -3,8 +3,21 @@
 #
 class AgendaController < ApplicationController
 
-  before_action :load_meeting, only: [:update]
+  before_action :load_meeting, only: [:create, :update]
   before_action :load_agendum, only: [:update]
+
+  # POST /meetings/:meeting_id/agenda
+  #   Creates a new agendum.
+  def create
+    agendum = @meeting.agenda.build(agendum_params)
+    
+    if agendum.save
+      render json: agendum
+    else
+      render json: agendum.errors.full_messages, status: :unprocessable_item
+    end
+  end
+  
 
   # PATCH /meetings/:meeting_id/agenda/:id
   #   Updates an agendum's attributes.

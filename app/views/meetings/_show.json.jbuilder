@@ -1,3 +1,4 @@
+json.id           meeting.id
 json.title        meeting.title
 json.description  meeting.description
 json.start_date   meeting.start_date
