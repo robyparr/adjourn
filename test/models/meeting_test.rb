@@ -34,4 +34,9 @@ class MeetingTest < ActiveSupport::TestCase
     @meeting.end_date -= 1
     assert_not @meeting.valid?
   end
+
+  test 'meeting may have an agenda' do
+    assert @meeting.agenda.count > 0
+  end
+  
 end

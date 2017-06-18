@@ -1,4 +1,21 @@
+#
+# Represents a single meeting.
+#
+# Attributes:
+#   - title:string
+#   - description:string
+#   - start_date:datetime
+#   - end_date:datetime
+#
+# Associations:
+#   - Agenda: a list of agendum (agenda items).
+#
 class Meeting < ApplicationRecord
+  #
+  # Relationships
+  #
+  has_many :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
+
   #
   # Validations
   #
