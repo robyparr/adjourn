@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 
-import AgendumList from './agendum_list';
+import AgendumList from './agendum/agendum_list';
 
 // Utilities
 import Utils from 'utils';
