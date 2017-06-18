@@ -9,7 +9,7 @@ class MeetingsController < ApplicationController
   # GET /meetings/:id
   # Show a specific meeting
   def show
-    @meeting = Meeting.find(params[:id])
+    @meeting = Meeting.includes(:agenda).find(params[:id])
   end
   
 

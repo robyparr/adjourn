@@ -1,5 +1,5 @@
 <div class="card-panel overlap">
-    <div id="react-root" data-meeting="<%= meeting.to_json %>">
+    <div id="react-root" data-meeting='<%= render 'meetings/show.json', meeting: meeting %>'>
         <%= javascript_pack_tag 'meeting_form' %>
     </div>
 </div>

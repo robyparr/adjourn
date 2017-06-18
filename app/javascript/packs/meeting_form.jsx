@@ -7,6 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 
+import AgendumList from './agendum_list';
+
 // Utilities
 import Utils from 'utils';
 import axios from 'axios';
@@ -170,6 +172,9 @@ class MeetingForm extends Component {
               format="24hr" />
           </div>
         </div>
+
+        <h5>Agenda</h5>
+        <AgendumList agenda={this.state.meeting.agenda} />
 
         <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
       </div>
