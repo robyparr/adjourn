@@ -13,9 +13,9 @@ const AgendumList = (props) => {
     return(
         <div className="row">
             {
-                props.agenda.map((agendum, key) => {
+                props.agenda.map((agendum) => {
                     return(
-                        <div className="col m4" key={key}>
+                        <div className="col m4" key={agendum.id}>
                             <Agendum agendum={agendum}
                                 meetingID={props.meetingID}
                                 handleAgendumAddRemove={props.handleAgendumAddRemove} />
