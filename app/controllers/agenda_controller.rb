@@ -3,8 +3,8 @@
 #
 class AgendaController < ApplicationController
 
-  before_action :load_meeting, only: [:create, :update]
-  before_action :load_agendum, only: [:update]
+  before_action :load_meeting, only: [:create, :update, :destroy]
+  before_action :load_agendum, only: [:update, :destroy]
 
   # POST /meetings/:meeting_id/agenda
   #   Creates a new agendum.
@@ -27,6 +27,13 @@ class AgendaController < ApplicationController
     else
       render json: @agendum.errors.full_messages, status: :unprocessable_item
     end
+  end
+
+  # DELETE /meetings/:meeting_id/agenda/:id
+  #   Deletes an agendum.
+  def destroy
+    @agendum.delete
+    render json: { message: 'Agendum sucessfully deleted.'}
   end
   
 

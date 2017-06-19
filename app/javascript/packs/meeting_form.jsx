@@ -111,10 +111,16 @@ class MeetingForm extends Component {
    * This will add the new agendum to the meeting agenda,
    * causing a state update.
    */
-  handleNewAgendum = (agendum) => {
+  handleAgendumAddRemove = (agendum, isAdd) => {
     var meeting = this.state.meeting;
     var agenda = meeting.agenda;
-    agenda.push(agendum);
+
+    if (isAdd) {
+      agenda.push(agendum);
+    } else {
+      var agendumToDeleteIndex = agenda.indexOf(agendum);
+      agenda.splice(agendumToDeleteIndex, 1);
+    }
     
     meeting.agenda = agenda;
 
@@ -193,7 +199,7 @@ class MeetingForm extends Component {
         <AgendumList 
           agenda={this.state.meeting.agenda} 
           meetingID={this.state.meeting.id}
-          handleNewAgendum={this.handleNewAgendum} />
+          handleAgendumAddRemove={this.handleAgendumAddRemove} />
 
         <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
       </div>

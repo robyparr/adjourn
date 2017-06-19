@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 // Controls
 import { RIEInput, RIETextArea } from 'riek';
+import Dialog  from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 // Utils
 import axios from 'axios';
@@ -71,11 +73,25 @@ export default class Agendum extends Component {
             { authenticity_token: Utils.getAuthenticityToken(), agendum: this.state.agendum }
         ).then(response => {
             this.setState(this.getInitialState());
-            this.props.handleNewAgendum(response.data);
+            this.props.handleAgendumAddRemove(response.data, true);
         }).catch(error => {
             console.log(error);
             console.log(error.response);
             console.log(error.response.data);
+        });
+    }
+
+    /*
+     * Delete the agendum.
+     */
+    handleDeleteAgendum = () => {
+        axios({
+            url: `/meetings/${this.props.meetingID}/agenda/${this.state.agendum.id}`,
+            method: 'delete',
+            data: { authenticity_token: Utils.getAuthenticityToken() }
+        }).then(response => {
+            this.setState({ delete: false });
+            this.props.handleAgendumAddRemove(this.state.agendum, false);
         });
     }
 
@@ -84,7 +100,7 @@ export default class Agendum extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var cardClass = `card blue-grey ${isExisting ? "lighten-1" : "lighten-3"}`;
+        var cardClass = `agendum card blue-grey ${isExisting ? "lighten-1" : "lighten-3"}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.agendum.id : 'new';
@@ -107,9 +123,31 @@ export default class Agendum extends Component {
             this.state.agendum.description
             : "Click here to add a new agendum!";
 
+
+        var deleteDialogActions = [
+            <FlatButton label="Yes" primary={true} onTouchTap={this.handleDeleteAgendum} />,
+            <FlatButton label="No" primary={true} onTouchTap={() => this.setState({ delete: false })} />
+        ];
+
+        var deleteDialog = this.state.delete ? 
+                <Dialog
+                    actions={deleteDialogActions}
+                    modal={false}
+                    open={this.state.delete}>
+                        Are you sure you want to remove this agendum?
+                </Dialog>
+                : "";
+
         return(
             <div className={cardClass} onClick={this.handleNewItemClick}>
                 <div className="card-content white-text">
+                    <div className="right">
+                        {isExisting && 
+                            <a className="delete-link" onClick={() => this.setState({ delete: true })}>
+                                <i className="material-icons">delete</i>
+                            </a>
+                        }
+                    </div>
                     <span className="card-title" id={`${idPrefix}_title`}>
                         <RIEInput
                             change={isExisting ? this.handleUpdate : this.handleChange}
@@ -124,6 +162,8 @@ export default class Agendum extends Component {
                             propName="description" />
                     </p>
                 </div>
+
+                {deleteDialog}
             </div>
         );
     }
