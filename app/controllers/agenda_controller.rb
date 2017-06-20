@@ -12,7 +12,7 @@ class AgendaController < ApplicationController
     agendum = @meeting.agenda.build(agendum_params)
     
     if agendum.save
-      render json: agendum
+      render json: agendum, status: :created
     else
       render json: agendum.errors.full_messages, status: :unprocessable_item
     end

@@ -25,7 +25,7 @@ class MeetingsController < ApplicationController
     meeting = Meeting.new(meeting_params)
 
     if meeting.save
-      render json: meeting
+      render json: meeting, status: :created
     else
       render json: meeting.errors.full_messages, status: :unprocessable_entity
     end
