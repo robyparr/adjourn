@@ -194,12 +194,16 @@ class MeetingForm extends Component {
           </div>
         </div>
 
-        <h5>Agenda</h5>
-        <hr />
-        <AgendumList 
-          agenda={this.state.meeting.agenda} 
-          meetingID={this.state.meeting.id}
-          handleAgendumAddRemove={this.handleAgendumAddRemove} />
+        {this.state.meeting.id &&
+          <div>
+            <h5>Agenda</h5>
+            <hr />
+            <AgendumList 
+              agenda={this.state.meeting.agenda} 
+              meetingID={this.state.meeting.id}
+              handleAgendumAddRemove={this.handleAgendumAddRemove} />
+          </div>
+        }
 
         <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
       </div>
