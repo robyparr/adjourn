@@ -19,3 +19,13 @@
         }
     }
 }
+
+.date-picker input {
+    margin-bottom: 10px !important;
+}
+
+.time-picker input {
+    height: inherit !important;
+}
+
+@import 'rc-time-picker/assets/index.css'

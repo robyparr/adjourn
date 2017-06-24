@@ -5,13 +5,15 @@ import ReactDOM from 'react-dom';
 import { RIEInput } from 'riek';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
+import TimePicker from 'rc-time-picker';
 
 import AgendumList from './agendum/agendum_list';
+import DateTimePicker from './common/date_time_picker';
 
 // Utilities
 import Utils from 'utils';
 import axios from 'axios';
+import moment from 'moment';
 
 // For material-ui
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -26,8 +28,8 @@ class MeetingForm extends Component {
     super(props);
 
     props.meeting.title =  props.meeting.title || 'New Meeting';
-    props.meeting.start_date = Utils.dateFromString(props.meeting.start_date || new Date()); 
-    props.meeting.end_date = Utils.dateFromString(props.meeting.end_date || new Date());
+    props.meeting.start_date = props.meeting.start_date || Utils.formatDateTime(new Date()); 
+    props.meeting.end_date = props.meeting.end_date || Utils.formatDateTime(new Date());
 
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
@@ -63,25 +65,6 @@ class MeetingForm extends Component {
     var value = e.target.value;
 
     this.handleFieldUpdate({ fieldName: value });
-  }
-
-  /*
-   * Special event handler for date/time field updates.
-   * Taking either 'start' or 'end' as the field argument,
-   * pulls the value for ${field}_date and ${field}_time to combine
-   * them into a single value.
-   */
-  handleDateTimeUpdate = (field) => {
-    // Get date and time fields
-    var date = document.querySelector(`#${field}_date`);
-    var time = document.querySelector(`#${field}_time`);
-
-    // Build props object for this.handleFieldUpdate()
-    var props = {};
-    props[`${field}_date`] = date.value + ' ' + (time != null ? time.value : '00:00:00');
-
-    // Update state with date and time
-    this.handleFieldUpdate(props);
   }
 
   /*
@@ -128,6 +111,9 @@ class MeetingForm extends Component {
   }
 
   render() {
+    /*
+     * HTML and styles
+     */
     var errorsHTML = this.state.errors ? (
       <div className="col m6 error text-right">
         <h5>Oops! We've got a problem!</h5>
@@ -140,6 +126,17 @@ class MeetingForm extends Component {
         </ul>
       </div>
     ) : "";
+
+    var datePickerStyles = {
+      width: 80,
+      textAlign: 'center'
+    };
+
+    /*
+     * Values
+     */
+    var start_date = moment(this.state.meeting.start_date);
+    var end_date = moment(this.state.meeting.end_date);
 
     return (
       <div>
@@ -155,42 +152,22 @@ class MeetingForm extends Component {
           {errorsHTML}
         </div>
 
-        {/* Start date & end date */}
         <div className="row">
-          <div className="col m4">
-            <DatePicker
-              id="start_date"
-              hintText="Start date"
-              onChange={() => this.handleDateTimeUpdate('start')}
-              defaultDate={this.state.meeting.start_date} />
-          </div>
-          <div className="col m4 text-center">to</div>
-          <div className="col m4 text-right">
-            <DatePicker 
-              id="end_date"
-              hintText="End date"
-              onChange={() => this.handleDateTimeUpdate('end')}
-              defaultDate={this.state.meeting.end_date} />
+          <div className="col m1 bold">Start</div>
+          <div className="col m3">
+            <DateTimePicker 
+              name="start_date"
+              dateTime={start_date}
+              onChange={this.handleFieldUpdate} />
           </div>
         </div>
-
-        {/* Start time & end time */}
         <div className="row">
-          <div className="col m4">
-            <TimePicker
-              id="start_time"
-              hintText="Start time"
-              onChange={() => this.handleDateTimeUpdate('start')}
-              defaultTime={this.state.meeting.start_date}
-              format="24hr" />
-          </div>
-          <div className="col m4 offset-m4 text-right">
-            <TimePicker 
-              id="end_time"
-              hintText="End time"
-              onChange={() => this.handleDateTimeUpdate('end')}
-              defaultTime={this.state.meeting.end_date}
-              format="24hr" />
+          <div className="col m1 bold">End</div>
+          <div className="col m3">
+            <DateTimePicker 
+              name="end_date"
+              dateTime={end_date}
+              onChange={this.handleFieldUpdate} />
           </div>
         </div>
 
