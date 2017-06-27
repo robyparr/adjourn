@@ -1,5 +1,3 @@
-var dateFormat = require('dateformat');
-
 /*
  * JavaScript utilities.
  */
