@@ -180,7 +180,9 @@ class MeetingForm extends Component {
           </div>
         }
 
-        <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
+        {!this.state.meeting.id &&
+          <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
+        }
       </div>
     );
   }
