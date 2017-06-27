@@ -28,8 +28,16 @@ class MeetingForm extends Component {
     super(props);
 
     props.meeting.title =  props.meeting.title || 'New Meeting';
-    props.meeting.start_date = props.meeting.start_date || Utils.formatDateTime(new Date()); 
-    props.meeting.end_date = props.meeting.end_date || Utils.formatDateTime(new Date());
+    props.meeting.start_date = props.meeting.start_date || Utils.formatDateTime(new Date());
+
+    // Add 1 hour to end date if it's a new meeting, otherwise
+    // just set to the passed value.
+    if (props.meeting.end_date) {
+      props.meeting.end_date = props.meeting.end_date;
+    } else {
+      var end_date = moment(new Date()).add(1, 'hours');
+      props.meeting.end_date = Utils.formatDateTime(end_date.toDate());
+    }
 
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
