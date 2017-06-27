@@ -76,8 +76,6 @@ export default class Agendum extends Component {
             this.props.handleAgendumAddRemove(response.data, true);
         }).catch(error => {
             console.log(error);
-            console.log(error.response);
-            console.log(error.response.data);
         });
     }
 

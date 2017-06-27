@@ -83,16 +83,11 @@ class MeetingForm extends Component {
       method: this.state.meeting.id ? 'PATCH' : 'POST',
       url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
       data: this.state
-    }).then(response => {
-      //window.location.href = '/meetings';
-      console.log(response);
-    }).catch(error => {
-      console.log(error.response);
+    }).then(response => this.setState({ meeting: response.data }))
+    .catch(error => {
       if (error.response) {
         var errors = error.response.data;
         this.setState({ errors: errors });
-      } else {
-        console.log(error.message);
       }
     });
   }
@@ -104,7 +99,7 @@ class MeetingForm extends Component {
    */
   handleAgendumAddRemove = (agendum, isAdd) => {
     var meeting = this.state.meeting;
-    var agenda = meeting.agenda;
+    var agenda = meeting.agenda || [];
 
     if (isAdd) {
       agenda.push(agendum);
@@ -134,11 +129,6 @@ class MeetingForm extends Component {
         </ul>
       </div>
     ) : "";
-
-    var datePickerStyles = {
-      width: 80,
-      textAlign: 'center'
-    };
 
     /*
      * Values
@@ -184,7 +174,7 @@ class MeetingForm extends Component {
             <h5>Agenda</h5>
             <hr />
             <AgendumList 
-              agenda={this.state.meeting.agenda} 
+              agenda={this.state.meeting.agenda || []} 
               meetingID={this.state.meeting.id}
               handleAgendumAddRemove={this.handleAgendumAddRemove} />
           </div>
