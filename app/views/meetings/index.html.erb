@@ -18,8 +18,8 @@
             <% @meetings.each do |meeting| %>
                 <tr>
                     <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-                    <td><%= meeting.start_date %></td>
-                    <td><%= meeting.end_date %></td>
+                    <td class="localize"><%= meeting.start_date %></td>
+                    <td class="localize"><%= meeting.end_date %></td>
                 </tr>
             <% end %>
         </tbody>

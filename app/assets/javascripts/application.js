@@ -13,6 +13,7 @@
 //= require rails-ujs
 //= require jquery 
 //= require jquery_ujs
+//= require moment/moment
 //= require materialize
 //= require turbolinks
 //= require_tree .

@@ -8,7 +8,7 @@ export default class Utils {
      * Formats a Date() object into a string.
      */
     static formatDateTime(date) {
-        return dateFormat(date, 'yyyy-mm-dd hh:MM:ss');
+        return moment(date).format('LLLL');
     }
 
     /*
