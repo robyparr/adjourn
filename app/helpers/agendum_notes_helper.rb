@@ -1,0 +1,2 @@
+module AgendumNotesHelper
+end

@@ -18,4 +18,9 @@ class AgendumTest < ActiveSupport::TestCase
     @agendum.meeting = nil
     assert_not @agendum.valid?
   end
+
+  test 'agendum can have notes' do
+    assert_not_empty @agendum.notes
+  end
+  
 end
