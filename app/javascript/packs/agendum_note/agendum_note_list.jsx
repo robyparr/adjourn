@@ -35,6 +35,13 @@ export default class AgendumNoteList extends Component {
         this.setState(this.getInitialState(notes));
     }
 
+    handleDeletedNote = (note) => {
+        var notes = this.state.notes.slice();
+        notes.splice(notes.indexOf(note), 1);
+
+        this.setState({ notes: notes });
+    }
+
     render() {
         return(
             <ul className="collection">
@@ -46,7 +53,8 @@ export default class AgendumNoteList extends Component {
                                 note={note}
                                 meetingID={this.props.meetingID}
                                 agendumID={this.props.agendumID}
-                                handleNewNote={this.handleNewNote} />
+                                handleNewNote={this.handleNewNote}
+                                handleDeletedNote={this.handleDeletedNote} />
                         )
                     })
                 }

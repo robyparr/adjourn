@@ -13,5 +13,18 @@
             display: block;
         }
     }
+
+    .agendum-note {
+        .delete-link {
+            display: none;
+            color: inherit;
+        }
+
+        &:hover {
+            .delete-link {
+                display: block;
+            }
+        }
+    }
 }
 

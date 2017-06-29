@@ -26,7 +26,7 @@ class AgendumNotesController < ApplicationController
   end
 
   def destroy
-    render json: { message: 'Successfully deleted '} if @note.destroy
+    render json: { message: 'Successfully deleted' } if @note.destroy
   end
 
 
