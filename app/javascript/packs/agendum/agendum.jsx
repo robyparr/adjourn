@@ -166,7 +166,7 @@ export default class Agendum extends Component {
                 {isExisting &&
                     <div className="card-actions">
                         <AgendumNoteList 
-                            meetingID={this.state.meetingID}
+                            meetingID={this.props.meetingID}
                             agendumID={this.state.agendum.id}
                             notes={this.state.agendum.notes} />
                     </div>
