@@ -5,6 +5,8 @@ import { RIEInput, RIETextArea } from 'riek';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
+import AgendumNoteList from '../agendum_note/agendum_note_list';
+
 // Utils
 import axios from 'axios';
 import Utils from 'utils';
@@ -160,6 +162,15 @@ export default class Agendum extends Component {
                             propName="description" />
                     </p>
                 </div>
+
+                {isExisting &&
+                    <div className="card-actions">
+                        <AgendumNoteList 
+                            meetingID={this.state.meetingID}
+                            agendumID={this.state.agendum.id}
+                            notes={this.state.agendum.notes} />
+                    </div>
+                }
 
                 {deleteDialog}
             </div>
