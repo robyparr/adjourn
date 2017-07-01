@@ -12,8 +12,11 @@
 
 ActiveRecord::Schema.define(version: 20170701101443) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "agendum_notes", force: :cascade do |t|
-    t.integer "agendum_id"
+    t.bigint "agendum_id"
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170701101443) do
   create_table "agendums", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "meeting_id"
+    t.bigint "meeting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meeting_id"], name: "index_agendums_on_meeting_id"
@@ -36,7 +39,7 @@ ActiveRecord::Schema.define(version: 20170701101443) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
@@ -57,4 +60,7 @@ ActiveRecord::Schema.define(version: 20170701101443) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "agendum_notes", "agendums"
+  add_foreign_key "agendums", "meetings"
+  add_foreign_key "meetings", "users"
 end

@@ -18,9 +18,9 @@ gem 'rubocop'
 gem 'materialize-sass', '~> 0.98.2'
 gem 'jquery-rails'
 gem 'devise'
+gem 'pg'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'byebug',             platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara',           '~> 2.13'
   gem 'selenium-webdriver'
