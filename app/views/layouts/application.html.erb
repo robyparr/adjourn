@@ -26,14 +26,19 @@
           <% end %>
         </ul>
       </div>
-      <div class="nav-content">&nbsp;</div>
+      <div class="nav-content text-center">
+        <% if notice || alert %>
+          <div class="card-panel">
+            <p class="black-text"><%= notice %></p>
+            <p class="red-text darken-2"><%= alert %></p>
+          </div>
+        <% else %>
+          &nbsp;
+        <% end %>
+      </div>
     </nav>
 
     <div class="container">
-      <% if notice || alert %>
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
-      <% end %>
       <%= yield %>
     </div>
   </body>
