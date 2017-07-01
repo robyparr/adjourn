@@ -13,7 +13,7 @@ export default class AgendumNoteList extends Component {
     }
 
     getInitialState(notes) {
-        notes = notes.slice();
+        notes = notes ? notes.slice() : [];
 
         // Add an empty note for the 'new note' interface
         notes.push({});
