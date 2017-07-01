@@ -32,7 +32,7 @@ class AgendaController < ApplicationController
   # DELETE /meetings/:meeting_id/agenda/:id
   #   Deletes an agendum.
   def destroy
-    @agendum.delete
+    @agendum.destroy
     render json: { message: 'Agendum sucessfully deleted.'}
   end
   

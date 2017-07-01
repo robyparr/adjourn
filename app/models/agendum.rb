@@ -13,7 +13,7 @@ class Agendum < ApplicationRecord
   # Relationships
   #
   belongs_to :meeting
-  has_many :notes, class_name: 'AgendumNote'
+  has_many :notes, class_name: 'AgendumNote', dependent: :destroy
 
   #
   # Validations
