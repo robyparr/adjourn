@@ -14,7 +14,8 @@ class Meeting < ApplicationRecord
   #
   # Relationships
   #
-  has_many :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
+  has_many    :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
+  belongs_to  :user
 
   #
   # Validations

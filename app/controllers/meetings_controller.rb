@@ -3,13 +3,15 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # List all meetings.
   def index
-    @meetings = Meeting.all
+    @meetings = current_user.meetings
   end
 
   # GET /meetings/:id
   # Show a specific meeting
   def show
-    @meeting = Meeting.includes(agenda: :notes).find(params[:id])
+    @meeting = current_user.meetings
+                           .includes(agenda: :notes)
+                           .find(params[:id])
   end
   
 
@@ -22,7 +24,7 @@ class MeetingsController < ApplicationController
   # POST /meetings
   # Create a new meeting.
   def create
-    meeting = Meeting.new(meeting_params)
+    meeting = current_user.meetings.build(meeting_params)
 
     if meeting.save
       render json: meeting, status: :created
@@ -34,7 +36,7 @@ class MeetingsController < ApplicationController
   # PATCH /meetings/:id
   # Update an existing meeting.
   def update
-    meeting = Meeting.find(params[:id])
+    meeting = current_user.meetings.find(params[:id])
 
     if meeting.update_attributes(meeting_params)
       render json: meeting

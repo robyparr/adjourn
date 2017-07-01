@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root to: 'meetings#index'
+
+  devise_for :users
   
   # /meetings/[:id]
   resources :meetings do

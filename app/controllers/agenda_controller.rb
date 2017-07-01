@@ -40,12 +40,12 @@ class AgendaController < ApplicationController
   private
   # Load the meeting object.
   def load_meeting
-    @meeting = Meeting.find params[:meeting_id]
+    @meeting = current_user.meetings.find(params[:meeting_id])
   end
 
   # Load the agendum object.
   def load_agendum
-    @agendum = Agendum.find params[:id]
+    @agendum = current_user.agenda.find(params[:id])
   end
 
   # Agendum strong params

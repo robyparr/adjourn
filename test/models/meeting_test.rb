@@ -3,6 +3,7 @@ require 'test_helper'
 class MeetingTest < ActiveSupport::TestCase
   def setup
     @meeting = meetings(:one)
+    @meeting.user = users(:one)
   end
 
   test 'meeting is valid' do

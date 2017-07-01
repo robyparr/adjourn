@@ -31,13 +31,14 @@ class AgendumNotesController < ApplicationController
 
 
   private
-
+  
   def load_agendum
-    @agendum = Agendum.find(params[:agenda_id])
+    @agendum = current_user.agenda.find(params[:agenda_id])
   end
 
   def load_note
-    @note = AgendumNote.find(params[:id])
+    load_agendum
+    @note = @agendum.notes.find(params[:id])
   end
   
   def note_params
