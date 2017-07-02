@@ -42,6 +42,7 @@ class MeetingForm extends Component {
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
       meeting: props.meeting,
+      agenda: props.meeting.agenda || [],
       errors: null
     };
   }
@@ -61,7 +62,7 @@ class MeetingForm extends Component {
     meeting[updateField] = prop[updateField];
 
     // Set the state with the modified meeting object
-    this.setState({ meeting: meeting }, () => console.log(this.state));
+    this.saveMeeting();
   }
 
   /*
@@ -78,7 +79,7 @@ class MeetingForm extends Component {
   /*
    * Saves the meeting.
    */
-  saveMeeting = (field) => {
+  saveMeeting = () => {
     axios({
       method: this.state.meeting.id ? 'PATCH' : 'POST',
       url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
@@ -98,8 +99,7 @@ class MeetingForm extends Component {
    * causing a state update.
    */
   handleAgendumAddRemove = (agendum, isAdd) => {
-    var meeting = this.state.meeting;
-    var agenda = meeting.agenda || [];
+    var agenda = this.state.agenda || [];
 
     if (isAdd) {
       agenda.push(agendum);
@@ -107,10 +107,8 @@ class MeetingForm extends Component {
       var agendumToDeleteIndex = agenda.indexOf(agendum);
       agenda.splice(agendumToDeleteIndex, 1);
     }
-    
-    meeting.agenda = agenda;
 
-    this.setState({ meeting: meeting });
+    this.setState({ agenda: agenda });
   }
 
   render() {
@@ -174,7 +172,7 @@ class MeetingForm extends Component {
             <h5>Agenda</h5>
             <hr />
             <AgendumList 
-              agenda={this.state.meeting.agenda || []} 
+              agenda={this.state.agenda} 
               meetingID={this.state.meeting.id}
               handleAgendumAddRemove={this.handleAgendumAddRemove} />
           </div>
