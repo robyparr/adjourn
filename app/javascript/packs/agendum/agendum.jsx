@@ -36,49 +36,20 @@ export default class Agendum extends Component {
     handleUpdate = (prop) => {
         var meetingID = this.props.meetingID;
         var agendumID = this.state.agendum.id;
+        var url = `/meetings/${meetingID}/agenda/`;
 
-        axios.patch(
-            `/meetings/${meetingID}/agenda/${agendumID}`,
-            { authenticity_token: Utils.getAuthenticityToken(), agendum: prop }
-        ).then(responese => {
-            console.log(responese);
-            console.log(response.data);
-        }).catch(error => {
-            console.log(error);
-            console.log(error.response);
-            console.log(error.response.data);
-        });
-    }
-
-    /*
-     * Handles the change of a new agendum component's
-     * elements, casuing the new value to be saved into
-     * component state.
-     */
-    handleChange = (prop) => {
-        var agendum = this.state.agendum;
-
-        var propName = Object.keys(prop)[0];
-        agendum[propName] = prop[propName];
-
-        this.setState({ agendum: agendum });
-    }
-
-    /*
-     * Save the new agendum.
-     */
-    handleSaveAgendum = (e) => {
-        e.preventDefault();
-
-        axios.post(
-            `/meetings/${this.props.meetingID}/agenda`,
-            { authenticity_token: Utils.getAuthenticityToken(), agendum: this.state.agendum }
-        ).then(response => {
-            this.setState(this.getInitialState());
-            this.props.handleAgendumAddRemove(response.data, true);
-        }).catch(error => {
-            console.log(error);
-        });
+        axios({
+            url: agendumID ? url + agendumID : url,
+            method: agendumID ? 'PATCH' : 'POST',
+            data: { authenticity_token: Utils.getAuthenticityToken(), agendum: prop }
+        }).then(response => {
+            if (agendumID) {
+                this.setState({ agendum: response.data });
+            } else {
+                this.setState(this.getInitialState());
+                this.props.handleAgendumAddRemove(response.data, true);
+            }
+        }).catch(error => console.log(error));
     }
 
     /*
@@ -105,14 +76,6 @@ export default class Agendum extends Component {
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.agendum.id : 'new';
 
-        // The card's FAB.
-        var cardFAB = !isExisting && this.state.agendum.title ?
-            <a className="btn-floating btn-large halfway-fab waves-effect waves-light red"
-                onClick={this.handleSaveAgendum}>
-                <i className="material-icons">done</i>
-              </a>
-            : "";
-
         // The title value
         var titleValue = this.state.agendum.title ? 
             this.state.agendum.title
@@ -121,7 +84,7 @@ export default class Agendum extends Component {
         // The description value
         var descriptionValue = this.state.agendum.description ?
             this.state.agendum.description
-            : "Click here to add a new agendum!";
+            : "Click here to add a description.";
 
 
         var deleteDialogActions = [
@@ -150,17 +113,16 @@ export default class Agendum extends Component {
                     </div>
                     <span className="card-title" id={`${idPrefix}_title`}>
                         <RIEInput
-                            change={isExisting ? this.handleUpdate : this.handleChange}
+                            change={this.handleUpdate}
                             value={titleValue}
                             propName="title" />
                     </span>
-                    {cardFAB}
-                    <p>
+                    {isExisting &&
                         <RIETextArea
-                            change={isExisting ? this.handleUpdate : this.handleChange}
+                            change={this.handleUpdate}
                             value={descriptionValue}
                             propName="description" />
-                    </p>
+                    }
                 </div>
 
                 {isExisting &&
