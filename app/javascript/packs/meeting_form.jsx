@@ -76,7 +76,7 @@ class MeetingForm extends Component {
       method: this.state.meeting.id ? 'PATCH' : 'POST',
       url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
       data: this.state
-    }).then(response => this.setState({ meeting: response.data }))
+    }).then(response => this.setState({ meeting: response.data, errors: null }))
     .catch(error => {
       if (error.response) {
         var errors = error.response.data;
