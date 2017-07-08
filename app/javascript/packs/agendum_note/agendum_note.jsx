@@ -92,6 +92,7 @@ export default class AgendumNote extends Component {
                 <RIETextArea
                     change={isExisting ? this.updateNote : this.addNewNote}
                     value={isExisting ? this.state.note.content : 'Add a new note...'}
+                    className="inline-textarea"
                     propName="content" />
 
                 {deleteDialog}

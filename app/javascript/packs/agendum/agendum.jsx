@@ -121,6 +121,7 @@ export default class Agendum extends Component {
                         <RIETextArea
                             change={this.handleUpdate}
                             value={descriptionValue}
+                            className="inline-textarea"
                             propName="description" />
                     }
                 </div>
