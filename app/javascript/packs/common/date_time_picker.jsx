@@ -35,7 +35,7 @@ export default class DateTimePicker extends Component {
         }
 
         var props = {};
-        props[`${this.props.name}`] = newValue.format('YYYY-MM-DD hh:mm');
+        props[`${this.props.name}`] = moment.utc(newValue).format();
 
         this.props.onChange(props);
     }
