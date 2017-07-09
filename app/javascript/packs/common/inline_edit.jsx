@@ -21,7 +21,8 @@ import marked from 'marked';
 export default class InlineEdit extends Component {
     constructor(props) {
         super(props);
-
+        marked.setOptions({ sanitize: true });
+        
         this.state = {
             displayElement: props.displayElement || 'p',
             multilineEditor: props.multilineEditor || false,
