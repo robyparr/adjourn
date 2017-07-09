@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 // Controls
-import { RIEInput, RIETextArea } from 'riek';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import AgendumNoteList from '../agendum_note/agendum_note_list';
+import InlineEdit from '../common/inline_edit';
 
 // Utils
 import axios from 'axios';
@@ -33,15 +33,18 @@ export default class Agendum extends Component {
     /*
      * Handle updating of the attribute of a the agendum.
      */
-    handleUpdate = (prop) => {
+    handleUpdate = (field, value) => {
         var meetingID = this.props.meetingID;
         var agendumID = this.state.agendum.id;
         var url = `/meetings/${meetingID}/agenda/`;
 
+        var agendum = {};
+        agendum[field] = value;
+
         axios({
             url: agendumID ? url + agendumID : url,
             method: agendumID ? 'PATCH' : 'POST',
-            data: { authenticity_token: Utils.getAuthenticityToken(), agendum: prop }
+            data: { authenticity_token: Utils.getAuthenticityToken(), agendum: agendum }
         }).then(response => {
             if (agendumID) {
                 this.setState({ agendum: response.data });
@@ -112,17 +115,18 @@ export default class Agendum extends Component {
                         }
                     </div>
                     <span className="card-title" id={`${idPrefix}_title`}>
-                        <RIEInput
-                            change={this.handleUpdate}
+                        <InlineEdit
+                            onChange={this.handleUpdate}
                             value={titleValue}
-                            propName="title" />
+                            name="title" />
                     </span>
                     {isExisting &&
-                        <RIETextArea
-                            change={this.handleUpdate}
+                        <InlineEdit
+                            onChange={this.handleUpdate}
                             value={descriptionValue}
-                            className="inline-textarea"
-                            propName="description" />
+                            name="description"
+                            multilineEditor={true}
+                            renderMarkdown={true} />
                     }
                 </div>
 

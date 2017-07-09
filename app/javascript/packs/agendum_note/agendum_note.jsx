@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Controls
-import { RIETextArea } from 'riek';
+import InlineEdit from '../common/inline_edit';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -25,11 +25,14 @@ export default class AgendumNote extends Component {
     /*
      * Handle adding a new note to the agendum.
      */
-    addNewNote = (prop) => {
+    addNewNote = (field, value) => {
+        var note = {};
+        note[field] = value;
+
         // Create the new note
         axios.post(this.BASE_URL, { 
             authenticity_token: Utils.getAuthenticityToken(), 
-            agendum_note: prop 
+            agendum_note: note 
         }).then(response => {
             this.props.handleNewNote(response.data);
         });
@@ -38,10 +41,13 @@ export default class AgendumNote extends Component {
     /*
      * Handle the updating of an existing note's contents.
      */
-    updateNote = (prop) => {
+    updateNote = (field, value) => {
+        var note = {};
+        note[field] = value;
+
         axios.patch(this.BASE_URL + this.state.note.id, {
             authenticity_token: Utils.getAuthenticityToken(),
-            agendum_note: prop
+            agendum_note: note
         }).then(response => {
             this.setState({ note: response.data });
         });
@@ -89,11 +95,12 @@ export default class AgendumNote extends Component {
                     </a>
                 }
 
-                <RIETextArea
-                    change={isExisting ? this.updateNote : this.addNewNote}
+                <InlineEdit
+                    onChange={isExisting ? this.updateNote : this.addNewNote}
                     value={isExisting ? this.state.note.content : 'Add a new note...'}
-                    className="inline-textarea"
-                    propName="content" />
+                    name="content"
+                    multilineEditor={true}
+                    renderMarkdown={true} />
 
                 {deleteDialog}
             </li>

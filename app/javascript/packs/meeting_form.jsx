@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 // Controls
-import { RIEInput } from 'riek';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
 import AgendumList from './agendum/agendum_list';
 import DateTimePicker from './common/date_time_picker';
+import InlineEdit from './common/inline_edit';
 
 // Utilities
 import Utils from 'utils';
@@ -41,17 +41,11 @@ class MeetingForm extends Component {
 
   /*
    * Event handler for field updates.
-   * Receives a prop in the form of { fieldName: value } as
-   * defined by RIEK: https://github.com/kaivi/riek and updates
-   * the state with the new value.
    */
-  handleFieldUpdate = (prop) => {
-    // The field to update
-    var updateField = Object.keys(prop)[0];
-
+  handleFieldUpdate = (field, value) => {
     // Update the meeting object
     var meeting = this.state.meeting;
-    meeting[updateField] = prop[updateField];
+    meeting[field] = value;
 
     // Set the state with the modified meeting object
     this.saveMeeting();
@@ -131,11 +125,11 @@ class MeetingForm extends Component {
         {/* Title */}
         <div className="row">
           <div className="col m6">
-            <RIEInput
-              change={this.handleFieldUpdate}
-              value={this.state.meeting.title}
-              propName="title"
-              className="inline-header" />
+            <InlineEdit
+              name="title"
+              onChange={this.handleFieldUpdate}
+              displayElement='h2'
+              value={this.state.meeting.title} />
           </div>
           {errorsHTML}
         </div>
