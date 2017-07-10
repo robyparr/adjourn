@@ -47,8 +47,12 @@ class MeetingForm extends Component {
     var meeting = this.state.meeting;
     meeting[field] = value;
 
-    // Set the state with the modified meeting object
-    this.saveMeeting();
+    // Set the state with the modified meeting object and save to
+    // the server.
+    this.setState({ meeting: meeting }, () => this.saveMeeting());
+
+    
+    ;
   }
 
   /*

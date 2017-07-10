@@ -34,10 +34,8 @@ export default class DateTimePicker extends Component {
             newValue.set('second', 0);
         }
 
-        var props = {};
-        props[`${this.props.name}`] = moment.utc(newValue).format();
-
-        this.props.onChange(props);
+        var newUtcValue = moment.utc(newValue).format();
+        this.props.onChange(this.props.name, newUtcValue);
     }
 
     render() {
