@@ -97,6 +97,7 @@ export default class InlineEdit extends Component {
             if (this.props.renderMarkdown) {
                 component = (
                     <this.state.displayElement 
+                        className="markdown-body"
                         onClick={this.handleEditModeActivation}
                         dangerouslySetInnerHTML={{ __html: marked(this.state.value) }}>
                     </this.state.displayElement>
