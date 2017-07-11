@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import marked from 'marked';
+import TextareaAutosize from 'react-autosize-textarea';
 
 /**
  * Provides inline editing ability.
@@ -100,17 +101,17 @@ export default class InlineEdit extends Component {
                         dangerouslySetInnerHTML={{ __html: marked(this.state.value) }}>
                     </this.state.displayElement>
                 );
-            } else { // Editor
+            } else {
                 component = (
                     <this.state.displayElement onClick={this.handleEditModeActivation}>
                         {this.state.value}
                     </this.state.displayElement>
                 );
             }
-        } else {
+        } else { // Editor
             if (this.state.multilineEditor) {
                 component = (
-                    <textarea
+                    <TextareaAutosize
                         onBlur={this.handleDisplayModeActivation}
                         onChange={this.handleValueChanged}
                         onKeyPress={this.handleEditorSubmitted}

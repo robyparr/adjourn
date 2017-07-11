@@ -32,6 +32,7 @@
     "rails-erb-loader": "^5.0.1",
     "rc-time-picker": "^2.4.1",
     "react": "^15.5.4",
+    "react-autosize-textarea": "^0.4.7",
     "react-dom": "^15.5.4",
     "react-tap-event-plugin": "^2.0.1",
     "resolve-url-loader": "^2.0.2",
