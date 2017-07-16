@@ -49,7 +49,7 @@ export default class AgendumNoteList extends Component {
                     this.state.notes.map(note => {
                         return (
                             <AgendumNote 
-                                key={note.id || 'new'}
+                                key={note.id || new Date()}
                                 note={note}
                                 meetingID={this.props.meetingID}
                                 agendumID={this.props.agendumID}
