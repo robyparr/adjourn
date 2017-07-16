@@ -99,6 +99,7 @@ export default class AgendumNote extends Component {
                     onChange={isExisting ? this.updateNote : this.addNewNote}
                     value={isExisting ? this.state.note.content : 'Add a new note...'}
                     name="content"
+                    className={noteClass}
                     multilineEditor={true}
                     renderMarkdown={true} />
 

@@ -97,14 +97,15 @@ export default class InlineEdit extends Component {
             if (this.props.renderMarkdown) {
                 component = (
                     <this.state.displayElement 
-                        className="markdown-body"
+                        className={"markdown-body " + this.props.className}
                         onClick={this.handleEditModeActivation}
                         dangerouslySetInnerHTML={{ __html: marked(this.state.value) }}>
                     </this.state.displayElement>
                 );
             } else {
                 component = (
-                    <this.state.displayElement onClick={this.handleEditModeActivation}>
+                    <this.state.displayElement onClick={this.handleEditModeActivation}
+                        className={this.props.className}>
                         {this.state.value}
                     </this.state.displayElement>
                 );
@@ -113,6 +114,7 @@ export default class InlineEdit extends Component {
             if (this.state.multilineEditor) {
                 component = (
                     <TextareaAutosize
+                        className={this.props.className}
                         onBlur={this.handleDisplayModeActivation}
                         onChange={this.handleValueChanged}
                         onKeyPress={this.handleEditorSubmitted}
@@ -123,7 +125,8 @@ export default class InlineEdit extends Component {
             } else {
                 component = (
                     <input 
-                        type="text" 
+                        type="text"
+                        className={this.props.className}
                         value={this.state.value} 
                         onBlur={this.handleDisplayModeActivation}
                         onChange={this.handleValueChanged}
