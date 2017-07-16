@@ -309,30 +309,26 @@
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
-
-  li {
-    list-style-type: disc !important;
-  }
 }
 
-.markdown-body ol ol,
-.markdown-body ul ol {
-  list-style-type: lower-roman !important;
-
-  li {
-    list-style-type: lower-roman !important;
-  }
+.markdown-body ul li {
+  list-style-type: disc !important;
 }
 
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
-  list-style-type: lower-alpha !important;
+.markdown-body ol li {
+  list-style-type: decimal !important;
+}
 
-  li {
-    list-style-type: lower-alpha !important;
-  }
+.markdown-body ol ol li,
+.markdown-body ul ol li {
+  list-style-type: decimal !important;
+}
+
+.markdown-body ul ul ol li,
+.markdown-body ul ol ol li,
+.markdown-body ol ul ol li,
+.markdown-body ol ol ol li {
+  list-style-type: decimal !important;
 }
 
 .markdown-body dd {
@@ -537,10 +533,6 @@
 .markdown-body ul,
 .markdown-body ol {
   padding-left: 2em !important;
-
-  li {
-    list-style-type: disc !important;
-  }
 }
 
 .markdown-body ul ul,
