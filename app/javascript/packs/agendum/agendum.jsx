@@ -74,7 +74,7 @@ export default class Agendum extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var cardClass = `agendum card blue-grey ${isExisting ? "lighten-1" : "lighten-3"}`;
+        var cardClass = `agendum card ${isExisting ? "lighten-1" : "lighten-3"}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.agendum.id : 'new';
@@ -106,7 +106,7 @@ export default class Agendum extends Component {
 
         return(
             <div className={cardClass} onClick={this.handleNewItemClick}>
-                <div className="card-content white-text">
+                <div className="card-content">
                     <div className="right">
                         {isExisting && 
                             <a className="delete-link" onClick={() => this.setState({ delete: true })}>

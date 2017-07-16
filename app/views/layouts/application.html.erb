@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <nav class="nav-extended">
-      <div class="nav-wrapper">
+    <nav class="nav">
+      <div class="nav-content">
         <%= link_to "Adjourn", root_url, class: 'brand-logo center' %>
         <ul class="right">
           <% if user_signed_in? %>
@@ -26,20 +26,20 @@
           <% end %>
         </ul>
       </div>
-      <div class="nav-content text-center">
-        <% if notice || alert %>
-          <div class="card-panel">
-            <p class="black-text"><%= notice %></p>
-            <p class="red-text darken-2"><%= alert %></p>
-          </div>
-        <% else %>
-          &nbsp;
-        <% end %>
-      </div>
     </nav>
 
     <div class="container">
       <%= yield %>
     </div>
+
+    <% if notice || alert %>
+      <script>
+        <% if notice %>
+          showInformationMessage("<%= notice %>");
+        <% else %>
+          showErrorMessage("<%= alert %>");
+        <% end %>
+      </script>
+      <% end %>
   </body>
 </html>

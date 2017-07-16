@@ -69,7 +69,7 @@ export default class AgendumNote extends Component {
     render() {
         var isExisting = this.state.note.id;
 
-        var noteClass = 'agendum-note collection-item' + 
+        var noteClass = 'agendum-note collection-item grey lighten-4' + 
             (!isExisting ? ' grey-text' : '');
 
         // Dialog settings

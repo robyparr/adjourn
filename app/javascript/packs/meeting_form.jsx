@@ -128,11 +128,11 @@ class MeetingForm extends Component {
       <div>
         {/* Title */}
         <div className="row">
-          <div className="col m6">
+          <div className="col m12">
             <InlineEdit
               name="title"
               onChange={this.handleFieldUpdate}
-              displayElement='h2'
+              displayElement='h4'
               value={this.state.meeting.title} />
           </div>
           {errorsHTML}
@@ -166,10 +166,6 @@ class MeetingForm extends Component {
               meetingID={this.state.meeting.id}
               handleAgendumAddRemove={this.handleAgendumAddRemove} />
           </div>
-        }
-
-        {!this.state.meeting.id &&
-          <a className="waves-effect waves-light btn" onClick={this.saveMeeting}>Save</a>
         }
       </div>
     );
