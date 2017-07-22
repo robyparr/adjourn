@@ -25,7 +25,7 @@ const AgendumList = (props) => {
             }
             {/* Add new Agendum item */}
             <div className="col m4">
-                <Agendum
+                <Agendum key={new Date()}
                     meetingID={props.meetingID}
                     handleAgendumAddRemove={props.handleAgendumAddRemove} />
             </div>
