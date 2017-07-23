@@ -19,7 +19,10 @@ export default class AgendumNote extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { note: props.note };
+        this.state = { 
+            note: props.note,
+            isEditing: false
+        };
     }
 
     /*
@@ -66,6 +69,10 @@ export default class AgendumNote extends Component {
         });
     }
 
+    handleNoteEditModeChanged = (isEditMode) => {
+        this.setState({ isEditing: isEditMode});
+    }
+
     render() {
         var isExisting = this.state.note.id;
 
@@ -86,10 +93,10 @@ export default class AgendumNote extends Component {
                         Are you sure you want to remove this note?
                 </Dialog>
                 : "";
-
+                
         return(
             <li className={noteClass}>
-                {isExisting &&
+                {isExisting && !this.state.isEditing &&
                     <a className="secondary-content delete-link" onClick={() => this.setState({ delete: true })}>
                         <i className="material-icons">delete</i>
                     </a>
@@ -97,6 +104,7 @@ export default class AgendumNote extends Component {
 
                 <InlineEdit
                     onChange={isExisting ? this.updateNote : this.addNewNote}
+                    onEditModeChanged={this.handleNoteEditModeChanged}
                     value={isExisting ? this.state.note.content : 'Add a new note...'}
                     name="content"
                     className={noteClass}

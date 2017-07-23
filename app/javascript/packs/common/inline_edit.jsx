@@ -34,20 +34,30 @@ export default class InlineEdit extends Component {
 
     /**
      * Handles activation of edit mode.
+     * Calls this.props.onEditModeChanged(true);
      */
     handleEditModeActivation = () => {
         if (this.state.isEditing) return;
 
         this.setState({ isEditing: true });
+
+        if (this.props.onEditModeChanged) {
+            this.props.onEditModeChanged(true);
+        }
     }
 
     /**
      * Handles activation of display mode.
+     * Calls this.props.onEditModeChanged(false);
      */
     handleDisplayModeActivation = () => {
         if (!this.state.isEditing) return;
 
         this.setState({ isEditing: false });
+
+        if (this.props.onEditModeChanged) {
+            this.props.onEditModeChanged(false);
+        }
     }
 
     /**

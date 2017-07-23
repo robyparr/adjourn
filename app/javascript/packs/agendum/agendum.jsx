@@ -26,7 +26,8 @@ export default class Agendum extends Component {
     getInitialState = () => {
         return {
             isExisting: this.props.agendum != null,
-            agendum: this.props.agendum || {}
+            agendum: this.props.agendum || {},
+            isEditing: false
         }
     }
 
@@ -69,6 +70,10 @@ export default class Agendum extends Component {
         });
     }
 
+    handleEditModeChanged = (isEditMode) => {
+        this.setState({ isEditing: isEditMode });
+    }
+
     render() {
         // Is this agendum an existing item or a new form?
         var isExisting = this.state.isExisting;
@@ -107,16 +112,17 @@ export default class Agendum extends Component {
         return(
             <div className={cardClass} onClick={this.handleNewItemClick}>
                 <div className="card-content">
-                    <div className="right">
-                        {isExisting && 
+                    {isExisting && !this.state.isEditing &&
+                        <div className="right">
                             <a className="delete-link" onClick={() => this.setState({ delete: true })}>
                                 <i className="material-icons">delete</i>
                             </a>
-                        }
-                    </div>
+                        </div>
+                    }
                     <span className="card-title" id={`${idPrefix}_title`}>
                         <InlineEdit
                             onChange={this.handleUpdate}
+                            onEditModeChanged={this.handleEditModeChanged}
                             value={titleValue}
                             name="title" />
                     </span>
@@ -124,6 +130,7 @@ export default class Agendum extends Component {
                         <InlineEdit
                             onChange={this.handleUpdate}
                             value={descriptionValue}
+                            onEditModeChanged={this.handleEditModeChanged}
                             name="description"
                             multilineEditor={true}
                             renderMarkdown={true} />
