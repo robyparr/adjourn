@@ -11,6 +11,7 @@ class MeetingsController < ApplicationController
   def show
     @meeting = current_user.meetings
                            .includes(agenda: :notes)
+                           .order('agendums.created_at ASC')
                            .find(params[:id])
   end
   
