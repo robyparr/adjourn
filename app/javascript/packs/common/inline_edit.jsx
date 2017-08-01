@@ -86,15 +86,19 @@ export default class InlineEdit extends Component {
      * props.onChange(fieldName, fieldValue)
      */
     handleEditorSubmitted = (e) => {
-        if (this.state.multilineEditor && e.shiftKey && e.key == 'Enter') {
+        if (e.type === 'keypress') {
+            if (this.state.multilineEditor && e.shiftKey && e.key == 'Enter') {
+                this.handleDisplayModeActivation();
+            } else if (!this.state.multilineEditor && e.key == 'Enter') {
+                this.handleDisplayModeActivation();
+            } else {
+                return;
+            }
+        } else if (e.type === 'blur') {
             this.handleDisplayModeActivation();
-        } else if (!this.state.multilineEditor && e.key == 'Enter') {
-            this.handleDisplayModeActivation();
-        } else {
-            return;
         }
 
-        if (this.props.onChange != null) {
+        if (this.props.onChange != null && this.state.value != this.props.value) {
             this.props.onChange(this.props.name, e.target.value)
         }
     }
@@ -125,7 +129,7 @@ export default class InlineEdit extends Component {
                 component = (
                     <TextareaAutosize
                         className={this.props.className}
-                        onBlur={this.handleDisplayModeActivation}
+                        onBlur={this.handleEditorSubmitted}
                         onChange={this.handleValueChanged}
                         onKeyPress={this.handleEditorSubmitted}
                         onFocus={this.handleEditorFocused}
@@ -138,9 +142,9 @@ export default class InlineEdit extends Component {
                         type="text"
                         className={this.props.className}
                         value={this.state.value} 
-                        onBlur={this.handleDisplayModeActivation}
+                        onBlur={this.handleEditorSubmitted}
                         onChange={this.handleValueChanged}
-                        onKeyUp={this.handleEditorSubmitted}
+                        onKeyPress={this.handleEditorSubmitted}
                         onFocus={this.handleEditorFocused}
                         autoFocus={true} />
                 );
