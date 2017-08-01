@@ -315,6 +315,18 @@
   list-style-type: disc !important;
 }
 
+.markdown-body ol ul li,
+.markdown-body ul ul li {
+  list-style-type: circle !important;
+}
+
+.markdown-body ul ul ul li,
+.markdown-body ul ol ul li,
+.markdown-body ol ul ul li,
+.markdown-body ol ol ul li {
+  list-style-type: disc !important;
+}
+
 .markdown-body ol li {
   list-style-type: decimal !important;
 }
