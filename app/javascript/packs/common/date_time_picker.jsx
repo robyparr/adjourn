@@ -25,13 +25,13 @@ export default class DateTimePicker extends Component {
         var newValue = this.state.dateTime;
 
         if (fieldType === 'date') {
-            newValue.set('year', date.get('year'));
-            newValue.set('month', date.get('month'));
-            newValue.set('day', date.get('day'));
+            newValue.year(date.year());
+            newValue.month(date.month());
+            newValue.date(date.date());
         } else {
-            newValue.set('hour', date.get('hour'));
-            newValue.set('minute', date.get('minute'));
-            newValue.set('second', 0);
+            newValue.hour(date.hour());
+            newValue.minute(date.minute());
+            newValue.second(date.second());
         }
 
         var newUtcValue = moment.utc(newValue).format();
