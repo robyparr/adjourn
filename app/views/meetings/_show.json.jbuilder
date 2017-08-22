@@ -4,6 +4,11 @@ json.description  meeting.description
 json.start_date   meeting.start_date
 json.end_date     meeting.end_date
 
+json.action_items meeting.action_items do |item|
+  json.id     item.id
+  json.title  item.title
+end
+
 json.agenda meeting.agenda do |agendum|
   json.id           agendum.id
   json.meeting_id   agendum.meeting_id

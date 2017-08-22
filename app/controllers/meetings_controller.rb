@@ -10,7 +10,7 @@ class MeetingsController < ApplicationController
   # Show a specific meeting
   def show
     @meeting = current_user.meetings
-                           .includes(agenda: :notes)
+                           .includes({ agenda: :notes }, :action_items)
                            .order('agendums.created_at ASC')
                            .find(params[:id])
   end

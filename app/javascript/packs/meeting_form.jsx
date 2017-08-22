@@ -32,27 +32,12 @@ class MeetingForm extends Component {
     props.meeting.start_date = props.meeting.start_date || moment().toDate();
     props.meeting.end_date = props.meeting.end_date || moment().add(1, 'hours').toDate();
 
-    var actionItems = [
-        {
-            id: 1,
-            title: 'Do this!'
-        },
-        {
-            id: 2,
-            title: 'And also this!'
-        },
-        {
-          id: 3,
-          title: 'last'
-        }
-    ];
-
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
       meeting: props.meeting,
       agenda: props.meeting.agenda || [],
       errors: null,
-      actionItems: actionItems
+      actionItems: props.meeting.action_items
     };
   }
 

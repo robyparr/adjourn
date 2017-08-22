@@ -36,24 +36,39 @@ export default class ActionItem extends Component {
     handleUpdate = (field, value) => {
         var meetingID = this.props.meetingID;
         var itemID = this.state.item.id;
-        //var url = `/meetings/${meetingID}/agenda/`;
 
         var item = {};
         item[field] = value;
-        item['id'] = Math.floor(Math.random() * 1000);
 
-        if (!itemID) {
-            this.setState(this.getInitialState());
-            this.props.handleActionItemAddRemove(item, true);
-        }
+        var url = itemID ? 
+            `/action_items/${itemID}`
+            : `/meetings/${meetingID}/action_items`;
+        var data = { authenticity_token: Utils.getAuthenticityToken(), action_item: item };
+
+        axios({ url: url, method: itemID ? 'PATCH' : 'POST', data: data })
+            .then(response => {
+                if (itemID) {
+                    this.setState({ item: response.data });
+                } else {
+                    this.setState(this.getInitialState());
+                    this.props.handleActionItemAddRemove(response.data, true);
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     /*
      * Delete the item.
      */
     handleDeleteItem = () => {
-        this.setState({ delete: false });
-        this.props.handleActionItemAddRemove(this.state.item, false);
+        var url = `/action_items/${this.state.item.id}`;
+        var data = { authenticity_token: Utils.getAuthenticityToken() };
+
+        axios({ url: url, method: 'delete', data: data })
+            .then(response => {
+                this.setState({ delete: false });
+                this.props.handleActionItemAddRemove(this.state.item, false);
+            });
     }
 
     handleEditModeChanged = (isEditMode) => {
