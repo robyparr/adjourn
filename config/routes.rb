@@ -3,11 +3,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  # /meetings/[:id]
   resources :meetings do
-    # /meetings/:meeting_id/agenda/[:id]
+    resources :action_items, shallow: true, only: [:create, :update, :destroy]
+
     resources :agenda, only: [:create, :update, :destroy] do
-      # /meetings/:meeting_id/agenda/:agenda_id/notes/[:id]
       resources :agendum_notes, 
                 path: 'notes', 
                 only: [:create, :update, :destroy]
