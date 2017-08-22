@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
+import ActionItems from './action_item/action_items';
 import AgendumList from './agendum/agendum_list';
 import DateTimePicker from './common/date_time_picker';
 import InlineEdit from './common/inline_edit';
@@ -31,11 +32,27 @@ class MeetingForm extends Component {
     props.meeting.start_date = props.meeting.start_date || moment().toDate();
     props.meeting.end_date = props.meeting.end_date || moment().add(1, 'hours').toDate();
 
+    var actionItems = [
+        {
+            id: 1,
+            title: 'Do this!'
+        },
+        {
+            id: 2,
+            title: 'And also this!'
+        },
+        {
+          id: 3,
+          title: 'last'
+        }
+    ];
+
     this.state = {
       authenticity_token: Utils.getAuthenticityToken(),
       meeting: props.meeting,
       agenda: props.meeting.agenda || [],
-      errors: null
+      errors: null,
+      actionItems: actionItems
     };
   }
 
@@ -101,6 +118,19 @@ class MeetingForm extends Component {
     this.setState({ agenda: agenda });
   }
 
+  handleActionItemAddRemove = (item, isAdd) => {
+    var actionItems = this.state.actionItems || [];
+
+    if (isAdd) {
+      actionItems.push(item);
+    } else {
+      var itemToDeleteIndex = actionItems.indexOf(item);
+      actionItems.splice(itemToDeleteIndex, 1);
+    }
+
+    this.setState({ actionItems: actionItems });
+  }
+
   render() {
     /*
      * HTML and styles
@@ -138,6 +168,7 @@ class MeetingForm extends Component {
           {errorsHTML}
         </div>
 
+        {/* Date & times */}
         <div className="row">
           <div className="col m1 bold">Start</div>
           <div className="col m3">
@@ -157,6 +188,19 @@ class MeetingForm extends Component {
           </div>
         </div>
 
+        {/* Action items */}
+        {this.state.meeting.id &&
+          <div>
+            <h5>Action Items</h5>
+            <hr />
+            <ActionItems
+              actionItems={this.state.actionItems} 
+              meetingID={this.state.meeting.id}
+              handleActionItemAddRemove={this.handleActionItemAddRemove} />
+          </div>
+        }
+
+        {/* Agenda */}
         {this.state.meeting.id &&
           <div>
             <h5>Agenda</h5>
