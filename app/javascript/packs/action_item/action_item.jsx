@@ -80,7 +80,7 @@ export default class ActionItem extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var cardClass = `card ${isExisting ? "lighten-1" : "lighten-3"}`;
+        var cardClass = `action-item card ${isExisting ? "lighten-1" : "lighten-3"}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.item.id : 'new';
