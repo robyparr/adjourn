@@ -8,13 +8,16 @@
 #   - end_date:datetime
 #
 # Associations:
-#   - Agenda: a list of agendum (agenda items).
+#   - Agenda:       A list of agendum (agenda items).
+#   - User:         The user who created the meeting.
+#   - ActionItems:  A list of action items for this meeting.
 #
 class Meeting < ApplicationRecord
   #
   # Relationships
   #
   has_many    :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
+  has_many    :action_items
   belongs_to  :user
 
   #

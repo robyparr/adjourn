@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701101443) do
+ActiveRecord::Schema.define(version: 20170822074211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "action_items", force: :cascade do |t|
+    t.string "title"
+    t.bigint "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_action_items_on_meeting_id"
+  end
 
   create_table "agendum_notes", force: :cascade do |t|
     t.bigint "agendum_id"
@@ -60,6 +68,7 @@ ActiveRecord::Schema.define(version: 20170701101443) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "action_items", "meetings"
   add_foreign_key "agendum_notes", "agendums"
   add_foreign_key "agendums", "meetings"
   add_foreign_key "meetings", "users"
