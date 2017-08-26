@@ -3,6 +3,7 @@
 #
 # Attributes:
 #   - title:string
+#   - description:text
 #
 # Relationships
 #   - Meeting:    The meeting this action item belongs to.

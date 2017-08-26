@@ -7,7 +7,12 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
     @meeting = meetings(:one)
     @item = action_items(:one)
 
-    @item_params = { action_item: { title: 'test' } }
+    @item_params = {
+      action_item: {
+        title: 'test',
+        description: 'test description'
+      }
+    }
   end
 
   # Create tests
@@ -36,6 +41,15 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
       post meeting_action_items_url(@meeting), params: @item_params
     end
     assert_response :success
+
+    item_json = JSON.parse(response.body)
+    item = ActionItem.find(item_json['id'])
+
+    expected_title = @item_params[:action_item][:title]
+    expected_description = @item_params[:action_item][:description]
+
+    assert_equal expected_title, item.title
+    assert_equal expected_description, item.description
   end
 
   # Update tests
