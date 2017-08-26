@@ -175,7 +175,7 @@ class MeetingForm extends Component {
 
         {/* Action items */}
         {this.state.meeting.id &&
-          <div>
+          <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
             <h5>Action Items</h5>
             <hr />
             <ActionItems

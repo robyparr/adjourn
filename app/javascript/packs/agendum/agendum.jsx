@@ -128,6 +128,7 @@ export default class Agendum extends Component {
                     </span>
                     {isExisting &&
                         <InlineEdit
+                            className={this.state.agendum.description ? "" : "print-hide"}
                             onChange={this.handleUpdate}
                             value={descriptionValue}
                             onEditModeChanged={this.handleEditModeChanged}

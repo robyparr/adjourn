@@ -80,7 +80,7 @@ export default class ActionItem extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var classes = `collection-item ${!isExisting ? "grey lighten-4" : ""}`;
+        var classes = `collection-item ${!isExisting ? "grey lighten-4 print-hide" : ""}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.item.id : 'new';
@@ -130,6 +130,7 @@ export default class ActionItem extends Component {
 
                 {isExisting && 
                     <InlineEdit
+                        className={this.state.item.description ? "" : "print-hide"}
                         name="description"
                         onChange={this.handleUpdate}
                         onEditModeChanged={this.handleEditModeChanged}
