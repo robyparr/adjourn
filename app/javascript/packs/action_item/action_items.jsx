@@ -12,25 +12,22 @@ import _ from 'lodash';
 const ActionItems = (props) => {
 
     return(
-        <div className="row">
+        <ul className="collection">
             {
                 props.actionItems.map((item) => {
                     return(
-                        <div className="col m4" key={item.id}>
-                            <ActionItem item={item}
-                                meetingID={props.meetingID}
-                                handleActionItemAddRemove={props.handleActionItemAddRemove} />
-                        </div>
+                        <ActionItem key={item.id}
+                            item={item}
+                            meetingID={props.meetingID}
+                            handleActionItemAddRemove={props.handleActionItemAddRemove} />
                     );
                 })
             }
             {/* Add new Action Item */}
-            <div className="col m4">
-                <ActionItem key={new Date()}
-                    meetingID={props.meetingID}
-                    handleActionItemAddRemove={props.handleActionItemAddRemove} />
-            </div>
-        </div>
+            <ActionItem key={new Date()}
+                meetingID={props.meetingID}
+                handleActionItemAddRemove={props.handleActionItemAddRemove} />
+        </ul>
     );
 }
 

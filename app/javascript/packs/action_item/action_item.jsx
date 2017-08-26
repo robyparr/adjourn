@@ -80,7 +80,7 @@ export default class ActionItem extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var cardClass = `card ${!isExisting ? "grey lighten-4" : ""}`;
+        var classes = `collection-item ${!isExisting ? "grey lighten-4" : ""}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.item.id : 'new';
@@ -106,26 +106,23 @@ export default class ActionItem extends Component {
                 : "";
 
         return(
-            <div className={cardClass} onClick={this.handleNewItemClick}>
-                <div className="card-content">
-                    {isExisting && !this.state.isEditing &&
-                        <div className="right">
-                            <a className="delete-link" onClick={() => this.setState({ delete: true })}>
-                                <i className="material-icons">delete</i>
-                            </a>
-                        </div>
-                    }
-                    <span className="card-title" id={`${idPrefix}_title`}>
-                        <InlineEdit
-                            onChange={this.handleUpdate}
-                            onEditModeChanged={this.handleEditModeChanged}
-                            value={titleValue}
-                            name="title" />
-                    </span>
-                </div>
+            <li className={classes}>
+                {isExisting && !this.state.isEditing &&
+                    <a className="secondary-content delete-link" 
+                        onClick={() => this.setState({ delete: true })}>
+                        
+                        <i className="material-icons">delete</i>
+                    </a>
+                }
+
+                <InlineEdit
+                    onChange={this.handleUpdate}
+                    onEditModeChanged={this.handleEditModeChanged}
+                    value={titleValue}
+                    name="title" />
 
                 {deleteDialog}
-            </div>
+            </li>
         );
     }
 }

@@ -21,7 +21,7 @@ body {
 }
 
 /* Card delete links */
-.card {
+.card, .collection-item {
     .delete-link {
         display: none;
         color: inherit;
