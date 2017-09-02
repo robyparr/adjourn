@@ -2,25 +2,27 @@
     <i class="material-icons">add</i>
 </a>
 
-<h4>Meetings</h4>
+<div class="container">
+    <h4>Meetings</h4>
 
-<div class="card-panel">
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @meetings.each do |meeting| %>
+    <div class="card-panel">
+        <table class="striped">
+            <thead>
                 <tr>
-                    <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-                    <td class="localize"><%= meeting.start_date %></td>
-                    <td class="localize"><%= meeting.end_date %></td>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                 </tr>
-            <% end %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% @meetings.each do |meeting| %>
+                    <tr>
+                        <td><%= link_to meeting.title, meeting_path(meeting) %></td>
+                        <td class="localize"><%= meeting.start_date %></td>
+                        <td class="localize"><%= meeting.end_date %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>

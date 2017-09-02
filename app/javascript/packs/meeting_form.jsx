@@ -173,29 +173,36 @@ class MeetingForm extends Component {
           </div>
         </div>
 
-        {/* Action items */}
-        {this.state.meeting.id &&
-          <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
-            <h5>Action Items</h5>
-            <hr />
-            <ActionItems
-              actionItems={this.state.actionItems} 
-              meetingID={this.state.meeting.id}
-              handleActionItemAddRemove={this.handleActionItemAddRemove} />
+        <div className="row">
+          <div className="action-items col m3 padding-sides-none card-panel margin-top-none margin-bottom-none"
+            style={{overflowY: 'scroll'}}>
+            
+              {/* Action items */}
+              {this.state.meeting.id &&
+                <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
+                  <ActionItems
+                    actionItems={this.state.actionItems} 
+                    meetingID={this.state.meeting.id}
+                    handleActionItemAddRemove={this.handleActionItemAddRemove} />
+                </div>
+              }
+            
           </div>
-        }
 
-        {/* Agenda */}
-        {this.state.meeting.id &&
-          <div>
-            <h5>Agenda</h5>
-            <hr />
-            <AgendumList 
-              agenda={this.state.agenda} 
-              meetingID={this.state.meeting.id}
-              handleAgendumAddRemove={this.handleAgendumAddRemove} />
+          <div className="col m9">
+            {/* Agenda */}
+            {this.state.meeting.id &&
+              <div>
+                <h5>Agenda</h5>
+                <hr />
+                <AgendumList 
+                  agenda={this.state.agenda} 
+                  meetingID={this.state.meeting.id}
+                  handleAgendumAddRemove={this.handleAgendumAddRemove} />
+              </div>
+            }
           </div>
-        }
+        </div>
       </div>
     );
   }

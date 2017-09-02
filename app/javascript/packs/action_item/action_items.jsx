@@ -12,7 +12,10 @@ import _ from 'lodash';
 const ActionItems = (props) => {
 
     return(
-        <ul className="collection">
+        <ul className="collection with-header margin-top-none">
+            <li className="collection-header">
+                <h4>Action Items</h4>
+            </li>
             {
                 props.actionItems.map((item) => {
                     return(
