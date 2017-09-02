@@ -174,8 +174,7 @@ class MeetingForm extends Component {
         </div>
 
         <div className="row">
-          <div className="action-items col m3 padding-sides-none card-panel margin-top-none margin-bottom-none"
-            style={{overflowY: 'scroll'}}>
+          <div className="action-items col m3 card-panel">
             
               {/* Action items */}
               {this.state.meeting.id &&

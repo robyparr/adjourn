@@ -9,6 +9,10 @@
         display: none;
     }
 
+    .print-only {
+        display: inherit !important;
+    }
+
     .print-full-width {
         width: 100%;
     }
@@ -25,5 +29,15 @@
 
     .delete-link {
         display: none !important;
+    }
+
+    .action-items {
+        position: inherit !important;
+        width: 100%;
+        overflow-y: inherit;
+
+        .collection-header {
+            border-bottom: none !important;
+        }
     }
 }

@@ -14,7 +14,8 @@ const ActionItems = (props) => {
     return(
         <ul className="collection with-header margin-top-none">
             <li className="collection-header">
-                <h4>Action Items</h4>
+                <h5>Action Items</h5>
+                <hr className="print-only" />
             </li>
             {
                 props.actionItems.map((item) => {
