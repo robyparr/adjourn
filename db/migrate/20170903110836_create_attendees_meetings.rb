@@ -1,6 +1,6 @@
 class CreateAttendeesMeetings < ActiveRecord::Migration[5.1]
   def change
-    create_table :attendees_meetings do |t|
+    create_table :attendees_meetings, id: false do |t|
       t.references :attendee, foreign_key: true
       t.references :meeting, foreign_key: true
 

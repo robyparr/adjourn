@@ -78,6 +78,20 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "an attendee can't attend a meeting twice" do
+    sign_in @user
+
+    post meeting_attendees_attend_url(@meeting), params: @attend_existing_params
+    assert_response :success
+
+    assert_no_difference ['@meeting.attendees.count', 'Attendee.count'] do
+      post meeting_attendees_attend_url(@meeting), 
+        params: @attend_existing_params
+
+      assert_response :unprocessable_entity
+    end
+  end
+
   # Removal tests
   test "guests can't remove attendees from a meeting" do
     assert_no_difference [

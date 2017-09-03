@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170903110836) do
     t.index ["user_id"], name: "index_attendees_on_user_id"
   end
 
-  create_table "attendees_meetings", force: :cascade do |t|
+  create_table "attendees_meetings", id: false, force: :cascade do |t|
     t.bigint "attendee_id"
     t.bigint "meeting_id"
     t.datetime "created_at", null: false
