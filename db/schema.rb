@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170826124339) do
+ActiveRecord::Schema.define(version: 20170903110836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,25 @@ ActiveRecord::Schema.define(version: 20170826124339) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meeting_id"], name: "index_agendums_on_meeting_id"
+  end
+
+  create_table "attendees", force: :cascade do |t|
+    t.string "email"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email", "user_id"], name: "index_attendees_on_email_and_user_id", unique: true
+    t.index ["user_id"], name: "index_attendees_on_user_id"
+  end
+
+  create_table "attendees_meetings", force: :cascade do |t|
+    t.bigint "attendee_id"
+    t.bigint "meeting_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attendee_id", "meeting_id"], name: "index_attendees_meetings_on_attendee_id_and_meeting_id", unique: true
+    t.index ["attendee_id"], name: "index_attendees_meetings_on_attendee_id"
+    t.index ["meeting_id"], name: "index_attendees_meetings_on_meeting_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -72,5 +91,8 @@ ActiveRecord::Schema.define(version: 20170826124339) do
   add_foreign_key "action_items", "meetings"
   add_foreign_key "agendum_notes", "agendums"
   add_foreign_key "agendums", "meetings"
+  add_foreign_key "attendees", "users"
+  add_foreign_key "attendees_meetings", "attendees"
+  add_foreign_key "attendees_meetings", "meetings"
   add_foreign_key "meetings", "users"
 end

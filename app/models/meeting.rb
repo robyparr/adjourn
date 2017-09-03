@@ -11,6 +11,7 @@
 #   - Agenda:       A list of agendum (agenda items).
 #   - User:         The user who created the meeting.
 #   - ActionItems:  A list of action items for this meeting.
+#   - Attendees:    A list of meeting attendees.
 #
 class Meeting < ApplicationRecord
   #
@@ -19,6 +20,7 @@ class Meeting < ApplicationRecord
   has_many    :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
   has_many    :action_items
   belongs_to  :user
+  has_and_belongs_to_many :attendees
 
   #
   # Validations

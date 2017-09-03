@@ -3,7 +3,16 @@ Rails.application.routes.draw do
 
   devise_for :users
   
+  scope '/attendees' do
+    get 'autocomplete', 
+      to: 'attendees#autocomplete', 
+      as: 'attendee_autocomplete'
+  end
+
   resources :meetings do
+    post '/attendees/attend', to: 'attendees#attend'
+    delete '/attendees/remove', to: 'attendees#remove'
+    
     resources :action_items, shallow: true, only: [:create, :update, :destroy]
 
     resources :agenda, only: [:create, :update, :destroy] do

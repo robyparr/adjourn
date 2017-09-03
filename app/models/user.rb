@@ -7,4 +7,5 @@ class User < ApplicationRecord
   # Relationships
   has_many :meetings
   has_many :agenda, through: :meetings
+  has_many :attendees
 end
