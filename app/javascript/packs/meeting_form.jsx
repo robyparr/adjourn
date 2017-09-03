@@ -8,6 +8,7 @@ import TimePicker from 'rc-time-picker';
 
 import ActionItems from './action_item/action_items';
 import AgendumList from './agendum/agendum_list';
+import Attendees from './attendee/attendees';
 import DateTimePicker from './common/date_time_picker';
 import InlineEdit from './common/inline_edit';
 
@@ -37,7 +38,8 @@ class MeetingForm extends Component {
       meeting: props.meeting,
       agenda: props.meeting.agenda || [],
       errors: null,
-      actionItems: props.meeting.action_items
+      actionItems: props.meeting.action_items,
+      attendees: props.meeting.attendees || []
     };
   }
 
@@ -103,6 +105,11 @@ class MeetingForm extends Component {
     this.setState({ agenda: agenda });
   }
 
+  /*
+   * Handles the addition of a new action item.
+   * This will add the new action item to the meeting,
+   * causing a state update.
+   */
   handleActionItemAddRemove = (item, isAdd) => {
     var actionItems = this.state.actionItems || [];
 
@@ -114,6 +121,24 @@ class MeetingForm extends Component {
     }
 
     this.setState({ actionItems: actionItems });
+  }
+
+    /*
+   * Handles the addition of a new attendee.
+   * This will add the new attendee to the meeting,
+   * causing a state update.
+   */
+  handleAttendeesAddRemove = (attendee, isAdd) => {
+    var attendees = this.state.attendees || [];
+
+    if (isAdd) {
+      attendees.push(attendee);
+    } else {
+      var itemToDeleteIndex = attendees.indexOf(attendee);
+      attendees.splice(itemToDeleteIndex, 1);
+    }
+
+    this.setState({ attendees: attendees });
   }
 
   render() {
@@ -155,21 +180,31 @@ class MeetingForm extends Component {
 
         {/* Date & times */}
         <div className="row">
-          <div className="col m1 bold">Start</div>
-          <div className="col m3">
-            <DateTimePicker 
-              name="start_date"
-              dateTime={start_date}
-              onChange={this.handleFieldUpdate} />
+          <div className="col m4">
+            <div className="row">
+              <div className="col m1 bold">Start</div>
+              <div className="col m3">
+                <DateTimePicker 
+                  name="start_date"
+                  dateTime={start_date}
+                  onChange={this.handleFieldUpdate} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m1 bold">End</div>
+              <div className="col m3">
+                <DateTimePicker 
+                  name="end_date"
+                  dateTime={end_date}
+                  onChange={this.handleFieldUpdate} />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col m1 bold">End</div>
-          <div className="col m3">
-            <DateTimePicker 
-              name="end_date"
-              dateTime={end_date}
-              onChange={this.handleFieldUpdate} />
+
+          <div className="col m8">
+            <Attendees
+              attendees={this.state.attendees}
+              handleAttendeesAddRemove={this.handleAttendeesAddRemove} />
           </div>
         </div>
 

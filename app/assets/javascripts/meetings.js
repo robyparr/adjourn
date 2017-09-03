@@ -7,6 +7,12 @@ var ready = function() {
         var element = $(this);
         element.html(moment(element.html()).format('LLL'));
     });
+
+    // Fix for Material UI's <AutoComplete /> applying .browser-default
+    // to a wrapping div instead of the input element.
+    $('div.browser-default').children('input[type=text]').each(function() {
+        $(this).addClass('browser-default');
+    });
 };
 
 $(document).ready(ready);
