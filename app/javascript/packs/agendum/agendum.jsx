@@ -79,7 +79,7 @@ export default class Agendum extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var cardClass = `card ${!isExisting ? "grey lighten-4" : ""}`;
+        var cardClass = `card${!isExisting ? " grey lighten-3" : " z-depth-3"}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.agendum.id : 'new';

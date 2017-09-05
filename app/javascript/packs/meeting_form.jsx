@@ -210,7 +210,7 @@ class MeetingForm extends Component {
         </div>
 
         <div className="row">
-          <div className="action-items col m3 card-panel">
+          <div className="action-items col m3 z-depth-3 card-panel">
             
               {/* Action items */}
               {this.state.meeting.id &&
