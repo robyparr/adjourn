@@ -16,4 +16,4 @@ var ready = function() {
 };
 
 $(document).ready(ready);
-$(document).on('turbolinks:load', ready);
+$(document).on('turbolinks:load', () => setTimeout(ready, 250));

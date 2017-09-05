@@ -6,8 +6,8 @@ class AttendeesController < ApplicationController
     matching_attendees = current_user.attendees.where(
       "email LIKE ?", 
       "%#{params[:email]}%"
-    )
-    
+    ).select(:id, :email)
+
     render json: matching_attendees
   end
 

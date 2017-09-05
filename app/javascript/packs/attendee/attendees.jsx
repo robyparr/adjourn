@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Controls
 import AutoComplete from 'material-ui/AutoComplete';
+import Chip from 'material-ui/Chip';
 
 // Utils
 import axios from 'axios';
@@ -17,8 +18,6 @@ export default class Attendees extends Component {
             attendeeResults: props.attendeeResults || [],
             searchText: ""
         };
-
-        console.log(this.state);
     }
 
     handleUpdateInput = (value) => {
@@ -29,10 +28,13 @@ export default class Attendees extends Component {
         axios({
             method: 'GET',
             url: '/attendees/autocomplete',
+            type: 'application/json',
             data: { email: value }
         }).then(response => {
+            var attendeeIDs = this.state.attendees.map(it => it.id);
+
             var results = response.data
-                .filter(it => this.state.attendees.indexOf(it) >= 0)
+                .filter(it => attendeeIDs.indexOf(it.id) === -1)
                 .map(it => it.email);
 
             this.setState({ attendeeResults: results });
@@ -50,10 +52,23 @@ export default class Attendees extends Component {
         });
     }
 
+    handleAttendeeRemoved = (attendee) => {
+        axios({
+            method: 'DELETE',
+            url: `/meetings/${this.props.meetingID}/attendees`,
+            data: { email: attendee.email, authenticity_token: Utils.getAuthenticityToken() }
+        }).then((response) => {
+            this.props.handleAttendeesAddRemove(attendee);
+        });
+    }
+
     render() {
+        $('.chips-autocomplete input').on('keyup', () => this.handleUpdateInput);
+
         return (
             <div>
                 <h5>Attendees</h5>
+
                 <AutoComplete
                     hintText="Add Attendee"
                     className="browser-default"
@@ -62,11 +77,15 @@ export default class Attendees extends Component {
                     onNewRequest={this.handleResultSelected}
                     searchText={this.state.searchText} />
 
-                    <ul>
                 {this.state.attendees.map(attendee => {
-                    return <li key={attendee.id}>{attendee.email}</li>
+                    return (
+                        <Chip 
+                            key={attendee.id}
+                            onRequestDelete={() => this.handleAttendeeRemoved(attendee)}>
+                            {attendee.email}
+                        </Chip>
+                    )
                 })}
-                </ul>
             </div>
         );
     }

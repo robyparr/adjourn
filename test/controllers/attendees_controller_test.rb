@@ -98,7 +98,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
       '@meeting.attendees.count', 
       '@user.attendees.count'
     ] do
-      delete meeting_attendees_remove_url(@meeting),
+      delete meeting_attendees_url(@meeting),
         params: @attend_existing_params
       
       assert_redirected_to new_user_session_url
@@ -112,7 +112,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
       '@meeting.attendees.count', 
       '@user.attendees.count'
     ] do
-      delete meeting_attendees_remove_url(@meeting),
+      delete meeting_attendees_url(@meeting),
         params: @attend_existing_params
       
       assert_response :not_found
@@ -126,7 +126,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference '@meeting.attendees.count', -1 do
       assert_no_difference ['@user.attendees.count', 'Attendee.count'] do
-        delete meeting_attendees_remove_url(@meeting), 
+        delete meeting_attendees_url(@meeting), 
           params: @attend_existing_params
 
         assert_response :success

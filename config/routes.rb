@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :meetings do
     post '/attendees/attend', to: 'attendees#attend'
-    delete '/attendees/remove', to: 'attendees#remove'
+    delete '/attendees', to: 'attendees#remove'
     
     resources :action_items, shallow: true, only: [:create, :update, :destroy]
 
