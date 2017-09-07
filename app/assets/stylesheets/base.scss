@@ -23,14 +23,14 @@ body {
 /* Card delete links */
 .card, .collection-item {
     .delete-link {
-        display: none;
+        visibility: hidden;
         color: inherit;
         cursor: pointer;
     }
 
     &:hover {
         .delete-link {
-            display: block;
+            visibility: visible;
         }
     }
 
