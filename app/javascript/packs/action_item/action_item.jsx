@@ -94,6 +94,9 @@ export default class ActionItem extends Component {
             this.state.item.description
             : "Click here to add a description.";
 
+        var descriptionClass = "margin-top-none margin-bottom-none "
+            + (this.state.item.description ? "" : "print-hide");
+
 
         var deleteDialogActions = [
             <FlatButton label="Yes" primary={true} onTouchTap={this.handleDeleteItem} />,
@@ -119,7 +122,7 @@ export default class ActionItem extends Component {
                     </a>
                 }
 
-                <span className="title">
+                <span className="title" style={{ display: 'block', marginBottom: 8}}>
                     <InlineEdit
                         onChange={this.handleUpdate}
                         onEditModeChanged={this.handleEditModeChanged}
@@ -130,7 +133,7 @@ export default class ActionItem extends Component {
 
                 {isExisting && 
                     <InlineEdit
-                        className={this.state.item.description ? "" : "print-hide"}
+                        className={descriptionClass}
                         name="description"
                         onChange={this.handleUpdate}
                         onEditModeChanged={this.handleEditModeChanged}
