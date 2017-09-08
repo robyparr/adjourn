@@ -122,7 +122,7 @@ export default class ActionItem extends Component {
                     </a>
                 }
 
-                <span className="title" style={{ display: 'block', marginBottom: 8}}>
+                <span className="title font-size-20" style={{ display: 'block', marginBottom: 8}}>
                     <InlineEdit
                         onChange={this.handleUpdate}
                         onEditModeChanged={this.handleEditModeChanged}
