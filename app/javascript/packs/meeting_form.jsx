@@ -201,7 +201,7 @@ class MeetingForm extends Component {
             </div>
           </div>
 
-          <div className="col m8">
+          <div className="col m5">
             <Attendees
               attendees={this.state.attendees}
               handleAttendeesAddRemove={this.handleAttendeesAddRemove}

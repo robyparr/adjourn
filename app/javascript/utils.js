@@ -1,3 +1,5 @@
+var md5 = require('md5');
+
 /*
  * JavaScript utilities.
  */
@@ -28,5 +30,10 @@ export default class Utils {
      */
     static getAuthenticityToken() {
         return document.querySelector('meta[name=csrf-token').getAttribute('content');
+    }
+
+    static getGravatarUrl(email) {
+        var hashedEmail = md5(email.trim().toLowerCase());
+        return `https://www.gravatar.com/avatar/${hashedEmail}.jpg?s=32&d=mm`;
     }
 }

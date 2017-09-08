@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 // Controls
 import AutoComplete from 'material-ui/AutoComplete';
 import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
 
 // Utils
 import axios from 'axios';
@@ -69,23 +70,30 @@ export default class Attendees extends Component {
             <div>
                 <h5>Attendees</h5>
 
-                <AutoComplete
-                    hintText="Add Attendee"
-                    className="browser-default"
-                    dataSource={this.state.attendeeResults}
-                    onUpdateInput={this.handleUpdateInput}
-                    onNewRequest={this.handleResultSelected}
-                    searchText={this.state.searchText} />
+                <div className="print-hide">
+                    <AutoComplete
+                        hintText="Add Attendee"
+                        className="browser-default"
+                        fullWidth={true}
+                        dataSource={this.state.attendeeResults}
+                        onUpdateInput={this.handleUpdateInput}
+                        onNewRequest={this.handleResultSelected}
+                        searchText={this.state.searchText} />
+                </div>
 
-                {this.state.attendees.map(attendee => {
-                    return (
-                        <Chip 
-                            key={attendee.id}
-                            onRequestDelete={() => this.handleAttendeeRemoved(attendee)}>
-                            {attendee.email}
-                        </Chip>
-                    )
-                })}
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {this.state.attendees.map(attendee => {
+                        return (
+                            <Chip 
+                                key={attendee.id}
+                                style={{ margin: 4 }}
+                                onRequestDelete={() => this.handleAttendeeRemoved(attendee)}>
+                                <Avatar src={Utils.getGravatarUrl(attendee.email)} />
+                                {attendee.email}
+                            </Chip>
+                        )
+                    })}
+                </div>
             </div>
         );
     }
