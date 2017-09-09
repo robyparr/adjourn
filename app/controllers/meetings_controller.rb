@@ -48,9 +48,7 @@ class MeetingsController < ApplicationController
     else
       render json: meeting.errors.full_messages, status: :unprocessable_entity
     end
-    
   end
-  
 
   private
   

@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <style>
+            body {
+                background-color: #fafafa;
+            }
+
+            .card-title {
+                font-weight: bold !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col m12 card">
+                    <div class="card-content">
+
+                        <div class="row">
+                            <div class="col m12">
+                                <h3 style="margin-top: 0;"><%= meeting.title %></h3>
+                                <strong>Start:</strong> <%= meeting.start_date %><br />
+                                <strong>End:</strong> <%= meeting.end_date %>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col m12">
+                                <h4>Attendees</h4>
+                                <ul class="browser-default">
+                                    <% meeting.attendees.each do |attendee| %>
+                                        <li><%= attendee.email %></li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col m12">
+                                <h4>Action Items</h4>
+                                <ul class="browser-default">
+                                    <% meeting.action_items.each do |item| %>
+                                        <li>
+                                            <h5><%= item.title %></h5>
+                                            <%= item.description %>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col m12">
+                                <h4>Agenda</h4>
+                                <ul class="browser-default">
+                                    <% meeting.agenda.each do |agendum| %>
+                                        <h5><%= agendum.title %></h5>
+                                        <%= agendum.description %>
+
+                                        <ul class="browser-default">
+                                            <% agendum.notes.each do |note| %>
+                                                <li>
+                                                    <%= note.content %>
+                                                </li>
+                                            <% end %>
+                                        </ul>
+                                    <% end %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

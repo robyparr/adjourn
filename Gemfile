@@ -19,6 +19,8 @@ gem 'materialize-sass', '~> 0.100.2'
 gem 'jquery-rails'
 gem 'devise'
 gem 'pg'
+gem 'nokogiri'
+gem 'premailer-rails'
 
 group :production do
   gem 'scout_apm'
