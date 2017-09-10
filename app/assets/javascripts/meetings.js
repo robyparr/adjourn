@@ -13,6 +13,8 @@ var ready = function() {
     $('div.browser-default').children('input[type=text]').each(function() {
         $(this).addClass('browser-default');
     });
+
+    $('.tooltipped').tooltip();
 };
 
 $(document).ready(ready);

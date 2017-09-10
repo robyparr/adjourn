@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
 
   resources :meetings do
+    post '/email_attendees', to: 'meetings#email_attendees'
+
     post '/attendees/attend', to: 'attendees#attend'
     delete '/attendees', to: 'attendees#remove'
     

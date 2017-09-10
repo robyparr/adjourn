@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class MeetingsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveJob::TestHelper
   
   def setup
     @meeting = meetings(:one)
@@ -9,6 +10,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     @user = users(:one)
 
     @user.meetings << @meeting
+    ActionMailer::Base.deliveries.clear
   end
   
   test "can list all a user's meetings" do
@@ -86,6 +88,35 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     assert_not_equal updated_meeting['title'], @meeting.title
     assert_not_equal updated_meeting['start_date'], @meeting.start_date
     assert_not_equal updated_meeting['end_date'], @meeting.end_date
+  end
+
+  # Email attendees test
+  test "unauthorized users can't send emails" do
+    assert_no_enqueued_jobs do
+      post meeting_email_attendees_url(@meeting)
+      assert_redirected_to new_user_session_path
+    end
+  end
+
+  test "users can't send emails from other users' meetings" do
+    sign_in users(:two)
+
+    assert_no_enqueued_jobs do
+      post meeting_email_attendees_url(@meeting)
+      assert_response :not_found
+    end
+  end
+
+  test "users can send emails to attendees" do
+    sign_in @user
+
+    assert_enqueued_with(job: ActionMailer::DeliveryJob) do
+      post meeting_email_attendees_url(@meeting)
+      assert_response :success
+    end
+
+    json_response = JSON.parse(response.body)['message']
+    assert_equal "Email successfully sent.", json_response
   end
 
 end

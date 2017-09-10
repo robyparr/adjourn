@@ -141,6 +141,16 @@ class MeetingForm extends Component {
     this.setState({ attendees: attendees });
   }
 
+  handleEmailAttendeesClick = () => {
+    axios({
+      method: 'POST',
+      url: `/meetings/${this.state.meeting.id}/email_attendees`,
+      data: { authenticity_token: Utils.getAuthenticityToken() }
+    }).then(response => {
+      showInformationMessage(response.data.message);
+    });
+  }
+
   render() {
     /*
      * HTML and styles
@@ -168,14 +178,14 @@ class MeetingForm extends Component {
       <div>
         {/* Title */}
         <div className="row">
-          <div className="col m12">
+          <div className="col m9">
             <InlineEdit
               name="title"
               onChange={this.handleFieldUpdate}
               displayElement='h4'
               value={this.state.meeting.title} />
+              {errorsHTML}
           </div>
-          {errorsHTML}
         </div>
 
         {/* Date & times */}
@@ -236,6 +246,24 @@ class MeetingForm extends Component {
                   handleAgendumAddRemove={this.handleAgendumAddRemove} />
               </div>
             }
+          </div>
+
+          {/* FAB */}
+          <div className="fixed-action-btn click-to-toggle">
+            <a className="btn-floating btn-large red">
+              <i className="material-icons">menu</i>
+            </a>
+            <ul>
+              <li>
+                <a className="btn-floating red tooltipped" 
+                  data-position="left"
+                  data-delay="50"
+                  onClick={this.handleEmailAttendeesClick}
+                  data-tooltip="Email Attendees">
+                  <i className="material-icons">send</i>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
