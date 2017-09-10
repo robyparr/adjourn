@@ -20,4 +20,12 @@ class Agendum < ApplicationRecord
   #
   validates :title, presence: true
   validates :meeting, presence: true
+
+  def markdown_description
+    if description
+      MarkdownRenderer.render(description)
+    else
+      ""
+    end
+  end
 end

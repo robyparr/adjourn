@@ -19,6 +19,7 @@ gem 'materialize-sass', '~> 0.100.2'
 gem 'jquery-rails'
 gem 'devise'
 gem 'pg'
+gem 'redcarpet',        '~> 3.3', '>= 3.3.4'
 
 group :production do
   gem 'scout_apm'
