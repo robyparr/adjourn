@@ -30,9 +30,10 @@ class Meeting < ApplicationRecord
   validates :end_date,        presence: true
   validate  :end_date_after_start_date
 
-  def to_html
+  def self.to_html(meeting)
+    view_variables = { meeting: meeting }
+
     controller = ActionController::Base.new
-    view_variables = { meeting: self }
     controller.render_to_string "meetings/export", locals: view_variables
   end
 
