@@ -211,32 +211,33 @@ class MeetingForm extends Component {
             </div>
           </div>
 
-          <div className="col m5">
-            <Attendees
-              attendees={this.state.attendees}
-              handleAttendeesAddRemove={this.handleAttendeesAddRemove}
-              meetingID={this.state.meeting.id} />
-          </div>
+          {/* Attendees */}
+          {this.state.meeting.id &&
+            <div className="col m5">
+              <Attendees
+                attendees={this.state.attendees}
+                handleAttendeesAddRemove={this.handleAttendeesAddRemove}
+                meetingID={this.state.meeting.id} />
+            </div>
+          }
         </div>
 
         <div className="row">
-          <div className="action-items col m3 z-depth-3 card-panel">
-            
-              {/* Action items */}
-              {this.state.meeting.id &&
-                <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
-                  <ActionItems
-                    actionItems={this.state.actionItems} 
-                    meetingID={this.state.meeting.id}
-                    handleActionItemAddRemove={this.handleActionItemAddRemove} />
-                </div>
-              }
-            
-          </div>
+          {/* Action items */}
+          {this.state.meeting.id &&
+            <div className="action-items col m3 z-depth-3 card-panel">
+              <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
+                <ActionItems
+                  actionItems={this.state.actionItems} 
+                  meetingID={this.state.meeting.id}
+                  handleActionItemAddRemove={this.handleActionItemAddRemove} />
+              </div>
+            </div>
+          }
 
-          <div className="col m9">
-            {/* Agenda */}
-            {this.state.meeting.id &&
+          {/* Agenda */}
+          {this.state.meeting.id &&
+            <div className="col m9">
               <div>
                 <h5>Agenda</h5>
                 <hr />
@@ -245,26 +246,28 @@ class MeetingForm extends Component {
                   meetingID={this.state.meeting.id}
                   handleAgendumAddRemove={this.handleAgendumAddRemove} />
               </div>
-            }
-          </div>
+            </div>
+          }
 
           {/* FAB */}
-          <div className="fixed-action-btn click-to-toggle">
-            <a className="btn-floating btn-large red">
-              <i className="material-icons">menu</i>
-            </a>
-            <ul>
-              <li>
-                <a className="btn-floating red tooltipped" 
-                  data-position="left"
-                  data-delay="50"
-                  onClick={this.handleEmailAttendeesClick}
-                  data-tooltip="Email Attendees">
-                  <i className="material-icons">send</i>
-                </a>
-              </li>
-            </ul>
-          </div>
+          {this.state.meeting.id &&
+            <div className="fixed-action-btn click-to-toggle">
+              <a className="btn-floating btn-large red">
+                <i className="material-icons">menu</i>
+              </a>
+              <ul>
+                <li>
+                  <a className="btn-floating red tooltipped" 
+                    data-position="left"
+                    data-delay="50"
+                    onClick={this.handleEmailAttendeesClick}
+                    data-tooltip="Email Attendees">
+                    <i className="material-icons">send</i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          }
         </div>
       </div>
     );
