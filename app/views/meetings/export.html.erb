@@ -31,30 +31,38 @@
 
         <h4>Action Items</h4>
         <hr />
-        <ul class="browser-default">
-            <% meeting.action_items.each do |item| %>
-                <li>
-                    <h5><%= item.title %></h5>
-                    <%= markdown_text item.description %>
-                </li>
-            <% end %>
-        </ul>
+        <% unless meeting.action_items.any? %>
+            <p>No action items set.</p>
+        <% else %>
+            <ul class="browser-default">
+                <% meeting.action_items.each do |item| %>
+                    <li>
+                        <h5><%= item.title %></h5>
+                        <%= markdown_text item.description %>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
 
         <h4>Agenda</h4>
         <hr />
-        <ul>
-            <% meeting.agenda.each do |agendum| %>
-                <h5><%= agendum.title %></h5>
-                <%= markdown_text agendum.description %>
+        <% unless meeting.agenda.any? %>
+            <p>No agenda set.</p>
+        <% else %>
+            <ul>
+                <% meeting.agenda.each do |agendum| %>
+                    <h5><%= agendum.title %></h5>
+                    <%= markdown_text agendum.description %>
 
-                <ul>
-                    <% agendum.notes.each do |note| %>
-                        <li>
-                            <%= markdown_text note.content %>
-                        </li>
-                    <% end %>
-                </ul>
-            <% end %>
-        </ul>
+                    <ul>
+                        <% agendum.notes.each do |note| %>
+                            <li>
+                                <%= markdown_text note.content %>
+                            </li>
+                        <% end %>
+                    </ul>
+                <% end %>
+            </ul>
+        <% end %>
     </body>
 </html>
