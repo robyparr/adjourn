@@ -35,7 +35,7 @@
             <% meeting.action_items.each do |item| %>
                 <li>
                     <h5><%= item.title %></h5>
-                    <%= item.markdown_description %>
+                    <%= markdown_text item.description %>
                 </li>
             <% end %>
         </ul>
@@ -45,12 +45,12 @@
         <ul>
             <% meeting.agenda.each do |agendum| %>
                 <h5><%= agendum.title %></h5>
-                <%= agendum.markdown_description %>
+                <%= markdown_text agendum.description %>
 
                 <ul>
                     <% agendum.notes.each do |note| %>
                         <li>
-                            <%= note.markdown_content %>
+                            <%= markdown_text note.content %>
                         </li>
                     <% end %>
                 </ul>

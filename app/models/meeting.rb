@@ -33,7 +33,7 @@ class Meeting < ApplicationRecord
   def self.to_html(meeting)
     view_variables = { meeting: meeting }
 
-    controller = ActionController::Base.new
+    controller = ExportController.new
     controller.render_to_string "meetings/export", locals: view_variables
   end
 

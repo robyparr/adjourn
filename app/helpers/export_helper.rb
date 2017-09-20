@@ -1,5 +1,7 @@
-class MarkdownRenderer
-  def self.render(text)
+module ExportHelper
+  def markdown_text(text)
+    text ||= ""
+    
     renderer_options = { filter_html: true }
     markdown_extensions = { autolink: true }
 

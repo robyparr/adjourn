@@ -15,11 +15,4 @@ class AgendumNote < ApplicationRecord
   # Validations
   validates :content, presence: true
 
-  def markdown_content
-    if content
-      MarkdownRenderer.render(content)
-    else
-      ""
-    end
-  end
 end

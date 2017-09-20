@@ -13,11 +13,4 @@ class ActionItem < ApplicationRecord
 
   validates :title, presence: true
 
-  def markdown_description
-    if description
-      MarkdownRenderer.render(description)
-    else
-      ""
-    end
-  end
 end
