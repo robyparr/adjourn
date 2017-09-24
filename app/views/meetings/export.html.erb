@@ -51,16 +51,18 @@
         <% else %>
             <ul>
                 <% meeting.agenda.each do |agendum| %>
-                    <h5><%= agendum.title %></h5>
-                    <%= markdown_text agendum.description %>
+                    <li style="margin-bottom: 30px;">
+                        <h5><%= agendum.title %></h5>
+                        <%= markdown_text agendum.description %>
 
-                    <ul>
-                        <% agendum.notes.each do |note| %>
-                            <li>
-                                <%= markdown_text note.content %>
-                            </li>
-                        <% end %>
-                    </ul>
+                        <ul>
+                            <% agendum.notes.each do |note| %>
+                                <li>
+                                    <%= markdown_text note.content %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </li>
                 <% end %>
             </ul>
         <% end %>
