@@ -33,7 +33,7 @@ class ActionItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:action_item).permit(:title, :description)
+    params.require(:action_item).permit(:title, :description, :done)
   end
 
   def load_meeting

@@ -8,6 +8,7 @@ json.action_items meeting.action_items do |item|
   json.id           item.id
   json.title        item.title
   json.description  item.description
+  json.done         item.done
 end
 
 json.attendees  meeting.attendees do |attendee|

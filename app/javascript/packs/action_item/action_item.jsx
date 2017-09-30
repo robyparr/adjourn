@@ -80,7 +80,7 @@ export default class ActionItem extends Component {
         var isExisting = this.state.isExisting;
 
         // The card's CSS class
-        var classes = `collection-item ${!isExisting ? "grey lighten-4 print-hide" : ""}`;
+        var classes = `collection-item checkbox ${!isExisting ? "grey lighten-4 print-hide" : ""}`;
 
         // The prefix for element IDs
         var idPrefix = isExisting ? this.state.item.id : 'new';
@@ -122,6 +122,15 @@ export default class ActionItem extends Component {
                     </a>
                 }
 
+                {isExisting && 
+                    <span className="checkbox">
+                        <input type="checkbox" 
+                            id={`item-done-${this.state.item.id}`}
+                            checked={this.state.item.done}
+                            onChange={(e) => this.handleUpdate('done', e.target.checked)} />
+                        <label htmlFor={`item-done-${this.state.item.id}`}></label>
+                    </span>
+                }
                 <span className="title font-size-20" style={{ display: 'block', marginBottom: 8}}>
                     <InlineEdit
                         onChange={this.handleUpdate}
