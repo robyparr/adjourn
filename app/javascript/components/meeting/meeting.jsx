@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 // Controls
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
 import ActionItems from './action_item/action_items';
 import AgendumList from './agendum/agendum_list';
 import Attendees from './attendee/attendees';
-import DateTimePicker from './common/date_time_picker';
-import InlineEdit from './common/inline_edit';
+import DateTimePicker from '../common/date_time_picker';
+import InlineEdit from '../common/inline_edit';
 
 // Utilities
 import Utils from 'utils';
@@ -24,7 +22,7 @@ injectTapEventPlugin();
 /*
  * MeetingForm provides the UI for all meeting resource updates.
  */
-class MeetingForm extends Component {
+export default class Meeting extends Component {
 
   constructor(props) {
     super(props);
@@ -273,14 +271,3 @@ class MeetingForm extends Component {
     );
   }
 }
-
-
-var rootNode = document.getElementById('react-root');
-var meeting = JSON.parse(rootNode.getAttribute('data-meeting'));
-
-ReactDOM.render(
-  <MuiThemeProvider>
-    <MeetingForm meeting={meeting} />
-  </MuiThemeProvider>,
-  document.getElementById('react-root'),
-);

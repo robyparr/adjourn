@@ -5,7 +5,7 @@ import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import AgendumNoteList from '../agendum_note/agendum_note_list';
-import InlineEdit from '../common/inline_edit';
+import InlineEdit from '../../common/inline_edit';
 
 // Utils
 import axios from 'axios';
