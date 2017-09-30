@@ -10,24 +10,61 @@ import _ from 'lodash';
  * Create a list of Agendum.
  */
 const AgendumList = (props) => {
+
+    /* 
+        Agendums will be placed into each array,
+        each of which will be rendered into a separate
+        HTML column. This helps to solve the spacing
+        issue when a single item in a column has a very
+        long length.
+    */
+    var columns = [
+        [],
+        [],
+        []
+    ];
+
+    var nextColumn = 0;
+
+    const getNextColumnIndex = (lastColumn) => {
+        if (lastColumn == columns.length - 1) {
+            return 0;
+        }
+
+        return ++lastColumn;
+    };
+
+    props.agenda.forEach((agendum, i) => {
+        const jsx = (
+            <Agendum agendum={agendum}
+                key={agendum.id}
+                meetingID={props.meetingID}
+                handleAgendumAddRemove={props.handleAgendumAddRemove} />
+        );
+
+        columns[nextColumn].push(jsx);
+        nextColumn = getNextColumnIndex(nextColumn);
+    });
+
+    /* Add new Agendum item */
+    columns[nextColumn].push(
+        <div className="print-hide" key={new Date()}>
+            <Agendum
+                meetingID={props.meetingID}
+                handleAgendumAddRemove={props.handleAgendumAddRemove} />
+        </div>
+    );
+
     return(
         <div className="row">
-            {
-                props.agenda.map((agendum) => {
-                    return(
-                        <div className="col m4 print-full-width" key={agendum.id}>
-                            <Agendum agendum={agendum}
-                                meetingID={props.meetingID}
-                                handleAgendumAddRemove={props.handleAgendumAddRemove} />
-                        </div>
-                    );
-                })
-            }
-            {/* Add new Agendum item */}
-            <div className="col m4 print-hide">
-                <Agendum key={new Date()}
-                    meetingID={props.meetingID}
-                    handleAgendumAddRemove={props.handleAgendumAddRemove} />
+            <div className="col m4 print-full-width">
+                { columns[0] }
+            </div>
+            <div className="col m4 print-full-width">
+                { columns[1] }
+            </div>
+            <div className="col m4 print-full-width">
+                { columns[2] }
             </div>
         </div>
     );
