@@ -1,11 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Meeting from '../components/meeting/meeting';
+import Meeting from '../components/meeting/Meeting';
+import { updateMeeting } from '../actions/meetings';
 
-const MeetingContainer = ({ meeting }) => {
+const MeetingContainer = ({ meeting, updateMeeting }) => {
+
+    const onFieldUpdate = (field, value) => {
+        const meetingUpdate = Object.assign({}, meeting, { 
+            [field]: value 
+        });
+        updateMeeting(meetingUpdate);
+    };
+
     return (
-        <Meeting {...meeting} />
+        <Meeting 
+            {...meeting}
+            onFieldUpdate={onFieldUpdate} />
     );
 };
 
@@ -15,4 +26,7 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(MeetingContainer);
+export default connect(
+    mapStateToProps,
+    { updateMeeting }
+)(MeetingContainer);

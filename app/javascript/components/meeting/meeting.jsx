@@ -17,76 +17,105 @@ import Utils from 'utils';
 import axios from 'axios';
 import moment from 'moment';
 
-// For material-ui
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
-
 /*
  * MeetingForm provides the UI for all meeting resource updates.
  */
-export default class Meeting extends Component {
-
-  constructor(props) {
-    super(props);
-    
-
-    /*props.meeting.title =  props.meeting.title || 'New Meeting';
-    props.meeting.start_date = props.meeting.start_date || moment().toDate();
-    props.meeting.end_date = props.meeting.end_date || moment().add(1, 'hours').toDate();
-
-    this.state = {
-      authenticity_token: Utils.getAuthenticityToken(),
-      meeting: props.meeting,
-      agenda: props.meeting.agenda || [],
-      errors: null,
-      actionItems: props.meeting.action_items,
-      attendees: props.meeting.attendees || []
-    };*/
-  }
-
+const Meeting = props => {
   /*
-   * Event handler for field updates.
-   */
-  /*handleFieldUpdate = (field, value) => {
-    // Update the meeting object
-    var meeting = this.state.meeting;
-    meeting[field] = value;
+    * Convert dates to local time.
+    */
+  var startDate = moment(props.startDate).utc().local();
+  var endDate = moment(props.endDate).utc().local();
 
-    // Set the state with the modified meeting object and save to
-    // the server.
-    this.setState({ meeting: meeting }, () => this.saveMeeting());
+  return (
+    <div>
+      {/* Title */}
+      <div className="row">
+        <div className="col m9">
+          <InlineEdit
+            name="title"
+            onChange={props.onFieldUpdate}
+            displayElement='h4'
+            value={props.title} />
+        </div>
+      </div>
 
-    
-    ;
-  }*/
+      {/* Date & times */}
+      <div className="row">
+        <div className="col m4">
+          <div className="row">
+            <div className="col m1 bold">Start</div>
+            <div className="col m3">
+              <DateTimePicker 
+                name="start_date"
+                dateTime={startDate}
+                onChange={props.onFieldUpdate} />
+            </div>
+          </div>
 
-  /*
-   * Utility event handler to convert a normal JavaScript event
-   * object into the proper format for this.handleFieldUpdate();
-   
-  handleNormalFieldUpdate = (e) => {
-    var fieldName = e.target.name;
-    var value = e.target.value;
+          <div className="row">
+            <div className="col m1 bold">End</div>
+            <div className="col m3">
+              <DateTimePicker 
+                name="end_date"
+                dateTime={endDate}
+                onChange={props.onFieldUpdate} />
+            </div>
+          </div>
+        </div>
 
-    this.handleFieldUpdate({ fieldName: value });
-  }*/
+        {/* Attendees */}
+        {props.id &&
+          <div className="col m5">
+            <AttendeeContainer />
+          </div>
+        }
+      </div>
 
-  /*
-   * Saves the meeting.
-   
-  saveMeeting = () => {
-    axios({
-      method: this.state.meeting.id ? 'PATCH' : 'POST',
-      url: this.state.meeting.id? `/meetings/${this.state.meeting.id}` : '/meetings',
-      data: this.state
-    }).then(response => this.setState({ meeting: response.data, errors: null }))
-    .catch(error => {
-      if (error.response) {
-        var errors = error.response.data;
-        this.setState({ errors: errors });
-      }
-    });
-  }*/
+      <div className="row">
+        {/* Action items */}
+        {props.id &&
+          <div className="action-items col m3 z-depth-3 card-panel">
+            <ActionItemContainer />
+          </div>
+        }
+
+        {/* Agenda */}
+        {props.id &&
+          <div className="col m9">
+            <div>
+              <h5>Agenda</h5>
+              <hr />
+              <AgendaContainer />
+            </div>
+          </div>
+        } 
+
+        {/* FAB */}
+        {props.id &&
+          <div className="fixed-action-btn click-to-toggle">
+            <a className="btn-floating btn-large red">
+              <i className="material-icons">menu</i>
+            </a>
+            <ul>
+              <li>
+                <a className="btn-floating red tooltipped" 
+                  data-position="left"
+                  data-delay="50"
+                  onClick={this.handleEmailAttendeesClick}
+                  data-tooltip="Email Attendees">
+                  <i className="material-icons">send</i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  );
+}
+
+export default Meeting;
 
   /*
    * Handles the addition of a new adgendum.
@@ -151,115 +180,3 @@ export default class Meeting extends Component {
       showInformationMessage(response.data.message);
     });
   }*/
-
-  render() {
-    /*
-     * HTML and styles
-     
-    var errorsHTML = this.state.errors ? (
-      <div className="col m6 error text-right">
-        <h5>Oops! We've got a problem!</h5>
-        <ul>
-          { 
-            this.state.errors.map((e, key) => {
-              return <li key={key}>{e}</li>
-            }) 
-          }
-        </ul>
-      </div>
-    ) : "";*/
-
-    /*
-     * Values
-     */
-    var startDate = moment(this.props.startDate).utc().local();
-    var endDate = moment(this.props.endDate).utc().local();
-
-    return (
-      <div>
-        {/* Title */}
-        <div className="row">
-          <div className="col m9">
-            <InlineEdit
-              name="title"
-              onChange={this.handleFieldUpdate}
-              displayElement='h4'
-              value={this.props.title} />
-              {/*errorsHTML*/}
-          </div>
-        </div>
-
-        {/* Date & times */}
-        <div className="row">
-          <div className="col m4">
-            <div className="row">
-              <div className="col m1 bold">Start</div>
-              <div className="col m3">
-                <DateTimePicker 
-                  name="start_date"
-                  dateTime={startDate}
-                  onChange={this.handleFieldUpdate} />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col m1 bold">End</div>
-              <div className="col m3">
-                <DateTimePicker 
-                  name="end_date"
-                  dateTime={endDate}
-                  onChange={this.handleFieldUpdate} />
-              </div>
-            </div>
-          </div>
-
-          {/* Attendees */}
-          {this.props.id &&
-            <div className="col m5">
-              <AttendeeContainer />
-            </div>
-          }
-        </div>
-
-        <div className="row">
-          {/* Action items */}
-          {this.props.id &&
-            <div className="action-items col m3 z-depth-3 card-panel">
-              <ActionItemContainer />
-            </div>
-          }
-
-          {/* Agenda */}
-          {this.props.id &&
-            <div className="col m9">
-              <div>
-                <h5>Agenda</h5>
-                <hr />
-                <AgendaContainer />
-              </div>
-            </div>
-          } 
-
-          {/* FAB */}
-          {this.props.id &&
-            <div className="fixed-action-btn click-to-toggle">
-              <a className="btn-floating btn-large red">
-                <i className="material-icons">menu</i>
-              </a>
-              <ul>
-                <li>
-                  <a className="btn-floating red tooltipped" 
-                    data-position="left"
-                    data-delay="50"
-                    onClick={this.handleEmailAttendeesClick}
-                    data-tooltip="Email Attendees">
-                    <i className="material-icons">send</i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          }
-        </div>
-      </div>
-    );
-  }
-}
