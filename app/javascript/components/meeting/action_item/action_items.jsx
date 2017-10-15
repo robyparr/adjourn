@@ -10,9 +10,11 @@ import _ from 'lodash';
  * Create a list of Action Items.
  */
 const ActionItems = (props) => {
+    const containerClass = "collection with-header margin-top-none "
+        + (props.actionItems.length === 0 ? "print-hide" : "");
 
     return(
-        <ul className="collection with-header margin-top-none">
+        <ul className={containerClass}>
             <li className="collection-header">
                 <h5>Action Items</h5>
                 <hr className="print-only" />

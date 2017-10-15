@@ -23,7 +23,8 @@ json.agenda meeting.agenda do |agendum|
   json.description  agendum.description
 
   json.notes agendum.notes do |note|
-    json.id       note.id
-    json.content  note.content
+    json.id         note.id
+    json.content    note.content
+    json.agendum_id note.agendum_id
   end  
 end

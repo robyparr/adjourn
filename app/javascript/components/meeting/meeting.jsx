@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
-import ActionItems from './action_item/action_items';
-import AgendumList from './agendum/agendum_list';
+
+import AgendaContainer from '../../containers/AgendaContainer';
+import ActionItemContainer from '../../containers/ActionItemContainer';
+import AttendeeContainer from '../../containers/AttendeeContainer';
 import Attendees from './attendee/attendees';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/inline_edit';
@@ -26,8 +28,9 @@ export default class Meeting extends Component {
 
   constructor(props) {
     super(props);
+    
 
-    props.meeting.title =  props.meeting.title || 'New Meeting';
+    /*props.meeting.title =  props.meeting.title || 'New Meeting';
     props.meeting.start_date = props.meeting.start_date || moment().toDate();
     props.meeting.end_date = props.meeting.end_date || moment().add(1, 'hours').toDate();
 
@@ -38,13 +41,13 @@ export default class Meeting extends Component {
       errors: null,
       actionItems: props.meeting.action_items,
       attendees: props.meeting.attendees || []
-    };
+    };*/
   }
 
   /*
    * Event handler for field updates.
    */
-  handleFieldUpdate = (field, value) => {
+  /*handleFieldUpdate = (field, value) => {
     // Update the meeting object
     var meeting = this.state.meeting;
     meeting[field] = value;
@@ -55,22 +58,22 @@ export default class Meeting extends Component {
 
     
     ;
-  }
+  }*/
 
   /*
    * Utility event handler to convert a normal JavaScript event
    * object into the proper format for this.handleFieldUpdate();
-   */
+   
   handleNormalFieldUpdate = (e) => {
     var fieldName = e.target.name;
     var value = e.target.value;
 
     this.handleFieldUpdate({ fieldName: value });
-  }
+  }*/
 
   /*
    * Saves the meeting.
-   */
+   
   saveMeeting = () => {
     axios({
       method: this.state.meeting.id ? 'PATCH' : 'POST',
@@ -83,13 +86,13 @@ export default class Meeting extends Component {
         this.setState({ errors: errors });
       }
     });
-  }
+  }*/
 
   /*
    * Handles the addition of a new adgendum.
    * This will add the new agendum to the meeting agenda,
    * causing a state update.
-   */
+   
   handleAgendumAddRemove = (agendum, isAdd) => {
     var agenda = this.state.agenda || [];
 
@@ -101,13 +104,13 @@ export default class Meeting extends Component {
     }
 
     this.setState({ agenda: agenda });
-  }
+  }*/
 
   /*
    * Handles the addition of a new action item.
    * This will add the new action item to the meeting,
    * causing a state update.
-   */
+   
   handleActionItemAddRemove = (item, isAdd) => {
     var actionItems = this.state.actionItems || [];
 
@@ -119,13 +122,13 @@ export default class Meeting extends Component {
     }
 
     this.setState({ actionItems: actionItems });
-  }
+  }*/
 
     /*
    * Handles the addition of a new attendee.
    * This will add the new attendee to the meeting,
    * causing a state update.
-   */
+   
   handleAttendeesAddRemove = (attendee, isAdd) => {
     var attendees = this.state.attendees || [];
 
@@ -147,12 +150,12 @@ export default class Meeting extends Component {
     }).then(response => {
       showInformationMessage(response.data.message);
     });
-  }
+  }*/
 
   render() {
     /*
      * HTML and styles
-     */
+     
     var errorsHTML = this.state.errors ? (
       <div className="col m6 error text-right">
         <h5>Oops! We've got a problem!</h5>
@@ -164,13 +167,13 @@ export default class Meeting extends Component {
           }
         </ul>
       </div>
-    ) : "";
+    ) : "";*/
 
     /*
      * Values
      */
-    var start_date = moment(this.state.meeting.start_date).utc().local();
-    var end_date = moment(this.state.meeting.end_date).utc().local();
+    var startDate = moment(this.props.startDate).utc().local();
+    var endDate = moment(this.props.endDate).utc().local();
 
     return (
       <div>
@@ -181,8 +184,8 @@ export default class Meeting extends Component {
               name="title"
               onChange={this.handleFieldUpdate}
               displayElement='h4'
-              value={this.state.meeting.title} />
-              {errorsHTML}
+              value={this.props.title} />
+              {/*errorsHTML*/}
           </div>
         </div>
 
@@ -194,7 +197,7 @@ export default class Meeting extends Component {
               <div className="col m3">
                 <DateTimePicker 
                   name="start_date"
-                  dateTime={start_date}
+                  dateTime={startDate}
                   onChange={this.handleFieldUpdate} />
               </div>
             </div>
@@ -203,52 +206,41 @@ export default class Meeting extends Component {
               <div className="col m3">
                 <DateTimePicker 
                   name="end_date"
-                  dateTime={end_date}
+                  dateTime={endDate}
                   onChange={this.handleFieldUpdate} />
               </div>
             </div>
           </div>
 
           {/* Attendees */}
-          {this.state.meeting.id &&
+          {this.props.id &&
             <div className="col m5">
-              <Attendees
-                attendees={this.state.attendees}
-                handleAttendeesAddRemove={this.handleAttendeesAddRemove}
-                meetingID={this.state.meeting.id} />
+              <AttendeeContainer />
             </div>
           }
         </div>
 
         <div className="row">
           {/* Action items */}
-          {this.state.meeting.id &&
+          {this.props.id &&
             <div className="action-items col m3 z-depth-3 card-panel">
-              <div className={this.state.actionItems.length === 0 ? "print-hide" : ""}>
-                <ActionItems
-                  actionItems={this.state.actionItems} 
-                  meetingID={this.state.meeting.id}
-                  handleActionItemAddRemove={this.handleActionItemAddRemove} />
-              </div>
+              <ActionItemContainer />
             </div>
           }
 
           {/* Agenda */}
-          {this.state.meeting.id &&
+          {this.props.id &&
             <div className="col m9">
               <div>
                 <h5>Agenda</h5>
                 <hr />
-                <AgendumList 
-                  agenda={this.state.agenda} 
-                  meetingID={this.state.meeting.id}
-                  handleAgendumAddRemove={this.handleAgendumAddRemove} />
+                <AgendaContainer />
               </div>
             </div>
-          }
+          } 
 
           {/* FAB */}
-          {this.state.meeting.id &&
+          {this.props.id &&
             <div className="fixed-action-btn click-to-toggle">
               <a className="btn-floating btn-large red">
                 <i className="material-icons">menu</i>
