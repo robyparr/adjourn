@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
-
 import AgendaContainer from '../../containers/AgendaContainer';
 import ActionItemContainer from '../../containers/ActionItemContainer';
-import AttendeeContainer from '../../containers/AttendeeContainer';
+import AttendeesContainer from '../../containers/AttendeesContainer';
 import Attendees from './attendee/attendees';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/inline_edit';
@@ -67,7 +66,7 @@ const Meeting = props => {
         {/* Attendees */}
         {props.id &&
           <div className="col m5">
-            <AttendeeContainer />
+            <AttendeesContainer />
           </div>
         }
       </div>
