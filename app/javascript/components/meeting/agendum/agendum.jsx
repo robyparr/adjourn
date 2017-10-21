@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import AgendumNoteList from '../agendum_note/agendum_note_list';
+import AgendumNotes from '../agendum_note/AgendumNotes';
 import InlineEdit from '../../common/inline_edit';
 
 /*
@@ -80,9 +80,9 @@ export default class Agendum extends Component {
                 </div>
 
                 <div className="card-actions">
-                    <AgendumNoteList
+                    <AgendumNotes
                         agendumID={this.props.agendum.id}
-                        notes={this.props.agendum.notes} />
+                        notes={this.props.notes} />
                 </div>
 
                 <Dialog

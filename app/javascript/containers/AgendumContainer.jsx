@@ -6,6 +6,7 @@ import { addAgendum, updateAgendum, deleteAgendum } from '../actions/agenda';
 
 const AgendumContainer = ({
     agendum,
+    notes,
     addAgendum,
     updateAgendum,
     deleteAgendum
@@ -23,14 +24,21 @@ const AgendumContainer = ({
     return (
         <Agendum
             agendum={agendum}
+            notes={notes}
             isExistingAgendum={isExistingAgendum}
             onAgendumChange={(partialAgendum) => updateAgendum(agendum.id, partialAgendum)}
             onAgendumDelete={deleteAgendum} />
     );
 };
 
-const mapStateToProps = state => {
-    return {};
+const mapStateToProps = (state, ownProps) => {
+    var notes = ownProps.agendum ?
+        state
+            .agendumNotes
+            .filter(note => note.agendum_id === ownProps.agendum.id)
+        : [];
+
+    return { notes: notes };
 };
 
 export default connect(

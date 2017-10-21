@@ -116,23 +116,7 @@ const Meeting = props => {
 
 export default Meeting;
 
-  /*
-   * Handles the addition of a new adgendum.
-   * This will add the new agendum to the meeting agenda,
-   * causing a state update.
-   
-  handleAgendumAddRemove = (agendum, isAdd) => {
-    var agenda = this.state.agenda || [];
 
-    if (isAdd) {
-      agenda.push(agendum);
-    } else {
-      var agendumToDeleteIndex = agenda.indexOf(agendum);
-      agenda.splice(agendumToDeleteIndex, 1);
-    }
-
-    this.setState({ agenda: agenda });
-  }*/
 
   /*
    * Handles the addition of a new action item.
@@ -152,24 +136,8 @@ export default Meeting;
     this.setState({ actionItems: actionItems });
   }*/
 
-    /*
-   * Handles the addition of a new attendee.
-   * This will add the new attendee to the meeting,
-   * causing a state update.
-   
-  handleAttendeesAddRemove = (attendee, isAdd) => {
-    var attendees = this.state.attendees || [];
 
-    if (isAdd) {
-      attendees.push(attendee);
-    } else {
-      var itemToDeleteIndex = attendees.indexOf(attendee);
-      attendees.splice(itemToDeleteIndex, 1);
-    }
-
-    this.setState({ attendees: attendees });
-  }
-
+/*
   handleEmailAttendeesClick = () => {
     axios({
       method: 'POST',
