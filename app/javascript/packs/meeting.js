@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-const humps = require('humps');
 
 import MeetingContainer from '../containers/MeetingContainer';
 import rootReducer from '../reducers';
@@ -27,12 +26,19 @@ let store = createStore(
 
 var rootNode = document.getElementById('react-root');
 var jsonString = rootNode.getAttribute('data-meeting');
-var meeting = humps.camelizeKeys(JSON.parse(jsonString));
+var meeting = JSON.parse(jsonString);
 
 store.dispatch(setMeeting(meeting));
 store.dispatch(setAgenda(meeting.agenda));
-store.dispatch(setAgendumNotes(meeting.agenda.map(agendum => agendum.notes)));
-store.dispatch(setActionItems(meeting.actionItems));
+store.dispatch(
+  setAgendumNotes(
+    meeting
+      .agenda
+      .map(agendum => agendum.notes)
+      .reduce((accumulator, current) => accumulator.concat(current))
+  )
+);
+store.dispatch(setActionItems(meeting.action_items));
 store.dispatch(setAttendees(meeting.attendees));
 
 ReactDOM.render(

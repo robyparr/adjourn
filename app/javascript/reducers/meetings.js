@@ -5,8 +5,8 @@ import {
 const initialState = {
     id: null,
     title: null,
-    startDate: null,
-    endDate: null
+    start_date: null,
+    end_date: null
 };
 
 export default function meetings(state = initialState, action) {
@@ -15,8 +15,8 @@ export default function meetings(state = initialState, action) {
             return Object.assign({}, state, {
                 id: action.meeting.id,
                 title: action.meeting.title,
-                startDate: action.meeting.startDate,
-                endDate: action.meeting.endDate
+                start_date: action.meeting.start_date,
+                end_date: action.meeting.end_date
             });
 
         default:

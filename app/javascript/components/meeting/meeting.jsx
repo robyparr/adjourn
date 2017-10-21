@@ -23,8 +23,8 @@ const Meeting = props => {
   /*
     * Convert dates to local time.
     */
-  var startDate = moment(props.startDate).utc().local();
-  var endDate = moment(props.endDate).utc().local();
+  var startDate = moment(props.start_date).utc().local();
+  var endDate = moment(props.end_date).utc().local();
 
   return (
     <div>
