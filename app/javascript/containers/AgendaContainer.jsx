@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AgendumList from '../components/meeting/agendum/agendum_list';
+import Agenda from '../components/meeting/agendum/Agenda';
 
 const AgendaContainer = ({ agenda, meetingID }) => {
     return (
-        <AgendumList
+        <Agenda
             agenda={agenda}
             meetingID={meetingID} />
     );

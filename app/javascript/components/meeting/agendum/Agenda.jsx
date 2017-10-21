@@ -1,15 +1,12 @@
 import React from 'react';
 
 // Controls
-import Agendum from './agendum';
-
-// Utils
-import _ from 'lodash';
+import AgendumContainer from '../../../containers/AgendumContainer';
 
 /*
- * Create a list of Agendum.
+ * Create a list of Agendums.
  */
-const AgendumList = (props) => {
+const Agenda = (props) => {
 
     /* 
         Agendums will be placed into each array,
@@ -36,10 +33,7 @@ const AgendumList = (props) => {
 
     props.agenda.forEach((agendum, i) => {
         const jsx = (
-            <Agendum agendum={agendum}
-                key={agendum.id}
-                meetingID={props.meetingID}
-                handleAgendumAddRemove={props.handleAgendumAddRemove} />
+            <AgendumContainer key={agendum.id} agendum={agendum} />
         );
 
         columns[nextColumn].push(jsx);
@@ -49,9 +43,7 @@ const AgendumList = (props) => {
     /* Add new Agendum item */
     columns[nextColumn].push(
         <div className="print-hide" key={new Date()}>
-            <Agendum
-                meetingID={props.meetingID}
-                handleAgendumAddRemove={props.handleAgendumAddRemove} />
+            <AgendumContainer />
         </div>
     );
 
@@ -70,4 +62,4 @@ const AgendumList = (props) => {
     );
 }
 
-export default AgendumList;
+export default Agenda;
