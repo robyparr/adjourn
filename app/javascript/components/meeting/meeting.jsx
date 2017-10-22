@@ -101,7 +101,7 @@ const Meeting = props => {
                 <a className="btn-floating red tooltipped" 
                   data-position="left"
                   data-delay="50"
-                  onClick={this.handleEmailAttendeesClick}
+                  onClick={props.onEmailAttendeesClick}
                   data-tooltip="Email Attendees">
                   <i className="material-icons">send</i>
                 </a>
@@ -115,35 +115,3 @@ const Meeting = props => {
 }
 
 export default Meeting;
-
-
-
-  /*
-   * Handles the addition of a new action item.
-   * This will add the new action item to the meeting,
-   * causing a state update.
-   
-  handleActionItemAddRemove = (item, isAdd) => {
-    var actionItems = this.state.actionItems || [];
-
-    if (isAdd) {
-      actionItems.push(item);
-    } else {
-      var itemToDeleteIndex = actionItems.indexOf(item);
-      actionItems.splice(itemToDeleteIndex, 1);
-    }
-
-    this.setState({ actionItems: actionItems });
-  }*/
-
-
-/*
-  handleEmailAttendeesClick = () => {
-    axios({
-      method: 'POST',
-      url: `/meetings/${this.state.meeting.id}/email_attendees`,
-      data: { authenticity_token: Utils.getAuthenticityToken() }
-    }).then(response => {
-      showInformationMessage(response.data.message);
-    });
-  }*/
