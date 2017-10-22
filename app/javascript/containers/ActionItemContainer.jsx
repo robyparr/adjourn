@@ -1,21 +1,49 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ActionItems from '../components/meeting/action_item/action_items';
+import ActionItem from '../components/meeting/action_item/ActionItem';
+import {
+    addActionItem,
+    updateActionItem,
+    deleteActionItem
+} from '../actions/actionItems';
 
-const ActionItemContainer = ({ actionItems, meetingID }) => {
+const ActionItemContainer = ({
+    actionItem,
+    meetingID,
+    addActionItem,
+    updateActionItem,
+    deleteActionItem
+}) => {
+    const isExistingItem = actionItem && actionItem.id;
+    
+    if (!isExistingItem) {
+        return (
+            <ActionItem
+                actionItem={actionItem}
+                isExistingItem={false}
+                onActionItemChange={addActionItem}
+                meetingID={meetingID} />
+        );
+    }
+
     return (
-        <ActionItems
-            actionItems={actionItems}
+        <ActionItem
+            actionItem={actionItem}
+            isExistingItem={true}
+            onActionItemChange={partialActionItem => updateActionItem(actionItem.id, partialActionItem)}
+            onActionItemDelete={deleteActionItem}
             meetingID={meetingID} />
     );
 };
 
 const mapStateToProps = state => {
     return {
-        actionItems: state.actionItems,
         meetingID: state.meeting.id
     }
 };
 
-export default connect(mapStateToProps)(ActionItemContainer);
+export default connect(
+    mapStateToProps,
+    { addActionItem, updateActionItem, deleteActionItem }
+)(ActionItemContainer);

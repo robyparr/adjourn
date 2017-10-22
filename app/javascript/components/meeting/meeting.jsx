@@ -5,7 +5,7 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'rc-time-picker';
 
 import AgendaContainer from '../../containers/AgendaContainer';
-import ActionItemContainer from '../../containers/ActionItemContainer';
+import ActionItemsContainer from '../../containers/ActionItemsContainer';
 import AttendeesContainer from '../../containers/AttendeesContainer';
 import Attendees from './attendee/attendees';
 import DateTimePicker from '../common/date_time_picker';
@@ -75,7 +75,7 @@ const Meeting = props => {
         {/* Action items */}
         {props.id &&
           <div className="action-items col m3 z-depth-3 card-panel">
-            <ActionItemContainer />
+            <ActionItemsContainer />
           </div>
         }
 
