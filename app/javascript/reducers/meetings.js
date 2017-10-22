@@ -4,9 +4,9 @@ import {
 
 const initialState = {
     id: null,
-    title: null,
-    start_date: null,
-    end_date: null
+    title: "New Meeting",
+    start_date: moment().toDate(),
+    end_date: moment().add(1, 'hours').toDate()
 };
 
 export default function meetings(state = initialState, action) {

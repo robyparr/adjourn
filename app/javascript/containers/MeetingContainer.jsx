@@ -28,10 +28,11 @@ const MeetingContainer = ({ meeting, updateMeeting }) => {
         })
         .catch(error => console.log(error));
       }
-
+    
     return (
         <Meeting 
-            {...meeting}
+            isExistingMeeting={meeting.id != null}
+            meeting={meeting}
             onFieldUpdate={onFieldUpdate}
             onEmailAttendeesClick={onEmailAttendeesClick} />
     );

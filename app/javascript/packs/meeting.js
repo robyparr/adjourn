@@ -28,18 +28,20 @@ var rootNode = document.getElementById('react-root');
 var jsonString = rootNode.getAttribute('data-meeting');
 var meeting = JSON.parse(jsonString);
 
-store.dispatch(setMeeting(meeting));
-store.dispatch(setAgenda(meeting.agenda));
-store.dispatch(
-  setAgendumNotes(
-    meeting
-      .agenda
-      .map(agendum => agendum.notes)
-      .reduce((accumulator, current) => accumulator.concat(current))
-  )
-);
-store.dispatch(setActionItems(meeting.action_items));
-store.dispatch(setAttendees(meeting.attendees));
+if (meeting.id) {
+  store.dispatch(setMeeting(meeting));
+  store.dispatch(setAgenda(meeting.agenda));
+  store.dispatch(
+    setAgendumNotes(
+      meeting
+        .agenda
+        .map(agendum => agendum.notes)
+        .reduce((accumulator, current) => accumulator.concat(current), [])
+    )
+  );
+  store.dispatch(setActionItems(meeting.action_items));
+  store.dispatch(setAttendees(meeting.attendees));
+}
 
 ReactDOM.render(
   <MuiThemeProvider>

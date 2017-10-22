@@ -21,11 +21,10 @@ import moment from 'moment';
  */
 const Meeting = props => {
   /*
-    * Convert dates to local time.
-    */
-  var startDate = moment(props.start_date).utc().local();
-  var endDate = moment(props.end_date).utc().local();
-
+   * Convert dates to local time.
+   */
+  var startDate = moment(props.meeting.start_date).utc().local();
+  var endDate = moment(props.meeting.end_date).utc().local();
   return (
     <div>
       {/* Title */}
@@ -35,7 +34,7 @@ const Meeting = props => {
             name="title"
             onChange={props.onFieldUpdate}
             displayElement='h4'
-            value={props.title} />
+            value={props.meeting.title} />
         </div>
       </div>
 
@@ -64,7 +63,7 @@ const Meeting = props => {
         </div>
 
         {/* Attendees */}
-        {props.id &&
+        {props.isExistingMeeting &&
           <div className="col m5">
             <AttendeesContainer />
           </div>
@@ -73,14 +72,14 @@ const Meeting = props => {
 
       <div className="row">
         {/* Action items */}
-        {props.id &&
+        {props.isExistingMeeting &&
           <div className="action-items col m3 z-depth-3 card-panel">
             <ActionItemsContainer />
           </div>
         }
 
         {/* Agenda */}
-        {props.id &&
+        {props.isExistingMeeting &&
           <div className="col m9">
             <div>
               <h5>Agenda</h5>
@@ -91,7 +90,7 @@ const Meeting = props => {
         } 
 
         {/* FAB */}
-        {props.id &&
+        {props.isExistingMeeting &&
           <div className="fixed-action-btn click-to-toggle">
             <a className="btn-floating btn-large red">
               <i className="material-icons">menu</i>
