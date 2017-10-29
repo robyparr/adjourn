@@ -18,7 +18,7 @@ export default function agenda(state = initialState, action) {
         case RECEIVE_UPDATED_AGENDUM:
             return state.map(agendum => {
                 if (agendum.id === action.agendum.id) {
-                    return action.agendum.id;
+                    return action.agendum;
                 }
                 return agendum;
             });
