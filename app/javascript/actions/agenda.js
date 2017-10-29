@@ -3,6 +3,14 @@ import Utils from 'utils';
 
 export const SET_AGENDA = 'SET_AGENDA';
 
+export const RECEIVE_NEW_AGENDUM = 'RECEIVE_NEW_AGENDUM';
+export const RECEIVE_UPDATED_AGENDUM = 'RECEIVE_UPDATED_AGENDUM';
+export const RECEIVE_DELETED_AGENDUM = 'RECEIVE_DELETED_AGENDUM';
+
+/**
+ * Set the meeting agenda to the passed agenda.
+ * This will completely replace the existing agenda.
+ */
 export function setAgenda(agenda) {
     return {
         type: SET_AGENDA,
@@ -10,6 +18,9 @@ export function setAgenda(agenda) {
     };
 }
 
+/**
+ * Add a new agendum to the agenda on the backend.
+ */
 export function addAgendum(agendum) {
     return function(dispatch, getState) {
         axios({
@@ -20,16 +31,24 @@ export function addAgendum(agendum) {
                 agendum: agendum
             }
         })
-        .then(response => {
-            const updatedAgenda = [
-                ...getState().agenda,
-                response.data
-            ];
-            dispatch(setAgenda(updatedAgenda));
-        });
+        .then(response => dispatch(receiveNewAgendum(response.data)));
     }
 }
 
+/**
+ * Receives a newly created agendum and updates
+ * the state on the frontend.
+ */
+export function receiveNewAgendum(agendum) {
+    return {
+        type: RECEIVE_NEW_AGENDUM,
+        agendum
+    };
+}
+
+/**
+ * Update an agendum on the backend.
+ */
 export function updateAgendum(agendumID, partialAgendum) {
     return function(dispatch, getState) {
         axios({
@@ -40,30 +59,41 @@ export function updateAgendum(agendumID, partialAgendum) {
                 agendum: partialAgendum
             }
         })
-        .then(response => {
-            const updatedAgenda = getState().agenda.filter(agendum => {
-                if (agendum.id === response.data.id) {
-                    return response.data;
-                }
-                return agendum;
-            })
-            dispatch(setAgenda(updatedAgenda));
-        });
+        .then(response => dispatch(receiveUpdatedAgendum(response.data)));
     }
 }
 
+/**
+ * Receives an updated agendum and updates
+ * the state on the frontend.
+ */
+export function receiveUpdatedAgendum(agendum) {
+    return {
+        type: RECEIVE_UPDATED_AGENDUM,
+        agendum
+    };
+}
+
+/**
+ * Delete an agendum on the backend.
+ */
 export function deleteAgendum(agendumID) {
     return function(dispatch, getState) {
         axios({
             url: `/meetings/${getState().meeting.id}/agenda/${agendumID}`,
             method: 'delete',
             data: { authenticity_token: Utils.getAuthenticityToken() }
-        }).then(response => {
-            const updatedAgenda = getState()
-                .agenda
-                .filter(agendum => agendum.id !== agendumID);
+        }).then(response => dispatch(receiveDeletedAgendum(agendumID)));
+    }
+}
 
-            dispatch(setAgenda(updatedAgenda));
-        });
+/**
+ * Receives a deleted agendum and removes it from the
+ * frontend state.
+ */
+export function receiveDeletedAgendum(agendumID) {
+    return {
+        type: RECEIVE_DELETED_AGENDUM,
+        agendumID
     }
 }

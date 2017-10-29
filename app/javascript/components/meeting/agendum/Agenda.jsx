@@ -31,12 +31,12 @@ const Agenda = (props) => {
         return ++lastColumn;
     };
 
-    props.agenda.forEach((agendum, i) => {
-        const jsx = (
-            <AgendumContainer key={agendum.id} agendum={agendum} />
+    props.agenda.forEach((agendum) => {
+        columns[nextColumn].push(
+            <AgendumContainer
+                key={agendum.id}
+                agendum={agendum} />
         );
-
-        columns[nextColumn].push(jsx);
         nextColumn = getNextColumnIndex(nextColumn);
     });
 
