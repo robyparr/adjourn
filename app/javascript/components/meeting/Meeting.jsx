@@ -7,7 +7,7 @@ import TimePicker from 'rc-time-picker';
 import AgendaContainer from '../../containers/AgendaContainer';
 import ActionItemsContainer from '../../containers/ActionItemsContainer';
 import AttendeesContainer from '../../containers/AttendeesContainer';
-import Attendees from './attendee/attendees';
+import Attendees from './attendee/Attendees';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/inline_edit';
 

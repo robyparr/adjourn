@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Attendees from '../components/meeting/attendee/attendees';
+import Attendees from '../components/meeting/attendee/Attendees';
 import { addAttendee, removeAttendee } from '../actions/attendees';
 
 import axios from 'axios';
