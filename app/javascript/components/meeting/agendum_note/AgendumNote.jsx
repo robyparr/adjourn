@@ -32,7 +32,7 @@ export default class AgendumNote extends Component {
         */
         if (!this.props.isExistingNote) {
             return (
-                <li className="agendum-note collection-item grey lighten-4 grey-text print-hide">
+                <li className="collection-item grey lighten-4 grey-text print-hide">
                     <InlineEdit
                         onChange={this.onFieldChange}
                         onEditModeChanged={this.onFieldEditModeChange}
@@ -46,7 +46,7 @@ export default class AgendumNote extends Component {
         }
 
         return(
-            <li className="agendum-note collection-item grey lighten-4">
+            <li className="collection-item grey lighten-4">
                 {!this.state.isEditing &&
                     <a className="secondary-content delete-link" onClick={() => this.setState({ delete: true })}>
                         <i className="material-icons">delete</i>

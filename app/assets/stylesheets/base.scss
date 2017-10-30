@@ -33,20 +33,6 @@ body {
             visibility: visible;
         }
     }
-
-    .agendum-note {
-        .delete-link {
-            display: none;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        &:hover {
-            .delete-link {
-                display: block;
-            }
-        }
-    }
 }
 
 .collection-item {
