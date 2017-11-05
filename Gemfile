@@ -20,6 +20,7 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'pg'
 gem 'redcarpet',        '~> 3.3', '>= 3.3.4'
+gem 'premailer-rails'
 
 group :production do
   gem 'scout_apm'
