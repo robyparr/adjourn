@@ -3,7 +3,10 @@ class MeetingsController < ApplicationController
   # GET /meetings
   # List all meetings.
   def index
-    @meetings = current_user.meetings.order(start_date: :desc)
+    @meetings = current_user
+      .meetings
+      .order(start_date: :desc)
+      .page(params[:page])
   end
 
   # GET /meetings/:id
