@@ -16,4 +16,5 @@
 //= require moment/moment
 //= require materialize
 //= require turbolinks
+//= require easy-autocomplete/dist/jquery.easy-autocomplete
 //= require_tree .

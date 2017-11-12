@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: Meeting 1
   description: MyString
   start_date: 2017-05-30 21:59:56
   end_date: 2017-05-31 21:59:56
   user: one
 
 two:
-  title: MyString
+  title: Meeting 2
   description: MyString
   start_date: 2017-05-30 21:09:56
   end_date: 2017-05-30 22:00:56

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyString
+  title: First Agendum
+  description: This is a string.
   meeting: one
 
 two:
-  title: MyString
-  description: MyString
+  title: First Agendum
+  description: This is another string.
   meeting: two

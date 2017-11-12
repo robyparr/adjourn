@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924075304) do
+ActiveRecord::Schema.define(version: 20171112065226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 20170924075304) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "meeting_id"
     t.index ["agendum_id"], name: "index_agendum_notes_on_agendum_id"
+    t.index ["meeting_id"], name: "index_agendum_notes_on_meeting_id"
   end
 
   create_table "agendums", force: :cascade do |t|
@@ -72,6 +74,17 @@ ActiveRecord::Schema.define(version: 20170924075304) do
     t.index ["user_id"], name: "index_meetings_on_user_id"
   end
 
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id"
+    t.index ["user_id"], name: "index_pg_search_documents_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -91,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170924075304) do
 
   add_foreign_key "action_items", "meetings"
   add_foreign_key "agendum_notes", "agendums"
+  add_foreign_key "agendum_notes", "meetings"
   add_foreign_key "agendums", "meetings"
   add_foreign_key "attendees", "users"
   add_foreign_key "attendees_meetings", "attendees"

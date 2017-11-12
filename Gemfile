@@ -21,7 +21,8 @@ gem 'devise'
 gem 'pg'
 gem 'redcarpet',        '~> 3.3', '>= 3.3.4'
 gem 'premailer-rails'
-gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'kaminari',         '~> 1.1', '>= 1.1.1'
+gem 'pg_search',        '~> 2.1', '>= 2.1.1'
 
 group :production do
   gem 'scout_apm'

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       as: 'attendee_autocomplete'
   end
 
+  get '/search', to: 'meetings#search', as: 'search'
   resources :meetings do
     post '/email_attendees', to: 'meetings#email_attendees'
 

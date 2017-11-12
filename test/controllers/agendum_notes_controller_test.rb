@@ -37,6 +37,11 @@ class AgendumNotesControllerTest < ActionDispatch::IntegrationTest
       post meeting_agenda_agendum_notes_url(@meeting, @agendum), params: params
     end
     assert_response :success
+
+    # Make sure that the agendum note has its meeting ID set
+    # for search cacheing.
+    note = AgendumNote.find_by_content(params[:agendum_note][:content])
+    assert_equal @meeting.id, note.meeting_id
   end
 
   test 'can update an agendum note' do

@@ -119,4 +119,32 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Email successfully sent.", json_response
   end
 
+  test "users can search for meetings by the agenda and agenda notes" do
+    rebuild_search_cache
+
+    get search_url(q: 'first')
+    assert_redirected_to new_user_session_path
+
+    sign_in @user
+
+    # Search by agenda
+    get search_url(q: 'first')
+    json_response = JSON.parse(response.body)
+    assert_equal 1, json_response.size
+    assert_equal @meeting.title, json_response.first['meeting']['title']
+
+    # Search by agenda notes
+    get search_url(q: 'example')
+    json_response = JSON.parse(response.body)
+    assert_equal 1, json_response.size
+    assert_equal @meeting.title, json_response.first['meeting']['title']
+  end
+
+  private
+
+  def rebuild_search_cache
+    PgSearch::Multisearch.rebuild(Agendum)
+    PgSearch::Multisearch.rebuild(AgendumNote)
+  end
+
 end

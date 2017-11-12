@@ -25,19 +25,35 @@
   <body>
     <div class="navbar-fixed">
       <nav class="nav print-hide">
-        <div class="nav-content">
-          <%= link_to "Adjourn", root_url, class: 'brand-logo center' %>
-          <ul class="right">
-            <% if user_signed_in? %>
-              <li>
-                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-              </li>
-            <% else %>
-              <li>
-                <%= link_to "Sign In", new_user_session_path %>
-              </li>
-            <% end %>
-          </ul>
+        <div class="nav-wrapper row">
+          <div class="col m4">
+            <%# Search bar formatting help from https://stackoverflow.com/a/42127640 %>
+            <%= form_with(url: search_path, method: 'get') do |f| %>
+                  <div class="input-field">
+                      <i class="material-icons prefix" style="z-index: 9;">search</i>
+                      <%= f.search_field :q,
+                          class: 'autocomplete',
+                          autocomplete: 'off',
+                          placeholder: 'Search' %>
+                  </div>
+              <% end %>
+          </div>
+          <div class="col m4">
+            <%= link_to "Adjourn", root_url, class: 'brand-logo center' %>
+          </div>
+          <div class="col m4">
+            <ul class="right">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to "Sign In", new_user_session_path %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </nav>
     </div>

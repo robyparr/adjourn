@@ -2,8 +2,10 @@
 
 one:
   agendum: one
-  content: MyString
+  content: Example note
+  meeting: one
 
 two:
   agendum: two
-  content: MyString
+  content: Example note
+  meeting: two

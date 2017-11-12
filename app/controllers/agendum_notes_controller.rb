@@ -7,6 +7,7 @@ class AgendumNotesController < ApplicationController
   #   Create a new note on the meeting agendum.
   def create
     note = @agendum.notes.build(note_params)
+    note.meeting_id = @agendum.meeting_id
 
     if note.save
       render json: note, status: :created

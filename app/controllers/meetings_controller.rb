@@ -60,6 +60,14 @@ class MeetingsController < ApplicationController
     render json: { message: 'Email successfully sent.' }
   end
 
+  def search
+    @results = PgSearch.multisearch(params[:q])
+      .where(user_id: current_user.id)
+      .includes(searchable: :meeting)
+
+    render 'search.json'
+  end
+
   private
   
   def meeting_params
@@ -67,9 +75,9 @@ class MeetingsController < ApplicationController
     .require(:meeting)
       .permit(
         :id,
-        :title, 
+        :title,
         :description,
-        :start_date, 
+        :start_date,
         :end_date,
         :created_at,
         :updated_at
