@@ -30,5 +30,5 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  model_names:
-    AgendumNote: Agendum Note
+  AgendumNote: Agendum Note
+  Agendum: Agendum
