@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import InlineEdit from '../../common/inline_edit';
+import InlineEdit from '../../common/InlineEdit';
 
 // Utils
 import axios from 'axios';

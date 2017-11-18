@@ -9,7 +9,7 @@ import ActionItemsContainer from '../../containers/ActionItemsContainer';
 import AttendeesContainer from '../../containers/AttendeesContainer';
 import Attendees from './attendee/Attendees';
 import DateTimePicker from '../common/date_time_picker';
-import InlineEdit from '../common/inline_edit';
+import InlineEdit from '../common/InlineEdit';
 
 // Utilities
 import Utils from 'utils';
