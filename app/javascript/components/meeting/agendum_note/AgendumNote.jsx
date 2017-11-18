@@ -37,10 +37,12 @@ export default class AgendumNote extends Component {
                         onChange={this.onFieldChange}
                         onEditModeChanged={this.onFieldEditModeChange}
                         value="Add a new note..."
+                        placeholder="Add a new note..."
                         name="content"
                         className="grey-text"
                         multilineEditor={true}
-                        renderMarkdown={true} />
+                        renderMarkdown={true}
+                        singleClickToEdit={true} />
                 </li>
             );
         }
@@ -57,6 +59,7 @@ export default class AgendumNote extends Component {
                     onChange={this.onFieldChange}
                     onEditModeChanged={this.onFieldEditModeChange}
                     value={this.props.note.content}
+                    placeholder="Agendum note"
                     name="content"
                     multilineEditor={true}
                     renderMarkdown={true} />

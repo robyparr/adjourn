@@ -40,6 +40,8 @@ export default class Agendum extends Component {
                                 onChange={this.onFieldChange}
                                 onEditModeChanged={this.onFieldEditModeChange}
                                 value="New Agendum"
+                                placeholder="New Agendum"
+                                singleClickToEdit={true}
                                 name="title" />
                         </span>
                     </div>
@@ -66,6 +68,7 @@ export default class Agendum extends Component {
                             onChange={this.onFieldChange}
                             onEditModeChanged={this.onFieldEditModeChange}
                             value={this.props.agendum.title}
+                            placeholder="Agendum Title"
                             name="title" />
                     </span>
                     
@@ -73,6 +76,7 @@ export default class Agendum extends Component {
                         className={this.props.agendum.description ? "" : "print-hide"}
                         onChange={this.onFieldChange}
                         value={descriptionValue}
+                        placeholder="Agendum Description"
                         onEditModeChanged={this.onFieldEditModeChange}
                         name="description"
                         multilineEditor={true}

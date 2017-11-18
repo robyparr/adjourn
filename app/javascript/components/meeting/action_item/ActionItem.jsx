@@ -40,6 +40,8 @@ export default class ActionItem extends Component {
                             onEditModeChanged={this.onFieldEditModeChange}
                             displayElement="p"
                             value="New Item"
+                            placeholder="New Item"
+                            singleClickToEdit={true}
                             name="title" />
                     </span>
                 </li>
@@ -76,6 +78,7 @@ export default class ActionItem extends Component {
                         onEditModeChanged={this.onFieldEditModeChange}
                         displayElement={"span"}
                         value={this.props.actionItem.title}
+                        placeholder="Item Title"
                         name="title" />
                 </span>
 
@@ -85,6 +88,7 @@ export default class ActionItem extends Component {
                     onChange={this.onFieldChange}
                     onEditModeChanged={this.onFieldEditModeChange}
                     value={descriptionValue}
+                    placeholder="Item Description"
                     multilineEditor={true}
                     renderMarkdown={true} />
 
