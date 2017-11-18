@@ -119,12 +119,15 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Email successfully sent.", json_response
   end
 
-  test "users can search for meetings by the agenda and agenda notes" do
+  test "Unauthorized users can't search" do
     rebuild_search_cache
 
     get search_url(q: 'first')
     assert_redirected_to new_user_session_path
+  end
 
+  test "users can search for meetings by the agenda" do
+    rebuild_search_cache
     sign_in @user
 
     # Search by agenda
@@ -133,8 +136,25 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, json_response.size
     assert_equal @meeting.title, json_response.first['meeting']['title']
 
+    # Search by agenda, partial word (full word is 'first')
+    get search_url(q: 'st')
+    json_response = JSON.parse(response.body)
+    assert_equal 1, json_response.size
+    assert_equal @meeting.title, json_response.first['meeting']['title']
+  end
+
+  test "users can search for meetings by the agenda notes" do
+    rebuild_search_cache
+    sign_in @user
+
     # Search by agenda notes
     get search_url(q: 'example')
+    json_response = JSON.parse(response.body)
+    assert_equal 1, json_response.size
+    assert_equal @meeting.title, json_response.first['meeting']['title']
+
+    # Search by agenda notes, partial word (full word is 'example')
+    get search_url(q: 'exam')
     json_response = JSON.parse(response.body)
     assert_equal 1, json_response.size
     assert_equal @meeting.title, json_response.first['meeting']['title']
