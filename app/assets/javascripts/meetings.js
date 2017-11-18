@@ -29,7 +29,10 @@ var ready = function() {
             method: function(value, item) {
                 return (
                     "<span class='markdown-body sub-content'><code>" + item.result_type + "</code></span>"
-                    + "<h5>" + value + "</h5>"
+                    + "<h5>"
+                        + value
+                        + "<span class='sub'>" + moment(item.meeting.date).format('LLL') + "</span>"
+                    + "</h5>"
                     + "<p>" + item.content + "</p>"
                 );
             }

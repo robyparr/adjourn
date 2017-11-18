@@ -47,3 +47,12 @@
 .autocomplete {
     margin-bottom: 0 !important;
 }
+
+h5 {
+    /* For sub-text within an h5 */
+    .sub {
+        display: block;
+        font-size: 50%;
+        color: rgba(0, 0, 0, 0.54);
+    }
+}

@@ -4,6 +4,7 @@ json.array! @results do |result|
 
   json.meeting do
     json.title        result.searchable.meeting.title
+    json.date         result.searchable.meeting.start_date
     json.resource_url meeting_url(result.searchable.meeting)
   end
 
