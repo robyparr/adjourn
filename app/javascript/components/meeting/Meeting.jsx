@@ -62,19 +62,14 @@ const Meeting = props => {
             </div>
           </div>
         </div>
-
-        {/* Attendees */}
-        {props.isExistingMeeting &&
-          <div className="col m5">
-            <AttendeesContainer />
-          </div>
-        }
       </div>
 
       <div className="row">
-        {/* Action items */}
+        {/* Action items & Attendees */}
         {props.isExistingMeeting &&
           <div className="action-items col m3 z-depth-3 card-panel">
+            <AttendeesContainer />
+
             <ActionItemsContainer />
           </div>
         }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Controls
-import Dialog  from 'material-ui/Dialog';
+import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 import InlineEdit from '../../common/InlineEdit';

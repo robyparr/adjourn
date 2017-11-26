@@ -2,8 +2,6 @@ import React from 'react';
 
 // Controls
 import AutoComplete from 'material-ui/AutoComplete';
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
 
 // Utils
 import Utils from 'utils';
@@ -21,11 +19,32 @@ export default class Attendees extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                <h5>Attendees</h5>
+        const containerClass = "collection with-header margin-top-none "
+            + (this.props.attendees.length === 0 ? "print-hide" : "");
 
-                <div className="print-hide">
+        return (
+            <ul className={containerClass}>
+                <li className="collection-header">
+                    <h5>Attendees</h5>
+                    <hr className="print-only" />
+                </li>
+
+                {this.props.attendees.map(attendee => {
+                    return (
+                        <li key={attendee.id}
+                            className="collection-item avatar">
+                            <a className="secondary-content delete-link"
+                                onClick={() => {
+                                    this.props.onAttendeeRemove(attendee.email, this.props.meetingID);
+                                }}>
+                                <i className="material-icons">delete</i>
+                            </a>
+                            <img src={Utils.getGravatarUrl(attendee.email)} className="circle" />
+                            <span>{attendee.email}</span>
+                        </li>
+                    );
+                })}
+                <li className="collection-item checkbox grey lighten-4 print-hide">
                     <AutoComplete
                         hintText="Add Attendee"
                         className="browser-default"
@@ -35,24 +54,8 @@ export default class Attendees extends React.Component {
                         onNewRequest={this.onNewrequest}
                         searchText={this.props.searchText}
                         ref={input => this.autoComplete = input} />
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {this.props.attendees.map(attendee => {
-                        return (
-                            <Chip
-                                key={attendee.id}
-                                style={{ margin: 4 }}
-                                onRequestDelete={() => {
-                                    this.props.onAttendeeRemove(attendee.email, this.props.meetingID);
-                                }}>
-                                <Avatar src={Utils.getGravatarUrl(attendee.email)} />
-                                {attendee.email}
-                            </Chip>
-                        )
-                    })}
-                </div>
-            </div>
+                </li>
+            </ul>
         );
     }
 };
