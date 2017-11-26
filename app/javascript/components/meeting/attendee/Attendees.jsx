@@ -24,11 +24,6 @@ export default class Attendees extends React.Component {
 
         return (
             <ul className={containerClass}>
-                <li className="collection-header">
-                    <h5>Attendees</h5>
-                    <hr className="print-only" />
-                </li>
-
                 {this.props.attendees.map(attendee => {
                     return (
                         <li key={attendee.id}

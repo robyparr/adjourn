@@ -12,11 +12,6 @@ const ActionItems = (props) => {
 
     return(
         <ul className={containerClass}>
-            <li className="collection-header">
-                <h5>Action Items</h5>
-                <hr className="print-only" />
-            </li>
-
             {props.actionItems.map((item) => {
                 return(
                     <ActionItemContainer

@@ -49,3 +49,13 @@ body {
 .collection-item.avatar {
     min-height: 60px !important;
 }
+
+.sidebar {
+    .collapsible {
+        margin-top: 0 !important;
+    }
+    
+    .collapsible-body {
+        padding: 0 !important;
+    }
+}

@@ -16,6 +16,8 @@ var ready = function() {
 
     $('.tooltipped').tooltip();
 
+    $('.collapsible').collapsible();
+
     $('.autocomplete').easyAutocomplete({
         url: function(q) {
             return "/search?q=" + q;
