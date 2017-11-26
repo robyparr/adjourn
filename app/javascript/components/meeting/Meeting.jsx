@@ -34,7 +34,8 @@ const Meeting = props => {
             name="title"
             onChange={props.onFieldUpdate}
             displayElement='h4'
-            value={props.meeting.title} />
+            value={props.meeting.title}
+            singleClickToEdit={!props.meeting.id} />
         </div>
       </div>
 
