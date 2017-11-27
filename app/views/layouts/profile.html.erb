@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <%= render 'layouts/head' %>
+  <body>
+    <% content_for :extended_nav do %>
+      <ul class="tabs tabs-transparent">
+        <li class="tab">
+          <%= link_to "Profile", profile_path, class: "active" %>
+        </li>
+      </ul>
+    <% end %>
+
+    <%= render 'layouts/navigation' %>
+
+    <%# Provide extra spacing from extended nav %>
+    <div style="margin-top: 55px;">
+      <%= yield %>
+    </div>
+
+    <%= render 'layouts/toasts' %>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<% if notice || alert %>
+  <script>
+    <% if notice %>
+      showInformationMessage("<%= notice %>");
+    <% else %>
+      showErrorMessage("<%= alert %>");
+    <% end %>
+  </script>
+<% end %>

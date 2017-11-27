@@ -17,10 +17,17 @@ class Meeting < ApplicationRecord
   #
   # Relationships
   #
-  has_many    :agenda, foreign_key: 'meeting_id', class_name: 'Agendum'
-  has_many    :action_items
-  belongs_to  :user
-  has_and_belongs_to_many :attendees
+  has_many :agenda,
+    foreign_key: 'meeting_id',
+    class_name: 'Agendum',
+    dependent: :destroy
+
+  has_many :action_items,
+    dependent: :destroy
+
+  belongs_to :user
+  has_and_belongs_to_many :attendees,
+    dependent: :destroy
 
   #
   # Validations

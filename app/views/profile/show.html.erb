@@ -1,0 +1,16 @@
+<div class="row">
+  <%# Profile picture %>
+  <div class="col m4 offset-m4 text-center">
+    <img src="<%= gravatar_url(current_user.email, 128) %>" class="circle" />
+    <h5><%= current_user.email %></h5>
+    <small>
+      Adjourn automatically pulls profile pictures from the
+      Gravatar service.<br />
+      Click <%= link_to "here", "https://en.gravatar.com/emails/" %> 
+      to change your profile picture.
+    </small>
+    <div>
+      <%= link_to "Edit Profile", edit_user_registration_path %>
+    </div>
+  </div>
+</div>

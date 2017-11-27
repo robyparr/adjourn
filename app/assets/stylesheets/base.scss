@@ -59,3 +59,13 @@ body {
         padding: 0 !important;
     }
 }
+
+nav {
+    a {
+        height: 64px;
+        img.circle.profile-picture {
+            height: 64px;
+            padding: 10px;
+        }
+    }
+}
