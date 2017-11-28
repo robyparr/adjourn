@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root to: 'meetings#index'
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
 
   get '/profile', to: 'profile#show'
   
