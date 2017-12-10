@@ -80,6 +80,7 @@ export default class Agendum extends Component {
                         onEditModeChanged={this.onFieldEditModeChange}
                         name="description"
                         multilineEditor={true}
+                        singleClickToEdit={!this.props.agendum.description}
                         renderMarkdown={true} />
                 </div>
 
