@@ -1,55 +1,57 @@
 <div class="row">
   <div class="col m4 offset-m4">
-    <h4>Edit Profile</h4>
+    <div class="card-panel">
+      <h4 class="margin-top-none">Edit Profile</h4>
 
-    <%= form_for(
+      <%= form_for(
           resource,
           as: resource_name,
           url: registration_path(resource_name),
           html: { method: :put }) do |f| %>
 
-      <%= devise_error_messages! %>
+        <%= devise_error_messages! %>
 
-      <div class="input-field">
-        <%= f.email_field :email, autofocus: true %>
-        <%= f.label :email %><br />
-      </div>
+        <div class="input-field">
+          <%= f.email_field :email, autofocus: true %>
+          <%= f.label :email %><br />
+        </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>
-          Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>
+            Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+          </div>
+        <% end %>
+
+        <div class="input-field">
+          <%= f.password_field :password, autocomplete: "off" %>
+          <%= f.label :password %>
+          <i>(leave blank if you don't want to change it)</i><br />
+          <% if @minimum_password_length %>
+            <em><%= @minimum_password_length %> characters minimum</em>
+          <% end %>
+        </div>
+
+        <div class="input-field">
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          <%= f.label :password_confirmation %><br />
+        </div>
+
+        <div class="input-field">
+          <%= f.password_field :current_password, autocomplete: "off" %>
+          <%= f.label :current_password %>
+          <i>(we need your current password to confirm your changes)</i><br />
+        </div>
+
+        <div class="row">
+          <div class="col m6" style="line-height: 36px;">
+            <%= link_to "Back to Profile", profile_path %>
+          </div>
+          <div class="col m6 text-right">
+            <%= f.submit "Update", class: 'btn' %>
+          </div>
         </div>
       <% end %>
-
-      <div class="input-field">
-        <%= f.password_field :password, autocomplete: "off" %>
-        <%= f.label :password %>
-        <i>(leave blank if you don't want to change it)</i><br />
-        <% if @minimum_password_length %>
-          <em><%= @minimum_password_length %> characters minimum</em>
-        <% end %>
-      </div>
-
-      <div class="input-field">
-        <%= f.password_field :password_confirmation, autocomplete: "off" %>
-        <%= f.label :password_confirmation %><br />
-      </div>
-
-      <div class="input-field">
-        <%= f.password_field :current_password, autocomplete: "off" %>
-        <%= f.label :current_password %>
-        <i>(we need your current password to confirm your changes)</i><br />
-      </div>
-
-      <div class="row">
-        <div class="col m6" style="line-height: 36px;">
-          <%= link_to "Back to Profile", profile_path %>
-        </div>
-        <div class="col m6 text-right">
-          <%= f.submit "Update", class: 'btn' %>
-        </div>
-      </div>
-    <% end %>
+    </div>
   </div>
   <div class="col m3 offset-m1">
     <div class="card">
