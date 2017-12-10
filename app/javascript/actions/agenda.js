@@ -6,6 +6,7 @@ export const SET_AGENDA = 'SET_AGENDA';
 export const RECEIVE_NEW_AGENDUM = 'RECEIVE_NEW_AGENDUM';
 export const RECEIVE_UPDATED_AGENDUM = 'RECEIVE_UPDATED_AGENDUM';
 export const RECEIVE_DELETED_AGENDUM = 'RECEIVE_DELETED_AGENDUM';
+export const SET_SELECTED_AGENDUM = 'SET_SELECTED_AGENDUM';
 
 /**
  * Set the meeting agenda to the passed agenda.
@@ -84,7 +85,7 @@ export function deleteAgendum(agendumID) {
             method: 'delete',
             data: { authenticity_token: Utils.getAuthenticityToken() }
         }).then(response => dispatch(receiveDeletedAgendum(agendumID)));
-    }
+    };
 }
 
 /**
@@ -95,5 +96,15 @@ export function receiveDeletedAgendum(agendumID) {
     return {
         type: RECEIVE_DELETED_AGENDUM,
         agendumID
-    }
+    };
+}
+
+/**
+ * Set the selected agendum in the UI.
+ */
+export function setSelectedAgendum(agendumID) {
+    return {
+        type: SET_SELECTED_AGENDUM,
+        agendumID
+    };
 }

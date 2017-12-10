@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import Dialog  from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-import AgendumNotes from '../agendum_note/AgendumNotes';
 import InlineEdit from '../../common/InlineEdit';
 
 /*
@@ -54,7 +53,9 @@ export default class Agendum extends Component {
             || "Click here to add a description.";
 
         return(
-            <div className="card z-depth-3">
+            <div className={`card z-depth-3 ${this.props.agendum.selected ? "selected" : ""}`}
+                onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
+
                 <div className="card-content">
                     {!this.state.isEditing &&
                         <div className="right">
@@ -82,12 +83,6 @@ export default class Agendum extends Component {
                         multilineEditor={true}
                         singleClickToEdit={!this.props.agendum.description}
                         renderMarkdown={true} />
-                </div>
-
-                <div className="card-actions">
-                    <AgendumNotes
-                        agendumID={this.props.agendum.id}
-                        notes={this.props.notes} />
                 </div>
 
                 <Dialog

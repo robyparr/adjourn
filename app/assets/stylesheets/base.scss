@@ -1,3 +1,5 @@
+@import "_variables";
+
 /*
  * Base stylesheet
  */
@@ -68,4 +70,11 @@ nav {
             padding: 10px;
         }
     }
+}
+
+.card.selected::before {
+    content: '';
+    display: block;
+    border-top: 2px solid $primary-color;
+    width: 100%;
 }

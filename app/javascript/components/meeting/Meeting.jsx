@@ -7,6 +7,7 @@ import TimePicker from 'rc-time-picker';
 import AgendaContainer from '../../containers/AgendaContainer';
 import ActionItemsContainer from '../../containers/ActionItemsContainer';
 import AttendeesContainer from '../../containers/AttendeesContainer';
+import AgendumDetailsContainer from '../../containers/AgendumDetailsContainer';
 import Attendees from './attendee/Attendees';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/InlineEdit';
@@ -99,6 +100,14 @@ export default class Meeting extends React.Component {
                   <div className="collapsible-body">
                     <ActionItemsContainer />
                   </div>
+                </li>
+                <li>
+                  <div className="collapsible-header">
+                    <h5>Agendum Details</h5>
+                  </div>
+                  <div className="collapsible-body">
+                      <AgendumDetailsContainer />
+                    </div>
                 </li>
               </ul>
             </div>

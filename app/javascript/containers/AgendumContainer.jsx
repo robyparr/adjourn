@@ -2,14 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Agendum from '../components/meeting/agendum/Agendum';
-import { addAgendum, updateAgendum, deleteAgendum } from '../actions/agenda';
+import {
+    addAgendum,
+    updateAgendum,
+    deleteAgendum,
+    setSelectedAgendum
+} from '../actions/agenda';
 
 const AgendumContainer = ({
     agendum,
     notes,
     addAgendum,
     updateAgendum,
-    deleteAgendum
+    deleteAgendum,
+    setSelectedAgendum
 }) => {
     const isExistingAgendum = agendum !== undefined;
 
@@ -27,6 +33,7 @@ const AgendumContainer = ({
             notes={notes}
             isExistingAgendum={isExistingAgendum}
             onAgendumChange={(partialAgendum) => updateAgendum(agendum.id, partialAgendum)}
+            onAgendumSelect={setSelectedAgendum}
             onAgendumDelete={deleteAgendum} />
     );
 };
@@ -43,5 +50,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    { addAgendum, updateAgendum, deleteAgendum }
+    { addAgendum, updateAgendum, deleteAgendum, setSelectedAgendum }
 )(AgendumContainer);
