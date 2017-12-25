@@ -6,7 +6,8 @@ import {
     addAgendum,
     updateAgendum,
     deleteAgendum,
-    setSelectedAgendum
+    setSelectedAgendum,
+    addAgendumUpload
 } from '../actions/agenda';
 
 const AgendumContainer = ({
@@ -15,7 +16,8 @@ const AgendumContainer = ({
     addAgendum,
     updateAgendum,
     deleteAgendum,
-    setSelectedAgendum
+    setSelectedAgendum,
+    addAgendumUpload
 }) => {
     const isExistingAgendum = agendum !== undefined;
 
@@ -34,7 +36,8 @@ const AgendumContainer = ({
             isExistingAgendum={isExistingAgendum}
             onAgendumChange={(partialAgendum) => updateAgendum(agendum.id, partialAgendum)}
             onAgendumSelect={setSelectedAgendum}
-            onAgendumDelete={deleteAgendum} />
+            onAgendumDelete={deleteAgendum}
+            onFileUpload={addAgendumUpload} />
     );
 };
 
@@ -50,5 +53,11 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
     mapStateToProps,
-    { addAgendum, updateAgendum, deleteAgendum, setSelectedAgendum }
+    {
+        addAgendum,
+        updateAgendum,
+        deleteAgendum,
+        setSelectedAgendum,
+        addAgendumUpload
+    }
 )(AgendumContainer);

@@ -23,12 +23,14 @@ gem 'redcarpet',        '~> 3.3', '>= 3.3.4'
 gem 'premailer-rails'
 gem 'kaminari',         '~> 1.1', '>= 1.1.1'
 gem 'pg_search',        '~> 2.1', '>= 2.1.1'
+gem 'aws-sdk-s3',       '~> 1.8'
 
 group :production do
   gem 'scout_apm'
 end
 
 group :development, :test do
+  gem 'dotenv-rails'
   gem 'byebug',             platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara',           '~> 2.13'
   gem 'selenium-webdriver'

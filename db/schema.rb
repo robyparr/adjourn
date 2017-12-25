@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171128065018) do
+ActiveRecord::Schema.define(version: 20171210093408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,17 @@ ActiveRecord::Schema.define(version: 20171128065018) do
     t.index ["user_id"], name: "index_pg_search_documents_on_user_id"
   end
 
+  create_table "uploads", force: :cascade do |t|
+    t.bigint "agendum_id"
+    t.string "filename"
+    t.string "content_type"
+    t.string "file_size"
+    t.string "storage_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agendum_id"], name: "index_uploads_on_agendum_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -115,4 +126,5 @@ ActiveRecord::Schema.define(version: 20171128065018) do
   add_foreign_key "attendees_meetings", "attendees"
   add_foreign_key "attendees_meetings", "meetings"
   add_foreign_key "meetings", "users"
+  add_foreign_key "uploads", "agendums"
 end

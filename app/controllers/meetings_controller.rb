@@ -14,7 +14,7 @@ class MeetingsController < ApplicationController
   def show
     @meeting = current_user.meetings
       .includes(
-        { agenda: :notes }, 
+        { agenda: [:notes, :uploads] },
         :action_items, 
         :attendees
       )

@@ -6,6 +6,8 @@ import FlatButton from 'material-ui/FlatButton';
 
 import InlineEdit from '../../common/InlineEdit';
 
+import Dropzone from 'react-dropzone';
+
 /*
  * A single Agendum.
  */
@@ -56,7 +58,12 @@ export default class Agendum extends Component {
             <div className={`card z-depth-3 ${this.props.agendum.selected ? "selected" : ""}`}
                 onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
 
-                <div className="card-content">
+                <Dropzone
+                    className="card-content"
+                    onDrop={(files) => this.props.onFileUpload(this.props.agendum.id, files)}
+                    disableClick={true}
+                    activeClassName="dropzone">
+
                     {!this.state.isEditing &&
                         <div className="right">
                             <a className="delete-link" onClick={() => this.setState({ delete: true })}>
@@ -83,7 +90,7 @@ export default class Agendum extends Component {
                         multilineEditor={true}
                         singleClickToEdit={!this.props.agendum.description}
                         renderMarkdown={true} />
-                </div>
+                </Dropzone>
 
                 <Dialog
                     actions={[

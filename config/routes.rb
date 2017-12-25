@@ -23,6 +23,13 @@ Rails.application.routes.draw do
     resources :action_items, shallow: true, only: [:create, :update, :destroy]
 
     resources :agenda, only: [:create, :update, :destroy] do
+      post '/uploads', to: 'uploads#upload'
+
+      # Allow filename.ext in the URL:
+      # https://github.com/rails/rails/issues/28901#issuecomment-297747521
+      post '/uploads/presign', to: 'uploads#presigned_url'
+      get '/uploads/:id/download', to: 'uploads#download'
+
       resources :agendum_notes, 
                 path: 'notes', 
                 only: [:create, :update, :destroy]

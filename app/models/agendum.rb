@@ -18,7 +18,9 @@ class Agendum < ApplicationRecord
   # Relationships
   #
   belongs_to :meeting
+  has_one :user, through: :meeting
   has_many :notes, class_name: 'AgendumNote', dependent: :destroy
+  has_many :uploads, dependent: :destroy
 
   #
   # Validations

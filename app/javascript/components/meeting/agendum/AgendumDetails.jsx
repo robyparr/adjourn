@@ -16,6 +16,18 @@ const AgendumDetails = ({ agendum, agendumNotes }) => {
             <div className="padding-sides-default">
                 <h5>{agendum.title}</h5>
 
+                {agendum.uploads &&
+                    <div>
+                        <div className="bold">Uploads</div>
+                        <ul>
+                            {agendum.uploads.map(upload =>
+                                <li key={upload.id}>
+                                    <a href={`/meetings/${agendum.meeting_id}/agenda/${agendum.id}/uploads/${upload.id}/download`}>{upload.filename}</a>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
+                }
                 <div className="bold">Agendum Notes</div>
             </div>
             <AgendumNotes

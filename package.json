@@ -37,6 +37,7 @@
     "react": "^15.5.4",
     "react-autosize-textarea": "^0.4.7",
     "react-dom": "^15.5.4",
+    "react-dropzone": "^4.2.3",
     "react-redux": "^5.0.6",
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.7.2",
