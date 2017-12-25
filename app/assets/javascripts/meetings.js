@@ -1,7 +1,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-var ready = function() {
+$(document).ready(function() {
     // localize times
     $('.localize').each(function () {
         var element = $(this);
@@ -50,9 +50,4 @@ var ready = function() {
     }).on('blur', function() {
         $(this).parents('.input-field').find('i.material-icons.prefix').removeClass('black-text');
     });
-};
-
-$(document).ready(ready);
-$(document).on('turbolinks:load', function() {
-    setTimeout(ready, 250);
 });

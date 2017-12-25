@@ -22,17 +22,6 @@ import moment from 'moment';
  */
 export default class Meeting extends React.Component {
 
-  componentDidUpdate() {
-    // Make sure that global JavaScript is initialized after the
-    // meeting component updates. This is especially important
-    // for when a new meeting is created and some previously
-    // missing components (e.g. the sidebar which relies on
-    // MaterializeCSS's collapsible script) are displayed.
-    // ready() is the function defined in 
-    // app/assets/javascripts/meetings.js
-    ready();
-  }
-
   render() {
     /*
     * Convert dates to local time.
