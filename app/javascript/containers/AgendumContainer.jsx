@@ -6,9 +6,10 @@ import {
     addAgendum,
     updateAgendum,
     deleteAgendum,
-    setSelectedAgendum,
-    addAgendumUpload
+    setSelectedAgendum
 } from '../actions/agenda';
+
+import { addAgendumUpload } from '../actions/agendumUploads';
 
 const AgendumContainer = ({
     agendum,

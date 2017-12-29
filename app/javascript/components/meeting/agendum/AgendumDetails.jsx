@@ -2,7 +2,7 @@ import React from 'react';
 
 import AgendumNotes from '../agendum_note/AgendumNotes';
 
-const AgendumDetails = ({ agendum, agendumNotes }) => {
+const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
     if (!agendum) {
         return (
             <p className="padding-sides-default">
@@ -16,11 +16,11 @@ const AgendumDetails = ({ agendum, agendumNotes }) => {
             <div className="padding-sides-default">
                 <h5>{agendum.title}</h5>
 
-                {agendum.uploads &&
+                {agendumUploads &&
                     <div>
                         <div className="bold">Uploads</div>
                         <ul>
-                            {agendum.uploads.map(upload =>
+                            {agendumUploads.map(upload =>
                                 <li key={upload.id}>
                                     <a href={`/meetings/${agendum.meeting_id}/agenda/${agendum.id}/uploads/${upload.id}/download`}>{upload.filename}</a>
                                 </li>

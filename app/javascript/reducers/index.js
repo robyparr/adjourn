@@ -5,13 +5,15 @@ import agenda from './agenda';
 import agendumNotes from './agendumNotes';
 import actionItems from './actionItems';
 import attendees from './attendees';
+import agendumUploads from './agendumUploads';
 
 const rootReducer = combineReducers({
     meeting: meetings,
     agenda,
     agendumNotes,
     actionItems,
-    attendees
+    attendees,
+    agendumUploads
 });
 
 export default rootReducer;

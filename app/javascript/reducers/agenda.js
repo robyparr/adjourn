@@ -3,8 +3,7 @@ import {
     RECEIVE_NEW_AGENDUM,
     RECEIVE_UPDATED_AGENDUM,
     RECEIVE_DELETED_AGENDUM,
-    SET_SELECTED_AGENDUM,
-    RECEIVE_NEW_AGENDUM_UPLOAD
+    SET_SELECTED_AGENDUM
 } from '../actions/agenda';
 
 const initialState = [];
@@ -40,16 +39,6 @@ export default function agenda(state = initialState, action) {
                 } else if (agendum.selected) {
                     return Object.assign({}, agendum, {
                         selected: false
-                    });
-                }
-                return agendum;
-            });
-
-        case RECEIVE_NEW_AGENDUM_UPLOAD:
-            return state.map(agendum => {
-                if (agendum.id === action.upload.agendum_id) {
-                    return Object.assign({}, agendum, {
-                        uploads: [ ...agendum.uploads, action.upload ]
                     });
                 }
                 return agendum;

@@ -8,8 +8,6 @@ export const RECEIVE_UPDATED_AGENDUM = 'RECEIVE_UPDATED_AGENDUM';
 export const RECEIVE_DELETED_AGENDUM = 'RECEIVE_DELETED_AGENDUM';
 export const SET_SELECTED_AGENDUM = 'SET_SELECTED_AGENDUM';
 
-export const RECEIVE_NEW_AGENDUM_UPLOAD = 'RECEIVE_NEW_AGENDUM_UPLOAD';
-
 /**
  * Set the meeting agenda to the passed agenda.
  * This will completely replace the existing agenda.
@@ -109,45 +107,4 @@ export function setSelectedAgendum(agendumID) {
         type: SET_SELECTED_AGENDUM,
         agendumID
     };
-}
-
-export function receiveNewAgendumUpload(upload) {
-    return {
-        type: RECEIVE_NEW_AGENDUM_UPLOAD,
-        upload
-    };
-}
-
-export function addAgendumUpload(agendumID, files) {
-    return function(dispatch, getState) {
-        const meetingID = getState().meeting.id;
-        const uploadsURL = `/meetings/${meetingID}/agenda/${agendumID}/uploads`;
-
-        files.forEach(file => {
-            var storageKey = '';
-
-            axios.post(`${uploadsURL}/presign`, {
-                authenticity_token: Utils.getAuthenticityToken(),
-                filename: file.name,
-                file_type: file.type
-            })
-            .then(response => {
-                storageKey = response.data.key;
-                var headers = response.data.headers;
-                return axios.put(response.data.url, file, { headers: headers });
-            })
-            .then(response => {
-                return axios.post(`${uploadsURL}`, {
-                    authenticity_token: Utils.getAuthenticityToken(),
-                    upload: {
-                        storage_key: storageKey,
-                        filename: file.name,
-                        content_type: file.type,
-                        file_size: file.size
-                    }
-                });
-            })
-            .then(response => dispatch(receiveNewAgendumUpload(response.data)));
-        });
-    }
 }
