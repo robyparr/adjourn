@@ -16,7 +16,7 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
             <div className="padding-sides-default">
                 <h5>{agendum.title}</h5>
 
-                {agendumUploads &&
+                {agendumUploads.length > 0 &&
                     <div>
                         <div className="bold">Uploads</div>
                         <ul>
