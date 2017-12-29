@@ -51,3 +51,11 @@ $(document).ready(function() {
         $(this).parents('.input-field').find('i.material-icons.prefix').removeClass('black-text');
     });
 });
+
+function openAgendumDetailsView() {
+    var agendumDetails = $('#agendum-details');
+
+    if (!agendumDetails.hasClass('active')) {
+        $('.sidebar .collapsible').collapsible('open', 2);
+    }
+}

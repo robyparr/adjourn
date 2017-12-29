@@ -34,7 +34,10 @@ const AgendumContainer = ({
             agendum={agendum}
             isExistingAgendum={isExistingAgendum}
             onAgendumChange={(partialAgendum) => updateAgendum(agendum.id, partialAgendum)}
-            onAgendumSelect={setSelectedAgendum}
+            onAgendumSelect={(agendumID) => {
+                setSelectedAgendum(agendumID);
+                openAgendumDetailsView();
+            }}
             onAgendumDelete={deleteAgendum}
             onFileUpload={addAgendumUpload} />
     );

@@ -90,7 +90,7 @@ export default class Meeting extends React.Component {
                     <ActionItemsContainer />
                   </div>
                 </li>
-                <li>
+                <li id="agendum-details">
                   <div className="collapsible-header">
                     <h5>Agendum Details</h5>
                   </div>
