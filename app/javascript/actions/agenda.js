@@ -53,7 +53,7 @@ export function receiveNewAgendum(agendum) {
 export function updateAgendum(agendumID, partialAgendum) {
     return function(dispatch, getState) {
         axios({
-            url: `/meetings/${getState().meeting.id}/agenda/${agendumID}`,
+            url: `/agenda/${agendumID}`,
             method: 'PATCH',
             data: { 
                 authenticity_token: Utils.getAuthenticityToken(), 
@@ -81,7 +81,7 @@ export function receiveUpdatedAgendum(agendum) {
 export function deleteAgendum(agendumID) {
     return function(dispatch, getState) {
         axios({
-            url: `/meetings/${getState().meeting.id}/agenda/${agendumID}`,
+            url: `/agenda/${agendumID}`,
             method: 'delete',
             data: { authenticity_token: Utils.getAuthenticityToken() }
         }).then(response => dispatch(receiveDeletedAgendum(agendumID)));

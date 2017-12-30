@@ -1,13 +1,10 @@
 class AgendumNotesController < ApplicationController
-
-  before_action :load_agendum, only: [:create]
   before_action :load_note, except: [:create]
 
-  # POST /meetings/:meeting_id/agenda/:agenda_id/notes
-  #   Create a new note on the meeting agendum.
   def create
-    note = @agendum.notes.build(note_params)
-    note.meeting_id = @agendum.meeting_id
+    agendum = current_user.agenda.find(params[:agenda_id])
+    note = agendum.notes.build(note_params)
+    note.meeting_id = agendum.meeting_id
 
     if note.save
       render json: note, status: :created
@@ -16,8 +13,6 @@ class AgendumNotesController < ApplicationController
     end
   end
 
-  # PUT /meetings/:meeting_id/agenda/:agenda_id/notes/:id
-  #   Update a meeting agendum note.
   def update
     if @note.update_attributes(note_params)
       render json: @note
@@ -30,16 +25,10 @@ class AgendumNotesController < ApplicationController
     render json: { message: 'Successfully deleted' } if @note.destroy
   end
 
-
   private
-  
-  def load_agendum
-    @agendum = current_user.agenda.find(params[:agenda_id])
-  end
 
   def load_note
-    load_agendum
-    @note = @agendum.notes.find(params[:id])
+    @note = current_user.notes.find(params[:id])
   end
   
   def note_params

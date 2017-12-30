@@ -22,7 +22,7 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
                         <ul>
                             {agendumUploads.map(upload =>
                                 <li key={upload.id}>
-                                    <a href={`/meetings/${agendum.meeting_id}/agenda/${agendum.id}/uploads/${upload.id}/download`}>{upload.filename}</a>
+                                    <a href={`/uploads/${upload.id}/download`}>{upload.filename}</a>
                                 </li>
                             )}
                         </ul>

@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  before_action :set_agendum
+  before_action :set_agendum, except: [:download]
 
   def upload
     upload = @agendum.uploads.build(upload_params)
@@ -25,7 +25,7 @@ class UploadsController < ApplicationController
   private
 
   def set_agendum
-    @agendum = current_user.agenda.find(params[:agenda_id])
+    @agendum = current_user.agenda.find(params[:id])
   end
 
   def upload_params

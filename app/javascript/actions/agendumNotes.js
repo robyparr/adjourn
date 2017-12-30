@@ -24,7 +24,7 @@ export function setAgendumNotes(agendumNotes) {
 export function addAgendumNote(agendumID, partialAgendumNote) {
     return function(dispatch, getState) {
         axios({
-            url: `/meetings/${getState().meeting.id}/agenda/${agendumID}/notes/`,
+            url: `/agenda/${agendumID}/notes/`,
             method: 'POST',
             data: { 
                 authenticity_token: Utils.getAuthenticityToken(), 
@@ -53,7 +53,7 @@ export function receiveNewAgendumNote(agendumNote) {
 export function updateAgendumNote(agendumID, agendumNoteID, partialAgendumNote) {
     return function(dispatch, getState) {
         axios({
-            url: `/meetings/${getState().meeting.id}/agenda/${agendumID}/notes/${agendumNoteID}`,
+            url: `/notes/${agendumNoteID}`,
             method: 'PATCH',
             data: { 
                 authenticity_token: Utils.getAuthenticityToken(), 
@@ -79,7 +79,7 @@ export function receiveUpdatedAgendumNote(agendumNote) {
 export function deleteAgendumNote(agendumID, agendumNoteID) {
     return function(dispatch, getState) {
         axios({
-            url: `/meetings/${getState().meeting.id}/agenda/${agendumID}/notes/${agendumNoteID}`,
+            url: `/notes/${agendumNoteID}`,
             method: 'DELETE',
             data: { authenticity_token: Utils.getAuthenticityToken() }
         })

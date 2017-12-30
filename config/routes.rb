@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'profile#show'
   get '/search', to: 'meetings#search', as: 'search'
+  get '/uploads/:id/download', to: 'uploads#download', as: 'download_upload'
 
   scope '/attendees' do
     get 'autocomplete',
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   end
 
   resources :meetings, except: [:edit, :destroy] do
+    resources :action_items, shallow: true, only: [:create, :update, :destroy]
+
     member do
       scope '/attendees' do
         post '/attend', to: 'attendees#attend'
@@ -22,21 +25,19 @@ Rails.application.routes.draw do
       end
       post '/email_attendees', to: 'meetings#email_attendees'
     end
-    
-    resources :action_items, shallow: true, only: [:create, :update, :destroy]
 
-    resources :agenda, only: [:create, :update, :destroy] do
-      post '/uploads', to: 'uploads#upload'
+    resources :agenda, shallow: true, only: [:create, :update, :destroy] do
+      member do
+        scope '/uploads' do
+          post '/', to: 'uploads#upload', as: :upload
+          post '/presign', to: 'uploads#presigned_url'
+        end
+      end
 
-      # Allow filename.ext in the URL:
-      # https://github.com/rails/rails/issues/28901#issuecomment-297747521
-      post '/uploads/presign', to: 'uploads#presigned_url'
-      get '/uploads/:id/download', to: 'uploads#download'
-
-      resources :agendum_notes, 
-                path: 'notes', 
-                only: [:create, :update, :destroy]
+      resources :agendum_notes,
+        shallow: true,
+        path: 'notes',
+        only: [:create, :update, :destroy]
     end
   end
-  
 end

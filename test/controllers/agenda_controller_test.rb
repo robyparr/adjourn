@@ -54,17 +54,17 @@ class AgendaControllerTest < ActionDispatch::IntegrationTest
     }
 
     # Unauthorized user
-    patch meeting_agenda_path(@meeting, @agendum), params: params
-    assert_redirected_to new_user_session_path
+    patch agenda_path(@meeting, @agendum), params: params
+    assert_response :unauthorized
 
     sign_in @user
 
     # Another user's agenda
-    patch meeting_agenda_path(@meeting2, @agendum2), params: params
+    patch agenda_path(@meeting2, @agendum2), params: params
     assert_response :not_found
 
     # Current user's agenda
-    patch meeting_agenda_path(@meeting, @agendum), params: params
+    patch agenda_path(@meeting, @agendum), params: params
     assert_response :success
 
     updated_agendum = JSON.parse(response.body)
@@ -75,21 +75,21 @@ class AgendaControllerTest < ActionDispatch::IntegrationTest
   test "can delete an agendum" do
     # Non authorized user
     assert_no_difference 'Agendum.count' do
-      delete meeting_agenda_path(@meeting, @agendum)
+      delete agenda_path(@meeting, @agendum)
     end
-    assert_redirected_to new_user_session_path
+    assert_response :unauthorized
 
     sign_in @user
 
     # Another user's agendum
     assert_no_difference 'Agendum.count' do
-      delete meeting_agenda_path(@meeting2, @agendum2)
+      delete agenda_path(@meeting2, @agendum2)
     end
     assert_response :not_found
 
     # Corrent user's agendum
     assert_difference ['Agendum.count', '@meeting.agenda.count'], -1 do
-      delete meeting_agenda_path(@meeting, @agendum)
+      delete agenda_path(@meeting, @agendum)
     end
     assert_response :success
 

@@ -23,8 +23,7 @@ export function receiveNewAgendumUpload(upload) {
 
 export function addAgendumUpload(agendumID, files) {
     return function(dispatch, getState) {
-        const meetingID = getState().meeting.id;
-        const uploadsURL = `/meetings/${meetingID}/agenda/${agendumID}/uploads`;
+        const uploadsURL = `/agenda/${agendumID}/uploads`;
 
         files.forEach(file => {
             var storageKey = '';
