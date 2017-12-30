@@ -10,7 +10,15 @@ const initialState = [];
 export default function agendumNotes(state = initialState, action) {
     switch(action.type) {
         case SET_AGENDUM_NOTES:
-            return action.agendumNotes;
+            // Sort notes oldest -> newest
+            return action.agendumNotes.sort((a, b) => {
+                const dateA = new Date(a.created_at)
+                const dateB = new Date(b.created_at)
+
+                if (dateA > dateB) return 1;
+                else if (dateA < dateB) return -1;
+                else return 0;
+            });;
 
         case RECEIVE_NEW_AGENDUM_NOTE:
             return [ ...state, action.agendumNote ];

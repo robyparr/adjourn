@@ -18,7 +18,6 @@ class MeetingsController < ApplicationController
         :action_items, 
         :attendees
       )
-      .order('agendums.created_at ASC, agendum_notes.created_at ASC')
       .find(params[:id])
   end
   
