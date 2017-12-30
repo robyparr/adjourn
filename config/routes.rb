@@ -6,19 +6,22 @@ Rails.application.routes.draw do
   }
 
   get '/profile', to: 'profile#show'
-  
+  get '/search', to: 'meetings#search', as: 'search'
+
   scope '/attendees' do
-    get 'autocomplete', 
-      to: 'attendees#autocomplete', 
+    get 'autocomplete',
+      to: 'attendees#autocomplete',
       as: 'attendee_autocomplete'
   end
 
-  get '/search', to: 'meetings#search', as: 'search'
-  resources :meetings do
-    post '/email_attendees', to: 'meetings#email_attendees'
-
-    post '/attendees/attend', to: 'attendees#attend'
-    delete '/attendees', to: 'attendees#remove'
+  resources :meetings, except: [:edit, :destroy] do
+    member do
+      scope '/attendees' do
+        post '/attend', to: 'attendees#attend'
+        delete '/unattend', to: 'attendees#remove'
+      end
+      post '/email_attendees', to: 'meetings#email_attendees'
+    end
     
     resources :action_items, shallow: true, only: [:create, :update, :destroy]
 

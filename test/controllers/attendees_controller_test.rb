@@ -29,10 +29,10 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
   #  Attend tests
   test "guests can't add attendees to a meeting" do
     assert_no_difference [
-      '@meeting.attendees.count', 
+      '@meeting.attendees.count',
       '@user.attendees.count'
     ] do
-      post meeting_attendees_attend_url(@meeting),
+      post attend_meeting_url(@meeting),
         params: @attend_existing_params
       
       assert_redirected_to new_user_session_url
@@ -43,10 +43,10 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:two)
 
     assert_no_difference [
-      '@meeting.attendees.count', 
+      '@meeting.attendees.count',
       '@user.attendees.count'
     ] do
-      post meeting_attendees_attend_url(@meeting),
+      post attend_meeting_url(@meeting),
         params: @attend_existing_params
       
       assert_response :not_found
@@ -58,7 +58,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference '@meeting.attendees.count', 1 do
       assert_no_difference '@user.attendees.count' do
-        post meeting_attendees_attend_url(@meeting), 
+        post attend_meeting_url(@meeting),
           params: @attend_existing_params
           
         assert_response :success
@@ -70,10 +70,10 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     assert_difference [
-      '@meeting.attendees.count', 
+      '@meeting.attendees.count',
       '@user.attendees.count'
     ], 1 do
-      post meeting_attendees_attend_url(@meeting), params: @attend_new_params
+      post attend_meeting_url(@meeting), params: @attend_new_params
       assert_response :success
     end
   end
@@ -81,11 +81,11 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
   test "an attendee can't attend a meeting twice" do
     sign_in @user
 
-    post meeting_attendees_attend_url(@meeting), params: @attend_existing_params
+    post attend_meeting_url(@meeting), params: @attend_existing_params
     assert_response :success
 
     assert_no_difference ['@meeting.attendees.count', 'Attendee.count'] do
-      post meeting_attendees_attend_url(@meeting), 
+      post attend_meeting_url(@meeting),
         params: @attend_existing_params
 
       assert_response :unprocessable_entity
@@ -95,10 +95,10 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
   # Removal tests
   test "guests can't remove attendees from a meeting" do
     assert_no_difference [
-      '@meeting.attendees.count', 
+      '@meeting.attendees.count',
       '@user.attendees.count'
     ] do
-      delete meeting_attendees_url(@meeting),
+      delete unattend_meeting_url(@meeting),
         params: @attend_existing_params
       
       assert_redirected_to new_user_session_url
@@ -109,10 +109,10 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:two)
 
     assert_no_difference [
-      '@meeting.attendees.count', 
+      '@meeting.attendees.count',
       '@user.attendees.count'
     ] do
-      delete meeting_attendees_url(@meeting),
+      delete unattend_meeting_url(@meeting),
         params: @attend_existing_params
       
       assert_response :not_found
@@ -126,7 +126,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference '@meeting.attendees.count', -1 do
       assert_no_difference ['@user.attendees.count', 'Attendee.count'] do
-        delete meeting_attendees_url(@meeting), 
+        delete unattend_meeting_url(@meeting),
           params: @attend_existing_params
 
         assert_response :success

@@ -54,7 +54,7 @@ class MeetingsController < ApplicationController
   end
 
   def email_attendees
-    meeting = current_user.meetings.find(params[:meeting_id])
+    meeting = current_user.meetings.find(params[:id])
     MeetingMailer.attendees_email(meeting.id).deliver_later
 
     render json: { message: 'Email successfully sent.' }

@@ -93,7 +93,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   # Email attendees test
   test "unauthorized users can't send emails" do
     assert_no_enqueued_jobs do
-      post meeting_email_attendees_url(@meeting)
+      post email_attendees_meeting_url(@meeting)
       assert_redirected_to new_user_session_path
     end
   end
@@ -102,7 +102,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:two)
 
     assert_no_enqueued_jobs do
-      post meeting_email_attendees_url(@meeting)
+      post email_attendees_meeting_url(@meeting)
       assert_response :not_found
     end
   end
@@ -111,7 +111,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     assert_enqueued_with(job: ActionMailer::DeliveryJob) do
-      post meeting_email_attendees_url(@meeting)
+      post email_attendees_meeting_url(@meeting)
       assert_response :success
     end
 

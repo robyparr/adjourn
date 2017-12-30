@@ -4,7 +4,7 @@ class AttendeesController < ApplicationController
   
   def autocomplete
     matching_attendees = current_user.attendees.where(
-      "email LIKE ?", 
+      "email LIKE ?",
       "%#{params[:email]}%"
     ).select(:id, :email)
 
@@ -14,7 +14,7 @@ class AttendeesController < ApplicationController
   def attend
     attendee = current_user.attendees.find_by_email params[:email]
     attendee ||= current_user.attendees.create(email: params[:email])
-    
+
     begin
       @meeting.attendees << attendee
     rescue ActiveRecord::RecordNotUnique
@@ -36,7 +36,7 @@ class AttendeesController < ApplicationController
   private
 
   def load_meeting
-    @meeting = current_user.meetings.find(params[:meeting_id])
+    @meeting = current_user.meetings.find(params[:id])
   end
 
 end

@@ -54,7 +54,7 @@ export const removeAttendee = (email, meetingID) => {
     return function (dispatch) {
         axios({
             method: 'DELETE',
-            url: `/meetings/${meetingID}/attendees`,
+            url: `/meetings/${meetingID}/attendees/unattend`,
             data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
         })
         .then(response => dispatch(receiveRemovedAttendee(email)))
