@@ -1,37 +1,17 @@
-#
-# Represents a single meeting.
-#
-# Attributes:
-#   - title:string
-#   - description:string
-#   - start_date:datetime
-#   - end_date:datetime
-#
-# Associations:
-#   - Agenda:       A list of agendum (agenda items).
-#   - User:         The user who created the meeting.
-#   - ActionItems:  A list of action items for this meeting.
-#   - Attendees:    A list of meeting attendees.
-#
 class Meeting < ApplicationRecord
-  #
   # Relationships
-  #
+  belongs_to :user
+
   has_many :agenda,
     foreign_key: 'meeting_id',
     class_name: 'Agendum',
     dependent: :destroy
 
-  has_many :action_items,
-    dependent: :destroy
+  has_many :action_items, dependent: :destroy
+  has_and_belongs_to_many :attendees, dependent: :destroy
+  has_many :notes, class_name: 'AgendumNote'
 
-  belongs_to :user
-  has_and_belongs_to_many :attendees,
-    dependent: :destroy
-
-  #
   # Validations
-  #
   validates :title,           presence: true
   validates :start_date,      presence: true
   validates :end_date,        presence: true
