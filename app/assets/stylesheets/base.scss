@@ -48,16 +48,6 @@ body {
     min-height: 60px !important;
 }
 
-.sidebar {
-    .collapsible {
-        margin-top: 0 !important;
-    }
-    
-    .collapsible-body {
-        padding: 0 !important;
-    }
-}
-
 nav {
     a {
         height: 64px;
@@ -68,9 +58,11 @@ nav {
     }
 }
 
-.card.selected::before {
-    content: '';
-    display: block;
-    border-top: 2px solid $primary-color;
-    width: 100%;
+h5 {
+    /* For sub-text within an h5 */
+    .sub {
+        display: block;
+        font-size: 50%;
+        color: rgba(0, 0, 0, 0.54);
+    }
 }
