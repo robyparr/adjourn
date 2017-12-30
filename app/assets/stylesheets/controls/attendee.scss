@@ -16,3 +16,12 @@
 .autocomplete {
     margin-bottom: 0 !important;
 }
+
+#attendees {
+    .collection-item {
+        span {
+            position: absolute;
+            top: 16px;
+        }
+    }
+}

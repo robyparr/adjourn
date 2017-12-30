@@ -68,7 +68,7 @@ export default class Meeting extends React.Component {
         </div>
 
         <div className="row">
-          {/* Action items & Attendees */}
+          {/* Action items, Attendees, & Agendum details */}
           {this.props.isExistingMeeting &&
             <div className="sidebar col m3 z-depth-3 card-panel">
               <ul className="collapsible" data-collapsible="accordion">
@@ -77,7 +77,7 @@ export default class Meeting extends React.Component {
                       <h5>Attendees</h5>
                       <hr className="print-only" />
                   </div>
-                  <div className="collapsible-body">
+                  <div id="attendees" className="collapsible-body">
                     <AttendeesContainer />
                   </div>
                 </li>
