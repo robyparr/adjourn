@@ -26,8 +26,8 @@ export default class Meeting extends React.Component {
     /*
     * Convert dates to local time.
     */
-    var startDate = moment(this.props.meeting.start_date).utc().local();
-    var endDate = moment(this.props.meeting.end_date).utc().local();
+    const startDate = moment(this.props.meeting.start_date).utc().local();
+    const endDate = moment(this.props.meeting.end_date).utc().local();
     return (
       <div>
         {/* Title */}
@@ -69,69 +69,63 @@ export default class Meeting extends React.Component {
 
         <div className="row">
           {/* Action items, Attendees, & Agendum details */}
-          {this.props.isExistingMeeting &&
-            <div className="sidebar col m3 z-depth-3 card-panel">
-              <ul className="collapsible" data-collapsible="accordion">
-                <li>
-                  <div className="collapsible-header active">
-                      <h5>Attendees</h5>
-                      <hr className="print-only" />
+          <div className="sidebar col m3 z-depth-3 card-panel">
+            <ul className="collapsible" data-collapsible="accordion">
+              <li>
+                <div className="collapsible-header active">
+                    <h5>Attendees</h5>
+                    <hr className="print-only" />
+                </div>
+                <div id="attendees" className="collapsible-body">
+                  <AttendeesContainer />
+                </div>
+              </li>
+              <li>
+                <div className="collapsible-header">
+                    <h5>Action Items</h5>
+                    <hr className="print-only" />
+                </div>
+                <div className="collapsible-body">
+                  <ActionItemsContainer />
+                </div>
+              </li>
+              <li id="agendum-details">
+                <div className="collapsible-header">
+                  <h5>Agendum Details</h5>
+                </div>
+                <div className="collapsible-body">
+                    <AgendumDetailsContainer />
                   </div>
-                  <div id="attendees" className="collapsible-body">
-                    <AttendeesContainer />
-                  </div>
-                </li>
-                <li>
-                  <div className="collapsible-header">
-                      <h5>Action Items</h5>
-                      <hr className="print-only" />
-                  </div>
-                  <div className="collapsible-body">
-                    <ActionItemsContainer />
-                  </div>
-                </li>
-                <li id="agendum-details">
-                  <div className="collapsible-header">
-                    <h5>Agendum Details</h5>
-                  </div>
-                  <div className="collapsible-body">
-                      <AgendumDetailsContainer />
-                    </div>
-                </li>
-              </ul>
-            </div>
-          }
+              </li>
+            </ul>
+          </div>
 
           {/* Agenda */}
-          {this.props.isExistingMeeting &&
-            <div className="col m9">
-              <div>
-                <h5>Agenda</h5>
-                <hr />
-                <AgendaContainer />
-              </div>
+          <div className="col m9">
+            <div>
+              <h5>Agenda</h5>
+              <hr />
+              <AgendaContainer />
             </div>
-          }
+          </div>
 
           {/* FAB */}
-          {this.props.isExistingMeeting &&
-            <div className="fixed-action-btn click-to-toggle">
-              <a className="btn-floating btn-large red">
-                <i className="material-icons">menu</i>
-              </a>
-              <ul>
-                <li>
-                  <a className="btn-floating red tooltipped"
-                    data-position="left"
-                    data-delay="50"
-                    onClick={this.props.onEmailAttendeesClick}
-                    data-tooltip="Email Attendees">
-                    <i className="material-icons">send</i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          }
+          <div className="fixed-action-btn click-to-toggle">
+            <a className="btn-floating btn-large red">
+              <i className="material-icons">menu</i>
+            </a>
+            <ul>
+              <li>
+                <a className="btn-floating red tooltipped"
+                  data-position="left"
+                  data-delay="50"
+                  onClick={this.props.onEmailAttendeesClick}
+                  data-tooltip="Email Attendees">
+                  <i className="material-icons">send</i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     );

@@ -18,6 +18,8 @@ $(document).ready(function() {
 
     $('.collapsible').collapsible();
 
+    $('.modal').modal();
+
     $('.autocomplete').easyAutocomplete({
         url: function(q) {
             return "/search?q=" + q;
@@ -49,6 +51,20 @@ $(document).ready(function() {
         $(this).parents('.input-field').find('i.material-icons.prefix').addClass('black-text');
     }).on('blur', function() {
         $(this).parents('.input-field').find('i.material-icons.prefix').removeClass('black-text');
+    });
+
+    $('#new-meeting-form').on('ajax:success', function(response) {
+        window.location = response.detail[0].resource_url;
+    }).on('ajax:error', function(response) {
+        var errorResponse = response.detail[0].errors;
+        var errorsListItems = "";
+        for(var i = 0; i < errorResponse.length; i++) {
+            errorsListItems += "<li>" + errorResponse[i] + "</li>";
+        }
+
+        var errors = $('#new-meeting-form').find('.errors');
+        errors.find('ul').html(errorsListItems);
+        errors.css('display', 'block');
     });
 });
 

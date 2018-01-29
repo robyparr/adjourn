@@ -1,0 +1,11 @@
+@import "_variables.scss";
+
+.errors {
+    color: $error-dark;
+    
+    h5 {
+        color: $error-dark;
+        background-color: $error-light;
+        padding: 10px;
+    }
+}

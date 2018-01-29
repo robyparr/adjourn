@@ -1,4 +1,4 @@
-<a class="btn-floating btn-large waves-effect waves-light red fab-fixed" href="<%= new_meeting_path %>">
+<a class="btn-floating btn-large waves-effect waves-light red fab-fixed modal-trigger" href="#new-meeting-modal">
   <i class="material-icons">add</i>
 </a>
 
@@ -40,3 +40,5 @@
   </div>
 </div>
 <% end %>
+
+<%= render 'meetings/new_modal', meeting: @meeting %>

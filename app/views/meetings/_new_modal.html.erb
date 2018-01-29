@@ -1,0 +1,26 @@
+<%= form_with(model: meeting, id: "new-meeting-form") do |f| %>
+  <div id="new-meeting-modal" class="modal">
+    <div class="modal-content">
+      <h4>New Meeting</h4>
+      <p>
+        Name your meeting and click <strong>CREATE</strong> it to start adding
+        to the agenda.
+      </p>
+
+      <div class="errors" style="display: none;">
+        <h5>There were some errors creating your meeting.</h5>
+        <ul class="browser-default"></ul>
+      </div>
+
+      <div class="input-field">
+        <%= f.text_field :title, autofocus: true %>
+        <%= f.label :title %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+      <%= f.submit "Create",
+        class: "modal-action waves-effect waves-light btn btn-green" %>
+    </div>
+  </div>
+<% end %>

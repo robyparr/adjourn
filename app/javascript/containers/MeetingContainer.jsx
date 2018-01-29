@@ -30,8 +30,7 @@ const MeetingContainer = ({ meeting, updateMeeting }) => {
       }
     
     return (
-        <Meeting 
-            isExistingMeeting={meeting.id != null}
+        <Meeting
             meeting={meeting}
             onFieldUpdate={onFieldUpdate}
             onEmailAttendeesClick={onEmailAttendeesClick} />
