@@ -1,3 +1,5 @@
+@import "_variables.scss";
+
 /*
  * Utility styles.
  */
@@ -7,6 +9,18 @@
 
 .text-right {
     text-align: right;
+}
+
+.text-muted {
+    color: $muted-color;
+}
+
+.vertical-center {
+    position: absolute;
+    top: 40%;
+    bottom: 60%;
+    width: 70%;
+    text-align: center;
 }
 
 .time-picker {

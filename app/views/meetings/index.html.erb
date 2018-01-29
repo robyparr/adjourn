@@ -1,32 +1,42 @@
 <a class="btn-floating btn-large waves-effect waves-light red fab-fixed" href="<%= new_meeting_path %>">
-    <i class="material-icons">add</i>
+  <i class="material-icons">add</i>
 </a>
 
 <div class="container">
-    <h4>Meetings</h4>
+  <h4>Meetings</h4>
+<% unless @meetings.present? %>
+  <div class="vertical-center text-muted">
+    <i class="large material-icons">inbox</i>
+    <h5>There's Nothing Here</h5>
+    <p>
+      Why don't you go ahead and add a meeting by clicking the button
+      to the bottom-right?
+    </p>
+  </div>
+<% else %>
+  <div class="card-panel">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @meetings.each do |meeting| %>
+          <tr>
+            <td><%= link_to meeting.title, meeting_path(meeting) %></td>
+            <td class="localize"><%= meeting.start_date %></td>
+            <td class="localize"><%= meeting.end_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-    <div class="card-panel">
-        <table class="striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @meetings.each do |meeting| %>
-                    <tr>
-                        <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-                        <td class="localize"><%= meeting.start_date %></td>
-                        <td class="localize"><%= meeting.end_date %></td>
-                    </tr>
-                <% end %>
-            </tbody>
-        </table>
-
-        <div style="text-align: right;">
-            <%= paginate @meetings %>
-        </div>
+    <div style="text-align: right;">
+      <%= paginate @meetings %>
     </div>
+  </div>
 </div>
+<% end %>
