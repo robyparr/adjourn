@@ -5,7 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '~> 2.4.1'
+ruby '~> 2.5.0'
 
 gem 'rails',            '~> 5.1.1'
 gem 'puma',             '~> 3.7'
@@ -17,7 +17,7 @@ gem 'rubocop'
 gem 'materialize-sass', '~> 0.100.2'
 gem 'jquery-rails'
 gem 'devise'
-gem 'pg'
+gem 'pg',               '~> 0.21.0'
 gem 'redcarpet',        '~> 3.3', '>= 3.3.4'
 gem 'premailer-rails'
 gem 'kaminari',         '~> 1.1', '>= 1.1.1'
