@@ -87,6 +87,7 @@ export default class ActionItem extends Component {
                     name="description"
                     onChange={this.onFieldChange}
                     onEditModeChanged={this.onFieldEditModeChange}
+                    singleClickToEdit={!this.props.actionItem.description}
                     value={descriptionValue}
                     placeholder="Item Description"
                     multilineEditor={true}
