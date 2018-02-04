@@ -51,6 +51,14 @@ class MeetingsController < ApplicationController
     render json: { message: 'Email successfully sent.' }
   end
 
+  def destroy
+    meeting = current_user.meetings.find(params[:id])
+    meeting.destroy
+
+    flash[:notice] = "Meeting successfully deleted."
+    redirect_to meetings_path
+  end
+
   def search
     @results = PgSearch.multisearch(params[:q])
       .where(user_id: current_user.id)

@@ -12,12 +12,22 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     @user.meetings << @meeting
     ActionMailer::Base.deliveries.clear
   end
-  
-  test "can list all a user's meetings" do
-    # Non authenticated user
-    get meetings_path
-    assert_redirected_to new_user_session_path
 
+  test "Unauthenticated users are redirected to login page" do
+    requests = [
+      { method: :delete, url: meeting_url(@meeting) },
+      { method: :get, url: meetings_url },
+      { method: :get, url: new_meeting_path },
+      { method: :get, url: meeting_path(@meeting) }
+    ]
+
+    requests.each do |request|
+      self.send(request[:method], request[:url])
+      assert_redirected_to new_user_session_path
+    end
+  end
+
+  test "can list all a user's meetings" do
     # Authenticated
     sign_in @user
     get meetings_path
@@ -34,10 +44,6 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can create a new meeting" do
-    # Un authorized user
-    get new_meeting_path
-    assert_redirected_to new_user_session_path
-
     # Authorized user
     sign_in @user
     get new_meeting_path
@@ -57,10 +63,6 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "can update an existing meeting" do
-    # Non authenticated user
-    get meeting_path(@meeting)
-    assert_redirected_to new_user_session_path
-
     sign_in @user
     params = {
       meeting: {
@@ -158,6 +160,23 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     json_response = JSON.parse(response.body)
     assert_equal 1, json_response.size
     assert_equal @meeting.title, json_response.first['meeting']['title']
+  end
+
+  test "can't delete another users meetings" do
+    sign_in users(:two)
+
+    assert_no_difference 'Meeting.count' do
+      delete meeting_path(@meeting)
+    end
+    assert_response :not_found
+  end
+
+  test "can delete meetings" do
+    sign_in @user
+    assert_difference ['Meeting.count', 'Agendum.count'], -1 do
+      delete meeting_path(@meeting)
+    end
+    assert_redirected_to meetings_path
   end
 
   private

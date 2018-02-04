@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       as: 'attendee_autocomplete'
   end
 
-  resources :meetings, except: [:edit, :destroy] do
+  resources :meetings, except: %w(edit) do
     resources :action_items, shallow: true, only: [:create, :update, :destroy]
 
     member do
