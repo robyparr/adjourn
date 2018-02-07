@@ -29,7 +29,8 @@ export default class Utils {
      * Get the Rails authenticity token.
      */
     static getAuthenticityToken() {
-        return document.querySelector('meta[name=csrf-token').getAttribute('content');
+        return document.querySelector('meta[name=csrf-token]')
+            .getAttribute('content');
     }
 
     static getGravatarUrl(email) {
