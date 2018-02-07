@@ -5,7 +5,10 @@ $(document).ready(function() {
     // localize times
     $('.localize').each(function () {
         var element = $(this);
-        element.html(moment(element.html()).format('LLL'));
+        var formattedDate = moment.utc(element.html(), "YYYY-MM-DD HH:mm")
+            .local()
+            .format('LLL');
+        element.html(formattedDate);
     });
 
     // Fix for Material UI's <AutoComplete /> applying .browser-default
