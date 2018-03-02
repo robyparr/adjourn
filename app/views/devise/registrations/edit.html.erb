@@ -1,73 +1,101 @@
-<div class="row">
-  <div class="col m4 offset-m4">
-    <div class="card-panel">
-      <h4 class="margin-top-none">Edit Profile</h4>
+<%= form_for(
+  resource,
+  as: resource_name,
+  url: registration_path(resource_name),
+  html: { method: :put }) do |f| %>
 
-      <%= form_for(
-          resource,
-          as: resource_name,
-          url: registration_path(resource_name),
-          html: { method: :put }) do |f| %>
+  <%# Change Email %>
+  <div class="row">
+    <div class="col m4 offset-m4">
+      <div class="card">
+        <div class="card-content">
 
-        <%= devise_error_messages! %>
+          <span class="card-title">Change Email</span>
 
-        <div class="input-field">
-          <%= f.email_field :email, autofocus: true %>
-          <%= f.label :email %><br />
-        </div>
-
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>
-            Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+          <div class="input-field">
+            <%= f.email_field :email,
+              autofocus: true,
+              required: true,
+              data: { errors: resource.errors[:email].join(", ") } %>
+            <%= f.label :email %>
           </div>
-        <% end %>
 
-        <div class="input-field">
-          <%= f.password_field :password, autocomplete: "off" %>
-          <%= f.label :password %>
-          <i>(leave blank if you don't want to change it)</i><br />
-          <% if @minimum_password_length %>
-            <em><%= @minimum_password_length %> characters minimum</em>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>
+              Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+            </div>
           <% end %>
+
         </div>
-
-        <div class="input-field">
-          <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          <%= f.label :password_confirmation %><br />
-        </div>
-
-        <div class="input-field">
-          <%= f.password_field :current_password, autocomplete: "off" %>
-          <%= f.label :current_password %>
-          <i>(we need your current password to confirm your changes)</i><br />
-        </div>
-
-        <div class="row">
-          <div class="col m6" style="line-height: 36px;">
-            <%= link_to "Back to Profile", profile_path %>
-          </div>
-          <div class="col m6 text-right">
-            <%= f.submit "Update", class: 'btn' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  <div class="col m3 offset-m1">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">Close Account</span>
-
-        <p>
-          Warning! Closing your account will delete all your data and this
-          action is irreversible!
-        </p>
-
-        <%= link_to "Cancel my account", registration_path(resource_name),
-          data: { confirm: "Are you sure?" },
-          method: :delete,
-          class: 'btn btn-block red' %>
       </div>
     </div>
   </div>
-</div>
+  <%# /Change Email %>
+
+  <%# Change Password %>
+  <div class="row">
+    <div class="col m4 offset-m4">
+      <div class="card">
+        <div class="card-content">
+
+          <span class="card-title">Change Password</span>
+          <p>
+            You can change your password here. Please leave this form
+            blank if you don't want to change your password.
+          </p>
+
+          <div class="input-field">
+            <%= f.password_field :password,
+              autocomplete: "off",
+              data: { errors: resource.errors[:password].join(", ") } %>
+            <%= f.label :password %>
+            <% if @minimum_password_length %>
+              <em><%= @minimum_password_length %> characters minimum</em>
+            <% end %>
+          </div>
+
+          <div class="input-field">
+            <%= f.password_field :password_confirmation, autocomplete: "off",
+              data: {
+                errors: resource.errors[:password_confirmation].join(", ")
+              } %>
+            <%= f.label :password_confirmation %><br />
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# /Change Password %>
+
+  <%# Submit %>
+  <div class="row">
+    <div class="col m4 offset-m4">
+      <div class="card">
+        <div class="card-content">
+
+          <span class="card-title">Update Profile</span>
+          <p>Please enter your current password to confirm your changes.</p>
+
+          <div class="input-field">
+            <%= f.password_field :current_password,
+              autocomplete: "off",
+              required: true,
+              data: { errors: resource.errors[:current_password].join(", ") } %>
+            <%= f.label :current_password %>
+          </div>
+
+          <%= f.submit "Update", class: 'btn btn-block', style: "width: 100%;" %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <%# /Submit %>
+<% end %>
+
+<% if resource.errors.any? %>
+  <script>
+    showErrorMessage("Please fix the errors in the form.");
+  </script>
+<% end %>
