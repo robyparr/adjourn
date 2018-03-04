@@ -2,6 +2,8 @@ class Upload < ApplicationRecord
   belongs_to :agendum
   before_destroy :delete_file
 
+  scope :uploads_size_total, ->(user) { user.uploads.sum(:file_size) }
+
   def url
     Upload.presigned_url(:get, self.storage_key)
   end
@@ -28,8 +30,8 @@ class Upload < ApplicationRecord
 
     def upload_headers(filename, file_type)
       {
-          "Content-Disposition" => "inline; filename=\"#{filename}\"",
-          "Content-Type" => file_type
+        "Content-Disposition" => "inline; filename=\"#{filename}\"",
+        "Content-Type" => file_type
       }
     end
 
@@ -38,21 +40,4 @@ class Upload < ApplicationRecord
       raw_headers.map { |k, v| [k.parameterize.underscore, v] }.to_h
     end
   end
-
-  
-
-
-  #has_attached_file :attachment
-
-  # validates_attachment_content_type :attachment, content_type: [
-  #   /\Aimage\/.*\z/,
-  #   'application/pdf',
-  #   'application/vnd.ms-powerpoint',
-  #   'application/rtf',
-  #   'application/msword',
-  #   'application/vnd.ms-excel',
-  #   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-  #   'application/zip',
-  #   'application/x-7z-compressed'
-  # ]
 end

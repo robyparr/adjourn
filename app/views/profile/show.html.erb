@@ -2,6 +2,16 @@
   <%# Left-most column %>
   <div class="col m4">
     <div class="col m12"><%= render "basic_info" %></div>
+    <div class="col m12">
+      <%= render "uploads", uploads_total: @view_model.uploads_total %>
+    </div>
+  </div>
+  <div class="col m4">
+    <div class="col m12">
+      <%= render "meetings", meetings_count: @view_model.meetings_count %>
+    </div>
+  </div>
+  <div class="col m4">
     <div class="col m12"><%= render "close_account" %></div>
   </div>
 </div>

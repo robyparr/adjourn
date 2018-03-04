@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171210093408) do
+ActiveRecord::Schema.define(version: 20180302141912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20171210093408) do
     t.bigint "agendum_id"
     t.string "filename"
     t.string "content_type"
-    t.string "file_size"
+    t.integer "file_size"
     t.string "storage_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
