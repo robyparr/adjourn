@@ -1,0 +1,13 @@
+<ul class="collection with-header z-depth-1">
+  <li class="collection-header"><strong>Recent</strong></li>
+  <% recent_meetings(meetings).each do |meeting| %>
+    <li class="collection-item">
+      <div>
+        <%= link_to meeting.title, meeting_path(meeting) %>
+        <span class="secondary-content">
+          <%= when_in_words(meeting) %>
+        </span>
+      </div>
+    </li>
+  <% end %>
+</ul>

@@ -4,48 +4,59 @@
 
 <div class="container">
   <h4>Meetings</h4>
-<% unless @meetings.present? %>
-  <div class="vertical-center text-muted">
-    <i class="large material-icons">inbox</i>
-    <h5>There's Nothing Here</h5>
-    <p>
-      Why don't you go ahead and add a meeting by clicking the button
-      to the bottom-right?
-    </p>
-  </div>
-<% else %>
-  <div class="card-panel">
-    <table class="striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @meetings.each do |meeting| %>
-          <tr>
-            <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-            <td class="localize"><%= meeting.start_date %></td>
-            <td class="localize"><%= meeting.end_date %></td>
-            <td class="text-right">
-              <%= link_to "Delete", meeting_path(meeting),
-                class: "btn-flat red-text",
-                method: :delete,
-                data: { confirm: "Are you sure you want to delete this meeting?" } %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <% unless @meetings.present? %>
+    <div class="vertical-center text-muted">
+      <i class="large material-icons">inbox</i>
+      <h5>There's Nothing Here</h5>
+      <p>
+        Why don't you go ahead and add a meeting by clicking the button
+        to the bottom-right?
+      </p>
+    </div>
+  <% else %>
+    <%# Recent and upcoming meetings %>
+    <div class="row">
+      <div class="col m6">
+        <%= render 'recent_meetings', meetings: @meetings %>
+      </div>
+      <div class="col m6">
+        <%= render 'upcoming_meetings', meetings: @meetings %>
+      </div>
+    </div>
 
-    <div style="text-align: right;">
-      <%= paginate @meetings %>
+    <%# All other meetings %>
+    <div class="table-collection-wrapper z-depth-1">
+      <table class="collection with-header">
+        <thead>
+          <tr class="collection-header">
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% neither_upcoming_nor_recent_meetings(@meetings).each do |meeting| %>
+            <tr class="collection-item">
+              <td><%= link_to meeting.title, meeting_path(meeting) %></td>
+              <td class="localize"><%= meeting.start_date %></td>
+              <td class="localize"><%= meeting.end_date %></td>
+              <td class="text-right">
+                <%= link_to "Delete", meeting_path(meeting),
+                  class: "btn-flat red-text",
+                  method: :delete,
+                  data: { confirm: "Are you sure you want to delete this meeting?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div style="text-align: right;">
+        <%= paginate @meetings %>
+      </div>
     </div>
   </div>
-</div>
 <% end %>
 
 <%= render 'meetings/new_modal', meeting: @meeting %>

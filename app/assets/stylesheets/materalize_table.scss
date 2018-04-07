@@ -1,0 +1,19 @@
+.table-collection-wrapper {
+    border: 1px solid #e0e0e0;
+
+    table.collection {
+        border: none;
+        margin-top: 0;
+        margin-bottom: 0;
+
+        tr {
+            td, th { 
+                padding-left: 20px !important;
+            }
+
+            :last-child {
+                padding-right: 20px !important;
+            }
+        }
+    }
+}
