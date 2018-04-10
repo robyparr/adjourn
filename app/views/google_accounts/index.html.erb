@@ -1,0 +1,47 @@
+<div class="container">
+  <h4>Google Accounts</h4>
+
+  <%= link_to new_google_account_path, class: "btn-floating btn-large waves-effect waves-light red fab-fixed" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+
+  <% unless @accounts.present? %>
+    <div class="vertical-center text-muted">
+        <i class="large material-icons">add_box</i>
+        <h5>There's Nothing Here</h5>
+        <p>
+          You have no Google accounts connected.<br />
+          You can add one by clicking the button to the bottom-right.
+        </p>
+      </div>
+    <div></div>
+  <% else %>
+    <div class="table-collection-wrapper z-depth-1">
+      <table class="collection with-header">
+        <thead>
+          <tr class="collection-header">
+            <th style="width: 70px;">Account</th>
+            <th></th>
+            <th>Connected At</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @accounts.each do |account| %>
+            <tr class="collection-item">
+              <td><img src="<%= account.avatar_url %>" height="64" /></td>
+              <td><%= account.email %></td>
+              <td><%= account.created_at %></td>
+              <td class="text-right">
+                <%= link_to "Delete", google_account_path(account),
+                  class: "btn-flat red-text",
+                  data: { confirm: "Are you sure you want to remove this Google Account?" },
+                  method: :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

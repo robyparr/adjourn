@@ -10,4 +10,5 @@ class User < ApplicationRecord
   has_many :attendees, dependent: :destroy
   has_many :uploads, through: :agenda
   has_many :notes, class_name: 'AgendumNote', through: :meetings
+  has_many :google_accounts, dependent: :destroy
 end

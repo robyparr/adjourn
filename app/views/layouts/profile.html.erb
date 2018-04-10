@@ -5,7 +5,11 @@
     <% content_for :extended_nav do %>
       <ul class="tabs tabs-transparent">
         <li class="tab">
-          <%= link_to "Profile", profile_path, class: "active" %>
+          <%= active_link_to "Profile", profile_path, target: "_self" %>
+        </li>
+        <li class="tab">
+          <%= active_link_to "Google Accounts", google_accounts_path,
+            target: "_self" %>
         </li>
       </ul>
     <% end %>

@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   get '/search', to: 'meetings#search', as: 'search'
   get '/uploads/:id/download', to: 'uploads#download', as: 'download_upload'
 
+  resources :google_accounts, only: %w(index new destroy) do
+    collection do
+      get '/callback', to: 'google_accounts#create'
+    end
+  end
+
   scope '/attendees' do
     get 'autocomplete',
       to: 'attendees#autocomplete',
