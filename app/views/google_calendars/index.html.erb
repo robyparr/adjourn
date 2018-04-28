@@ -1,0 +1,18 @@
+<div class="row">
+  <% @calendars.each do |calendar| %>
+    <div class="col m4">
+      <input
+        id="checkbox-<%= calendar[:google_id] %>"
+        class="calendar-checkbox"
+        data-calendar-url="<%= google_calendars_url %>"
+        data-calendar-google-id="<%= calendar[:google_id] %>"
+        data-google-account-id="<%= calendar[:account_id] %>"
+        <%= calendar[:sync] ? "checked='checked'" : "" %>
+        type="checkbox" />
+
+      <label for="checkbox-<%= calendar[:google_id] %>">
+        <%= calendar[:name] %>
+      </label>
+    </div>
+  <% end %>
+</div>

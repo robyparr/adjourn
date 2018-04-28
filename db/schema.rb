@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180407122234) do
+ActiveRecord::Schema.define(version: 20180423122535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20180407122234) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_google_accounts_on_email", unique: true
     t.index ["user_id"], name: "index_google_accounts_on_user_id"
+  end
+
+  create_table "google_calendars", force: :cascade do |t|
+    t.string "google_id"
+    t.bigint "google_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["google_account_id"], name: "index_google_calendars_on_google_account_id"
+    t.index ["google_id", "google_account_id"], name: "index_google_calendars_on_google_id_and_google_account_id", unique: true
+    t.index ["google_id"], name: "index_google_calendars_on_google_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -137,6 +147,7 @@ ActiveRecord::Schema.define(version: 20180407122234) do
   add_foreign_key "attendees_meetings", "attendees"
   add_foreign_key "attendees_meetings", "meetings"
   add_foreign_key "google_accounts", "users"
+  add_foreign_key "google_calendars", "google_accounts"
   add_foreign_key "meetings", "users"
   add_foreign_key "uploads", "agendums"
 end

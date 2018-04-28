@@ -24,6 +24,7 @@
             <th></th>
             <th>Connected At</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +33,11 @@
               <td><img src="<%= account.avatar_url %>" height="64" /></td>
               <td><%= account.email %></td>
               <td><%= account.created_at %></td>
+              <td>
+                <%= link_to "Synced Calendars", nil, data: {
+                  calendar_list: account.id
+                }%>
+              </td>
               <td class="text-right">
                 <%= link_to "Delete", google_account_path(account),
                   class: "btn-flat red-text",
@@ -44,4 +50,20 @@
       </table>
     </div>
   <% end %>
+</div>
+
+<div id="google-calendars-modal" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Synced Calendars</h4>
+    <div class="loading text-center">
+      <%= render 'shared/loader' %>
+    </div>
+    <p class="content"></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!"
+      class="modal-action modal-close waves-effect waves-green btn-flat">
+      Close
+    </a>
+  </div>
 </div>

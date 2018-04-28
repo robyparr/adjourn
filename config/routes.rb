@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :google_calendars, only: %w(index create) do
+    collection do
+      delete '/', action: :destroy
+    end
+  end
+
   scope '/attendees' do
     get 'autocomplete',
       to: 'attendees#autocomplete',
