@@ -38,26 +38,8 @@
     <% end %>
   </div>
   <div class="col m3">
-    <ul class="collection with-header">
-      <li class="collection-header">
-        <strong>Calendar Events</strong>
-      </li>
-      <div id="calendar-events">
-        <div class="text-center" style="margin: 15px;">
-          <%= render 'shared/loader' %>
-        </div>
-      </div>
-    </ul>
+    <%= render 'calendar_events' %>
   </div>
 </div>
 
 <%= render 'meetings/new_modal', meeting: @meeting %>
-
-<script>
-  $(document).ready(function() {
-    $.get('/calendar_events')
-      .success(function(data) {
-        $('#calendar-events').html(data);
-      });
-  });
-</script>

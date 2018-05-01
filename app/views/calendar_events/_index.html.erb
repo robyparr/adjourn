@@ -1,3 +1,30 @@
+<% if !has_google_accounts %>
+  <li class="collection-item">
+    <p>
+      Connect your Google Account to Adjourn
+      to sync your Google Calendar events.
+    </p>
+    <p>
+      You can connect your account by clicking your email in the top-right and
+      selecting "Google Accounts" from the menu.
+    </p>
+  </li>
+<% elsif has_google_accounts && !has_synced_calendars %>
+  <li class="collection-item">
+    <p>
+      Please select some calendars to sync with Adjourn.
+    </p>
+    <p>
+      You can choose calendars to sync by clicking the "Synced Calendars" link
+      on your connected account in your profile.
+    </p>
+  </li>
+<% elsif events.empty? %>
+  <li class="collection-item">
+    There are no upcoming events or you've added them all to Adjourn.
+  </li>
+<% end %>
+
 <% events.each do |event| %>
   <span class="calendar-event-item">
     <li class="collection-item">

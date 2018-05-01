@@ -1,7 +1,12 @@
 class CalendarEventsController < ApplicationController
   def index
+    has_google_accounts = false
+    has_synced_calendars = false
+
     events = current_user.google_accounts.map do |account|
+      has_google_accounts = true
       account.google_calendars.map do |calendar|
+        has_synced_calendars = true
         GoogleService::CalendarEvent.new(account, calendar.google_id).all
       end
     end
@@ -9,7 +14,11 @@ class CalendarEventsController < ApplicationController
       .reject { |it| current_user.meetings.where(google_event_id: it[:id]).any? }
       .sort_by { |it| it[:start] }
 
-    render partial: 'index.html', locals: { events: events }
+    render partial: 'index.html', locals: {
+      has_google_accounts: has_google_accounts,
+      has_synced_calendars: has_synced_calendars,
+      events: events
+    }
   end
 
   def create
