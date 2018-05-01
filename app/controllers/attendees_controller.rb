@@ -12,18 +12,10 @@ class AttendeesController < ApplicationController
   end
 
   def attend
-    attendee = current_user.attendees.find_by_email params[:email]
-    attendee ||= current_user.attendees.create(email: params[:email])
+    add_attendee = @meeting.add_attendee params[:email]
 
-    begin
-      @meeting.attendees << attendee
-    rescue ActiveRecord::RecordNotUnique
-      message = 'Attendee is already attending this meeting.'
-      render json: { message: message }, status: :unprocessable_entity
-      return
-    end
-
-    render json: attendee
+    return render(json: add_attendee) if add_attendee.respond_to? :email
+    render json: { message: add_attendee }, status: :unprocessable_entity
   end
 
   def remove

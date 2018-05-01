@@ -43,6 +43,18 @@ class Meeting < ApplicationRecord
     self.start_date <= Time.now && self.end_date >= Time.now
   end
 
+  def add_attendee(email)
+    attendee = user.attendees.find_by_email email
+    attendee ||= user.attendees.create(email: email)
+
+    begin
+      attendees << attendee
+      attendee
+    rescue ActiveRecord::RecordNotUnique
+      'Attendee is already attending this meeting.'
+    end
+  end
+
   private
     # Add an error to the model unless :end_date
     # is after :start_date

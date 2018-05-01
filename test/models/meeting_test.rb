@@ -92,4 +92,35 @@ class MeetingTest < ActiveSupport::TestCase
     @meeting.end_date = @meeting.start_date + 5.minutes
     assert_not @meeting.upcoming?
   end
+
+  test "add_attendee adds an existing attendee to the meeting" do
+    attendee_email = attendees(:one).email
+    @meeting.attendees.delete_all
+    assert_difference '@meeting.attendees.count', 1 do
+      @meeting.add_attendee(attendee_email)
+    end
+
+    assert @meeting.attendees.where(email: attendee_email).any?
+  end
+
+  test "add_attendee creates and adds a new attendee for unknown emails" do
+    attendee_email = 'brand_new_email@example.com'
+    @meeting.attendees.delete_all
+
+    assert_difference ['@meeting.attendees.count', 'Attendee.count'], 1 do
+      @meeting.add_attendee(attendee_email)
+    end
+    assert @meeting.attendees.where(email: attendee_email).any?
+  end
+
+  test "add_attendee returns an error when adding the same email twice" do
+    attendee_email = attendees(:one).email
+    @meeting.attendees.delete_all
+    @meeting.add_attendee(attendee_email)
+
+    assert_no_difference '@meeting.attendees.count' do
+      response = @meeting.add_attendee(attendee_email)
+      assert_equal 'Attendee is already attending this meeting.', response
+    end
+  end
 end

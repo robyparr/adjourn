@@ -1,0 +1,17 @@
+.calendar-event-item {
+    a {
+        float: right;
+        margin-top: -40px;
+        margin-right: 5px;
+    }
+
+    li.collection-item {
+        position: relative !important;
+        transition: 0.5s;
+        left: 0;
+    }
+    &:hover li.collection-item, .calendar-event-item a:hover li.collection-item {
+        transition: 0.5s;
+        left: -100px;
+    }
+}
