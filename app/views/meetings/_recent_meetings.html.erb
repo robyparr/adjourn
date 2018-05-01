@@ -1,5 +1,8 @@
 <ul class="collection with-header z-depth-1">
   <li class="collection-header"><strong>Recent</strong></li>
+  <% if recent_meetings(meetings).empty? %>
+    <li class="collection-item">No recent meetings.</li>
+  <% end %>
   <% recent_meetings(meetings).each do |meeting| %>
     <li class="collection-item">
       <div>

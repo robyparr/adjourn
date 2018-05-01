@@ -14,6 +14,13 @@ class MeetingsHelperTest < ActionView::TestCase
     @meetings = [@recent_meeting, @upcoming_meeting]
   end
 
+  def make_meeting_old(meeting)
+    meeting.tap do |old_meeting|
+      old_meeting.start_date = Time.zone.now - 1.year
+      old_meeting.end_date = meeting.start_date + 1.hour
+    end
+  end
+
   test "recent_meetings returns only recent meetings" do
     recent = recent_meetings(@meetings)
     assert_equal 1, recent.size
@@ -35,5 +42,35 @@ class MeetingsHelperTest < ActionView::TestCase
 
     assert_equal 1, the_rest.size
     assert_equal old_meeting.id, the_rest.first.id
+  end
+
+  test "display_recent_and_upcoming_meetings_section? is true without a page" do
+    assert display_recent_and_upcoming_meetings_section?(nil)
+  end
+
+  test "display_recent_and_upcoming_meetings_section? is true when page is 1" do
+    assert display_recent_and_upcoming_meetings_section?("1")
+  end
+
+  test "display_recent_and_upcoming_meetings_section? is false when page is >1" do
+    assert_not display_recent_and_upcoming_meetings_section?("2")
+  end
+
+  test "meetings_list returns the full meeting list if display_recent_and_upcoming_meetings_section? is false" do
+    page = "2"
+    meetings = meetings_list(@meetings, page)
+
+    assert_not display_recent_and_upcoming_meetings_section?(page)
+    assert_equal @meetings.size, meetings.size
+  end
+
+  test "meetings_list returns neither_upcoming_nor_recent_meetings if display_recent_and_upcoming_meetings_section? is false" do
+    page = "1"
+    old_meeting = make_meeting_old(@upcoming_meeting)
+    meetings = meetings_list(@meetings, page)
+
+    assert display_recent_and_upcoming_meetings_section?(page)
+    assert_equal 1, meetings.size
+    assert_equal old_meeting.id, meetings.first.id
   end
 end

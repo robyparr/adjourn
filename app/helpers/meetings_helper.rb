@@ -10,6 +10,15 @@ module MeetingsHelper
       .sort_by { |it| it.start_date }
   end
 
+  def display_recent_and_upcoming_meetings_section?(page)
+    page.nil? || page.to_i == 1
+  end
+
+  def meetings_list(meetings, page)
+    return meetings unless display_recent_and_upcoming_meetings_section?(page)
+    neither_upcoming_nor_recent_meetings(meetings)
+  end
+
   def neither_upcoming_nor_recent_meetings(meetings)
     meetings.select { |it| !it.upcoming? && !it.recent? }
   end

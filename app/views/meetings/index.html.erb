@@ -17,18 +17,20 @@
       </div>
     <% else %>
       <%# Recent and upcoming meetings %>
-      <div class="row">
-        <div class="col m6">
-          <%= render 'recent_meetings', meetings: @meetings %>
+      <% if display_recent_and_upcoming_meetings_section? params[:page] %>
+        <div class="row">
+          <div class="col m6">
+            <%= render 'recent_meetings', meetings: @meetings %>
+          </div>
+          <div class="col m6">
+            <%= render 'upcoming_meetings', meetings: @meetings %>
+          </div>
         </div>
-        <div class="col m6">
-          <%= render 'upcoming_meetings', meetings: @meetings %>
-        </div>
-      </div>
+      <% end %>
 
       <%# All other meetings %>
       <%= render 'meetings',
-        meetings: neither_upcoming_nor_recent_meetings(@meetings) %>
+        meetings: meetings_list(@meetings, params[:page]) %>
     <% end %>
   </div>
   <div class="col m3">

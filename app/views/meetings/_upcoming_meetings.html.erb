@@ -1,5 +1,8 @@
 <ul class="collection with-header z-depth-1">
   <li class="collection-header"><strong>Upcoming</strong></li>
+  <% if upcoming_meetings(meetings).empty? %>
+    <li class="collection-item">No recent meetings.</li>
+  <% end %>
   <% upcoming_meetings(meetings).each do |meeting| %>
     <li class="<%= upcoming_meeting_item_classes(meeting) %>">
       <div>
