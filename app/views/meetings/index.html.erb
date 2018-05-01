@@ -2,61 +2,56 @@
   <i class="material-icons">add</i>
 </a>
 
-<div class="container">
-  <h4>Meetings</h4>
-  <% unless @meetings.present? %>
-    <div class="vertical-center text-muted">
-      <i class="large material-icons">inbox</i>
-      <h5>There's Nothing Here</h5>
-      <p>
-        Why don't you go ahead and add a meeting by clicking the button
-        to the bottom-right?
-      </p>
-    </div>
-  <% else %>
-    <%# Recent and upcoming meetings %>
-    <div class="row">
-      <div class="col m6">
-        <%= render 'recent_meetings', meetings: @meetings %>
-      </div>
-      <div class="col m6">
-        <%= render 'upcoming_meetings', meetings: @meetings %>
-      </div>
-    </div>
+<h4>Meetings</h4>
 
-    <%# All other meetings %>
-    <div class="table-collection-wrapper z-depth-1">
-      <table class="collection with-header">
-        <thead>
-          <tr class="collection-header">
-            <th>Title</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% neither_upcoming_nor_recent_meetings(@meetings).each do |meeting| %>
-            <tr class="collection-item">
-              <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-              <td class="localize"><%= meeting.start_date %></td>
-              <td class="localize"><%= meeting.end_date %></td>
-              <td class="text-right">
-                <%= link_to "Delete", meeting_path(meeting),
-                  class: "btn-flat red-text",
-                  method: :delete,
-                  data: { confirm: "Are you sure you want to delete this meeting?" } %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
-      <div style="text-align: right;">
-        <%= paginate @meetings %>
+<div class="row">
+  <div class="col m9">
+    <% unless @meetings.present? %>
+      <div class="vertical-center text-muted">
+        <i class="large material-icons">inbox</i>
+        <h5>There's Nothing Here</h5>
+        <p>
+          Why don't you go ahead and add a meeting by clicking the button
+          to the bottom-right?
+        </p>
       </div>
-    </div>
+    <% else %>
+      <%# Recent and upcoming meetings %>
+      <div class="row">
+        <div class="col m6">
+          <%= render 'recent_meetings', meetings: @meetings %>
+        </div>
+        <div class="col m6">
+          <%= render 'upcoming_meetings', meetings: @meetings %>
+        </div>
+      </div>
+
+      <%# All other meetings %>
+      <%= render 'meetings',
+        meetings: neither_upcoming_nor_recent_meetings(@meetings) %>
+    <% end %>
   </div>
-<% end %>
+  <div class="col m3">
+    <ul class="collection with-header">
+      <li class="collection-header">
+        <strong>Calendar Events</strong>
+      </li>
+      <div id="calendar-events">
+        <div class="text-center" style="margin: 15px;">
+          <%= render 'shared/loader' %>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>
 
 <%= render 'meetings/new_modal', meeting: @meeting %>
+
+<script>
+  $(document).ready(function() {
+    $.get('/calendar_events')
+      .success(function(data) {
+        $('#calendar-events').html(data);
+      });
+  });
+</script>

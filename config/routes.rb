@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :calendar_events, only: %w(index)
+
   scope '/attendees' do
     get 'autocomplete',
       to: 'attendees#autocomplete',

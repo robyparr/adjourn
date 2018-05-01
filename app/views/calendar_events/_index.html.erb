@@ -1,0 +1,14 @@
+<% events.each do |event| %>
+  <li class="collection-item">
+    <%= link_to add_event_url(event),
+      class: "btn-floating btn-small",
+      remote: false,
+      method: :post do %>
+      <i class="material-icons">add</i>
+    <% end %>
+    <%= event[:summary] %>
+    <span class="secondary-content">
+      in <%= time_ago_in_words(event[:start]) %>
+    </span>
+  </li>
+<% end %>
