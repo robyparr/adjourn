@@ -12,14 +12,7 @@ export default function agenda(state = initialState, action) {
     switch(action.type) {
         case SET_AGENDA:
             // Sort agendums oldest -> newest
-            return action.agenda.sort((a, b) => {
-                const dateA = new Date(a.created_at)
-                const dateB = new Date(b.created_at)
-
-                if (dateA > dateB) return 1;
-                else if (dateA < dateB) return -1;
-                else return 0;
-            });
+            return action.agenda;
 
         case RECEIVE_NEW_AGENDUM:
             return [ ...state, action.agendum ];

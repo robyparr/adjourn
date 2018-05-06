@@ -3,6 +3,7 @@ class Meeting < ApplicationRecord
   belongs_to :user
 
   has_many :agenda,
+    -> { order('created_at asc') },
     foreign_key: 'meeting_id',
     class_name: 'Agendum',
     dependent: :destroy
