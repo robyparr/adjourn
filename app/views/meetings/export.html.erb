@@ -1,181 +1,181 @@
 <html>
-    <head>
-        <style>
-            <% # Base styling %>
-            .body {
-                background-color: #fafafa;
-                padding: 20px;
-            }
+  <head>
+    <style>
+      <% # Base styling %>
+      .body {
+        background-color: #fafafa;
+        padding: 20px;
+      }
 
-            table {
-                width: 100%;
-            }
+      table {
+        width: 100%;
+      }
 
-            td.content {
-                background-color: white;
-                padding: 20px;
-                border-radius: 5px;
-                width: 80%;
-            }
+      td.content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 80%;
+      }
 
-            .main-header {
-                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-                margin-top: 25px;
-            }
+      .main-header {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        margin-top: 25px;
+      }
 
-            .sub-header {
-                margin-bottom: 0;
-            }
+      .sub-header {
+        margin-bottom: 0;
+      }
 
-            <% # Light markdwon styling %>
-            .markdown-body p,
-            .markdown-body blockquote,
-            .markdown-body ul,
-            .markdown-body ol,
-            .markdown-body dl,
-            .markdown-body table,
-            .markdown-body pre {
-                margin-top: 0 !important;
-                margin-bottom: 16px !important;
-            }
+      <% # Light markdwon styling %>
+      .markdown-body p,
+      .markdown-body blockquote,
+      .markdown-body ul,
+      .markdown-body ol,
+      .markdown-body dl,
+      .markdown-body table,
+      .markdown-body pre {
+        margin-top: 0 !important;
+        margin-bottom: 16px !important;
+      }
 
-            .markdown-body table {
-                display: block;
-                width: 100%;
-                overflow: auto;
-                border-spacing: 0;
-                border-collapse: collapse;
-            }
+      .markdown-body table {
+        display: block;
+        width: 100%;
+        overflow: auto;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
 
-            .markdown-body table th {
-                font-weight: 600;
-                padding: 0;
-            }
+      .markdown-body table th {
+        font-weight: 600;
+        padding: 0;
+      }
 
-            .markdown-body table th,
-            .markdown-body table td {
-                padding: 6px 13px;
-                border: 1px solid #dfe2e5;
-                text-align: left;
-            }
+      .markdown-body table th,
+      .markdown-body table td {
+        padding: 6px 13px;
+        border: 1px solid #dfe2e5;
+        text-align: left;
+      }
 
-            .markdown-body table tr {
-                background-color: #fff;
-                border-top: 1px solid #c6cbd1;
-            }
+      .markdown-body table tr {
+        background-color: #fff;
+        border-top: 1px solid #c6cbd1;
+      }
 
-            .markdown-body table tr:nth-child(2n) {
-                background-color: #f6f8fa;
-            }
+      .markdown-body table tr:nth-child(2n) {
+        background-color: #f6f8fa;
+      }
 
-            .markdown-body code {
-                padding: 0;
-                padding-top: 0.2em;
-                padding-bottom: 0.2em;
-                margin: 0;
-                font-size: 85%;
-                background-color: rgba(27,31,35,0.05);
-                border-radius: 3px;
-            }
+      .markdown-body code {
+        padding: 0;
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+        margin: 0;
+        font-size: 85%;
+        background-color: rgba(27,31,35,0.05);
+        border-radius: 3px;
+      }
 
-            .markdown-body code::before,
-            .markdown-body code::after {
-                letter-spacing: -0.2em;
-                content: "\00a0";
-            }
+      .markdown-body code::before,
+      .markdown-body code::after {
+        letter-spacing: -0.2em;
+        content: "\00a0";
+      }
 
-            .markdown-body blockquote {
-               padding: 0 1em;
-                color: #6a737d;
-                border-left: 0.25em solid #dfe2e5;
-            }
+      .markdown-body blockquote {
+        padding: 0 1em;
+        color: #6a737d;
+        border-left: 0.25em solid #dfe2e5;
+      }
 
-            .markdown-body blockquote>:first-child {
-                margin-top: 0;
-            }
+      .markdown-body blockquote>:first-child {
+        margin-top: 0;
+      }
 
-            .markdown-body blockquote>:last-child {
-                margin-bottom: 0;
-            }
+      .markdown-body blockquote>:last-child {
+        margin-bottom: 0;
+      }
 
-            .markdown-body h1 {
-                font-size: 1.5em;
-            }
+      .markdown-body h1 {
+        font-size: 1.5em;
+      }
 
-            .markdown-body h2 {
-                font-size: 1.17em;
-            }
+      .markdown-body h2 {
+        font-size: 1.17em;
+      }
 
-            .markdown-body h3 {
-                font-size: 1.07em;
-            }
+      .markdown-body h3 {
+        font-size: 1.07em;
+      }
 
-            .markdown-body h4 {
-                font-size: 1.00em;
-            }
+      .markdown-body h4 {
+        font-size: 1.00em;
+      }
 
-            .markdown-body h5 {
-                font-size: 0.83em;
-            }
-        </style>
-    </head>
-    <body>
-        <table class="body">
-            <tr>
-                <td>&nbsp;</td>
-                <td class="content">
-                    <h1 style="margin-top: 0;"><%= meeting.title %></h1>
-                    <strong>Start:</strong> <%= meeting.start_date %><br />
-                    <strong>End:</strong> <%= meeting.end_date %>
+      .markdown-body h5 {
+        font-size: 0.83em;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="content">
+          <h1 style="margin-top: 0;"><%= meeting.title %></h1>
+          <strong>Start:</strong> <%= meeting.start_date %><br />
+          <strong>End:</strong> <%= meeting.end_date %>
 
-                    <h2 class="main-header">Attendees</h2>
+          <h2 class="main-header">Attendees</h2>
+          <ul>
+            <% meeting.attendees.each do |attendee| %>
+              <li><%= attendee.email %></li>
+            <% end %>
+          </ul>
+
+          <h2 class="main-header">Action Items</h2>
+          <% unless meeting.action_items.any? %>
+            <p>There are no action items for this meeting.</p>
+          <% else %>
+            <ul>
+              <% meeting.action_items.each do |item| %>
+                <li>
+                  <h3 class="sub-header"><%= item.title %></h3>
+                  <div class="markdown-body">
+                    <%= markdown_text item.description %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+
+          <h2 class="main-header">Agenda</h2>
+          <% unless meeting.agenda.any? %>
+            <p>There is no agenda for this meeting.</p>
+          <% else %>
+            <ul>
+              <% meeting.agenda.each do |agendum| %>
+                <li>
+                    <h3 class="sub-header"><%= agendum.title %></h3>
+                    <div class="markdown-body">
+                      <%= markdown_text agendum.description %>
+                    </div>
                     <ul>
-                        <% meeting.attendees.each do |attendee| %>
-                            <li><%= attendee.email %></li>
-                        <% end %>
+                      <% agendum.notes.each do |note| %>
+                        <li class="markdown-body">
+                          <%= markdown_text note.content %>
+                        </li>
+                      <% end %>
                     </ul>
-
-                    <h2 class="main-header">Action Items</h2>
-                    <% unless meeting.action_items.any? %>
-                        <p>There are no action items for this meeting.</p>
-                    <% else %>
-                        <ul>
-                            <% meeting.action_items.each do |item| %>
-                                <li>
-                                    <h3 class="sub-header"><%= item.title %></h3>
-                                    <div class="markdown-body">
-                                        <%= markdown_text item.description %>
-                                    </div>
-                                </li>
-                            <% end %>
-                        </ul>
-                    <% end %>
-
-                    <h2 class="main-header">Agenda</h2>
-                    <% unless meeting.agenda.any? %>
-                        <p>There is no agenda for this meeting.</p>
-                    <% else %>
-                        <ul>
-                            <% meeting.agenda.each do |agendum| %>
-                                <li>
-                                    <h3 class="sub-header"><%= agendum.title %></h3>
-                                    <div class="markdown-body">
-                                        <%= markdown_text agendum.description %>
-                                    </div>
-                                    <ul>
-                                        <% agendum.notes.each do |note| %>
-                                            <li class="markdown-body">
-                                                <%= markdown_text note.content %>
-                                            </li>
-                                        <% end %>
-                                    </ul>
-                                </li>
-                            <% end %>
-                        </ul>
-                    <% end %>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-        </table>
-    </body>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
 </html>
