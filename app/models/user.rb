@@ -1,3 +1,8 @@
+if Rails.env.development?
+  require_dependency 'google_service'
+  require_dependency 'google_service/calendar_event'
+end
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -14,28 +19,28 @@ class User < ApplicationRecord
 
 
   def load_calendar_events
-    @has_google_accounts = false
-    @has_synced_calendars = false
+    accounts = google_accounts.includes(:google_calendars)
+    calendars = accounts.map(&:google_calendars).flatten
 
-    events = fetch_google_calendar_events
+    events = fetch_google_calendar_events(calendars)
       .yield_self { |events| filter_out_added_calendar_events(events) }
       .yield_self { |events| events.sort_by { |it| it[:start] } }
 
-    { has_google_accounts: @has_google_accounts,
-      has_synced_calendars: @has_synced_calendars,
+    { has_google_accounts: accounts.present?,
+      has_synced_calendars: calendars.present?,
       events: events }
   end
 
   private
 
-  def fetch_google_calendar_events
-    google_accounts.includes(:google_calendars).map do |account|
-      @has_google_accounts = true
-      account.google_calendars.map do |calendar|
-        @has_synced_calendars = true
-        GoogleService::CalendarEvent.new(account, calendar.google_id).all
+  def fetch_google_calendar_events(calendars)
+    event_threads = calendars.map do |calendar|
+      Thread.new do
+        GoogleService::CalendarEvent.new(
+          calendar.google_account, calendar.google_id).all
       end
-    end.flatten
+    end
+    event_threads.map(&:value).flatten
   end
 
   def filter_out_added_calendar_events(events)
