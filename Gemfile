@@ -7,7 +7,7 @@ end
 
 ruby '~> 2.5.0'
 
-gem 'rails',              '~> 5.1.1'
+gem 'rails',              '~> 5.2.0'
 gem 'puma',               '~> 3.7'
 gem 'sass-rails',         '~> 5.0'
 gem 'uglifier',           '>= 1.3.0'
@@ -26,6 +26,7 @@ gem 'aws-sdk-s3',         '~> 1.8'
 gem 'signet',             '~> 0.8.1'
 gem 'httparty',           '~> 0.16.2'
 gem 'active_link_to',     '~> 1.0', '>= 1.0.5'
+gem 'bootsnap',           '~> 1.3'
 
 group :production do
   gem 'scout_apm'
