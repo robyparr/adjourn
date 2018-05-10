@@ -1,31 +1,29 @@
-<div class="table-collection-wrapper z-depth-1">
-  <table class="collection with-header">
-    <thead>
-      <tr class="collection-header">
-        <th>Title</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th></th>
+<table class="z-depth-1">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% meetings.each do |meeting| %>
+      <tr class="collection-item">
+        <td><%= link_to meeting.title, meeting_path(meeting) %></td>
+        <td class="localize"><%= meeting.start_date %></td>
+        <td class="localize"><%= meeting.end_date %></td>
+        <td class="text-right">
+          <%= link_to "Delete", meeting_path(meeting),
+            class: "btn-flat red-text",
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete this meeting?" } %>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <% meetings.each do |meeting| %>
-        <tr class="collection-item">
-          <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-          <td class="localize"><%= meeting.start_date %></td>
-          <td class="localize"><%= meeting.end_date %></td>
-          <td class="text-right">
-            <%= link_to "Delete", meeting_path(meeting),
-              class: "btn-flat red-text",
-              method: :delete,
-              data: { confirm: "Are you sure you want to delete this meeting?" } %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+    <% end %>
+  </tbody>
+</table>
 
-  <div style="text-align: right;">
-    <%= paginate @meetings %>
-  </div>
+<div style="text-align: right;">
+  <%= paginate @meetings %>
 </div>
