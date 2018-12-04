@@ -69,7 +69,7 @@ export default class Meeting extends React.Component {
 
         <div className="row">
           {/* Action items, Attendees, & Agendum details */}
-          <div className="sidebar col m3 z-depth-3 card-panel">
+          <div className="meeting-sidebar col m3 z-depth-3 card-panel">
             <ul className="collapsible" data-collapsible="accordion">
               <li>
                 <div className="collapsible-header active">

@@ -1,6 +1,4 @@
 class GoogleAccountsController < ApplicationController
-  layout 'profile'
-
   def index
     @accounts = current_user.google_accounts
   end

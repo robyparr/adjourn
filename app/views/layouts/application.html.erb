@@ -2,8 +2,14 @@
 <html>
   <%= render 'layouts/head' %>
   <body>
-    <%= render 'layouts/navigation' %>
-    <%= yield %>
+    <div class="row">
+      <div class="col m2">
+        <%= render 'layouts/sidebar' %>
+      </div>
+      <div class="col m10">
+        <%= yield %>
+      </div>
+    </div>
     <%= render 'layouts/toasts' %>
   </body>
 </html>

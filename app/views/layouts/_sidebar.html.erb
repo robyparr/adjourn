@@ -1,0 +1,75 @@
+<div class="sidebar z-depth-2">
+  <%= link_to "Adjourn", root_url, class: "header" %>
+
+  <%= link_to profile_path, class: 'user-info' do %>
+    <img src="<%= gravatar_url(current_user.email) %>"
+      class="circle profile-picture" />
+    <%= current_user.email %>
+  <% end %>
+
+  <%# Search bar formatting help from https://stackoverflow.com/a/42127640 %>
+  <%= form_with(url: search_path, method: 'get', class: 'search') do |f| %>
+    <i class="material-icons prefix" style="z-index: 9;">search</i>
+    <%= f.search_field :q,
+      class: 'autocomplete',
+      autocomplete: 'off',
+      placeholder: 'Search' %>
+  <% end %>
+
+  <ul class="links">
+    <li><%= active_link_to "Meetings", meetings_url %></li>
+    <li><%= active_link_to "My Profile", profile_path %></li>
+    <li><%= active_link_to "Google Accounts", google_accounts_path %></li>
+  </ul>
+
+  <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "sign-out-link" %>
+</div>
+
+<!--
+<div class="navbar-fixed">
+  <nav class="nav<%= content_for?(:extended_nav) ? '-extended' : '' %> print-hide">
+    <div class="nav-wrapper row" style="margin-bottom: 0;">
+      <div class="col m4">
+        <%# Search bar formatting help from https://stackoverflow.com/a/42127640 %>
+        <%= form_with(url: search_path, method: 'get') do |f| %>
+          <div class="input-field">
+            <i class="material-icons prefix" style="z-index: 9;">search</i>
+            <%= f.search_field :q,
+              class: 'autocomplete',
+              autocomplete: 'off',
+              placeholder: 'Search' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col m4">
+        <%= link_to "Adjourn", root_url, class: 'brand-logo center' %>
+      </div>
+      <div class="col m4">
+        <ul class="right">
+          <% if user_signed_in? %>
+            <li>
+              <a href="<%= profile_path %>">
+                <img src="<%= gravatar_url(current_user.email) %>"
+                  class="circle profile-picture" />
+                <span class="right"><%= current_user.email %></span>
+              </a>
+            </li>
+            <li>
+              <%= link_to "Sign Out", destroy_user_session_path,
+                method: :delete %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "Sign In", new_user_session_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% if content_for? :extended_nav %>
+      <div class="nav-content">
+        <%= yield :extended_nav %>
+      </div>
+    <% end %>
+  </nav>
+</div>-->
