@@ -27,9 +27,9 @@
 
 <% events.each do |event| %>
   <span class="calendar-event-item">
-    <li class="collection-item">
-      <%= event[:summary] %>
-      <span class="secondary-content">
+    <li class="collection-item" title="<%= event[:summary] %>">
+      <div class="event-text"><%= event[:summary] %></div>
+      <span class="event-time">
         in <%= time_ago_in_words(event[:start]) %>
       </span>
     </li>

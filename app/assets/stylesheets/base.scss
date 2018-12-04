@@ -48,25 +48,15 @@ body {
     min-height: 60px !important;
 }
 
-nav {
-    a {
-        height: 64px;
-        img.circle.profile-picture {
-            height: 64px;
-            padding: 10px;
-        }
-    }
-}
-
 h5 {
-    /* For sub-text within an h5 */
-    .sub {
-        display: block;
-        font-size: 50%;
-        color: rgba(0, 0, 0, 0.54);
-    }
+  /* For sub-text within an h5 */
+  .sub {
+    display: block;
+    font-size: 50%;
+    color: rgba(0, 0, 0, 0.54);
+  }
 
-    &.sub-header {
-        border-bottom: 0.25px solid $muted-color;
-    }
+  &.sub-header {
+    color: $muted-color;
+  }
 }

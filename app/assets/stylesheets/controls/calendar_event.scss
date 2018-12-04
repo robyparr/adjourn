@@ -1,17 +1,28 @@
 .calendar-event-item {
-    a {
-        float: right;
-        margin-top: -40px;
-        margin-right: 5px;
-    }
+  a {
+    float: right;
+    margin-top: -40px;
+    margin-right: 5px;
+  }
 
-    li.collection-item {
-        position: relative !important;
-        transition: 0.5s;
-        left: 0;
+  li.collection-item {
+    position: relative !important;
+    transition: 0.5s;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .event-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 50%;
     }
-    &:hover li.collection-item, .calendar-event-item a:hover li.collection-item {
-        transition: 0.5s;
-        left: -100px;
-    }
+  }
+
+  &:hover li.collection-item, .calendar-event-item a:hover li.collection-item {
+    transition: 0.5s;
+    left: -100px;
+  }
 }

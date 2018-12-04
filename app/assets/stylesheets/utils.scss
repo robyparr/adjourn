@@ -53,12 +53,17 @@
 }
 
 .padding-sides-default {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: $default-spacing;
+    padding-right: $default-spacing;
 }
 
 .padding-bottom-default {
-    padding-bottom: 15px;
+    padding-bottom: $default-spacing;
+}
+
+.padding-vertical-default {
+  padding-top: $default-spacing;
+  padding-bottom: $default-spacing;
 }
 
 .font-size-20 {
