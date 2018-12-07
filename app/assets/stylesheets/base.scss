@@ -7,6 +7,15 @@ body {
     background-color: #fafafa;
 }
 
+.content {
+    margin-left: 16%;
+    transition: 0.5s;
+
+    &.with-collapsed-sidebar {
+        margin-left: 75px;
+    }
+}
+
 .fab-fixed {
     position: fixed !important;
     right: 50px;

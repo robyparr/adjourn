@@ -4,7 +4,7 @@
   <%= link_to profile_path, class: 'user-info' do %>
     <img src="<%= gravatar_url(current_user.email) %>"
       class="circle profile-picture" />
-    <%= current_user.email %>
+    <div class="email"><%= current_user.email %></div>
   <% end %>
 
   <%# Search bar formatting help from https://stackoverflow.com/a/42127640 %>
@@ -22,7 +22,17 @@
     <li><%= active_link_to "Google Accounts", google_accounts_path %></li>
   </ul>
 
-  <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "sign-out-link" %>
+  <ul class="links bottom">
+    <li>
+      <a class="collapse-button">
+        <i class="small material-icons collapse">chevron_left</i>
+        <i class="small material-icons expand">chevron_right</i>
+      </a>
+    </li>
+    <li>
+      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "sign-out-link" %>
+    </li>
+  </ul>
 </div>
 
 <!--

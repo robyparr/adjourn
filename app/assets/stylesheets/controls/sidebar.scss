@@ -5,9 +5,25 @@
   top: 0;
   bottom: 0;
   left: 0;
-  width: inherit;
+  width: 16%;
+  transition: 0.5s;
+  z-index: 2;
 
   background-color: $primary-color;
+
+  &.collapsed {
+    width: 75px;
+
+    .search { display: none; }
+    .user-info {
+      .profile-picture { margin-right: 0; }
+      .email { display: none; }
+    }
+    .collapse-button {
+      .collapse { display: none; }
+      .expand { display: initial; }
+    }
+  }
 
   * { color: white; }
 
@@ -68,15 +84,21 @@
     }
   }
 
-  .sign-out-link {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: inherit;
-    text-align: center;
+  .collapse-button {
+    cursor: pointer;
+    
+    .collapse { display: initial; }
+    .expand { display: none; }
   }
 
   ul.links {
+    &.bottom {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: inherit;
+      text-align: center;
+    }
     li {
       a { width: 100%; padding: 10px; }
     }

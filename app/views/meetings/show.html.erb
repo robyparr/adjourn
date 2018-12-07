@@ -1,2 +1,8 @@
 <% content_for(:title, @meeting.title) %>
 <%= render 'shared/meeting_react_component', meeting: @meeting %>
+
+<script>
+  $(document).ready(function() {
+    Sidebar.collapse();
+  })
+</script>

@@ -2,13 +2,9 @@
 <html>
   <%= render 'layouts/head' %>
   <body>
-    <div class="row">
-      <div class="col m2">
-        <%= render 'layouts/sidebar' %>
-      </div>
-      <div class="col m10">
-        <%= yield %>
-      </div>
+    <%= render 'layouts/sidebar' %>
+    <div class="content">
+      <%= yield %>
     </div>
     <%= render 'layouts/toasts' %>
   </body>
