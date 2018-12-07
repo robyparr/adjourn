@@ -1,5 +1,8 @@
 <div class="sidebar z-depth-2">
-  <%= link_to "Adjourn", root_url, class: "header" %>
+  <%= link_to root_url, class: "header" do %>
+    <div class="icon">ICON</div>
+    <div class="text">Adjourn</div>
+  <% end %>
 
   <%= link_to profile_path, class: 'user-info' do %>
     <img src="<%= gravatar_url(current_user.email) %>"
@@ -17,9 +20,24 @@
   <% end %>
 
   <ul class="links">
-    <li><%= active_link_to "Meetings", meetings_url %></li>
-    <li><%= active_link_to "My Profile", profile_path %></li>
-    <li><%= active_link_to "Google Accounts", google_accounts_path %></li>
+    <li>
+      <%= active_link_to meetings_url, active: [['meetings'], []] do %>
+        <i class="small material-icons icon">assignment</i>
+        <span class="text">Meetings</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link_to profile_path do %>
+        <i class="small material-icons icon">account_box</i>
+        <span class="text">My Profile</span>
+      <% end %>
+    </li>
+    <li>
+      <%= active_link_to google_accounts_path do %>
+        <i class="small material-icons icon">sync</i>
+        <span class="text">Google Accounts</span>
+      <% end %>
+    </li>
   </ul>
 
   <ul class="links bottom">
