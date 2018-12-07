@@ -1,0 +1,32 @@
+@import "_variables";
+
+.meeting-main-content {
+  width: calc(100% - 400px);
+  padding: 0 $default-spacing;
+}
+
+.meeting-sidebar {
+  position: fixed !important;
+  top: 0px !important;
+  right: 0 !important;
+  bottom: 0;
+  overflow-y: auto;
+  width: 400px;
+
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+
+  background-color: rgb(245, 245, 245) !important;
+
+  .collapsible {
+    margin-top: 0 !important;
+    border-top: 0;
+  }
+
+  .collapsible-body {
+    padding: 0 !important;
+  }
+}
