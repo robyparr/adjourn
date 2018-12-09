@@ -1,0 +1,10 @@
+<h5>Delete Account</h5>
+<p>
+  Warning! Deleting your account will delete all your data and this
+  action is irreversible!
+</p>
+
+<%= link_to "Delete Account", registration_path(current_user),
+  class: "modal-action waves-effect waves-light btn btn-block red",
+  method: :delete,
+  data: { confirm: "Are you sure you want to delete your account?" } %>

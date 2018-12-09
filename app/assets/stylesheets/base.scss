@@ -69,3 +69,16 @@ h5 {
     color: $muted-color;
   }
 }
+
+#error_explanation {
+    border: 2px solid $error-dark;
+    background-color: $error-light;
+    padding: 0 24px;
+
+    h2 { font-size: 1.5rem; }
+    ul {
+        padding-left: 40px;
+
+        li { list-style-type: disc; }
+    }
+}
