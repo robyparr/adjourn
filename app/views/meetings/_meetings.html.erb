@@ -8,6 +8,13 @@
     </tr>
   </thead>
   <tbody>
+    <% unless meetings.present? %>
+      <tr>
+        <td colspan="4">
+          <%= no_meeting_text %>
+        </td>
+      </tr>
+    <% end %>
     <% meetings.each do |meeting| %>
       <tr>
         <td><%= link_to meeting.title, meeting_path(meeting) %></td>

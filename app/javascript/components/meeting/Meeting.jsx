@@ -35,9 +35,9 @@ export default class Meeting extends React.Component {
 
           {/* Date & times */}
           <div className="row margin-bottom-none">
-            <div className="col m6">
+            <div className="col m6 padding-left-none">
               <div className="row margin-bottom-none">
-                <div className="col m1 bold">Start</div>
+                <div className="col m1 bold padding-left-none">Start</div>
                 <div className="col m3">
                   <DateTimePicker
                     name="start_date"
@@ -47,7 +47,7 @@ export default class Meeting extends React.Component {
               </div>
 
               <div className="row margin-bottom-none">
-                <div className="col m1 bold">End</div>
+                <div className="col m1 bold padding-left-none">End</div>
                 <div className="col m3">
                   <DateTimePicker
                     name="end_date"

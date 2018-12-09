@@ -49,13 +49,13 @@ const Agenda = (props) => {
 
     return(
         <div className="row">
-            <div className="col m4 print-full-width">
+            <div className="col m4 padding-left-none">
                 { columns[0] }
             </div>
-            <div className="col m4 print-full-width">
+            <div className="col m4">
                 { columns[1] }
             </div>
-            <div className="col m4 print-full-width">
+            <div className="col m4">
                 { columns[2] }
             </div>
         </div>

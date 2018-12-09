@@ -19,7 +19,7 @@
 
       <div class="padding-vertical-default">
         <%= render 'meetings', meetings: meetings_list(@meetings, params[:page]),
-          show_pagination: true %>
+          show_pagination: true, no_meeting_text: "There's nothing here." %>
       </div>
     <% end %>
   </div>
