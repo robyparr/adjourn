@@ -1,0 +1,50 @@
+<div class="container">
+  <h4>Uploads</h4>
+
+  <div class="row">
+    <div class="col m4">
+      <div class="card-panel text-center">
+        <h5><%= number_to_human_size @storage_used %></h5>
+        <h6>Storage Used</h6>
+      </div>
+    </div>
+  </div>
+
+  <table class="z-depth-1">
+    <thead>
+      <tr>
+        <th>Filename</th>
+        <th>Meeting / Agendum</th>
+        <th>File Size</th>
+        <th>Uploaded</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% unless @uploads.present? %>
+        <tr>
+          <td colspan="5">You haven't uploaded any files yet.</td>
+        </tr>
+      <% end %>
+      <% @uploads.each do |upload| %>
+        <tr class="collection-item">
+          <td><%= upload.filename %></td>
+          <td><%= upload.agendum.meeting.title %> / <%= upload.agendum.title %></td>
+          <td><%= number_to_human_size upload.file_size %></td>
+          <td class="localize"><%= upload.created_at %></td>
+          <td class="text-right">
+            <%= link_to "View", download_upload_url(upload) %>
+
+            <%= link_to "Delete", upload_url(upload),
+              class: "btn-flat red-text",
+              data: { confirm: "Are you sure you want to delete this upload?" },
+              method: :delete %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div style="text-align: right;">
+    <%= paginate @uploads %>
+  </div>
+</div>

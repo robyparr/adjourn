@@ -1,13 +1,27 @@
 class UploadsController < ApplicationController
-  before_action :set_agendum, except: [:download]
+  before_action :set_agendum, only: %i(upload presigned_url)
+
+  def index
+    @uploads = current_user.uploads.includes(agendum: :meeting).page(params[:page])
+    @storage_used = current_user.uploads.sum(:file_size)
+  end
 
   def upload
-    upload = @agendum.uploads.build(upload_params)
+    upload = @agendum.uploads.build(upload_params.merge(user: @agendum.user))
+
     if upload.save
       render json: upload
     else
       render json: upload.errors.full_messages, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    upload = current_user.uploads.find(params[:id])
+    upload.destroy
+
+    flash[:notice] = "Upload successfully deleted."
+    redirect_to uploads_url
   end
 
   def presigned_url

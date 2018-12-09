@@ -7,7 +7,12 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'profile#show'
   get '/search', to: 'meetings#search', as: 'search'
-  get '/uploads/:id/download', to: 'uploads#download', as: 'download_upload'
+
+  resources :uploads, only: %i(index destroy) do
+    member do
+      get '/download', to: 'uploads#download'
+    end
+  end
 
   resources :google_accounts, only: %w(index new destroy) do
     collection do

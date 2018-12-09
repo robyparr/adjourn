@@ -1,5 +1,7 @@
 class Upload < ApplicationRecord
   belongs_to :agendum
+  belongs_to :user
+
   before_destroy :delete_file
 
   scope :uploads_size_total, ->(user) { user.uploads.sum(:file_size) }
