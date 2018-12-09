@@ -75,6 +75,6 @@ $(document).ready(function() {
     var agendumDetails = $('#agendum-details');
 
     if (!agendumDetails.hasClass('active')) {
-      $('.sidebar .collapsible').collapsible('open', 2);
+      $('.meeting-sidebar .collapsible').collapsible('open', 2);
     }
   }
