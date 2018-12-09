@@ -2,59 +2,59 @@
 
 /*
  * Base stylesheet
- */
+*/
 body {
-    background-color: #fafafa;
+  background-color: #fafafa;
 }
 
 .content {
-    margin-left: 16%;
-    transition: 0.5s;
+  margin-left: 16%;
+  transition: 0.5s;
 
-    &.with-collapsed-sidebar {
-        margin-left: 75px;
-    }
+  &.with-collapsed-sidebar {
+    margin-left: 75px;
+  }
 }
 
 .fab-fixed {
-    position: fixed !important;
-    right: 50px;
-    bottom: 50px;
+  position: fixed !important;
+  right: 50px;
+  bottom: 50px;
 }
 
 /* Pull .card-panel up onto the Navigation bar */
 .card-panel.overlap {
-    margin-top: -18px;
+  margin-top: -18px;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 /* Card delete links */
 .card, .collection-item {
-    .delete-link {
-        visibility: hidden;
-        color: inherit;
-        cursor: pointer;
-    }
+  .delete-link {
+    visibility: hidden;
+    color: inherit;
+    cursor: pointer;
+  }
 
-    &:hover {
-        .delete-link {
-            visibility: visible;
-        }
+  &:hover {
+    .delete-link {
+      visibility: visible;
     }
+  }
 }
 
 .collection-item {
-    .title {
-        font-size: 24px;
-        font-weight: 300;
-    }
+  .title {
+    font-size: 24px;
+    font-weight: 300;
+  }
 }
 
 .collection-item.avatar {
-    min-height: 60px !important;
+  min-height: 60px !important;
 }
 
 h5 {
@@ -71,14 +71,14 @@ h5 {
 }
 
 #error_explanation {
-    border: 2px solid $error-dark;
-    background-color: $error-light;
-    padding: 0 24px;
+  border: 2px solid $error-dark;
+  background-color: $error-light;
+  padding: 0 24px;
 
-    h2 { font-size: 1.5rem; }
-    ul {
-        padding-left: 40px;
+  h2 { font-size: 1.5rem; }
+  ul {
+    padding-left: 40px;
 
-        li { list-style-type: disc; }
-    }
+    li { list-style-type: disc; }
+  }
 }

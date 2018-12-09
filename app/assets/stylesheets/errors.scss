@@ -1,15 +1,15 @@
 @import "_variables.scss";
 
 .errors {
+  color: $error-dark;
+
+  h5 {
     color: $error-dark;
-    
-    h5 {
-        color: $error-dark;
-        background-color: $error-light;
-        padding: 10px;
-    }
+    background-color: $error-light;
+    padding: 10px;
+  }
 }
 
 input.invalid {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }

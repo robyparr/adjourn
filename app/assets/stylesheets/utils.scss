@@ -2,68 +2,68 @@
 
 /*
  * Utility styles.
- */
+*/
 .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
 .text-muted {
-    color: $muted-color;
+  color: $muted-color;
 }
 
 .vertical-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .time-picker {
-    width: 80px;
+  width: 80px;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .margin-top-default {
-    margin-top: $default-spacing;
+  margin-top: $default-spacing;
 }
 
 .margin-top-none {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .margin-bottom-none {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .padding-left-none {
-    padding-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 .padding-right-none {
-    padding-right: 0 !important;
+  padding-right: 0 !important;
 }
 
 .padding-sides-none {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 
 .padding-sides-default {
-    padding-left: $default-spacing;
-    padding-right: $default-spacing;
+  padding-left: $default-spacing;
+  padding-right: $default-spacing;
 }
 
 .padding-bottom-default {
-    padding-bottom: $default-spacing;
+  padding-bottom: $default-spacing;
 }
 
 .padding-vertical-default {
@@ -72,9 +72,9 @@
 }
 
 .font-size-20 {
-    font-size: 20px !important;
+  font-size: 20px !important;
 }
 
 .print-only {
-    display: none;
+  display: none;
 }
