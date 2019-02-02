@@ -50,6 +50,7 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "tailwindcss": "^0.7.4",
     "webpack-dev-server": "^2.9.3"
   }
 }
