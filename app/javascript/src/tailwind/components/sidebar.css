@@ -1,0 +1,109 @@
+.sidebar-overlay { @apply hidden w-full fixed pin-x pin-y bg-black opacity-25 z-10; }
+
+.sidebar {
+  @apply fixed pin-x pin-y z-10 bg-primary shadow-lg ml-0 pt-4;
+  width: 16%;
+  transition: 0.5s;
+
+  * { @apply text-white; }
+
+  a {
+    @apply block p-3;
+    &:hover, &.active { @apply bg-primary-dark; }
+  }
+
+  .header {
+    @apply block text-4xl text-center;
+    padding: inherit;
+
+    &:hover { background-color: inherit; }
+    .icon { @apply hidden; }
+  }
+
+  .user-info {
+    @apply flex items-center justify-center;
+    .profile-picture { height: 32px; @apply mr-3; }
+  }
+
+  .search {
+    @apply relative p-3;
+
+    i.prefix {
+      @apply absolute text-black ml-1;
+      line-height: 45px;
+    }
+
+    input[type=search] {
+      @apply bg-white border-b-0 rounded;
+      padding: 0 10px 0 33px;
+      width: calc(100% - 43px);
+
+      &:focus { @apply border-b-0; }
+    }
+
+    .easy-autocomplete { max-width: 100%; }
+  }
+
+  .collapse-button {
+    @apply cursor-pointer;
+    
+    .collapse { display: initial; }
+    .expand { @apply hidden; }
+  }
+
+  ul.links {
+    @apply mt-10;
+
+    &.bottom {
+      @apply fixed pin-l pin-b;
+      width: inherit;
+
+      a { @apply justify-center text-center; }
+    }
+
+    a {
+      @apply flex w-full p-3;
+      line-height: 30px;
+
+      .text { @apply ml-1; }
+    }
+  }
+
+  &.collapsed {
+    width: 75px;
+
+    .header {
+      .icon {
+        display: initial;
+        img { width: 40px; padding-top: 5px; }
+      }
+
+      .text { @apply hidden; }
+    }
+
+    .search { @apply hidden; }
+
+    .user-info {
+      .profile-picture { @apply mr-0; }
+      .email { @apply hidden; }
+    }
+
+    .collapse-button {
+      .collapse { @apply hidden; }
+      .expand { display: initial; }
+    }
+
+    ul.links {
+      a {
+        justify-content: center;
+        .text { @apply hidden; }
+      }
+    }
+  }
+
+  &.sidebar-hidden * { display: none; }
+}
+
+@media (max-width: 576px) {
+  .sidebar { width: 75%; margin-left: -80%; }
+}

@@ -1,7 +1,11 @@
-<h4 class="margin-bottom-none" style="padding: 0 0.75rem;">Meetings</h4>
+<div class="row mb-0">
+  <div class="column sm12">
+    <h3>Meetings</h3>
+  </div>
+</div>
 
 <div class="row">
-  <div class="col m9">
+  <div class="column sm12 m9">
     <% unless @meetings.present? %>
       <div class="vertical-center text-muted">
         <i class="large material-icons">inbox</i>
@@ -23,7 +27,7 @@
       </div>
     <% end %>
   </div>
-  <div class="col m3">
+  <div class="column sm12 m3">
     <%= render 'calendar_events' %>
   </div>
 </div>

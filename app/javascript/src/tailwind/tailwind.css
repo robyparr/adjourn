@@ -21,6 +21,10 @@
  @tailwind components;
 
  @import 'components/button';
+ @import 'components/heading';
+ @import 'components/table';
+ @import 'components/grid';
+ @import 'components/sidebar';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

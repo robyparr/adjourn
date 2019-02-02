@@ -10,11 +10,14 @@ body {
 .content {
   margin-left: 16%;
   transition: 0.5s;
-  padding: $default-spacing;
 
   &.with-collapsed-sidebar {
     margin-left: 75px;
   }
+}
+
+@media (max-width: 576px) {
+  .content { margin-left: 0; }
 }
 
 .fab-fixed {

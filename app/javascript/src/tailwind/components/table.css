@@ -1,0 +1,5 @@
+table { @apply bg-white shadow; }
+
+table tbody tr:last-child { @apply border-0; }
+table tr td, table tr th { @apply pl-4 }
+table tr td:last-child, table tr th:last-child { @apply pr-4 }

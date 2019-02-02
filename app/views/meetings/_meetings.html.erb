@@ -1,38 +1,40 @@
-<table class="z-depth-1">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Start Date</th>
-      <th>End Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% unless meetings.present? %>
+<div class="overflow-x-auto">
+  <table>
+    <thead>
       <tr>
-        <td colspan="4">
-          <%= no_meeting_text %>
-        </td>
+        <th>Title</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th></th>
       </tr>
-    <% end %>
-    <% meetings.each do |meeting| %>
-      <tr>
-        <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-        <td class="localize"><%= meeting.start_date %></td>
-        <td class="localize"><%= meeting.end_date %></td>
-        <td class="text-right">
-          <%= link_to "Delete", meeting_path(meeting),
-            class: "btn-flat red-text",
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete this meeting?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% unless meetings.present? %>
+        <tr>
+          <td colspan="4">
+            <%= no_meeting_text %>
+          </td>
+        </tr>
+      <% end %>
+      <% meetings.each do |meeting| %>
+        <tr>
+          <td><%= link_to meeting.title, meeting_path(meeting) %></td>
+          <td class="localize"><%= meeting.start_date %></td>
+          <td class="localize"><%= meeting.end_date %></td>
+          <td class="text-right">
+            <%= link_to "Delete", meeting_path(meeting),
+              class: "btn-flat red-text",
+              method: :delete,
+              data: { confirm: "Are you sure you want to delete this meeting?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<% if show_pagination %>
-  <div style="text-align: right;">
-    <%= paginate @meetings %>
-  </div>
-<% end %>
+  <% if show_pagination %>
+    <div style="text-align: right;">
+      <%= paginate @meetings %>
+    </div>
+  <% end %>
+</div>

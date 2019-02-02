@@ -2,8 +2,10 @@
 <html>
   <%= render 'layouts/head' %>
   <body>
+    <%= render 'layouts/header' %>
+
     <%= render 'layouts/sidebar' %>
-    <div class="content">
+    <div class="content mt-24 md:mt-0 p-4">
       <%= yield %>
     </div>
     <%= render 'layouts/toasts' %>
