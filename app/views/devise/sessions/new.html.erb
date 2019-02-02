@@ -1,8 +1,13 @@
 <div class="vertical-center">
-  <h4>Sign in</h4>
+  <h2 class="flex flex-row items-center mb-4">
+    <%= image_tag 'icon-blue.png', width: '54px' %>
+    <span class="ml-4">Adjourn</span>
+  </h2>
 
   <div class="card-panel">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <h4 class="text-center">Sign in</h4>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-4' }) do |f| %>
       <div class="input-field">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true %>
@@ -21,9 +26,10 @@
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in", class: 'btn', style: 'width: 100%;' %>
+        <%= f.submit "Log in", class: 'button block' %>
       </div>
     <% end %>
+
     <%= render "devise/shared/links" %>
   </div>
 </div>
