@@ -5,7 +5,7 @@
 </div>
 
 <div class="row">
-  <div class="column sm12 m9">
+  <div class="column sm12 md9">
     <% unless @meetings.present? %>
       <div class="vertical-center text-muted">
         <i class="large material-icons">inbox</i>
@@ -27,7 +27,7 @@
       </div>
     <% end %>
   </div>
-  <div class="column sm12 m3">
+  <div class="column sm12 md3">
     <%= render 'calendar_events' %>
   </div>
 </div>

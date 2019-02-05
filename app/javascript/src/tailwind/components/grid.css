@@ -17,18 +17,18 @@
 .column.sm12 { @apply w-full; }
 
 @screen md {
-  .column.m1 { @apply w-1/12; }
-  .column.m2 { @apply w-2/12; }
-  .column.m3 { @apply w-3/12; }
-  .column.m4 { @apply w-4/12; }
-  .column.m5 { @apply w-5/12; }
-  .column.m6 { @apply w-6/12; }
-  .column.m7 { @apply w-7/12; }
-  .column.m8 { @apply w-8/12; }
-  .column.m9 { @apply w-9/12; }
-  .column.m10 { @apply w-10/12; }
-  .column.m11 { @apply w-11/12; }
-  .column.m12 { @apply w-full; }
+  .column.md1 { @apply w-1/12; }
+  .column.md2 { @apply w-2/12; }
+  .column.md3 { @apply w-3/12; }
+  .column.md4 { @apply w-4/12; }
+  .column.md5 { @apply w-5/12; }
+  .column.md6 { @apply w-6/12; }
+  .column.md7 { @apply w-7/12; }
+  .column.md8 { @apply w-8/12; }
+  .column.md9 { @apply w-9/12; }
+  .column.md10 { @apply w-10/12; }
+  .column.md11 { @apply w-11/12; }
+  .column.md12 { @apply w-full; }
 }
 
 @screen lg {
