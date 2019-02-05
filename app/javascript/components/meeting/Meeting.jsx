@@ -2,9 +2,7 @@ import React from 'react';
 
 // Controls
 import AgendaContainer from '../../containers/AgendaContainer';
-import ActionItemsContainer from '../../containers/ActionItemsContainer';
-import AttendeesContainer from '../../containers/AttendeesContainer';
-import AgendumDetailsContainer from '../../containers/AgendumDetailsContainer';
+import MeetingSidebar from './MeetingSidebar';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/InlineEdit';
 
@@ -22,39 +20,43 @@ export default class Meeting extends React.Component {
     */
     const startDate = moment(this.props.meeting.start_date).utc().local();
     const endDate = moment(this.props.meeting.end_date).utc().local();
+
     return (
-      <div>
-        <div className="meeting-main-content">
+      <div className="row">
+        <div className="column md9 md:pr-6">
           {/* Title */}
-          <InlineEdit
-            name="title"
-            onChange={this.props.onFieldUpdate}
-            displayElement='h4'
-            value={this.props.meeting.title}
-            singleClickToEdit={!this.props.meeting.id} />
+          <div className="row">
+            <div className="column sm12">
+              <InlineEdit
+                name="title"
+                onChange={this.props.onFieldUpdate}
+                displayElement='h4'
+                value={this.props.meeting.title}
+                singleClickToEdit={!this.props.meeting.id} />
+            </div>
+          </div>
 
           {/* Date & times */}
-          <div className="row margin-bottom-none">
-            <div className="col m6 padding-left-none">
-              <div className="row margin-bottom-none">
-                <div className="col m1 bold padding-left-none">Start</div>
-                <div className="col m3">
-                  <DateTimePicker
-                    name="start_date"
-                    dateTime={startDate}
-                    onChange={this.props.onFieldUpdate} />
-                </div>
-              </div>
-
-              <div className="row margin-bottom-none">
-                <div className="col m1 bold padding-left-none">End</div>
-                <div className="col m3">
-                  <DateTimePicker
-                    name="end_date"
-                    dateTime={endDate}
-                    onChange={this.props.onFieldUpdate} />
-                </div>
-              </div>
+          <div className="row">
+            <div className="column sm12 md1 bold">
+              Start
+            </div>
+            <div className="column sm12 md11">
+              <DateTimePicker
+                name="start_date"
+                dateTime={startDate}
+                onChange={this.props.onFieldUpdate} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="column sm12 md1 bold">
+              End
+            </div>
+            <div className="column sm12 md11">
+              <DateTimePicker
+                name="end_date"
+                dateTime={endDate}
+                onChange={this.props.onFieldUpdate} />
             </div>
           </div>
 
@@ -63,40 +65,11 @@ export default class Meeting extends React.Component {
           <AgendaContainer />
         </div>
 
-        {/* Action items, Attendees, & Agendum details */}
-        <div className="meeting-sidebar col m3 z-depth-3 card-panel">
-          <ul className="collapsible" data-collapsible="accordion">
-            <li>
-              <div className="collapsible-header active">
-                  <h5>Attendees</h5>
-                  <hr className="print-only" />
-              </div>
-              <div id="attendees" className="collapsible-body">
-                <AttendeesContainer />
-              </div>
-            </li>
-            <li>
-              <div className="collapsible-header">
-                  <h5>Action Items</h5>
-                  <hr className="print-only" />
-              </div>
-              <div className="collapsible-body">
-                <ActionItemsContainer />
-              </div>
-            </li>
-            <li id="agendum-details">
-              <div className="collapsible-header">
-                <h5>Agendum Details</h5>
-              </div>
-              <div className="collapsible-body">
-                  <AgendumDetailsContainer />
-                </div>
-            </li>
-          </ul>
-        </div>
+        {/* Sidebar: Action items, Attendees, & Agendum details */}
+        <MeetingSidebar />
 
         {/* FAB */}
-        <div className="fixed-action-btn click-to-toggle">
+        <div className="fixed-action-btn click-to-toggle mb-10 md:mb-0 z-10">
           <a className="btn-floating btn-large red">
             <i className="material-icons">menu</i>
           </a>

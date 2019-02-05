@@ -4,7 +4,9 @@
 <script>
   $(document).ready(function() {
     setTimeout(function() {
-      Sidebar.collapse();
+      if (screen.width > 576) {
+        Sidebar.collapse();
+      }
     }, 100);
   })
 </script>

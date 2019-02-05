@@ -72,9 +72,11 @@ $(document).ready(function() {
   });
 
   function openAgendumDetailsView() {
-    var agendumDetails = $('#agendum-details');
+    var agendumDetails = $('#agendum-details-tab');
 
     if (!agendumDetails.hasClass('active')) {
-      $('.meeting-sidebar .collapsible').collapsible('open', 2);
+      if (screen.width > 576) {
+        agendumDetails.click();
+      }
     }
   }

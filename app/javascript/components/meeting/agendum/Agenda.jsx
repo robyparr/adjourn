@@ -8,7 +8,7 @@ import AgendumContainer from '../../../containers/AgendumContainer';
  */
 const Agenda = (props) => {
 
-    /* 
+    /*
         Agendums will be placed into each array,
         each of which will be rendered into a separate
         HTML column. This helps to solve the spacing
@@ -49,13 +49,13 @@ const Agenda = (props) => {
 
     return(
         <div className="row">
-            <div className="col m4 padding-left-none">
+            <div className="column sm12 md4">
                 { columns[0] }
             </div>
-            <div className="col m4">
+            <div className="column sm12 md4">
                 { columns[1] }
             </div>
-            <div className="col m4">
+            <div className="column sm12 md4">
                 { columns[2] }
             </div>
         </div>
