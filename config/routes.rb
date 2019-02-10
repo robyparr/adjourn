@@ -59,4 +59,6 @@ Rails.application.routes.draw do
         only: [:create, :update, :destroy]
     end
   end
+
+  get '/components', to: 'application#components' if Rails.env.development?
 end
