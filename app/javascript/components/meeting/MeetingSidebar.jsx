@@ -71,7 +71,7 @@ export default class MeetingSidebar extends React.Component {
           </div>
         }
 
-        <div className={this.withActiveClass(this.state.active, "column md3 meeting-sidebar")}>
+        <div className={this.withActiveClass(this.state.active, "column lg3 meeting-sidebar")}>
           <div className="row tabs">
             <div id="attendees-tab"
                 className={this.withSelectedTabClass('attendees', "tab column sm4")}

@@ -23,7 +23,7 @@ export default class Meeting extends React.Component {
 
     return (
       <div className="row">
-        <div className="column md9 md:pr-6">
+        <div className="column lg9 lg:pr-6">
           {/* Title */}
           <div className="row">
             <div className="column sm12">
@@ -69,7 +69,7 @@ export default class Meeting extends React.Component {
         <MeetingSidebar />
 
         {/* FAB */}
-        <div className="fixed-action-btn click-to-toggle mb-10 md:mb-0 z-10">
+        <div className="fixed-action-btn click-to-toggle mb-10 lg:mb-0 z-10">
           <a className="btn-floating btn-large red">
             <i className="material-icons">menu</i>
           </a>

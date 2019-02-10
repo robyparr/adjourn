@@ -1,9 +1,19 @@
 .sidebar-overlay { @apply hidden w-full fixed pin-x pin-y bg-black opacity-25 z-10; }
 
 .sidebar {
-  @apply fixed pin-x pin-y z-10 bg-primary shadow-lg ml-0 pt-4;
-  width: 16%;
+  @apply fixed pin-x pin-y z-30 bg-primary shadow-lg ml-0 pt-4;
   transition: 0.5s;
+  width: 75%;
+  margin-left: -80%;
+
+  @screen md {
+    width: 40%;
+  }
+
+  @screen lg {
+    width: 16%;
+    margin-left: 0;
+  }
 
   * { @apply text-white; }
 
@@ -102,8 +112,4 @@
   }
 
   &.sidebar-hidden * { display: none; }
-}
-
-@media (max-width: 576px) {
-  .sidebar { width: 75%; margin-left: -80%; }
 }

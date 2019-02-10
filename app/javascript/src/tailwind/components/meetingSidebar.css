@@ -1,5 +1,7 @@
 .meeting-sidebar-overlay {
   @apply fixed pin-x pin-y bg-black opacity-25 z-10;
+
+  @screen lg { @apply hidden; }
 }
 
 .meeting-sidebar {
@@ -7,28 +9,28 @@
   height: 48px;
   transition: height 0.5s;
 
+  @screen lg {
+    @apply pin-y pin-r pr-0 py-0 z-10;
+    left: inherit;
+    height: 100%;
+  }
+
   .tabs {
     @apply p-0 m-0 border-b text-center;
 
-    .tab { @apply p-2; }
+    .tab {
+      @apply p-2;
+
+      @screen lg {
+        &.selected { @apply bg-grey; }
+      }
+    }
   }
 
   &.active {
     height: 75%;
+    @screen lg { height: 100%; }
 
     .tabs .tab.selected { @apply bg-grey; }
   }
-}
-
-@screen md {
-  .meeting-sidebar {
-    @apply pin-y pin-r pr-0 py-0 z-10;
-    left: inherit;
-    height: 100%;
-
-    &.active { height: 100%; }
-    .tabs .tab.selected { @apply bg-grey; }
-  }
-
-  .meeting-sidebar-overlay { @apply hidden; }
 }
