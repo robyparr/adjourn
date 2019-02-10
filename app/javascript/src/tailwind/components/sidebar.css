@@ -51,7 +51,7 @@
       &:focus { @apply border-b-0; }
     }
 
-    .easy-autocomplete { max-width: 100%; }
+    .easy-autocomplete { max-width: 100%; min-width: 100%; }
   }
 
   .collapse-button {

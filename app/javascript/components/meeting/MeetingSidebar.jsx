@@ -90,7 +90,7 @@ export default class MeetingSidebar extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="column sm12 py-5 pl-4">
+            <div className="column sm12 py-5 pl-4 bg-white border-b">
               <h5>{this.tabTitle()}</h5>
             </div>
           </div>

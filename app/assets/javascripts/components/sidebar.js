@@ -4,6 +4,9 @@ $(document).ready(function() {
     var sidebar = $('.sidebar');
     var sidebarOverlay = $('.sidebar-overlay');
 
+    var sidebarIsHidden = sidebar.css('margin-left').indexOf('-') !== -1;
+    sidebar.toggleClass('sidebar-hidden', sidebarIsHidden);
+
     return {
       isCollapsed: function() {
         return sidebar.hasClass('collapsed');
