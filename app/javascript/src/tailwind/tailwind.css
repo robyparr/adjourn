@@ -26,6 +26,7 @@
  @import 'components/grid';
  @import 'components/sidebar';
  @import 'components/meetingSidebar';
+ @import 'components/modal';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

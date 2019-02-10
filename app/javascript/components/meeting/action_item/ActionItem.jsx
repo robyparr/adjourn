@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 
 // Controls
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-
 import InlineEdit from '../../common/InlineEdit';
-
-// Utils
-import axios from 'axios';
-import Utils from 'utils';
 
 /*
  * A single Action Item.
@@ -57,10 +50,11 @@ export default class ActionItem extends Component {
         return(
             <li className="collection-item checkbox">
                 {!this.state.isEditing &&
-                    <a className="secondary-content delete-link"
-                        onClick={() => this.setState({ delete: true })}>
-                        
-                        <i className="material-icons">delete</i>
+                    <a className="secondary-content delete-link">
+                        <i className="material-icons"
+                                data-adjourn-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
+                            delete
+                        </i>
                     </a>
                 }
 
@@ -93,21 +87,20 @@ export default class ActionItem extends Component {
                     multilineEditor={true}
                     renderMarkdown={true} />
 
-                <Dialog
-                    actions={[
-                        <FlatButton
-                            label="Yes"
-                            primary={true}
-                            onTouchTap={() => this.props.onActionItemDelete(this.props.actionItem.id)} />,
-                        <FlatButton 
-                            label="No"
-                            primary={true}
-                            onTouchTap={() => this.setState({ delete: false })} />
-                    ]}
-                    modal={false}
-                    open={this.state.delete}>
-                        Are you sure you want to remove this action item?
-                </Dialog>
+                <div className={`adjourn-modal confirm-aa-delete-${this.props.actionItem.id}`}>
+                    <div className="title">Are you sure?</div>
+                    <div className="adjourn-modal-content">
+                        Are you sure you want to delete this action item?
+                    </div>
+                    <div className="adjourn-modal-footer">
+                        <a href="#"
+                            data-close-adjourn-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>No</a>
+                        <button className="button ml-4"
+                                onClick={() => this.props.onActionItemDelete(this.props.actionItem.id)}>
+                            Yes
+                        </button>
+                    </div>
+                </div>
             </li>
         );
     }
