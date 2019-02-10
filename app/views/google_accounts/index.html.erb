@@ -16,37 +16,39 @@
       </div>
     <div></div>
   <% else %>
-    <table class="z-depth-1">
-      <thead>
-        <tr>
-          <th style="width: 70px;">Account</th>
-          <th></th>
-          <th>Connected At</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @accounts.each do |account| %>
-          <tr class="collection-item">
-            <td><img src="<%= account.avatar_url %>" height="64" /></td>
-            <td><%= account.email %></td>
-            <td><%= account.created_at %></td>
-            <td>
-              <%= link_to "Synced Calendars", nil, data: {
-                calendar_list: account.id
-              }%>
-            </td>
-            <td class="text-right">
-              <%= link_to "Delete", google_account_path(account),
-                class: "btn-flat red-text",
-                data: { confirm: "Are you sure you want to remove this Google Account?" },
-                method: :delete %>
-            </td>
+    <div class="table-container">
+      <table class="z-depth-1">
+        <thead>
+          <tr>
+            <th style="width: 70px;">Account</th>
+            <th></th>
+            <th>Connected At</th>
+            <th></th>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @accounts.each do |account| %>
+            <tr class="collection-item">
+              <td><img src="<%= account.avatar_url %>" height="64" /></td>
+              <td><%= account.email %></td>
+              <td><%= account.created_at %></td>
+              <td>
+                <%= link_to "Synced Calendars", nil, data: {
+                  calendar_list: account.id
+                }%>
+              </td>
+              <td class="text-right">
+                <%= link_to "Delete", google_account_path(account),
+                  class: "btn-flat red-text",
+                  data: { confirm: "Are you sure you want to remove this Google Account?" },
+                  method: :delete %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   <% end %>
 </div>
 
