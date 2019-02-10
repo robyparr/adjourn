@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 // Controls
 import InlineEdit from '../../common/InlineEdit';
-import Dialog  from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 /*
  * A single Agendum Note.
@@ -13,8 +11,7 @@ export default class AgendumNote extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            delete: false,
-            isEditing: false 
+            isEditing: false
         };
     }
 
@@ -50,8 +47,11 @@ export default class AgendumNote extends Component {
         return(
             <li className="collection-item grey lighten-4">
                 {!this.state.isEditing &&
-                    <a className="secondary-content delete-link" onClick={() => this.setState({ delete: true })}>
-                        <i className="material-icons">delete</i>
+                    <a className="secondary-content delete-link">
+                        <i className="material-icons"
+                                data-adjourn-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
+                            delete
+                        </i>
                     </a>
                 }
 
@@ -64,21 +64,23 @@ export default class AgendumNote extends Component {
                     multilineEditor={true}
                     renderMarkdown={true} />
 
-                <Dialog
-                    actions={[
-                        <FlatButton 
-                            label="Yes"
-                            primary={true}
-                            onTouchTap={this.props.onNoteDelete} />,
-                        <FlatButton 
-                            label="No"
-                            primary={true}
-                            onTouchTap={() => this.setState({ delete: false })} />
-                    ]}
-                    modal={false}
-                    open={this.state.delete}>
+
+                <div className={`adjourn-modal confirm-agendum-note-delete-${this.props.note.id}`}>
+                    <div className="title">Are you sure?</div>
+                    <div className="adjourn-modal-content">
                         Are you sure you want to remove this note?
-                </Dialog>
+                    </div>
+                    <div className="adjourn-modal-footer">
+                        <a href="#"
+                                data-close-adjourn-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
+                            No
+                        </a>
+                        <button className="button ml-4"
+                                onClick={this.props.onNoteDelete}>
+                            Yes
+                        </button>
+                    </div>
+                </div>
             </li>
         );
     }
