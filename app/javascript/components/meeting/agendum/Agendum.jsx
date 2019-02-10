@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 // Controls
-import Dialog  from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-
 import InlineEdit from '../../common/InlineEdit';
 
 import Dropzone from 'react-dropzone';
@@ -15,7 +12,6 @@ export default class Agendum extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            delete: false,
             isEditing: false
         }
     }
@@ -66,8 +62,11 @@ export default class Agendum extends Component {
 
                     {!this.state.isEditing &&
                         <div className="right">
-                            <a className="delete-link" onClick={() => this.setState({ delete: true })}>
-                                <i className="material-icons">delete</i>
+                            <a className="delete-link">
+                                <i className="material-icons"
+                                    data-adjourn-modal={`.confirm-agendum-delete-${this.props.agendum.id}`}>
+                                        delete
+                                </i>
                             </a>
                         </div>
                     }
@@ -92,22 +91,22 @@ export default class Agendum extends Component {
                         renderMarkdown={true} />
                 </Dropzone>
 
-                <Dialog
-                    actions={[
-                        <FlatButton 
-                            label="Yes" 
-                            primary={true} 
-                            onTouchTap={() => this.props.onAgendumDelete(this.props.agendum.id)} />,
-                        <FlatButton 
-                        
-                            label="No" 
-                            primary={true} 
-                            onTouchTap={() => this.setState({ delete: false })} />
-                    ]}
-                    modal={false}
-                    open={this.state.delete}>
+                <div className={`adjourn-modal confirm-agendum-delete-${this.props.agendum.id}`}>
+                    <div className="title">Are you sure?</div>
+                    <div className="adjourn-modal-content">
                         Are you sure you want to remove this agendum?
-                </Dialog>
+                    </div>
+                    <div className="adjourn-modal-footer">
+                        <a href="#"
+                                data-close-adjourn-modal={`.confirm-agendum-delete-${this.props.agendum.id}`}>
+                            No
+                        </a>
+                        <button className="button ml-4"
+                                onClick={() => this.props.onAgendumDelete(this.props.agendum.id)}>
+                            Yes
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
