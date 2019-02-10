@@ -12,3 +12,27 @@
 </div>
 
 <button class="button" data-adjourn-modal="#modal">Show Modal</button>
+
+<h2>Autocomplete</h2>
+
+<div class="row">
+  <div class="column s12 md4">
+    <input type="text" class="adjourn-autocomplete" placeholder="Autocomplete" />
+  </div>
+</div>
+
+<script>
+  AdjournAutocomplete.init('.adjourn-autocomplete', {
+    method: 'GET',
+    url: function(autocomplete) {
+      return '/attendees/autocomplete?email=' + encodeURIComponent(autocomplete);
+    },
+    renderItem: function(item) {
+      return "<strong>" + item.email + "</strong>";
+    },
+    onItemSelected: function(item) {
+      console.log(item);
+      alert('you selected ' + item.email);
+    }
+  });
+</script>

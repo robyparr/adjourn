@@ -1,8 +1,5 @@
 import React from 'react';
 
-// Controls
-import AutoComplete from 'material-ui/AutoComplete';
-
 // Utils
 import Utils from 'utils';
 
@@ -10,12 +7,26 @@ export default class Attendees extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (this.props.attendees.length > prevProps.attendees.length) {
-            this.autoComplete.focus();
+            this.autocomplete.focus();
         }
     }
 
-    onNewrequest = (value, index) => {
-        this.props.onAttendeeSelect(value, this.props.meetingID);
+    componentDidMount() {
+        AdjournAutocomplete.init('#attendees-autocomplete', {
+            method: 'GET',
+            url: function(autocomplete) {
+                return '/attendees/autocomplete?email=' + encodeURIComponent(autocomplete);
+            },
+            parseResponse: (data) => {
+                var attendeeIDs = this.props.attendees.map(it => it.id);
+
+                return data.filter(it => attendeeIDs.indexOf(it.id) === -1);
+            },
+            renderItem: (item) => item.email,
+            onItemSelected: (item) => {
+                this.props.onAttendeeSelect(item.email, this.props.meetingID);
+            }
+          });
     }
 
     render() {
@@ -40,15 +51,11 @@ export default class Attendees extends React.Component {
                     );
                 })}
                 <li className="collection-item checkbox grey lighten-4 print-hide">
-                    <AutoComplete
-                        hintText="Add Attendee"
-                        className="browser-default"
-                        fullWidth={true}
-                        dataSource={this.props.attendeeResults}
-                        onUpdateInput={this.props.onInputUpdate}
-                        onNewRequest={this.onNewrequest}
-                        searchText={this.props.searchText}
-                        ref={input => this.autoComplete = input} />
+                    <input type="text"
+                        id="attendees-autocomplete"
+                        className="adjourn-autocomplete"
+                        placeholder="Add Attendee"
+                        ref="autocomplete" />
                 </li>
             </ul>
         );

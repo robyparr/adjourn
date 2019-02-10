@@ -1,0 +1,11 @@
+.adjourn-autocomplete + ul {
+  @apply bg-white rounded shadow-lg relative m-auto -mt-4 overflow-hidden;
+
+  li {
+    @apply px-6 py-4 cursor-pointer;
+
+    &:hover { @apply bg-grey-lighter; }
+
+    * { pointer-events: none; }
+  }
+}
