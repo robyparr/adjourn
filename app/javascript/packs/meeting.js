@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import MeetingContainer from '../containers/MeetingContainer';
 import rootReducer from '../reducers';
@@ -14,9 +12,6 @@ import { setAgendumNotes } from '../actions/agendumNotes';
 import { setActionItems } from '../actions/actionItems';
 import { setAttendees } from '../actions/attendees';
 import { setMeetingAgendumUploads } from '../actions/agendumUploads';
-
-// For material-ui
-injectTapEventPlugin();
 
 let store = createStore(
   rootReducer,
@@ -53,10 +48,8 @@ if (meeting.id) {
 }
 
 ReactDOM.render(
-  <MuiThemeProvider>
-    <Provider store={store}>
-      <MeetingContainer />
-    </Provider>
-  </MuiThemeProvider>,
+  <Provider store={store}>
+    <MeetingContainer />
+  </Provider>,
   document.getElementById('react-root'),
 );

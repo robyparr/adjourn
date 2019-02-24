@@ -3,7 +3,6 @@ import React from 'react';
 // Controls
 import AgendaContainer from '../../containers/AgendaContainer';
 import MeetingSidebar from './MeetingSidebar';
-import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/InlineEdit';
 import EventTimePicker from '../common/EventTimePicker';
 
