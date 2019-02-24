@@ -29,6 +29,11 @@
  @import 'components/modal';
  @import 'components/autocomplete';
  @import 'components/eventTimePicker';
+ @import 'components/link';
+ @import 'components/form';
+ @import 'components/list';
+ @import 'components/text';
+ @import 'components/alert';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

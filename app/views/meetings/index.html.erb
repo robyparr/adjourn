@@ -1,8 +1,12 @@
-<div class="row mb-0">
-  <div class="column sm12">
+<div class="row">
+  <div class="column sm12 pl-0">
     <h3>Meetings</h3>
   </div>
 </div>
+
+<button class="button primary" data-modal="#new-meeting-modal">
+  New Meeting
+</button>
 
 <div class="row">
   <div class="column sm12 md9">
@@ -33,7 +37,3 @@
 </div>
 
 <%= render 'meetings/new_modal', meeting: @meeting %>
-
-<a class="btn-floating btn-large waves-effect waves-light red fab-fixed modal-trigger" href="#new-meeting-modal">
-  <i class="material-icons">add</i>
-</a>

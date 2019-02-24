@@ -14,6 +14,6 @@
 //= require jquery 
 //= require jquery_ujs
 //= require moment/moment
-//= require materialize
+// require materialize
 //= require easy-autocomplete/dist/jquery.easy-autocomplete
 //= require_tree .

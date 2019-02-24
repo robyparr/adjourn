@@ -17,12 +17,6 @@ $(document).ready(function() {
     $(this).addClass('browser-default');
   });
 
-  $('.tooltipped').tooltip();
-
-  $('.collapsible').collapsible();
-
-  $('.modal').modal();
-
   $('.autocomplete').easyAutocomplete({
     url: function(q) {
       return "/search?q=" + q;
@@ -65,7 +59,7 @@ $(document).ready(function() {
         errorsListItems += "<li>" + errorResponse[i] + "</li>";
       }
 
-      var errors = $('#new-meeting-form').find('.errors');
+      var errors = $('#new-meeting-form').find('.alert.error');
       errors.find('ul').html(errorsListItems);
       errors.css('display', 'block');
     });

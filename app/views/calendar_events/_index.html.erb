@@ -1,43 +1,47 @@
 <% if !has_google_accounts %>
   <li class="collection-item">
-    <p>
-      Connect your Google Account to Adjourn
-      to sync your Google Calendar events.
-    </p>
-    <p>
-      You can connect your account by clicking your email in the top-right and
-      selecting "Google Accounts" from the menu.
-    </p>
+    <div class="list-item-content">
+      <p>
+        Connect your Google Account to Adjourn
+        to sync your Google Calendar events.
+      </p>
+      <p>
+        You can connect your account by clicking your email in the top-right and
+        selecting "Google Accounts" from the menu.
+      </p>
+    </div>
   </li>
 <% elsif has_google_accounts && !has_synced_calendars %>
   <li class="collection-item">
-    <p>
-      Please select some calendars to sync with Adjourn.
-    </p>
-    <p>
-      You can choose calendars to sync by clicking the "Synced Calendars" link
-      on your connected account in your profile.
-    </p>
+    <div class="list-item-content">
+      <p>
+        Please select some calendars to sync with Adjourn.
+      </p>
+      <p>
+        You can choose calendars to sync by clicking the "Synced Calendars" link
+        on your connected account in your profile.
+      </p>
+    <div class="list-item-content">
   </li>
 <% elsif events.empty? %>
   <li class="collection-item">
-    There are no upcoming events or you've added them all to Adjourn.
+    <div class="list-item-content">
+      There are no upcoming events or you've added them all to Adjourn.
+    </div>
   </li>
 <% end %>
 
 <% events.each do |event| %>
-  <span class="calendar-event-item">
-    <li class="collection-item" title="<%= event[:summary] %>">
-      <div class="event-text"><%= event[:summary] %></div>
-      <span class="event-time">
-        in <%= time_ago_in_words(event[:start]) %>
-      </span>
-    </li>
-    <%= link_to add_event_url(event),
-        class: "btn btn-small",
+    <li title="<%= event[:summary] %>">
+      <div class="list-item-content">
+        <div><%= event[:summary] %></div>
+        <div class="list-secondary-text">
+          in <%= time_ago_in_words(event[:start]) %>
+        </div>
+      </div>
+      <%= link_to "Add",
+        add_event_url(event),
         remote: false,
-        method: :post do %>
-      <i class="material-icons">add</i>
-    <% end %>
-  </span>
+        method: :post %>
+    </li>
 <% end %>

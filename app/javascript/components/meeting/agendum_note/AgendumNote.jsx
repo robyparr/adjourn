@@ -49,7 +49,7 @@ export default class AgendumNote extends Component {
                 {!this.state.isEditing &&
                     <a className="secondary-content delete-link">
                         <i className="material-icons"
-                                data-adjourn-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
+                                data-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
                             delete
                         </i>
                     </a>
@@ -65,14 +65,14 @@ export default class AgendumNote extends Component {
                     renderMarkdown={true} />
 
 
-                <div className={`adjourn-modal confirm-agendum-note-delete-${this.props.note.id}`}>
+                <div className={`modal confirm-agendum-note-delete-${this.props.note.id}`}>
                     <div className="title">Are you sure?</div>
-                    <div className="adjourn-modal-content">
+                    <div className="modal-content">
                         Are you sure you want to remove this note?
                     </div>
-                    <div className="adjourn-modal-footer">
+                    <div className="modal-footer">
                         <a href="#"
-                                data-close-adjourn-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
+                                data-close-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
                             No
                         </a>
                         <button className="button ml-4"

@@ -1,6 +1,6 @@
-.adjourn-modal-overlay { @apply fixed pin-x pin-y bg-black opacity-25 z-30; }
+.modal-overlay { @apply fixed pin-x pin-y bg-black opacity-25 z-30; }
 
-.adjourn-modal {
+.modal {
   @apply hidden max-w-md bg-white rounded shadow-lg px-6 py-4 relative z-50 m-auto fixed;
   top: 25%;
   left: 0;
@@ -10,6 +10,6 @@
   min-width: 30rem;
 
   .title { @apply font-bold text-xl; }
-  .adjourn-modal-content { @apply text-base py-4; }
-  .adjourn-modal-footer { @apply text-right py-4 bg-grey-lighter -mb-4 -mx-6 px-6 py-4; }
+  .modal-content { @apply text-base py-4; }
+  .modal-footer { @apply rounded text-right py-4 bg-grey-lighter -mb-4 -mx-6 px-6 py-4; }
 }

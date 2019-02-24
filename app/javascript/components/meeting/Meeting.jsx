@@ -58,7 +58,7 @@ export default class Meeting extends React.Component {
           </a>
           <ul>
             <li>
-              <a className="btn-floating red tooltipped"
+              <a className="btn-floating red"
                 data-position="left"
                 data-delay="50"
                 onClick={this.props.onEmailAttendeesClick}

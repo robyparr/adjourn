@@ -1,26 +1,27 @@
 <%= form_with(model: meeting, id: "new-meeting-form") do |f| %>
   <div id="new-meeting-modal" class="modal">
-    <div class="modal-content">
+    <div class="modal-title">
       <h4>New Meeting</h4>
+    </div>
+    <div class="modal-content">
+      <div class="alert error" style="display: none;">
+        <h5>There were some errors creating your meeting.</h5>
+        <ul class="browser-default"></ul>
+      </div>
+
       <p>
         Name your meeting and click <strong>CREATE</strong> it to start adding
         to the agenda.
       </p>
 
-      <div class="errors" style="display: none;">
-        <h5>There were some errors creating your meeting.</h5>
-        <ul class="browser-default"></ul>
-      </div>
-
-      <div class="input-field">
-        <%= f.text_field :title, autofocus: true %>
+      <p>
         <%= f.label :title %>
-      </div>
+        <%= f.text_field :title, autofocus: true, placeholder: "Title" %>
+      </p>
     </div>
     <div class="modal-footer">
-      <a class="modal-action modal-close">Close</a>
-      <%= f.submit "Create",
-        class: "modal-action button" %>
+      <button class="modal-action" data-close-modal="#new-meeting-modal">Close</button>
+      <%= f.submit "Create", class: "button primary" %>
     </div>
   </div>
 <% end %>

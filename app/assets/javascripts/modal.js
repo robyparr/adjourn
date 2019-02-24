@@ -1,11 +1,11 @@
 document.addEventListener('click', function(e) {
-  if (e.target.dataset.adjournModal) {
-    var modalSelector = e.target.dataset.adjournModal;
+  if (e.target.dataset.modal) {
+    var modalSelector = e.target.dataset.modal;
     var modal = document.querySelector(modalSelector);
 
     var overlay = document.createElement('div')
-    overlay.classList.add('adjourn-modal-overlay');
-    overlay.dataset.closeAdjournModal = modalSelector;
+    overlay.classList.add('modal-overlay');
+    overlay.dataset.closeModal = modalSelector;
 
     modal.parentNode.insertBefore(overlay, modal);
 
@@ -15,14 +15,14 @@ document.addEventListener('click', function(e) {
 });
 
 document.addEventListener('click', function(e) {
-  if (e.target.dataset.closeAdjournModal) {
-    var modalSelector = e.target.dataset.closeAdjournModal;
+  if (e.target.dataset.closeModal) {
+    var modalSelector = e.target.dataset.closeModal;
     var modal = document.querySelector(modalSelector);
 
     modal.classList.add('hidden');
     modal.classList.remove('block');
     document
-      .querySelector('.adjourn-modal-overlay[data-close-adjourn-modal="' + modalSelector +'"]')
+      .querySelector('.modal-overlay[data-close-modal="' + modalSelector +'"]')
       .remove();
   }
 });

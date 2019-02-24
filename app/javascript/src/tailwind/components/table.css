@@ -1,6 +1,14 @@
 .table-container { @apply shadow overflow-x-auto; }
-table { @apply bg-white shadow; }
 
-table tbody tr:last-child { @apply border-0; }
-table tr td, table tr th { @apply pl-4 }
-table tr td:last-child, table tr th:last-child { @apply pr-4 }
+table {
+  @apply bg-white shadow w-full rounded;
+
+  tbody tr:last-child { @apply border-0; }
+
+  tr {
+    td, th { @apply p-4 text-left; }
+    td:last-child, th:last-child { @apply pr-4; }
+
+    &:not(:last-child) { @apply border-b; }
+  }
+}

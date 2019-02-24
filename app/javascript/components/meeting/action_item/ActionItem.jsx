@@ -52,7 +52,7 @@ export default class ActionItem extends Component {
                 {!this.state.isEditing &&
                     <a className="secondary-content delete-link">
                         <i className="material-icons"
-                                data-adjourn-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
+                                data-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
                             delete
                         </i>
                     </a>
@@ -87,14 +87,14 @@ export default class ActionItem extends Component {
                     multilineEditor={true}
                     renderMarkdown={true} />
 
-                <div className={`adjourn-modal confirm-aa-delete-${this.props.actionItem.id}`}>
+                <div className={`modal confirm-aa-delete-${this.props.actionItem.id}`}>
                     <div className="title">Are you sure?</div>
-                    <div className="adjourn-modal-content">
+                    <div className="modal-content">
                         Are you sure you want to delete this action item?
                     </div>
-                    <div className="adjourn-modal-footer">
+                    <div className="modal-footer">
                         <a href="#"
-                            data-close-adjourn-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>No</a>
+                            data-close-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>No</a>
                         <button className="button ml-4"
                                 onClick={() => this.props.onActionItemDelete(this.props.actionItem.id)}>
                             Yes
