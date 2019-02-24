@@ -1,0 +1,30 @@
+.event-time-picker{
+  @apply bg-white shadow-lg rounded inline-block absolute z-10;
+  
+  .calendar {
+    max-width: 300px;
+
+    .header {
+      @apply flex flex-row justify-between border-b border-grey p-4 mb-4;
+    }
+
+    .week {
+      @apply flex flex-row justify-between;
+    }
+
+    .day {
+      @apply flex items-center justify-center border border-transparent rounded;
+      width: 40px;
+      height: 40px;
+
+      &.inactive { @apply text-grey; }
+      &.today { @apply text-green; }
+      &.selected { @apply bg-green text-white; }
+
+      &:not(.inactive):not(.selected) {
+        @apply cursor-pointer;
+        &:hover { @apply border-grey; }
+      }
+    }
+  }
+}

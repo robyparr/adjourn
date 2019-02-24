@@ -28,6 +28,7 @@
  @import 'components/meetingSidebar';
  @import 'components/modal';
  @import 'components/autocomplete';
+ @import 'components/eventTimePicker';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

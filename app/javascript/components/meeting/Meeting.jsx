@@ -5,6 +5,7 @@ import AgendaContainer from '../../containers/AgendaContainer';
 import MeetingSidebar from './MeetingSidebar';
 import DateTimePicker from '../common/date_time_picker';
 import InlineEdit from '../common/InlineEdit';
+import EventTimePicker from '../common/EventTimePicker';
 
 // Utilities
 import moment from 'moment';
@@ -38,25 +39,8 @@ export default class Meeting extends React.Component {
 
           {/* Date & times */}
           <div className="row">
-            <div className="column sm12 md1 bold">
-              Start
-            </div>
-            <div className="column sm12 md11">
-              <DateTimePicker
-                name="start_date"
-                dateTime={startDate}
-                onChange={this.props.onFieldUpdate} />
-            </div>
-          </div>
-          <div className="row">
-            <div className="column sm12 md1 bold">
-              End
-            </div>
-            <div className="column sm12 md11">
-              <DateTimePicker
-                name="end_date"
-                dateTime={endDate}
-                onChange={this.props.onFieldUpdate} />
+            <div className="column sm12 bold">
+              <EventTimePicker />
             </div>
           </div>
 
