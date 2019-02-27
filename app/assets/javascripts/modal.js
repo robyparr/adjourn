@@ -16,6 +16,8 @@ document.addEventListener('click', function(e) {
 
 document.addEventListener('click', function(e) {
   if (e.target.dataset.closeModal) {
+    e.preventDefault();
+
     var modalSelector = e.target.dataset.closeModal;
     var modal = document.querySelector(modalSelector);
 
