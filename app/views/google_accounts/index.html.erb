@@ -1,15 +1,13 @@
 <div class="container">
-  <h4>Google Accounts</h4>
+  <h3>Google Accounts</h3>
 
-  <%= link_to new_google_account_path, class: "btn-floating btn-large waves-effect waves-light red fab-fixed" do %>
-    <i class="material-icons">add</i>
-  <% end %>
+  <%= link_to "Add Account", new_google_account_path, class: "button primary" %>
 
   <% unless @accounts.present? %>
-    <div class="vertical-center text-muted">
-        <i class="large material-icons">add_box</i>
+    <div class="vertical-center text-grey-dark">
+        <i class="fa fa-5x fa-inbox"></i>
         <h5>There's Nothing Here</h5>
-        <p>
+        <p class="text-center">
           You have no Google accounts connected.<br />
           You can add one by clicking the button to the bottom-right.
         </p>

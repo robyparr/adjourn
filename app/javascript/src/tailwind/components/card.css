@@ -1,0 +1,5 @@
+.card {
+  @apply bg-white shadow rounded p-4;
+
+  .card-title { @apply font-bold text-lg mb-2; }
+}

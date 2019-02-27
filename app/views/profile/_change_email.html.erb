@@ -1,14 +1,14 @@
 <h5>Change Email</h5>
-<div class="input-field">
+<p>
+  <%= f.label :email %>
   <%= f.email_field :email,
     autofocus: true,
     required: true,
     data: { errors: current_user.errors[:email].join(", ") } %>
-  <%= f.label :email %>
-</div>
+</p>
 
 <% if devise_mapping.confirmable? && current_user.pending_reconfirmation? %>
-  <div class="text-muted">
+  <div class="text-grey-dark">
     Currently waiting confirmation for: <%= current_user.unconfirmed_email %>
   </div>
 <% end %>

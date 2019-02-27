@@ -35,6 +35,7 @@
  @import 'components/text';
  @import 'components/alert';
  @import 'components/image';
+ @import 'components/card';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

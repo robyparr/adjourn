@@ -19,14 +19,15 @@
           <p>Please enter your current password to confirm your changes.</p>
 
           <div class="input-field">
+            <%= f.label :current_password %>
             <%= f.password_field :current_password,
               autocomplete: "off",
               required: true,
+              placeholder: 'Current password',
               data: { errors: current_user.errors[:current_password].join(", ") }  %>
-            <%= f.label :current_password %>
           </div>
 
-          <%= f.submit "Update", class: 'btn btn-block', style: "width: 100%;" %>
+          <%= f.submit "Update", class: 'button primary block mt-2' %>
         </div>
       </div>
     <% end %>

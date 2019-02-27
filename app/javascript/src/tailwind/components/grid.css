@@ -1,3 +1,5 @@
+.container { @apply ml-auto mr-auto; }
+
 .row { @apply flex flex-wrap mb-4; }
 
 .column { @apply px-2; }
