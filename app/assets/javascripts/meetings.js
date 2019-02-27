@@ -17,53 +17,7 @@ $(document).ready(function() {
     $(this).addClass('browser-default');
   });
 
-  $('.autocomplete').easyAutocomplete({
-    url: function(q) {
-      return "/search?q=" + q;
-    },
-    requestDelay: 250,
-    getValue: function(element) {
-      return element.meeting.title
-    },
-    template: {
-      type: "custom",
-      method: function(value, item) {
-        return (
-          "<span class='markdown-body sub-content'><code>" + item.result_type + "</code></span>"
-          + "<h5>"
-          + value
-          + "<span class='sub'>" + moment(item.meeting.date).format('LLL') + "</span>"
-          + "</h5>"
-          + "<p>" + item.content + "</p>"
-          );
-        }
-      },
-      list: {
-        onChooseEvent: function() {
-          var data = $('.autocomplete').getSelectedItemData();
-          window.location.href = data.meeting.resource_url;
-        }
-      }
-    }).on('focus', function() {
-      $(this).parents('.input-field').find('i.material-icons.prefix').addClass('black-text');
-    }).on('blur', function() {
-      $(this).parents('.input-field').find('i.material-icons.prefix').removeClass('black-text');
-    });
-
-    $('#new-meeting-form').on('ajax:success', function(response) {
-      window.location = response.detail[0].resource_url;
-    }).on('ajax:error', function(response) {
-      var errorResponse = response.detail[0].errors;
-      var errorsListItems = "";
-      for(var i = 0; i < errorResponse.length; i++) {
-        errorsListItems += "<li>" + errorResponse[i] + "</li>";
-      }
-
-      var errors = $('#new-meeting-form').find('.alert.error');
-      errors.find('ul').html(errorsListItems);
-      errors.css('display', 'block');
-    });
-  });
+});
 
   function openAgendumDetailsView() {
     var agendumDetails = $('#agendum-details-tab');

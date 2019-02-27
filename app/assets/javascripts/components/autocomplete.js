@@ -4,14 +4,20 @@ var AdjournAutocomplete = (function() {
   var autocompleteResultsList;
   var autocompleteResults = [];
 
+  var listClasses = "";
+  var itemClasses = "";
+
   var showResults = function() {
-    var existingResults = document.querySelector(autocompleteTextboxSelector + ' + ul');
+    var resultsListSelector = autocompleteTextboxSelector
+      + ' + ul.adjourn-autocomplete-results-list';
+    var existingResults = document.querySelector(resultsListSelector);
     if (existingResults) {
       existingResults.classList.remove('hidden');
       return;
     }
 
     autocompleteResultsList = document.createElement('ul');
+    autocompleteResultsList.className = 'adjourn-autocomplete-results-list ' + listClasses;
     autocompleteTextbox.insertAdjacentElement('afterend', autocompleteResultsList);
   };
 
@@ -44,6 +50,7 @@ var AdjournAutocomplete = (function() {
         } else {
           for (var i = 0; i < autocompleteResults.length; i++) {
             var item = document.createElement('li');
+            item.className = itemClasses;
             item.innerHTML = renderItem(autocompleteResults[i]);
             item.dataset.resultIndex = i;
 
@@ -60,6 +67,9 @@ var AdjournAutocomplete = (function() {
     init: function(el, options) {
       autocompleteTextboxSelector = el;
       autocompleteTextbox = document.querySelector(el);
+
+      listClasses = options.listClasses || "";
+      itemClasses = options.itemClasses || "";
 
       var debounceTimeout = null;
       document.addEventListener('keyup', function(e) {

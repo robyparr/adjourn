@@ -2,7 +2,7 @@
   @apply list-reset bg-white rounded shadow;
 
   li {
-    @apply flex items-center p-4 border-b bg-white relative;
+    @apply flex items-center justify-between p-4 border-b bg-white relative;
 
     &.list-header { @apply font-bold; }
     &:first-child { @apply rounded-t; }
@@ -11,8 +11,11 @@
     .list-item-content {
       @apply flex flex-col;
 
-      .list-secondary-text { @apply text-grey-dark; }
-      .list-floating-text { @apply flex flex-row items-center p-4; } 
+      .list-secondary-text { @apply block text-grey-dark; }
+    }
+
+    .list-floating-text {
+      @apply absolute pin-t pin-r mt-4 mr-4;
     }
   }
 }

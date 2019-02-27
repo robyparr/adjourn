@@ -10,41 +10,37 @@
 
   <%= link_to profile_path, class: 'user-info' do %>
     <img src="<%= gravatar_url(current_user.email) %>"
-      class="circle profile-picture" />
+      class="avatar profile-picture" />
     <div class="email"><%= current_user.email %></div>
   <% end %>
 
-  <%# Search bar formatting help from https://stackoverflow.com/a/42127640 %>
-  <%= form_with(url: search_path, method: 'get', class: 'search') do |f| %>
-    <i class="material-icons prefix" style="z-index: 9;">search</i>
-    <%= f.search_field :q,
-      class: 'autocomplete',
-      autocomplete: 'off',
-      placeholder: 'Search' %>
-  <% end %>
+  <div class="search">
+    <i class="fa fa-search prefix" style="z-index: 9;"></i>
+    <input type="search" id="sidebar-search" placeholder="Search" />
+  </div>
 
   <ul class="links">
     <li>
       <%= active_link_to meetings_url, active: [['meetings'], []] do %>
-        <i class="small material-icons icon">assignment</i>
+        <i class="fa fa-clipboard"></i>
         <span class="text">Meetings</span>
       <% end %>
     </li>
     <li>
       <%= active_link_to uploads_url do %>
-        <i class="small material-icons icon">attach_file</i>
+        <i class="fa fa-file-upload"></i>
         <span class="text">Uploads</span>
       <% end %>
     </li>
     <li>
       <%= active_link_to profile_path do %>
-        <i class="small material-icons icon">account_box</i>
+        <i class="fa fa-user-cog"></i>
         <span class="text">My Profile</span>
       <% end %>
     </li>
     <li>
       <%= active_link_to google_accounts_path do %>
-        <i class="small material-icons icon">sync</i>
+        <i class="fa fa-sync"></i>
         <span class="text">Google Accounts</span>
       <% end %>
     </li>
@@ -53,12 +49,43 @@
   <ul class="links bottom">
     <li class="hidden md:block">
       <a class="collapse-button">
-        <i class="small material-icons collapse">chevron_left</i>
-        <i class="small material-icons expand">chevron_right</i>
+        <i class="fa fa-chevron-left collapse"></i>
+        <i class="fa fa-chevron-right expand"></i>
       </a>
     </li>
     <li>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "sign-out-link" %>
+      <%= link_to destroy_user_session_path, method: :delete, class: "sign-out-link" do %>
+        <i class="fa fa-sign-out-alt"></i>
+        <span class="text">Sign Out</span>
+      <% end %>
     </li>
   </ul>
 </div>
+
+<script>
+  AdjournAutocomplete.init('#sidebar-search', {
+    method: 'GET',
+    listClasses: 'list absolute',
+    itemClasses: 'cursor-pointer hover:bg-grey-light',
+    url: function(autocomplete) {
+      return '<%= search_path %>?q=' + encodeURIComponent(autocomplete);
+    },
+    renderItem: function(item) {
+      return (
+        "<div class='list-item-content text-black pointer-events-none'>"
+          + "<h5>"
+            + item.meeting.title
+            + "<small class='list-secondary-text'>" + moment(item.meeting.date).format('LLL') + "</small>"
+          + "</h5>"
+          + "<p class='mt-2'>" + item.content + "</p>"
+          + "<span class='list-floating-text'>"
+            + "<span class='px-2 py-1 bg-blue text-white text-xs rounded-full opacity-50'>" + item.result_type + "</span>"
+          + "</span>"
+        + "</div>"
+      );
+    },
+    onItemSelected: function(item) {
+      window.location.href = item.meeting.resource_url;
+    }
+  });
+</script>
