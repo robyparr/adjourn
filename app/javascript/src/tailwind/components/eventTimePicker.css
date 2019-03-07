@@ -1,6 +1,6 @@
 .event-time-picker{
   @apply bg-white shadow-lg rounded inline-block absolute z-10;
-  
+
   .calendar {
     max-width: 300px;
 

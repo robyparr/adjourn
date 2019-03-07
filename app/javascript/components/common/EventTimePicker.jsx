@@ -51,7 +51,7 @@ class EventTimePicker extends React.Component {
   render() {
     return (
       <span ref="self">
-        <div onClick={this.openPicker}>
+        <div className="text-grey-darkest cursor-pointer" onClick={this.openPicker}>
           {`${this.state.from.format('YYYY-MM-DD hh:mm A')} - ${this.state.to.format('hh:mm A')}`}
         </div>
         {this.state.pickerIsOpen &&

@@ -42,7 +42,7 @@ const Agenda = (props) => {
 
     /* Add new Agendum item */
     columns[nextColumn].push(
-        <div className="print-hide" key={new Date()}>
+        <div key={new Date()}>
             <AgendumContainer />
         </div>
     );

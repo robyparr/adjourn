@@ -1,5 +1,18 @@
 .card {
-  @apply bg-white shadow rounded p-4;
+  @apply bg-white shadow rounded p-4 border-t-2 border-transparent;
 
-  .card-title { @apply font-bold text-lg mb-2; }
+  .card-head {
+    @apply flex items-center relative;
+
+    .card-title { @apply font-bold text-lg mb-2 w-full; }
+    .card-actions { @apply absolute pin-t pin-r; }
+  }
+
+  &.selected {
+    @apply border-t-2 border-primary;
+  }
+
+  .dropzone {
+    border: 2px dashed rgb(102, 102, 102);
+  }
 }

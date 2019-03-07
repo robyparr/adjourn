@@ -17,7 +17,11 @@ export default class Agendum extends Component {
     }
 
     onFieldEditModeChange = (isEditMode) => this.setState({ isEditing: isEditMode })
-    onFieldChange = (field, value) => this.props.onAgendumChange({ [field]: value })
+    onFieldChange = (e, field, value) => {
+        if (e.key === 'Enter') {
+            this.props.onAgendumChange({ [field]: value });
+        }
+    }
 
     render() {
         /* 
@@ -33,12 +37,9 @@ export default class Agendum extends Component {
                 <div className="card grey lighten-3">
                     <div className="card-content">
                         <span className="card-title" id="new_title">
-                            <InlineEdit
-                                onChange={this.onFieldChange}
-                                onEditModeChanged={this.onFieldEditModeChange}
-                                value="New Agendum"
+                            <input type="text"
+                                onKeyUp={(e) => this.onFieldChange(e, e.target.name, e.target.value)}
                                 placeholder="New Agendum"
-                                singleClickToEdit={true}
                                 name="title" />
                         </span>
                     </div>
@@ -51,25 +52,10 @@ export default class Agendum extends Component {
             || "Click here to add a description.";
 
         return(
-            <div className={`card z-depth-3 ${this.props.agendum.selected ? "selected" : ""}`}
+            <div className={`card ${this.props.agendum.selected ? "selected" : ""}`}
                 onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
 
-                <Dropzone
-                    className="card-content"
-                    onDrop={(files) => this.props.onFileUpload(this.props.agendum.id, files)}
-                    disableClick={true}
-                    activeClassName="dropzone">
-
-                    {!this.state.isEditing &&
-                        <div className="right">
-                            <a className="delete-link">
-                                <i className="material-icons"
-                                    data-modal={`.confirm-agendum-delete-${this.props.agendum.id}`}>
-                                        delete
-                                </i>
-                            </a>
-                        </div>
-                    }
+                <div className="card-head">
                     <span className="card-title" id={`${this.props.agendum.id}_title`}>
                         <InlineEdit
                             onChange={this.onFieldChange}
@@ -78,9 +64,25 @@ export default class Agendum extends Component {
                             placeholder="Agendum Title"
                             name="title" />
                     </span>
-                    
+
+                    {!this.state.isEditing &&
+                        <div className="card-actions">
+                            <button>
+                                <i className="fa fa-trash"
+                                    data-modal={`.confirm-agendum-delete-${this.props.agendum.id}`}>
+                                </i>
+                            </button>
+                        </div>
+                    }
+                </div>
+
+                <Dropzone
+                    onDrop={(files) => this.props.onFileUpload(this.props.agendum.id, files)}
+                    className="card-content"
+                    disableClick={true}
+                    activeClassName="dropzone">
                     <InlineEdit
-                        className={this.props.agendum.description ? "" : "print-hide"}
+                        className="w-full"
                         onChange={this.onFieldChange}
                         value={descriptionValue}
                         placeholder="Agendum Description"

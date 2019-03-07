@@ -25,49 +25,27 @@ export default class Meeting extends React.Component {
       <div className="row">
         <div className="column lg9 lg:pr-6">
           {/* Title */}
-          <div className="row">
-            <div className="column sm12">
-              <InlineEdit
-                name="title"
-                onChange={this.props.onFieldUpdate}
-                displayElement='h4'
-                value={this.props.meeting.title}
-                singleClickToEdit={!this.props.meeting.id} />
-            </div>
-          </div>
+          <InlineEdit
+            name="title"
+            onChange={this.props.onFieldUpdate}
+            displayElement='h3'
+            className="mb-1"
+            value={this.props.meeting.title}
+            singleClickToEdit={!this.props.meeting.id} />
 
-          {/* Date & times */}
-          <div className="row">
-            <div className="column sm12 bold">
-              <EventTimePicker />
-            </div>
-          </div>
+          {/* Date and times */}
+          <EventTimePicker />
+
+          <div className="button primary mt-4"
+            onClick={this.props.onEmailAttendeesClick}>Email Attendees</div>
 
           {/* Agenda */}
-          <h5 className="sub-header">Agenda</h5>
+          <h4 className="mt-8">Agenda</h4>
           <AgendaContainer />
         </div>
 
         {/* Sidebar: Action items, Attendees, & Agendum details */}
         <MeetingSidebar />
-
-        {/* FAB */}
-        <div className="fixed-action-btn click-to-toggle mb-10 lg:mb-0 z-10">
-          <a className="btn-floating btn-large red">
-            <i className="material-icons">menu</i>
-          </a>
-          <ul>
-            <li>
-              <a className="btn-floating red"
-                data-position="left"
-                data-delay="50"
-                onClick={this.props.onEmailAttendeesClick}
-                data-tooltip="Email Attendees">
-                <i className="material-icons">send</i>
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
     );
   }
