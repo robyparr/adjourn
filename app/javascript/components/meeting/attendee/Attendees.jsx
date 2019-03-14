@@ -1,6 +1,7 @@
 import React from 'react';
 
-// Utils
+import Autocomplete from '../../common/autocomplete';
+
 import Utils from 'utils';
 
 export default class Attendees extends React.Component {
@@ -11,53 +12,52 @@ export default class Attendees extends React.Component {
         }
     }
 
-    componentDidMount() {
-        AdjournAutocomplete.init('#attendees-autocomplete', {
-            method: 'GET',
-            url: function(autocomplete) {
-                return '/attendees/autocomplete?email=' + encodeURIComponent(autocomplete);
-            },
-            parseResponse: (data) => {
-                var attendeeIDs = this.props.attendees.map(it => it.id);
+    autocompletePath = (autocompleteValue) => {
+        return '/attendees/autocomplete?email=' + encodeURIComponent(autocompleteValue);
+    }
 
-                return data.filter(it => attendeeIDs.indexOf(it.id) === -1);
-            },
-            renderItem: (item) => item.email,
-            onItemSelected: (item) => {
-                this.props.onAttendeeSelect(item.email, this.props.meetingID);
-            }
-          });
+    parseAutocompleteResponse = (data) => {
+        var attendeeIDs = this.props.attendees.map(it => it.id);
+        return data.filter(it => attendeeIDs.indexOf(it.id) === -1);
+    }
+
+    onAutocompleteItemSelected = (item) => {
+        this.props.onAttendeeSelect(item.email, this.props.meetingID);
     }
 
     render() {
-        const containerClass = "collection with-header margin-top-none "
-            + (this.props.attendees.length === 0 ? "print-hide" : "");
-
         return (
-            <ul className={containerClass}>
-                {this.props.attendees.map(attendee => {
-                    return (
-                        <li key={attendee.id}
-                            className="collection-item avatar">
-                            <a className="secondary-content delete-link"
-                                onClick={() => {
-                                    this.props.onAttendeeRemove(attendee.email, this.props.meetingID);
-                                }}>
-                                <i className="material-icons">delete</i>
-                            </a>
-                            <img src={Utils.getGravatarUrl(attendee.email)} className="circle" />
-                            <span>{attendee.email}</span>
-                        </li>
-                    );
-                })}
-                <li className="collection-item checkbox grey lighten-4 print-hide">
-                    <input type="text"
-                        id="attendees-autocomplete"
-                        className="adjourn-autocomplete"
-                        placeholder="Add Attendee"
-                        ref="autocomplete" />
-                </li>
-            </ul>
+            <div>
+                <ul className="list">
+                    {this.props.attendees.map(attendee => {
+                        return (
+                            <li key={attendee.id}>
+                                <div className="media">
+                                    <img src={Utils.getGravatarUrl(attendee.email)} className="avatar" />
+                                    <div className="media-text">
+                                        <span>{attendee.email}</span>
+                                    </div>
+                                </div>
+                                <button className="list-floating-content"
+                                    onClick={() => {
+                                        this.props.onAttendeeRemove(attendee.email, this.props.meetingID);
+                                    }}>
+                                    <i className="fa fa-trash"></i>
+                                </button>
+                            </li>
+                        );
+                    })}
+                </ul>
+                <Autocomplete
+                    id="attendees-autocomplete"
+                    className="autocomplete"
+                    placeholder="Add Attendee"
+                    method="GET"
+                    url={this.autocompletePath}
+                    parseResponse={this.parseAutocompleteResponse}
+                    renderItem={(item) => item.email}
+                    onItemSelected={this.onAutocompleteItemSelected} />
+            </div>
         );
     }
 };

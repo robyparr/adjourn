@@ -1,5 +1,5 @@
-.adjourn-autocomplete + ul {
-  @apply bg-white rounded shadow-lg relative m-auto -mt-4 overflow-hidden;
+.autocomplete + ul {
+  @apply bg-white rounded shadow-lg relative m-auto overflow-hidden list-reset;
 
   li {
     @apply px-6 py-4 cursor-pointer;
@@ -7,5 +7,10 @@
     &:hover { @apply bg-grey-lighter; }
 
     * { pointer-events: none; }
+
+    &.selected {
+      @apply border font-bold;
+      border-left: 3px solid config('colors.primary');
+    }
   }
 }

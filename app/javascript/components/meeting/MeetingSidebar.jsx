@@ -76,21 +76,22 @@ export default class MeetingSidebar extends React.Component {
             <div id="attendees-tab"
                 className={this.withSelectedTabClass('attendees', "tab column sm4")}
                 onClick={() => this.selectTab('attendees')}>
-              <i className="material-icons">people</i>
+              <i className="fa fa-users"></i>
             </div>
             <div id="action-items-tab"
                 className={this.withSelectedTabClass('actionItems', "tab column sm4")}
                 onClick={() => this.selectTab('actionItems')}>
-              <i className="material-icons">check</i>
+              <i className="fa fa-check"></i>
             </div>
             <div id="agendum-details-tab"
                 className={this.withSelectedTabClass('agendumDetails', "tab column sm4")}
                 onClick={() => this.selectTab('agendumDetails')}>
-              <i className="material-icons">book</i>
+              <i className="fa fa-book-open"></i>
             </div>
           </div>
           <div className="row">
-            <div className="column sm12 py-5 pl-4 bg-white border-b">
+            <div className="column sm12 pt-2 pl-4 bg-white border-b border-l"
+                style={{ borderLeftColor: 'transparent' }}>
               <h5>{this.tabTitle()}</h5>
             </div>
           </div>

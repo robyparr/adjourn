@@ -16,7 +16,7 @@
 
   <div class="search">
     <i class="fa fa-search prefix" style="z-index: 9;"></i>
-    <input type="search" id="sidebar-search" placeholder="Search" />
+    <div id="sidebar-search"></div>
   </div>
 
   <ul class="links">
@@ -62,11 +62,14 @@
   </ul>
 </div>
 
+<%= javascript_pack_tag 'autocomplete' %>
 <script>
-  AdjournAutocomplete.init('#sidebar-search', {
+  AdjournAutocomplete('#sidebar-search', {
+    className: 'autocomplete',
+    placeholder: 'Search',
+    type: 'search',
     method: 'GET',
     listClasses: 'list absolute',
-    itemClasses: 'cursor-pointer hover:bg-grey-light',
     url: function(autocomplete) {
       return '<%= search_path %>?q=' + encodeURIComponent(autocomplete);
     },

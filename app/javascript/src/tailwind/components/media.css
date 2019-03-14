@@ -1,0 +1,8 @@
+.media {
+  @apply flex items-center;
+
+  img.avatar { @apply rounded-full; }
+  .media-text {
+    @apply flex flex-col ml-4;
+  }
+}
