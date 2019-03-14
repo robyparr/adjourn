@@ -17,9 +17,11 @@ export default class Agendum extends Component {
     }
 
     onFieldEditModeChange = (isEditMode) => this.setState({ isEditing: isEditMode })
-    onFieldChange = (e, field, value) => {
+    onFieldChange = (field, value) => this.props.onAgendumChange({ [field]: value });
+
+    onNewAgendumTitleChange = (e) => {
         if (e.key === 'Enter') {
-            this.props.onAgendumChange({ [field]: value });
+            this.props.onAgendumChange({ [e.target.name]: e.target.value });
         }
     }
 
@@ -38,7 +40,7 @@ export default class Agendum extends Component {
                     <div className="card-content">
                         <span className="card-title" id="new_title">
                             <input type="text"
-                                onKeyUp={(e) => this.onFieldChange(e, e.target.name, e.target.value)}
+                                onKeyUp={this.onNewAgendumTitleChange}
                                 placeholder="New Agendum"
                                 name="title" />
                         </span>
