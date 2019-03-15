@@ -3,6 +3,7 @@
 table {
   @apply bg-white shadow w-full rounded;
 
+  thead tr { @apply border-b; }
   tbody tr:last-child { @apply border-0; }
 
   tr {
