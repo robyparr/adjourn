@@ -15,7 +15,7 @@
     <div></div>
   <% else %>
     <div class="table-container">
-      <table class="z-depth-1">
+      <table>
         <thead>
           <tr>
             <th style="width: 70px;">Account</th>
@@ -30,15 +30,15 @@
             <tr class="collection-item">
               <td><img src="<%= account.avatar_url %>" height="64" /></td>
               <td><%= account.email %></td>
-              <td><%= account.created_at %></td>
+              <td class="localize"><%= account.created_at %></td>
               <td>
                 <%= link_to "Synced Calendars", nil, data: {
+                  modal: "#google-calendars-modal",
                   calendar_list: account.id
                 }%>
               </td>
               <td class="text-right">
                 <%= link_to "Delete", google_account_path(account),
-                  class: "btn-flat red-text",
                   data: { confirm: "Are you sure you want to remove this Google Account?" },
                   method: :delete %>
               </td>
@@ -50,18 +50,17 @@
   <% end %>
 </div>
 
-<div id="google-calendars-modal" class="modal bottom-sheet">
-  <div class="modal-content">
+<div id="google-calendars-modal" class="modal">
+  <div class="modal-title">
     <h4>Synced Calendars</h4>
+  </div>
+  <div class="modal-content">
     <div class="loading text-center">
       <%= render 'shared/loader' %>
     </div>
-    <p class="content"></p>
+    <div class="calendars"></div>
   </div>
   <div class="modal-footer">
-    <a href="#!"
-      class="modal-action modal-close waves-effect waves-green btn-flat">
-      Close
-    </a>
+    <button class="button" data-close-modal="#google-calendars-modal">Close</button>
   </div>
 </div>

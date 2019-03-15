@@ -2,16 +2,15 @@ $(document).ready(function() {
   $('[data-calendar-list]').on('click', function(e) {
     e.preventDefault();
 
-    var modal = $('#google-calendars-modal')
-    modal.find('p.content').hide();
+    var modal = $('#google-calendars-modal');
+    modal.find('.calendars').hide();
     modal.find('.loading').show();
-    modal.modal('open');
 
     var accountId = $(this).attr('data-calendar-list');
     $.get('/google_calendars?google_account_id=' + accountId)
       .success(function(data) {
         modal.find('.loading').hide();
-        modal.find('p.content').html(data).show();
+        modal.find('.calendars').html(data).show();
       });
   });
 });
