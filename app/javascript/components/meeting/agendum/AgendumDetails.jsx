@@ -13,12 +13,12 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
 
   return (
     <div className="agendum-details padding-sides-default padding-bottom-default">
-      <h5 className="bold">{agendum.title}</h5>
+      <h4>{agendum.title}</h4>
 
       {agendumUploads.length > 0 &&
         <div>
-          <h5 className="sub-header">Uploads</h5>
-          <ul>
+          <h6 className="mb-2">Uploads</h6>
+          <ul className="list">
             {agendumUploads.map(upload =>
               <li key={upload.id}>
                 <a href={`/uploads/${upload.id}/download`}>{upload.filename}</a>
@@ -27,7 +27,7 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
           </ul>
         </div>
       }
-      <h5 className="sub-header">Agendum Notes</h5>
+      <h6 className="mt-4 mb-2">Agendum Notes</h6>
       <AgendumNotes
         agendumID={agendum.id}
         notes={agendumNotes} />

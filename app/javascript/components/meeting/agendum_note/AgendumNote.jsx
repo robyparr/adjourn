@@ -18,6 +18,12 @@ export default class AgendumNote extends Component {
     onFieldEditModeChange = (isEditMode) => this.setState({ isEditing: isEditMode});
     onFieldChange = (field,  value) => this.props.onNoteChange({ [field]: value });
 
+    onNewNoteFieldChange = (e) => {
+        if (e.key === 'Enter') {
+            this.props.onNoteChange({ [e.target.name]: e.target.value });
+        }
+    }
+
     render() {
         /* 
             At the end of the agendum note list (of "existing" notes)
@@ -29,41 +35,34 @@ export default class AgendumNote extends Component {
         */
         if (!this.props.isExistingNote) {
             return (
-                <li className="collection-item grey lighten-4 grey-text print-hide">
-                    <InlineEdit
-                        onChange={this.onFieldChange}
-                        onEditModeChanged={this.onFieldEditModeChange}
-                        value="Add a new note..."
+                <li>
+                    <input
+                        type="text"
+                        onKeyUp={this.onNewNoteFieldChange}
                         placeholder="Add a new note..."
                         name="content"
-                        className="grey-text"
-                        multilineEditor={true}
-                        renderMarkdown={true}
-                        singleClickToEdit={true} />
+                        className="w-full" />
                 </li>
             );
         }
 
         return(
-            <li className="collection-item grey lighten-4">
-                {!this.state.isEditing &&
-                    <a className="secondary-content delete-link">
-                        <i className="material-icons"
-                                data-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
-                            delete
-                        </i>
-                    </a>
-                }
-
+            <li>
                 <InlineEdit
                     onChange={this.onFieldChange}
                     onEditModeChanged={this.onFieldEditModeChange}
                     value={this.props.note.content}
                     placeholder="Agendum note"
                     name="content"
+                    className="w-full mr-4"
                     multilineEditor={true}
                     renderMarkdown={true} />
 
+                <button className="list-floating-text">
+                    <i className="fa fa-trash"
+                            data-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
+                    </i>
+                </button>
 
                 <div className={`modal confirm-agendum-note-delete-${this.props.note.id}`}>
                     <div className="title">Are you sure?</div>

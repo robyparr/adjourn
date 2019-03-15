@@ -8,7 +8,7 @@ import AgendumNoteContainer from '../../../containers/AgendumNoteContainer';
  */
 const AgendumNotes = (props) => {
   return (
-    <ul className="collection">
+    <ul className="list">
       {props.notes.map(note => {
         return (
           <AgendumNoteContainer
