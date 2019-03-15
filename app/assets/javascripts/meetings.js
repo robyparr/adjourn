@@ -17,6 +17,20 @@ $(document).ready(function() {
     $(this).addClass('browser-default');
   });
 
+  $('#new-meeting-form').on('ajax:success', function(response) {
+    window.location = response.detail[0].resource_url;
+  }).on('ajax:error', function(response) {
+    var errorResponse = response.detail[0].errors;
+    var errorsListItems = "";
+    for(var i = 0; i < errorResponse.length; i++) {
+      errorsListItems += "<li>" + errorResponse[i] + "</li>";
+    }
+
+    var errors = $('#new-meeting-form').find('.error');
+    errors.find('ul').html(errorsListItems);
+    errors.css('display', 'block');
+  });
+
 });
 
   function openAgendumDetailsView() {
