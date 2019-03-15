@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white shadow rounded p-4 border-t-2 border-transparent;
+  @apply bg-white shadow rounded p-4 border border-grey-light;
 
   .card-head {
     @apply flex items-center relative;
@@ -9,7 +9,8 @@
   }
 
   &.selected {
-    @apply border-t-2 border-primary;
+    @apply border-t-2;
+    border-top-color: config('colors.primary');
   }
 
   .dropzone {
