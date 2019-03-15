@@ -1,7 +1,7 @@
 function showErrorMessage(message) {
-  Materialize.toast(message, 5000, 'red');
+  Toast.show(message, 'error');
 }
 
 function showInformationMessage(message) {
-  Materialize.toast(message, 5000);
+  Toast.show(message, 'info');
 }

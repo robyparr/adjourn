@@ -1,0 +1,17 @@
+.toast-container {
+  @apply fixed pin-t pin-l pin-r z-50;
+
+  .toast {
+    @apply bg-white border mx-auto shadow py-2 px-4 mt-4 rounded cursor-pointer;
+    transition: transform 0.5s ease;
+    transform: translateY(-200px);
+    min-width: 300px;
+    max-width: 500px;
+    width: fit-content;
+
+    &.visible { transform: translateY(0); }
+
+    &.info { border-left: 4px solid config('colors.primary'); }
+    &.error { border-left: 4px solid config('colors.red'); }
+  }
+}
