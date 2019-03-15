@@ -14,5 +14,4 @@
 //= require jquery 
 //= require jquery_ujs
 //= require moment/moment
-// require materialize
 //= require_tree .
