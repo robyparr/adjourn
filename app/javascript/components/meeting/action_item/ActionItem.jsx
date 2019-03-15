@@ -18,25 +18,21 @@ export default class ActionItem extends Component {
     onFieldEditModeChange = (isEditMode) => this.setState({ isEditing: isEditMode });
     onFieldChange = (field, value) => this.props.onActionItemChange({ [field]: value });
 
-    render() {
-        const titleWrapperStyles = {
-            display: 'block',
-            marginBottom: 8
-        };
+    onNewActionItemFieldChange = (e) => {
+        if (e.key === 'Enter') {
+            this.props.onActionItemChange({ [e.target.name]: e.target.value });
+        }
+    }
 
+    render() {
         if (!this.props.isExistingItem) {
             return (
-                <li className="collection-item checkbox grey lighten-4 print-hide">
-                    <span className="title font-size-20" style={titleWrapperStyles}>
-                        <InlineEdit
-                            onChange={this.onFieldChange}
-                            onEditModeChanged={this.onFieldEditModeChange}
-                            displayElement="p"
-                            value="New Item"
-                            placeholder="New Item"
-                            singleClickToEdit={true}
-                            name="title" />
-                    </span>
+                <li>
+                    <input
+                        type="text"
+                        onKeyUp={this.onNewActionItemFieldChange}
+                        placeholder="New Item"
+                        name="title" />
                 </li>
             );
         }
@@ -44,49 +40,47 @@ export default class ActionItem extends Component {
         var descriptionValue = this.props.actionItem.description
             || "Click here to add a description.";
 
-        var descriptionClass = "margin-top-none margin-bottom-none "
-            + (this.props.actionItem.description ? "" : "print-hide");
-
         return(
-            <li className="collection-item checkbox">
-                {!this.state.isEditing &&
-                    <a className="secondary-content delete-link">
-                        <i className="material-icons"
-                                data-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
-                            delete
-                        </i>
-                    </a>
-                }
+            <li>
+                <div className="list-item-content">
+                    <div className="flex">
+                        <input type="checkbox"
+                            id={`item-done-${this.props.actionItem.id}`}
+                            checked={this.props.actionItem.done}
+                            onChange={(e) => this.onFieldChange('done', e.target.checked)} />
+                        <div className="flex flex-col mx-4">
+                            <div className="font-semibold">
+                                <InlineEdit
+                                    onChange={this.onFieldChange}
+                                    onEditModeChanged={this.onFieldEditModeChange}
+                                    displayElement="span"
+                                    value={this.props.actionItem.title}
+                                    className="w-full"
+                                    placeholder="Item Title"
+                                    name="title" />
+                            </div>
 
-                <span className="checkbox">
-                    <input type="checkbox"
-                        id={`item-done-${this.props.actionItem.id}`}
-                        checked={this.props.actionItem.done}
-                        onChange={(e) => this.onFieldChange('done', e.target.checked)} />
-                    <label htmlFor={`item-done-${this.props.actionItem.id}`}></label>
-                </span>
-
-                <span className="title font-size-20" style={titleWrapperStyles}>
-                    <InlineEdit
-                        onChange={this.onFieldChange}
-                        onEditModeChanged={this.onFieldEditModeChange}
-                        displayElement={"span"}
-                        value={this.props.actionItem.title}
-                        placeholder="Item Title"
-                        name="title" />
-                </span>
-
-                <InlineEdit
-                    className={descriptionClass}
-                    name="description"
-                    onChange={this.onFieldChange}
-                    onEditModeChanged={this.onFieldEditModeChange}
-                    singleClickToEdit={!this.props.actionItem.description}
-                    value={descriptionValue}
-                    placeholder="Item Description"
-                    multilineEditor={true}
-                    renderMarkdown={true} />
-
+                            <div className="text-grey-darker">
+                                <InlineEdit
+                                    className="margin-top-none margin-bottom-none"
+                                    name="description"
+                                    onChange={this.onFieldChange}
+                                    onEditModeChanged={this.onFieldEditModeChange}
+                                    singleClickToEdit={!this.props.actionItem.description}
+                                    value={descriptionValue}
+                                    placeholder="Item Description"
+                                    multilineEditor={true}
+                                    className="w-full"
+                                    renderMarkdown={true} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button className="list-floating-text">
+                    <i className="fa fa-trash"
+                            data-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
+                    </i>
+                </button>
                 <div className={`modal confirm-aa-delete-${this.props.actionItem.id}`}>
                     <div className="title">Are you sure?</div>
                     <div className="modal-content">

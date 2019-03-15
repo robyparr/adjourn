@@ -7,11 +7,8 @@ import ActionItemContainer from '../../../containers/ActionItemContainer';
  * Create a list of Action Items.
  */
 const ActionItems = (props) => {
-    const containerClass = "collection with-header margin-top-none "
-        + (props.actionItems.length === 0 ? "print-hide" : "");
-
     return(
-        <ul className={containerClass}>
+        <ul className="list action-item-list">
             {props.actionItems.map((item) => {
                 return(
                     <ActionItemContainer

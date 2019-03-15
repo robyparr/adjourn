@@ -44,6 +44,14 @@
       left: 8px;
       right: 8px;
     }
+
+    .action-item-list {
+      @apply absolute overflow-y-auto;
+      top: 0;
+      bottom: 5px;
+      left: 8px;
+      right: 8px;
+    }
   }
 
   &.active {

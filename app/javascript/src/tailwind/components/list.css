@@ -1,5 +1,5 @@
 .list {
-  @apply list-reset bg-white rounded shadow;
+  @apply list-reset rounded shadow;
 
   li {
     @apply flex items-center justify-between p-4 border-b bg-white relative;
