@@ -28,7 +28,17 @@ export default class Attendees extends React.Component {
     render() {
         return (
             <div>
-                <ul className="list">
+                <Autocomplete
+                    id="attendees-autocomplete"
+                    className="autocomplete bg-white flex-no-shrink"
+                    placeholder="Add Attendee"
+                    method="GET"
+                    url={this.autocompletePath}
+                    parseResponse={this.parseAutocompleteResponse}
+                    renderItem={(item) => item.email}
+                    onItemSelected={this.onAutocompleteItemSelected} />
+
+                <ul className="list mt-4 attendees-list">
                     {this.props.attendees.map(attendee => {
                         return (
                             <li key={attendee.id}>
@@ -48,15 +58,6 @@ export default class Attendees extends React.Component {
                         );
                     })}
                 </ul>
-                <Autocomplete
-                    id="attendees-autocomplete"
-                    className="autocomplete"
-                    placeholder="Add Attendee"
-                    method="GET"
-                    url={this.autocompletePath}
-                    parseResponse={this.parseAutocompleteResponse}
-                    renderItem={(item) => item.email}
-                    onItemSelected={this.onAutocompleteItemSelected} />
             </div>
         );
     }

@@ -33,6 +33,19 @@
     }
   }
 
+  .meeting-sidebar-contents {
+    height: calc(100vh - 105px);
+    position: relative;
+
+    .attendees-list {
+      @apply absolute overflow-y-auto;
+      top: 40px;
+      bottom: 5px;
+      left: 8px;
+      right: 8px;
+    }
+  }
+
   &.active {
     height: 75%;
     @screen lg { height: 100%; }

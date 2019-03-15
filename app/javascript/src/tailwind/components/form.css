@@ -6,4 +6,6 @@ input:not([type="submit"]) {
   &:focus {
     @apply outline-none bg-white border-primary;
   }
+
+  &.bg-white { @apply bg-white; }
 }

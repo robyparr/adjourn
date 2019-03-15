@@ -96,7 +96,7 @@ export default class MeetingSidebar extends React.Component {
             </div>
           </div>
           <div className="row">
-            <div className="column sm12">
+            <div className="column sm12 meeting-sidebar-contents">
               {this.tabContent()}
             </div>
           </div>
