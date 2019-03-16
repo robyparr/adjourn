@@ -6,9 +6,7 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="<%= 'disabled' if current_page.first? %>">
-  <%= link_to '<i class="material-icons">chevron_left</i>'.html_safe, 
-    url, 
-    rel: 'prev', 
-    remote: remote %>
-</li>
+
+<%= link_to url, rel: 'prev', remote: remote do %>
+  <i class="fa fa-chevron-left fa-xs"></i> Previous
+<% end %>

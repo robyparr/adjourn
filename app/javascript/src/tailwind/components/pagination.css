@@ -1,0 +1,13 @@
+.pagination {
+  @apply flex justify-end items-center;
+
+  .page {
+    @apply mx-1 rounded text-center;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+
+    &:not(.gap) { @apply bg-primary-lightest text-white; }
+    &.current { @apply bg-primary-dark; }
+  }
+}

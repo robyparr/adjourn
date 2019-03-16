@@ -31,10 +31,10 @@
       <% end %>
     </tbody>
   </table>
-
-  <% if show_pagination %>
-    <div style="text-align: right;">
-      <%= paginate @meetings %>
-    </div>
-  <% end %>
 </div>
+
+<% if show_pagination %>
+  <div class="mt-4">
+    <%= paginate @meetings %>
+  </div>
+<% end %>

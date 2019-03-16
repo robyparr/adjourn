@@ -7,6 +7,8 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<li class="<%= page.current? ? 'active' : 'waves-current' %>">
-  <%= link_to page, url, {remote: remote, rel: page.rel} %>
-</li>
+<%= link_to page,
+  url,
+  class: "page #{page.current? ? 'current' : ''}",
+  remote: remote,
+  rel: page.rel %>
