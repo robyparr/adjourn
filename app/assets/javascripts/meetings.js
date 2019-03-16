@@ -11,12 +11,6 @@ $(document).ready(function() {
     element.html(formattedDate);
   });
 
-  // Fix for Material UI's <AutoComplete /> applying .browser-default
-  // to a wrapping div instead of the input element.
-  $('div.browser-default').children('input[type=text]').each(function() {
-    $(this).addClass('browser-default');
-  });
-
   $('#new-meeting-form').on('ajax:success', function(response) {
     window.location = response.detail[0].resource_url;
   }).on('ajax:error', function(response) {
