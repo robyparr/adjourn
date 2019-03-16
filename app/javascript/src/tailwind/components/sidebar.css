@@ -54,6 +54,7 @@
     
     .collapse { display: initial; }
     .expand { @apply hidden; }
+    i { pointer-events: none; }
   }
 
   ul.links {

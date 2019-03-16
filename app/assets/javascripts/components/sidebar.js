@@ -38,20 +38,26 @@ $(document).ready(function() {
     };
   })();
 
-  $(document).on('click', '.sidebar .collapse-button', function() {
-    if (Sidebar.isCollapsed()) {
-      Sidebar.expand();
-    } else {
-      Sidebar.collapse();
+  document.addEventListener('click', function(e) {
+    if (document.querySelector('.sidebar .collapse-button') === e.target) {
+      if (Sidebar.isCollapsed()) {
+        Sidebar.expand();
+      } else {
+        Sidebar.collapse();
+      }
     }
   });
 
-  $(document).on('click', '#sidebar-menu', function(e) {
-    Sidebar.expand();
-    Sidebar.show();
+  document.addEventListener('click', function(e) {
+    if (e.target.id === 'sidebar-menu') {
+      Sidebar.expand();
+      Sidebar.show();
+    }
   });
 
-  $(document).on('click', '.sidebar-overlay', function(e) {
-    Sidebar.hide();
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('sidebar-overlay')) {
+      Sidebar.hide();
+    }
   });
 });
