@@ -1,0 +1,14 @@
+.card.auth {
+  @apply relative;
+  min-width: 300px;
+  max-width: 385px;
+  width: 20%;
+
+  .auth-banner {
+    @apply flex flex-row items-center bg-primary absolute pin-t pin-x mt-0 p-4 justify-center;
+  }
+
+  .card-head {
+    @apply mt-20;
+  }
+}

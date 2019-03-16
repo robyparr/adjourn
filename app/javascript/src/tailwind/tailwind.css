@@ -39,6 +39,7 @@
  @import 'components/media';
  @import 'components/toast';
  @import 'components/pagination';
+ @import 'components/auth';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

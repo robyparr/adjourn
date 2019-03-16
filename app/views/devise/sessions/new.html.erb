@@ -1,35 +1,42 @@
 <div class="vertical-center">
-  <h2 class="flex flex-row items-center mb-4">
-    <%= image_tag 'icon-blue.png', width: '54px' %>
-    <span class="ml-4">Adjourn</span>
-  </h2>
+  <div class="card auth">
+    <%= render 'devise/shared/auth_banner' %>
 
-  <div class="card-panel">
-    <h4 class="text-center">Sign in</h4>
+    <div class="card-head">
+      <div class="card-title">Sign in</div>
+    </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'mb-4' }) do |f| %>
-      <div class="input-field">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name),
+        html: { class: 'mb-4' }) do |f| %>
+      <div class="mt-2">
         <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true %>
+        <%= f.email_field :email, autofocus: true, placeholder: 'Email' %>
       </div>
 
-      <div class="input-field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %>
+      <div class="mt-2">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
       </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div>
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+        <div class="mt-2">
+          <label>
+            <%= f.check_box :remember_me %>
+            Remember me
+          </label>
         </div>
       <% end -%>
 
       <div class="actions">
-        <%= f.submit "Log in", class: 'button block' %>
+        <%= f.submit "Sign in", class: 'button block primary' %>
       </div>
     <% end %>
 
-    <%= render "devise/shared/links" %>
+    <% if devise_mapping.registerable? %>
+      <div class="text-center">
+        <%= link_to "Sign up", new_registration_path(resource_name) %>
+      </div>
+    <% end %>
   </div>
+  <%= render "devise/shared/links" %>
 </div>

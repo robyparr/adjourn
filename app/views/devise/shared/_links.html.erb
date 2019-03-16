@@ -1,10 +1,10 @@
-<div class="text-center">
-  <%- if controller_name != 'sessions' %>
-    <%= link_to "Log in", new_session_path(resource_name) %><br />
+<div class="text-center mt-4">
+  <%- if controller_name != 'sessions' && controller_name != 'registrations' %>
+    <%= link_to "Sign in", new_session_path(resource_name) %><br />
   <% end -%>
 
-  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-    <%= link_to "Sign up", new_registration_path(resource_name), class: 'button block outline mb-1' %>
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' && controller_name != 'sessions' %>
+    <%= link_to "Sign up", new_registration_path(resource_name) %><br />
   <% end -%>
 
   <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
