@@ -3,47 +3,47 @@ import { connect } from 'react-redux';
 
 import ActionItem from '../components/meeting/action_item/ActionItem';
 import {
-    addActionItem,
-    updateActionItem,
-    deleteActionItem
+  addActionItem,
+  updateActionItem,
+  deleteActionItem
 } from '../actions/actionItems';
 
 const ActionItemContainer = ({
-    actionItem,
-    meetingID,
-    addActionItem,
-    updateActionItem,
-    deleteActionItem
+  actionItem,
+  meetingID,
+  addActionItem,
+  updateActionItem,
+  deleteActionItem
 }) => {
-    const isExistingItem = actionItem && actionItem.id;
-    
-    if (!isExistingItem) {
-        return (
-            <ActionItem
-                actionItem={actionItem}
-                isExistingItem={false}
-                onActionItemChange={addActionItem}
-                meetingID={meetingID} />
-        );
-    }
+  const isExistingItem = actionItem && actionItem.id;
 
+  if (!isExistingItem) {
     return (
-        <ActionItem
-            actionItem={actionItem}
-            isExistingItem={true}
-            onActionItemChange={partialActionItem => updateActionItem(actionItem.id, partialActionItem)}
-            onActionItemDelete={deleteActionItem}
-            meetingID={meetingID} />
+      <ActionItem
+        actionItem={actionItem}
+        isExistingItem={false}
+        onActionItemChange={addActionItem}
+        meetingID={meetingID} />
     );
+  }
+
+  return (
+    <ActionItem
+      actionItem={actionItem}
+      isExistingItem={true}
+      onActionItemChange={partialActionItem => updateActionItem(actionItem.id, partialActionItem)}
+      onActionItemDelete={deleteActionItem}
+      meetingID={meetingID} />
+  );
 };
 
 const mapStateToProps = state => {
-    return {
-        meetingID: state.meeting.id
-    }
+  return {
+    meetingID: state.meeting.id
+  }
 };
 
 export default connect(
-    mapStateToProps,
-    { addActionItem, updateActionItem, deleteActionItem }
-)(ActionItemContainer);
+  mapStateToProps,
+  { addActionItem, updateActionItem, deleteActionItem }
+  )(ActionItemContainer);

@@ -10,40 +10,40 @@ import Utils from 'utils';
 
 const MeetingContainer = ({ meeting, updateMeeting }) => {
 
-    const onFieldUpdate = (field, value) => {
-        const meetingUpdate = Object.assign({}, meeting, { 
-            [field]: value 
-        });
-        updateMeeting(meetingUpdate);
-    };
+  const onFieldUpdate = (field, value) => {
+    const meetingUpdate = Object.assign({}, meeting, {
+      [field]: value
+    });
+    updateMeeting(meetingUpdate);
+  };
 
-    const onEmailAttendeesClick = () => {
-        axios({
-          method: 'POST',
-          url: `/meetings/${meeting.id}/email_attendees`,
-          data: { authenticity_token: Utils.getAuthenticityToken() }
-        })
-        .then(response => {
-          showInformationMessage(response.data.message);
-        })
-        .catch(error => console.log(error));
-      }
-    
-    return (
-        <Meeting
-            meeting={meeting}
-            onFieldUpdate={onFieldUpdate}
-            onEmailAttendeesClick={onEmailAttendeesClick} />
-    );
+  const onEmailAttendeesClick = () => {
+    axios({
+      method: 'POST',
+      url: `/meetings/${meeting.id}/email_attendees`,
+      data: { authenticity_token: Utils.getAuthenticityToken() }
+    })
+    .then(response => {
+      showInformationMessage(response.data.message);
+    })
+    .catch(error => console.log(error));
+  }
+
+  return (
+    <Meeting
+      meeting={meeting}
+      onFieldUpdate={onFieldUpdate}
+      onEmailAttendeesClick={onEmailAttendeesClick} />
+  );
 };
 
 const mapStateToProps = state => {
-    return {
-        meeting: state.meeting
-    }
+  return {
+    meeting: state.meeting
+  }
 };
 
 export default connect(
-    mapStateToProps,
-    { updateMeeting }
+  mapStateToProps,
+  { updateMeeting }
 )(MeetingContainer);

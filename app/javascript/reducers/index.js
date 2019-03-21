@@ -8,12 +8,12 @@ import attendees from './attendees';
 import agendumUploads from './agendumUploads';
 
 const rootReducer = combineReducers({
-    meeting: meetings,
-    agenda,
-    agendumNotes,
-    actionItems,
-    attendees,
-    agendumUploads
+  meeting: meetings,
+  agenda,
+  agendumNotes,
+  actionItems,
+  attendees,
+  agendumUploads
 });
 
 export default rootReducer;

@@ -1,40 +1,40 @@
 var md5 = require('md5');
 
 /*
- * JavaScript utilities.
- */
+* JavaScript utilities.
+*/
 export default class Utils {
-    /*
-     * Formats a Date() object into a string.
-     */
-    static formatDateTime(date) {
-        return moment(date).format('LLLL');
+  /*
+  * Formats a Date() object into a string.
+  */
+  static formatDateTime(date) {
+    return moment(date).format('LLLL');
+  }
+
+  /*
+  * Returns a Date() object from a string in the same format
+  * as formatDateTime();
+  */
+  static dateFromString(dateTimeString) {
+    if (typeof dateTimeString === 'object') {
+      // Assume that dateTimeString is a Date() object
+      // and reurn that.
+      return dateTimeString;
     }
 
-    /*
-     * Returns a Date() object from a string in the same format
-     * as formatDateTime();
-     */
-    static dateFromString(dateTimeString) {
-        if (typeof dateTimeString === 'object') {
-            // Assume that dateTimeString is a Date() object
-            // and reurn that.
-            return dateTimeString;
-        }
+    return new Date(dateTimeString.replace(' ', 'T').replace('Z', ''));
+  }
 
-        return new Date(dateTimeString.replace(' ', 'T').replace('Z', ''));
-    }
+  /*
+  * Get the Rails authenticity token.
+  */
+  static getAuthenticityToken() {
+    return document.querySelector('meta[name=csrf-token]')
+      .getAttribute('content');
+  }
 
-    /*
-     * Get the Rails authenticity token.
-     */
-    static getAuthenticityToken() {
-        return document.querySelector('meta[name=csrf-token]')
-            .getAttribute('content');
-    }
-
-    static getGravatarUrl(email) {
-        var hashedEmail = md5(email.trim().toLowerCase());
-        return `https://www.gravatar.com/avatar/${hashedEmail}.jpg?s=32&d=mm`;
-    }
+  static getGravatarUrl(email) {
+    var hashedEmail = md5(email.trim().toLowerCase());
+    return `https://www.gravatar.com/avatar/${hashedEmail}.jpg?s=32&d=mm`;
+  }
 }

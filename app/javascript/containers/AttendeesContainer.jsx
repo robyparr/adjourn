@@ -5,30 +5,30 @@ import Attendees from '../components/meeting/attendee/Attendees';
 import { addAttendee, removeAttendee } from '../actions/attendees';
 
 export class AttendeesContainer extends React.Component {
-    onAttendeeAdded = (email, meetingID) => {
-        this.props.addAttendee(email, meetingID);
-        this.setState({ searchText: "" });
-    }
+  onAttendeeAdded = (email, meetingID) => {
+    this.props.addAttendee(email, meetingID);
+    this.setState({ searchText: "" });
+  }
 
-    render() {
-        return (
-            <Attendees
-                attendees={this.props.attendees}
-                meetingID={this.props.meetingID}
-                onAttendeeSelect={this.onAttendeeAdded}
-                onAttendeeRemove={this.props.removeAttendee} />
-        );
-    }
+  render() {
+    return (
+      <Attendees
+        attendees={this.props.attendees}
+        meetingID={this.props.meetingID}
+        onAttendeeSelect={this.onAttendeeAdded}
+        onAttendeeRemove={this.props.removeAttendee} />
+    );
+  }
 };
 
 const mapStateToProps = state => {
-    return {
-        attendees: state.attendees,
-        meetingID: state.meeting.id
-    }
+  return {
+    attendees: state.attendees,
+    meetingID: state.meeting.id
+  }
 };
 
 export default connect(
-    mapStateToProps,
-    { addAttendee, removeAttendee }
+  mapStateToProps,
+  { addAttendee, removeAttendee }
 )(AttendeesContainer);
