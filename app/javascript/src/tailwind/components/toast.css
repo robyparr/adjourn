@@ -1,5 +1,5 @@
 .toast-container {
-  @apply fixed pin-l pin-r z-50;
+  @apply fixed pin-l pin-r z-50 pointer-events-none;
   bottom: 0px;
 
   &.with-sidebar { bottom: 60px; }
