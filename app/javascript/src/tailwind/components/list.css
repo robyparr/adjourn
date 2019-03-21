@@ -9,7 +9,7 @@
     &:last-child { @apply rounded-b; }
 
     .list-item-content {
-      @apply flex flex-col;
+      @apply flex flex-col w-full;
 
       .list-secondary-text { @apply block text-grey-dark; }
     }

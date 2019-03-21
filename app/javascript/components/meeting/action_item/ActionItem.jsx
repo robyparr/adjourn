@@ -48,7 +48,7 @@ export default class ActionItem extends Component {
               checked={this.props.actionItem.done}
               onChange={(e) => this.onFieldChange('done', e.target.checked)} />
 
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col mx-4 w-full">
               <div className="font-semibold">
                 <InlineEdit
                   onChange={this.onFieldChange}
@@ -77,11 +77,13 @@ export default class ActionItem extends Component {
           </div>
         </div>
 
-        <button className="list-floating-text">
-          <i className="fa fa-trash"
-            data-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
-          </i>
-        </button>
+        {!this.state.isEditing &&
+          <button className="list-floating-text">
+            <i className="fa fa-trash"
+              data-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
+            </i>
+          </button>
+        }
         <div className={`modal confirm-aa-delete-${this.props.actionItem.id}`}>
           <div className="title">Are you sure?</div>
           <div className="modal-content">
