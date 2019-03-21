@@ -1,4 +1,6 @@
-.sidebar-overlay { @apply hidden w-full fixed pin-x pin-y bg-black opacity-25 z-10; }
+.sidebar-overlay {
+  @apply hidden w-full fixed pin-x pin-y bg-black opacity-25 z-10 cursor-pointer;
+}
 
 .sidebar {
   @apply fixed pin-x pin-y z-30 bg-primary shadow-lg ml-0 pt-4;
