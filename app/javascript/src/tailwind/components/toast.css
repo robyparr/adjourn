@@ -1,13 +1,27 @@
 .toast-container {
-  @apply fixed pin-t pin-l pin-r z-50;
+  @apply fixed pin-l pin-r z-50;
+  bottom: 0px;
+
+  &.with-sidebar { bottom: 60px; }
+
+  @screen lg {
+    @apply pin-t;
+    bottom: 0;
+  }
 
   .toast {
-    @apply bg-white border mx-auto shadow py-2 px-4 mt-4 rounded cursor-pointer;
-    transition: transform 0.5s ease;
-    transform: translateY(-200px);
+    @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full;
     min-width: 300px;
     max-width: 500px;
-    width: fit-content;
+
+    transition: transform 0.5s ease;
+    transform: translateY(200px);
+
+    @screen lg {
+      @apply mt-4;
+      transform: translateY(-200px);
+      width: fit-content;
+    }
 
     &.visible { transform: translateY(0); }
 
