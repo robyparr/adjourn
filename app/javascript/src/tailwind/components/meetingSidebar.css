@@ -40,7 +40,7 @@
     position: relative;
 
     .attendees-list {
-      @apply absolute overflow-y-auto;
+      @apply absolute overflow-y-auto shadow-none;
       top: 40px;
       bottom: 5px;
       left: 8px;
@@ -48,7 +48,7 @@
     }
 
     .action-item-list {
-      @apply absolute overflow-y-auto;
+      @apply absolute overflow-y-auto shadow-none;
       top: 0;
       bottom: 5px;
       left: 8px;
