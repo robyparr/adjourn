@@ -1,37 +1,21 @@
 import React from 'react';
 
-import moment from 'moment';
+const TimePicker = (props) => {
+  const selectedTime = props.selectedTime.clone();
 
-class TimePicker extends React.Component {
-  constructor(props) {
-    super(props);
+  return (
+    <div className="inline-flex">
+      <input type="number"
+        min="0" max="24" step="1"
+        value={selectedTime.format('HH')}
+        onChange={(e) => props.onTimeChange(selectedTime.hour(e.target.value))} />
 
-    this.state = {
-      selectedTime: moment()
-    };
-  }
-
-  onTimeChange = (e, interval) => {
-    this.setState({
-      selectedTime: this.state.selectedTime[interval](e.target.value)
-    }, () => this.props.onTimeChange(this.state.selectedTime));
-  }
-
-  render() {
-    return (
-      <div className="inline-flex">
-        <input type="number"
-          min="0" max="24" step="1"
-          value={this.state.selectedTime.format('HH')}
-          onChange={(e) => this.onTimeChange(e, 'hour')} />
-
-        <input type="number"
-          min="0" max="59" step="1"
-          value={this.state.selectedTime.format('mm')}
-          onChange={(e) => this.onTimeChange(e, 'minute')} />
-      </div>
-    );
-  }
-}
+      <input type="number"
+        min="0" max="59" step="1"
+        value={selectedTime.format('mm')}
+        onChange={(e) => props.onTimeChange(selectedTime.minute(e.target.value))} />
+    </div>
+  );
+};
 
 export default TimePicker;

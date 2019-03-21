@@ -10,10 +10,8 @@ import Utils from 'utils';
 
 const MeetingContainer = ({ meeting, updateMeeting }) => {
 
-  const onFieldUpdate = (field, value) => {
-    const meetingUpdate = Object.assign({}, meeting, {
-      [field]: value
-    });
+  const onFieldsUpdate = (fields) => {
+    const meetingUpdate = Object.assign({}, meeting, fields);
     updateMeeting(meetingUpdate);
   };
 
@@ -32,7 +30,7 @@ const MeetingContainer = ({ meeting, updateMeeting }) => {
   return (
     <Meeting
       meeting={meeting}
-      onFieldUpdate={onFieldUpdate}
+      onFieldsUpdate={onFieldsUpdate}
       onEmailAttendeesClick={onEmailAttendeesClick} />
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import DatePicker from './eventTimePicker/DatePicker';
-import TimePicker from './eventTimePicker/TimePicker';
+import DatePicker from './EventTimePicker/DatePicker';
+import TimePicker from './EventTimePicker/TimePicker';
 
 import moment from 'moment';
 
@@ -10,8 +10,8 @@ class EventTimePicker extends React.Component {
     super(props);
 
     this.state = {
-      from: moment(),
-      to: moment().add('minute', 15),
+      from: moment(props.from).utc(),
+      to: moment(props.to).utc(),
       pickerIsOpen: false
     };
   }
@@ -21,19 +21,36 @@ class EventTimePicker extends React.Component {
   }
 
   onDateTimeSelect = (dateTime, interval, fromTo) => {
-    var newDate;
+    const newState = { [fromTo]: this.state[fromTo].clone() };
+
     if (interval === 'date') {
-      newDate = this.state[fromTo]
+      newState[fromTo]
         .year(dateTime.year())
         .month(dateTime.month())
         .date(dateTime.date());
     } else {
-      newDate = this.state[fromTo]
+      newState[fromTo]
         .hour(dateTime.hour())
         .minute(dateTime.minute());
     }
 
-    this.setState({ [fromTo]: newDate });
+    if (interval === 'date') {
+      newState[fromTo === 'from' ? 'to' : 'from'] = this.state.to.clone()
+        .year(dateTime.year())
+        .month(dateTime.month())
+        .date(dateTime.date());
+    } else {
+      if (fromTo === 'from' && newState[fromTo].isAfter(this.state.to)) {
+        newState.to = newState[fromTo].clone().add('minute', 15);
+      }
+    }
+
+    this.setState(newState, () => {
+      this.props.onChange({
+        start_date: this.state.from,
+        end_date: this.state.to
+      })
+    });
   }
 
   openPicker = () => {
@@ -52,20 +69,26 @@ class EventTimePicker extends React.Component {
     return (
       <span ref="self">
         <div className="text-grey-darkest cursor-pointer" onClick={this.openPicker}>
-          {`${this.state.from.format('YYYY-MM-DD hh:mm A')} - ${this.state.to.format('hh:mm A')}`}
+          {`${this.state.from.local().format('YYYY-MM-DD hh:mm A')} - ${this.state.to.local().format('hh:mm A')}`}
         </div>
         {this.state.pickerIsOpen &&
           <div className="event-time-picker">
             <div className="row">
               <div className="col sm6">
-                <DatePicker onDateSelect={(date) => this.onDateTimeSelect(date, 'date', 'from')} />
+                <DatePicker
+                  selectedDate={this.state.from}
+                  onDateSelect={(date) => this.onDateTimeSelect(date, 'date', 'from')} />
               </div>
               <div className="col sm6">
                 <h5 className="mt-4">From</h5>
-                <TimePicker onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'from')} />
+                <TimePicker
+                  selectedTime={this.state.from}
+                  onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'from')} />
 
                 <h5 className="mt-4">To</h5>
-                <TimePicker onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'to')} />
+                <TimePicker
+                  selectedTime={this.state.to}
+                  onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'to')} />
               </div>
             </div>
           </div>

@@ -7,8 +7,8 @@ class DatePicker extends React.Component {
     super(props);
 
     this.state = {
-      currentMonth: moment(),
-      selectedDate: null
+      currentMonth: moment(this.props.selectedDate).utc() || moment().utc(),
+      selectedDate: moment(this.props.selectedDate).utc() || null
     };
   }
 
