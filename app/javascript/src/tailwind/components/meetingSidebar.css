@@ -17,10 +17,12 @@
   }
 
   .tabs {
-    @apply p-0 m-0 text-center bg-white;
+    @apply p-0 m-0 text-center bg-white border-t;
+
+    @screen lg { @apply border-t-0; }
 
     .tab {
-      @apply p-2 border-b;
+      @apply p-4 border-b;
 
       @screen lg {
         &.selected {
