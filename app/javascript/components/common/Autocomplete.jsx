@@ -104,14 +104,25 @@ export default class Autocomplete extends React.Component {
     this.setState({ showResults: false, selectedItem: null });
   }
 
-  onAutocompleteItemSelect = (item) => {
-    this.props.onItemSelected(item);
+  resetAutocomplete = () => {
     this.setState({
       autocompleteResults: null,
       autocompleteText: '',
       selectedItem: null
     });
     this.refs.autocomplete.focus();
+  }
+
+  onAutocompleteItemSelect = (item) => {
+    this.props.onItemSelected(item);
+    this.resetAutocomplete();
+  }
+
+  onEmptySubmit = () => {
+    if (this.state.selectedItem === null) {
+      this.props.onEmptySubmit(this.state.autocompleteText);
+      this.resetAutocomplete();
+    }
   }
 
   resultItemClasses = (i) => {
@@ -135,6 +146,11 @@ export default class Autocomplete extends React.Component {
           className={this.props.className}
           onChange={this.onChange}
           onClick={this.showResults}
+          onKeyUp={e => {
+            if (e.keyCode === this.ENTER_KEY_CODE) {
+              this.onEmptySubmit();
+            }
+          }}
           placeholder={this.props.placeholder}
           autoComplete="off"
           ref="autocomplete"
@@ -148,6 +164,12 @@ export default class Autocomplete extends React.Component {
                 dangerouslySetInnerHTML={{ __html: this.props.renderItem(item) }}>
             </li>
           ))}
+
+          {this.state.autocompleteResults && this.state.autocompleteResults.length ===  0 &&
+            <li onClick={this.onEmptySubmit}>
+              {this.props.noResultsMessage(this.state.autocompleteText) || "No results found."}
+            </li>
+          }
         </ul>
       </div>
     );

@@ -25,6 +25,14 @@ export default class Attendees extends React.Component {
     this.props.onAttendeeSelect(item.email, this.props.meetingID);
   }
 
+  onAutocompleteEmptySubmit = (autocompleteText) => {
+    this.props.onAttendeeSelect(autocompleteText, this.props.meetingID);
+  }
+
+  noAttendeesFoundMessage = (autocompleteText) => {
+    return `No attendees found. Hit 'Enter' or click here to add '${autocompleteText}.'`
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +44,9 @@ export default class Attendees extends React.Component {
           url={this.autocompletePath}
           parseResponse={this.parseAutocompleteResponse}
           renderItem={(item) => item.email}
-          onItemSelected={this.onAutocompleteItemSelected} />
+          onItemSelected={this.onAutocompleteItemSelected}
+          onEmptySubmit={this.onAutocompleteEmptySubmit}
+          noResultsMessage={this.noAttendeesFoundMessage} />
 
         <ul className="list mt-4 attendees-list">
           {this.props.attendees.map(attendee => {
