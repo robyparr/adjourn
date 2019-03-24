@@ -2,10 +2,12 @@
   @apply bg-white shadow-lg rounded inline-block absolute z-10;
 
   .calendar {
-    max-width: 300px;
+    max-width: 350px;
 
     .header {
       @apply flex flex-row justify-between border-b border-grey p-4 mb-4;
+
+      .month-selector { @apply cursor-pointer; }
     }
 
     .week {
@@ -18,12 +20,36 @@
       height: 40px;
 
       &.inactive { @apply text-grey; }
-      &.today { @apply text-green; }
-      &.selected { @apply bg-green text-white; }
+      &.today { @apply text-primary; }
+      &.selected { @apply bg-primary text-white; }
 
       &:not(.inactive):not(.selected) {
         @apply cursor-pointer;
         &:hover { @apply border-grey; }
+      }
+    }
+  }
+
+  .time-input {
+    .inputs {
+      @apply inline-flex items-center bg-grey-lighter rounded;
+
+      input { @apply pr-2 pl-3 text-center; }
+      .separator { @apply font-bold; }
+    }
+
+    .period {
+      @apply inline-flex items-center ml-4;
+
+      .button {
+        @apply rounded-none shadow-none;
+
+        &:first-child { @apply rounded-l border-r-0; }
+        &:last-child { @apply rounded-r border-l-0; }
+
+        &.selected {
+          @apply bg-primary text-white;
+        }
       }
     }
   }

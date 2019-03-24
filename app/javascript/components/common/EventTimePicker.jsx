@@ -74,12 +74,12 @@ class EventTimePicker extends React.Component {
         {this.state.pickerIsOpen &&
           <div className="event-time-picker">
             <div className="row">
-              <div className="col sm6">
+              <div className="column sm12 lg6">
                 <DatePicker
                   selectedDate={this.state.from}
                   onDateSelect={(date) => this.onDateTimeSelect(date, 'date', 'from')} />
               </div>
-              <div className="col sm6">
+              <div className="column sm12 lg6">
                 <h5 className="mt-4">From</h5>
                 <TimePicker
                   selectedTime={this.state.from}

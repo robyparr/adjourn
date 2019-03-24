@@ -63,9 +63,13 @@ class DatePicker extends React.Component {
     return (
       <div className="calendar">
         <div className="header">
-          <div onClick={this.previousMonth}>&lt;</div>
+          <div className="month-selector" onClick={this.previousMonth}>
+            <i className="fa fa-chevron-left"></i>
+          </div>
           <div>{this.state.currentMonth.format('MMMM YYYY')}</div>
-          <div onClick={this.nextMonth}>&gt;</div>
+          <div className="month-selector" onClick={this.nextMonth}>
+            <i className="fa fa-chevron-right"></i>
+          </div>
         </div>
         <div className="week">
           {daysOfWeek.map((day, i) => <div key={i} className="day">{day}</div>)}
