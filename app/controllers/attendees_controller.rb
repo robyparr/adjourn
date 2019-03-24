@@ -5,7 +5,7 @@ class AttendeesController < ApplicationController
   def autocomplete
     matching_attendees = current_user.attendees.where(
       "email LIKE ?",
-      "%#{params[:email]}%"
+      "%#{params[:email].downcase}%"
     ).select(:id, :email)
 
     render json: matching_attendees
