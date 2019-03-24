@@ -1,7 +1,11 @@
-.table-container { @apply shadow overflow-x-auto; }
+.table-container {
+  @apply shadow overflow-x-auto border;
+
+  table { @apply border-0; }
+}
 
 table {
-  @apply bg-white shadow w-full rounded;
+  @apply bg-white shadow w-full rounded border;
 
   thead tr { @apply border-b; }
   tbody tr:last-child { @apply border-0; }
