@@ -10,7 +10,7 @@
   }
 
   .toast {
-    @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full;
+    @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full pointer-events-auto;
     min-width: 300px;
     max-width: 500px;
 
