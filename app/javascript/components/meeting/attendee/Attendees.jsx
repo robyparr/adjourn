@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Autocomplete from '../../common/autocomplete';
+import Autocomplete from '../../common/Autocomplete';
 
 import Utils from 'utils';
 
