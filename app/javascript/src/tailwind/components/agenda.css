@@ -3,6 +3,7 @@
 
   .agendum {
     @apply mb-2 mx-2 w-full;
+    height: fit-content;
 
     @screen lg { width: 30%; }
   }
