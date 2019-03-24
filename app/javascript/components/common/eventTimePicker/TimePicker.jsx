@@ -41,7 +41,7 @@ export default class TimePicker extends React.Component {
     return (
       <div className="time-input">
         <div className="inputs">
-          <input type="number"
+          <input type="tel"
             min="1" max="12" step="1"
             value={selectedTime.format('hh')}
             onChange={(e) => this.onTimeChange('hour', e.target.value, selectedTimePeriod)}
@@ -50,7 +50,7 @@ export default class TimePicker extends React.Component {
 
           <span className="separator">:</span>
 
-          <input type="number"
+          <input type="tel"
             min="0" max="59" step="1"
             value={selectedTime.format('mm')}
             onChange={(e) => this.onTimeChange('minute', e.target.value, selectedTimePeriod)}
