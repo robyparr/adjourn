@@ -22,6 +22,7 @@ export default class Agendum extends Component {
   onNewAgendumTitleChange = (e) => {
     if (e.key === 'Enter') {
       this.props.onAgendumChange({ [e.target.name]: e.target.value });
+      e.target.value = '';
     }
   }
 
@@ -36,7 +37,7 @@ export default class Agendum extends Component {
     */
     if (!this.props.isExistingAgendum) {
       return(
-        <div className="card grey lighten-3">
+        <div className="card agendum">
           <div className="card-content">
             <span className="card-title" id="new_title">
               <input type="text"
@@ -53,7 +54,7 @@ export default class Agendum extends Component {
     const descriptionValue = this.props.agendum.description || "Click here to add a description.";
 
     return(
-      <div className={`card ${this.props.agendum.selected ? "selected" : ""}`}
+      <div className={`card agendum ${this.props.agendum.selected ? "selected" : ""}`}
         onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
 
         <div className="card-head">

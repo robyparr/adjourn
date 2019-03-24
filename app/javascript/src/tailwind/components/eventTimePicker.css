@@ -34,7 +34,11 @@
     .inputs {
       @apply inline-flex items-center bg-grey-lighter rounded;
 
-      input { @apply pr-2 pl-3 text-center; }
+      input {
+        @apply pr-2 pl-3 text-center;
+        width: 70px;
+      }
+
       .separator { @apply font-bold; }
     }
 

@@ -7,53 +7,13 @@ import AgendumContainer from '../../../containers/AgendumContainer';
 * Create a list of Agendums.
 */
 const Agenda = (props) => {
-
-  /*
-  Agendums will be placed into each array,
-  each of which will be rendered into a separate
-  HTML column. This helps to solve the spacing
-  issue when a single item in a column has a very
-  long length.
-  */
-  var columns = [
-    [],
-    [],
-    []
-  ];
-
-  var nextColumn = 0;
-
-  const getNextColumnIndex = (lastColumn) => {
-    if (lastColumn == columns.length - 1) {
-      return 0;
-    }
-
-    return ++lastColumn;
-  };
-
-  props.agenda.forEach((agendum) => {
-    columns[nextColumn].push(<AgendumContainer key={agendum.id} agendum={agendum} />);
-    nextColumn = getNextColumnIndex(nextColumn);
-  });
-
-  /* Add new Agendum item */
-  columns[nextColumn].push(
-    <div key={new Date()}>
-      <AgendumContainer />
-    </div>
-  );
-
   return(
-    <div className="row">
-      <div className="column sm12 md4">
-        { columns[0] }
-      </div>
-      <div className="column sm12 md4">
-        { columns[1] }
-      </div>
-      <div className="column sm12 md4">
-        { columns[2] }
-      </div>
+    <div className="agenda">
+      {props.agenda.map(agendum => (
+        <AgendumContainer key={agendum.id} agendum={agendum} />
+      ))}
+
+      <AgendumContainer />
     </div>
   );
 }
