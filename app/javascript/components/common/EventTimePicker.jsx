@@ -1,7 +1,7 @@
 import React from 'react';
 
-import DatePicker from './EventTimePicker/DatePicker';
-import TimePicker from './EventTimePicker/TimePicker';
+import DatePicker from './eventTimePicker/DatePicker';
+import TimePicker from './eventTimePicker/TimePicker';
 
 import moment from 'moment';
 
