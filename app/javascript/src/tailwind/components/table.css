@@ -4,7 +4,7 @@
   table { @apply border-0; }
 }
 
-table {
+:not(.markdown-body) > table {
   @apply bg-white shadow w-full rounded border;
 
   thead tr { @apply border-b; }
