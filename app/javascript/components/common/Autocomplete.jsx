@@ -119,6 +119,10 @@ export default class Autocomplete extends React.Component {
   }
 
   onEmptySubmit = () => {
+    if(this.props.onEmptySubmit === null || typeof this.props.onEmptySubmit !== 'function') {
+      return;
+    }
+
     if (this.state.selectedItem === null) {
       this.props.onEmptySubmit(this.state.autocompleteText);
       this.resetAutocomplete();
@@ -128,6 +132,25 @@ export default class Autocomplete extends React.Component {
   resultItemClasses = (i) => {
     if (this.state.selectedItem === i) {
       return "selected";
+    }
+  }
+
+  noResultsMessage = () => {
+    var resultMessageFromFunction = null;
+    if (this.props.noResultsMessage !== null && typeof this.props.noResultsMessage === 'function') {
+      resultMessageFromFunction = this.props.noResultsMessage(this.state.autocompleteText);
+    }
+
+    return resultMessageFromFunction || "No results found."
+  }
+
+  onKeyUp = (e) => {
+    if (this.props.onEmptySubmit === null || typeof this.props.onEmptySubmit !== 'function') {
+      return;
+    }
+
+    if (e.keyCode === this.ENTER_KEY_CODE) {
+      this.onEmptySubmit();
     }
   }
 
@@ -146,11 +169,7 @@ export default class Autocomplete extends React.Component {
           className={this.props.className}
           onChange={this.onChange}
           onClick={this.showResults}
-          onKeyUp={e => {
-            if (e.keyCode === this.ENTER_KEY_CODE) {
-              this.onEmptySubmit();
-            }
-          }}
+          onKeyUp={this.onKeyUp}
           placeholder={this.props.placeholder}
           autoComplete="off"
           ref="autocomplete"
@@ -167,7 +186,7 @@ export default class Autocomplete extends React.Component {
 
           {this.state.autocompleteResults && this.state.autocompleteResults.length ===  0 &&
             <li onClick={this.onEmptySubmit}>
-              {this.props.noResultsMessage(this.state.autocompleteText) || "No results found."}
+              {this.noResultsMessage()}
             </li>
           }
         </ul>
