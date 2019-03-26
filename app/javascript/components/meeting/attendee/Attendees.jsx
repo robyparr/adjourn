@@ -51,7 +51,7 @@ export default class Attendees extends React.Component {
         <ul className="list mt-4 attendees-list">
           {this.props.attendees.map(attendee => {
             return (
-              <li key={attendee.id}>
+              <li className="list-item" key={attendee.id}>
                 <div className="media">
                   <img src={Utils.getGravatarUrl(attendee.email)} className="avatar" />
                   <div className="media-text">

@@ -35,7 +35,7 @@ export default class AgendumNote extends Component {
     */
     if (!this.props.isExistingNote) {
       return (
-        <li>
+        <li className="list-item">
           <input
             type="text"
             onKeyUp={this.onNewNoteFieldChange}
@@ -47,7 +47,7 @@ export default class AgendumNote extends Component {
     }
 
     return(
-      <li>
+      <li className="list-item">
         <InlineEdit
           onChange={this.onFieldChange}
           onEditModeChanged={this.onFieldEditModeChange}

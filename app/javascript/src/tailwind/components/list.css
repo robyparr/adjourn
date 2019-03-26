@@ -1,7 +1,7 @@
 .list {
   @apply list-reset rounded shadow;
 
-  li {
+  li.list-item {
     @apply flex items-center justify-between p-4 border-b bg-white relative;
 
     &.list-header { @apply font-bold; }

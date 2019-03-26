@@ -27,7 +27,7 @@ export default class ActionItem extends Component {
   render() {
     if (!this.props.isExistingItem) {
       return (
-        <li>
+        <li className="list-item">
           <input
             type="text"
             onKeyUp={this.onNewActionItemFieldChange}
@@ -40,7 +40,7 @@ export default class ActionItem extends Component {
     var descriptionValue = this.props.actionItem.description || "Click here to add a description.";
 
     return(
-      <li>
+      <li className="list-item">
         <div className="list-item-content">
           <div className="flex">
             <input type="checkbox"

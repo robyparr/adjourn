@@ -1,5 +1,5 @@
 <% if !has_google_accounts %>
-  <li class="collection-item">
+  <li class="list-item">
     <div class="list-item-content">
       <p>
         Connect your Google Account to Adjourn
@@ -12,7 +12,7 @@
     </div>
   </li>
 <% elsif has_google_accounts && !has_synced_calendars %>
-  <li class="collection-item">
+  <li class="list-item">
     <div class="list-item-content">
       <p>
         Please select some calendars to sync with Adjourn.
@@ -24,7 +24,7 @@
     <div class="list-item-content">
   </li>
 <% elsif events.empty? %>
-  <li class="collection-item">
+  <li class="list-item">
     <div class="list-item-content">
       There are no upcoming events or you've added them all to Adjourn.
     </div>
@@ -32,7 +32,7 @@
 <% end %>
 
 <% events.each do |event| %>
-    <li title="<%= event[:summary] %>">
+    <li class="list-item" title="<%= event[:summary] %>">
       <div class="list-item-content">
         <div><%= event[:summary] %></div>
         <div class="list-secondary-text">
