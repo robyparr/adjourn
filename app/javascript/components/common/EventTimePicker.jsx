@@ -9,15 +9,15 @@ class EventTimePicker extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      from: moment(props.from).utc(),
-      to: moment(props.to).utc(),
-      pickerIsOpen: false
-    };
+    this.state = this.calculateOriginalState();
   }
 
-  componentWillUnmount() {
-    this.closePicker();
+  calculateOriginalState = () => {
+    return {
+      from: moment(this.props.from).utc(),
+      to: moment(this.props.to).utc(),
+      pickerIsOpen: false
+    };
   }
 
   onDateTimeSelect = (dateTime, interval, fromTo) => {
@@ -45,41 +45,46 @@ class EventTimePicker extends React.Component {
       }
     }
 
-    this.setState(newState, () => {
-      this.props.onChange({
-        start_date: this.state.from,
-        end_date: this.state.to
-      })
+    this.setState(newState);
+  }
+
+  openPicker = () => this.setState({ pickerIsOpen: true });
+  closePicker = () => this.setState({ pickerIsOpen: false });
+
+  onSaveButtonClick = () => {
+    this.props.onChange({
+      start_date: this.state.from,
+      end_date: this.state.to
     });
+    this.closePicker();
   }
 
-  openPicker = () => {
-    this.setState({ pickerIsOpen: true });
-    document.addEventListener('click', this.closePicker);
-  }
-
-  closePicker = (e) => {
-    if (this.refs.self !== e.target && !this.refs.self.contains(e.target)) {
-      this.setState({ pickerIsOpen: false });
-      document.removeEventListener('click', this.closePicker);
-    }
+  onCancelButtonClick = () => {
+    this.setState(this.calculateOriginalState());
+    this.closePicker();
   }
 
   render() {
+    const formattedFromDate = this.state.from.local().format('LL');
+    const formattedFromTime = this.state.from.local().format('hh:mm A');
+    const formattedToTime = this.state.to.local().format('hh:mm A');
+
     return (
       <span ref="self">
         <div className="text-grey-darkest cursor-pointer" onClick={this.openPicker}>
-          {`${this.state.from.local().format('YYYY-MM-DD hh:mm A')} - ${this.state.to.local().format('hh:mm A')}`}
+          {formattedFromDate} <span className="text-grey-darker">from </span>
+          {formattedFromTime} <span className="text-grey-darker"> to </span>
+          {formattedToTime}
         </div>
         {this.state.pickerIsOpen &&
           <div className="event-time-picker">
-            <div className="row">
-              <div className="column sm12 lg6">
+            <div className="row mb-0">
+              <div className="column sm12 md6">
                 <DatePicker
                   selectedDate={this.state.from}
                   onDateSelect={(date) => this.onDateTimeSelect(date, 'date', 'from')} />
               </div>
-              <div className="column sm12 lg6">
+              <div className="column sm12 md6 relative" style={{ paddingBottom: 70 }}>
                 <h5 className="mt-4">From</h5>
                 <TimePicker
                   selectedTime={this.state.from}
@@ -89,6 +94,11 @@ class EventTimePicker extends React.Component {
                 <TimePicker
                   selectedTime={this.state.to}
                   onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'to')} />
+
+                <div className="action-buttons">
+                  <button className="button" onClick={this.onCancelButtonClick}>Cancel</button>
+                  <button className="button primary" onClick={this.onSaveButtonClick}>Save</button>
+                </div>
               </div>
             </div>
           </div>

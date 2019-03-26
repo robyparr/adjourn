@@ -1,6 +1,10 @@
 .event-time-picker{
   @apply bg-white shadow-lg rounded inline-block absolute z-10;
 
+  @media(max-width: 576px) {
+    @apply fixed pin-x pin-y z-30 rounded-none overflow-y-auto;
+  }
+
   .calendar {
     max-width: 350px;
 
@@ -55,6 +59,20 @@
           @apply bg-primary text-white;
         }
       }
+    }
+  }
+
+  .action-buttons {
+    @apply absolute pin-b pin-r pin-l mb-4 mr-4 inline-flex;
+
+    @media(max-width: 576px) {
+      @apply ml-4;
+    }
+
+    button {
+      @apply flex-1;
+
+      &:last-child { @apply ml-2; }
     }
   }
 }
