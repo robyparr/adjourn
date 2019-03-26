@@ -5,7 +5,7 @@ class MeetingMailer < ApplicationMailer
       .find(meeting_id)
 
     email_options = {
-      from: meeting.user.email,
+      reply_to: meeting.user.email,
       cc: meeting.attendees.map(&:email).uniq,
       subject: "Meeting Notes: #{meeting.title}"
     }
