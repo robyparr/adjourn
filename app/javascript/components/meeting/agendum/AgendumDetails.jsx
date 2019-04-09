@@ -11,6 +11,9 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
     );
   }
 
+  const determinefileIcon = upload => upload.content_type.includes('image') ? 'fa-image' : 'fa-file';
+  const humanizedFileSize = upload => (upload.file_size / 1024).toFixed(2);
+
   return (
     <div className="agendum-details padding-sides-default padding-bottom-default">
       <h4>{agendum.title}</h4>
@@ -20,8 +23,14 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
           <h6 className="mb-2">Uploads</h6>
           <ul className="list">
             {agendumUploads.map(upload =>
-              <li key={upload.id}>
-                <a href={`/uploads/${upload.id}/download`}>{upload.filename}</a>
+              <li className="list-item" key={upload.id}>
+                <div className="media">
+                  <i className={`fa ${determinefileIcon(upload)} fa-lg`}></i>
+                  <div className="media-text">
+                    <a href={`/uploads/${upload.id}/download`}>{upload.filename}</a>
+                    <span className="text-grey">{humanizedFileSize(upload)} KB</span>
+                  </div>
+                </div>
               </li>
             )}
           </ul>
