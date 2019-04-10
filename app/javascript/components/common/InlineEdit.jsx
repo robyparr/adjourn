@@ -117,7 +117,7 @@ export default class InlineEdit extends Component {
   renderDisplayElement = () => {
     const props = { className: this.props.className || "" };
 
-    if (this.props.singleClickToEdit) {
+    if (this.props.singleClickToEdit || screen.width <= 992) {
       props['onClick'] = this.onEditModeActivated;
     } else {
       props['onDoubleClick'] = this.onEditModeActivated;
