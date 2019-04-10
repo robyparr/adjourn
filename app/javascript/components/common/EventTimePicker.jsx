@@ -16,36 +16,43 @@ class EventTimePicker extends React.Component {
     return {
       from: moment(this.props.from).utc(),
       to: moment(this.props.to).utc(),
-      pickerIsOpen: false
+      pickerIsOpen: false,
+      errors: [],
+      disableSaveButton: false
     };
   }
 
-  onDateTimeSelect = (dateTime, interval, fromTo) => {
+  onDateSelect = (date, fromTo) => {
     const newState = { [fromTo]: this.state[fromTo].clone() };
+    newState[fromTo]
+      .year(date.year())
+      .month(date.month())
+      .date(date.date());
 
-    if (interval === 'date') {
-      newState[fromTo]
-        .year(dateTime.year())
-        .month(dateTime.month())
-        .date(dateTime.date());
-    } else {
-      newState[fromTo]
-        .hour(dateTime.hour())
-        .minute(dateTime.minute());
+    const fromToOpposite = fromTo === 'from' ? 'to' : 'from';
+    newState[fromToOpposite] = this.state.to.clone()
+      .year(date.year())
+      .month(date.month())
+      .date(date.date());
+
+    this.setState(newState, this.validateDateTimes);
+  }
+
+  onTimeChange = (time, fromTo) => {
+    const newState = { [fromTo]: this.state[fromTo].clone() };
+    newState[fromTo].hour(time.hour).minute(time.minute);
+
+    this.setState(newState, this.validateDateTimes);
+  }
+
+  validateDateTimes = () => {
+    const newErrors = [];
+
+    if (this.state.from.isAfter(this.state.to)) {
+      newErrors.push('"To" must be after "From"');
     }
 
-    if (interval === 'date') {
-      newState[fromTo === 'from' ? 'to' : 'from'] = this.state.to.clone()
-        .year(dateTime.year())
-        .month(dateTime.month())
-        .date(dateTime.date());
-    } else {
-      if (fromTo === 'from' && newState[fromTo].isAfter(this.state.to)) {
-        newState.to = newState[fromTo].clone().add('minute', 15);
-      }
-    }
-
-    this.setState(newState);
+    this.setState({ errors: newErrors, disableSaveButton: newErrors.length > 0 });
   }
 
   openPicker = () => this.setState({ pickerIsOpen: true });
@@ -62,6 +69,10 @@ class EventTimePicker extends React.Component {
   onCancelButtonClick = () => {
     this.setState(this.calculateOriginalState());
     this.closePicker();
+  }
+
+  onTimePickerError = (timePickerHasErrors) => {
+    this.setState({ disableSaveButton: timePickerHasErrors });
   }
 
   render() {
@@ -82,22 +93,33 @@ class EventTimePicker extends React.Component {
               <div className="column sm12 md6">
                 <DatePicker
                   selectedDate={this.state.from}
-                  onDateSelect={(date) => this.onDateTimeSelect(date, 'date', 'from')} />
+                  onDateSelect={(date) => this.onDateSelect(date, 'from')} />
               </div>
               <div className="column sm12 md6 relative" style={{ paddingBottom: 70 }}>
                 <h5 className="mt-4">From</h5>
                 <TimePicker
-                  selectedTime={this.state.from}
-                  onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'from')} />
+                  initialTime={this.state.from}
+                  onTimeChange={(time) => this.onTimeChange(time, 'from')}
+                  onError={this.onTimePickerError} />
 
                 <h5 className="mt-4">To</h5>
                 <TimePicker
-                  selectedTime={this.state.to}
-                  onTimeChange={(time) => this.onDateTimeSelect(time, 'time', 'to')} />
+                  initialTime={this.state.to}
+                  onTimeChange={(time) => this.onTimeChange(time, 'to')}
+                  onError={this.onTimePickerError} />
 
+                {this.state.errors.length > 0 &&
+                  <div className="alert error mt-4">
+                    {this.state.errors.map((error, index) => (
+                      <div key={index} className="text-red">{error}</div>
+                    ))}
+                  </div>
+                }
                 <div className="action-buttons">
                   <button className="button" onClick={this.onCancelButtonClick}>Cancel</button>
-                  <button className="button primary" onClick={this.onSaveButtonClick}>Save</button>
+                  <button className="button primary"
+                    disabled={this.state.disableSaveButton}
+                    onClick={this.onSaveButtonClick}>Save</button>
                 </div>
               </div>
             </div>

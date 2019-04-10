@@ -63,7 +63,7 @@
   }
 
   .action-buttons {
-    @apply absolute pin-b pin-r pin-l mb-4 mr-4 inline-flex;
+    @apply absolute pin-b pin-r pin-l mb-4 mr-4 -mt-4 inline-flex;
 
     @media(max-width: 576px) {
       @apply ml-4;
