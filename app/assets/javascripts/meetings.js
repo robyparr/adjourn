@@ -23,6 +23,11 @@ $(document).ready(function() {
     var errors = $('#new-meeting-form').find('.error');
     errors.find('ul').html(errorsListItems);
     errors.css('display', 'block');
+  }).on('keydown', function(e) {
+    if (e.keyCode === 13) {// Enter
+      e.preventDefault();
+      Rails.fire(this, 'submit');
+    }
   });
 
 });
