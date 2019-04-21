@@ -32,7 +32,6 @@
     "prop-types": "^15.5.10",
     "rails-erb-loader": "^5.0.1",
     "react": "^15.5.4",
-    "react-autosize-textarea": "^0.4.7",
     "react-dom": "^15.5.4",
     "react-dropzone": "^4.2.3",
     "react-redux": "^5.0.6",
@@ -43,6 +42,7 @@
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.2",
     "tailwindcss": "^0.7.4",
+    "tui-editor": "^1.4.0",
     "webpack": "^2.6.1",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-merge": "^4.1.0"
