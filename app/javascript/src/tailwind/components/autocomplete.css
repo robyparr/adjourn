@@ -1,5 +1,5 @@
 .autocomplete + ul {
-  @apply bg-white rounded shadow-lg relative m-auto overflow-hidden list-reset z-20;
+  @apply bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-20;
 
   li {
     @apply px-6 py-4 cursor-pointer;

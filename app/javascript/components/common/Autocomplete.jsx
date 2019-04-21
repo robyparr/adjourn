@@ -130,9 +130,14 @@ export default class Autocomplete extends React.Component {
   }
 
   resultItemClasses = (i) => {
+    const staticClasses = "list-item";
+    var dynamicClasses = " ";
+
     if (this.state.selectedItem === i) {
-      return "selected";
+      dynamicClasses += "selected";
     }
+
+    return staticClasses + dynamicClasses
   }
 
   noResultsMessage = () => {
