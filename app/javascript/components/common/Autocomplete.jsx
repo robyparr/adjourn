@@ -167,10 +167,10 @@ export default class Autocomplete extends React.Component {
     }
 
     return (
-      <div ref="self">
+      <div className="autocomplete" ref="self">
         <input type="text"
           id={this.props.id}
-          type={this.props.type || 'input'}
+          type={this.props.type || 'search'}
           className={this.props.className}
           onChange={this.onChange}
           onClick={this.showResults}
