@@ -38,7 +38,7 @@ export default class InlineEdit extends Component {
         el:               this.refs.tuiEditor,
         initialValue:     this.state.value,
         usageStatistics:  false,
-        previewStyle:     'none',
+        previewtype:      'tab',
         events: {
           change: () => {
             this.setState({ value: this.editor.getMarkdown() });
@@ -53,6 +53,7 @@ export default class InlineEdit extends Component {
         ]
       });
 
+      this.editor.focus();
       document.addEventListener('keypress', this.handleEditorKeypress);
     }
   }

@@ -1,16 +1,15 @@
-.autocomplete + ul {
-  @apply bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-20;
+.autocomplete {
+  @apply relative;
 
-  li {
-    @apply px-6 py-4 cursor-pointer;
+  input + ul {
+    @apply border bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-50 absolute pin-x;
 
-    &:hover { @apply bg-grey-lighter; }
+    li {
+      @apply px-6 py-4 cursor-pointer;
 
-    * { pointer-events: none; }
+      &:hover, &.selected { @apply bg-grey-lighter; }
 
-    &.selected {
-      @apply border font-bold;
-      border-left: 3px solid config('colors.primary');
+      * { pointer-events: none; }
     }
   }
 }

@@ -77,7 +77,9 @@ export default class Autocomplete extends React.Component {
     }
 
     this.state.debounceTimeout = setTimeout(() => {
-      this.callAutocompleteURL(this.state.autocompleteText)
+      if (this.isOverAutocompleteThreshold()) {
+        this.callAutocompleteURL(this.state.autocompleteText)
+      }
     }, 500);
   }
 
@@ -159,6 +161,12 @@ export default class Autocomplete extends React.Component {
     }
   }
 
+  isOverAutocompleteThreshold = () => {
+    const threshold = this.props.autocompleteThreshold || 3;
+
+    return this.state.autocompleteText && this.state.autocompleteText.length >= threshold;
+  }
+
   render() {
     const resultListStyles = {};
 
@@ -167,10 +175,10 @@ export default class Autocomplete extends React.Component {
     }
 
     return (
-      <div ref="self">
+      <div className="autocomplete" ref="self">
         <input type="text"
           id={this.props.id}
-          type={this.props.type || 'input'}
+          type={this.props.type || 'search'}
           className={this.props.className}
           onChange={this.onChange}
           onClick={this.showResults}
