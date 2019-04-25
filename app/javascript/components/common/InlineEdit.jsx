@@ -53,6 +53,7 @@ export default class InlineEdit extends Component {
         ]
       });
 
+      this.editor.focus();
       document.addEventListener('keypress', this.handleEditorKeypress);
     }
   }
