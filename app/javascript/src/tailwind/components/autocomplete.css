@@ -2,7 +2,7 @@
   @apply relative;
 
   input + ul {
-    @apply bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-50 absolute pin-x;
+    @apply border bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-50 absolute pin-x;
 
     li {
       @apply px-6 py-4 cursor-pointer;

@@ -77,7 +77,9 @@ export default class Autocomplete extends React.Component {
     }
 
     this.state.debounceTimeout = setTimeout(() => {
-      this.callAutocompleteURL(this.state.autocompleteText)
+      if (this.isOverAutocompleteThreshold()) {
+        this.callAutocompleteURL(this.state.autocompleteText)
+      }
     }, 500);
   }
 
@@ -157,6 +159,12 @@ export default class Autocomplete extends React.Component {
     if (e.keyCode === this.ENTER_KEY_CODE) {
       this.onEmptySubmit();
     }
+  }
+
+  isOverAutocompleteThreshold = () => {
+    const threshold = this.props.autocompleteThreshold || 3;
+
+    return this.state.autocompleteText && this.state.autocompleteText.length >= threshold;
   }
 
   render() {
