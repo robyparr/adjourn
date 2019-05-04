@@ -62,7 +62,7 @@ export default class ActionItem extends Component {
 
               <div className="text-grey-darker">
                 <InlineEdit
-                  className="margin-top-none margin-bottom-none"
+                  className="my-0"
                   name="description"
                   onChange={this.onFieldChange}
                   onEditModeChanged={this.onFieldEditModeChange}

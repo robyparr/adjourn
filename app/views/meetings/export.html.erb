@@ -151,7 +151,7 @@
               <ul>
                 <% meeting.action_items.each do |item| %>
                   <li>
-                    <h3 class="sub-header"><%= item.title %></h3>
+                    <h3><%= item.title %></h3>
                     <div class="markdown-body">
                       <%= markdown_text item.description %>
                     </div>
@@ -167,7 +167,7 @@
               <ul>
                 <% meeting.agenda.each do |agendum| %>
                   <li>
-                      <h3 class="sub-header"><%= agendum.title %></h3>
+                      <h3><%= agendum.title %></h3>
                       <div class="markdown-body">
                         <%= markdown_text agendum.description %>
                       </div>

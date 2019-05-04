@@ -25,7 +25,7 @@
         <%= render 'recent_meetings', meetings: recent_meetings(@meetings) %>
       <% end %>
 
-      <div class="padding-vertical-default">
+      <div class="py-4">
         <%= render 'meetings', meetings: meetings_list(@meetings, params[:page]),
           show_pagination: true, no_meeting_text: "There's nothing here." %>
       </div>

@@ -5,7 +5,7 @@ import AgendumNotes from '../agendum_note/AgendumNotes';
 const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
   if (!agendum) {
     return (
-      <p className="padding-sides-default">
+      <p className="px-4">
         Select an agendum to see details.
       </p>
     );
@@ -15,7 +15,7 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
   const humanizedFileSize = upload => (upload.file_size / 1024).toFixed(2);
 
   return (
-    <div className="agendum-details padding-sides-default padding-bottom-default">
+    <div className="agendum-details px-4 pb-4">
       <h4>{agendum.title}</h4>
 
       {agendumUploads.length > 0 &&
