@@ -11,6 +11,9 @@
         <div class="card-content">
           <%= render 'profile/basic_info' %>
 
+          <h5>Change Timezone</h5>
+          <%= f.time_zone_select(:time_zone) %>
+
           <%= render 'profile/change_email', f: f %>
 
           <%= render 'profile/change_password', f: f %>

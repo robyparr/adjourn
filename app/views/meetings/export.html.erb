@@ -134,8 +134,10 @@
         <td class="wrapper">
           <div class="content">
             <h1 style="margin-top: 0;"><%= meeting.title %></h1>
-            <strong>Start:</strong> <%= meeting.start_date %><br />
-            <strong>End:</strong> <%= meeting.end_date %>
+            <strong>Start:</strong>
+            <%= formatted_date_time meeting.start_date, user: meeting.user, with_time_zone: true %><br />
+            <strong>End:</strong>
+            <%= formatted_date_time meeting.end_date, user: meeting.user, with_time_zone: true %>
 
             <h2 class="main-header">Attendees</h2>
             <ul>

@@ -30,7 +30,7 @@
             <tr class="collection-item">
               <td><img src="<%= account.avatar_url %>" height="64" /></td>
               <td><%= account.email %></td>
-              <td class="localize"><%= account.created_at %></td>
+              <td><%= formatted_date_time account.created_at %></td>
               <td>
                 <%= link_to "Synced Calendars", nil, data: {
                   modal: "#google-calendars-modal",

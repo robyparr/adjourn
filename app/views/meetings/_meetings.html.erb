@@ -19,8 +19,8 @@
       <% meetings.each do |meeting| %>
         <tr>
           <td><%= link_to meeting.title, meeting_path(meeting) %></td>
-          <td class="localize"><%= meeting.start_date %></td>
-          <td class="localize"><%= meeting.end_date %></td>
+          <td><%= formatted_date_time meeting.start_date %></td>
+          <td><%= formatted_date_time meeting.end_date %></td>
           <td class="text-right">
             <%= link_to "Delete", meeting_path(meeting),
               class: "btn-flat red-text",

@@ -32,7 +32,7 @@
             <td><%= upload.filename %></td>
             <td><%= upload.agendum.meeting.title %> / <%= upload.agendum.title %></td>
             <td><%= number_to_human_size upload.file_size %></td>
-            <td class="localize"><%= upload.created_at %></td>
+            <td><%= formatted_date_time upload.created_at %></td>
             <td class="text-right inline-flex">
               <%= link_to "View", download_upload_url(upload) %>
 

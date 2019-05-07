@@ -2,15 +2,6 @@
 // All this logic will automatically be available in application.js.
 
 $(document).ready(function() {
-  // localize times
-  $('.localize').each(function () {
-    var element = $(this);
-    var formattedDate = moment.utc(element.html(), "YYYY-MM-DD HH:mm")
-    .local()
-    .format('LLL');
-    element.html(formattedDate);
-  });
-
   $('#new-meeting-form').on('ajax:success', function(response) {
     window.location = response.detail[0].resource_url;
   }).on('ajax:error', function(response) {

@@ -8,4 +8,11 @@ module ApplicationHelper
     hashed_email = Digest::MD5.hexdigest(email.strip.downcase)
     "https://www.gravatar.com/avatar/#{hashed_email}.jpg?s=#{size}&d=mm"
   end
+
+  def formatted_date_time(date_time, user: current_user, with_time_zone: false)
+    format_string = '%B %d, %Y %l:%M %p'
+    format_string += ' %Z' if with_time_zone
+
+    date_time.in_time_zone(user.time_zone).strftime(format_string)
+  end
 end
