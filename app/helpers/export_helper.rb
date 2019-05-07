@@ -1,5 +1,7 @@
 module ExportHelper
-  def markdown_text(text)
+  MARKDOWN_INLINE_LINK_REGEX = /!\[.*\]\((http[s]?:\/\/.+\/uploads\/(\d+)\/download)\)/
+
+  def markdown_text(text, inline_images: {})
     text ||= ""
 
     renderer_options    = { filter_html: true }
@@ -8,6 +10,21 @@ module ExportHelper
     renderer = Redcarpet::Render::HTML.new(renderer_options)
     markdown = Redcarpet::Markdown.new(renderer, markdown_extensions)
 
+    replace_inline_upload_links! text, inline_images
+
     markdown.render(text).html_safe
+  end
+
+  private
+
+  def replace_inline_upload_links!(text, inline_images)
+    inline_image_links_and_upload_ids = text.scan(MARKDOWN_INLINE_LINK_REGEX)
+
+    inline_image_links_and_upload_ids.each do |inline_link, upload_id|
+      image_data   = inline_images[upload_id.to_i]
+      base64_image = image_data[:file]
+
+      text.gsub! inline_link, "data:#{image_data[:type]};base64,#{base64_image}"
+    end
   end
 end

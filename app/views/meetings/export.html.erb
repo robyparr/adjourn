@@ -169,7 +169,7 @@
                   <li>
                       <h3><%= agendum.title %></h3>
                       <div class="markdown-body">
-                        <%= markdown_text agendum.description %>
+                        <%= markdown_text agendum.description, inline_images: inline_images %>
                       </div>
                       <ul>
                         <% agendum.notes.each do |note| %>

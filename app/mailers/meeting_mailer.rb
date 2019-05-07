@@ -6,17 +6,25 @@ class MeetingMailer < ApplicationMailer
 
     email_options = {
       reply_to: meeting.user.email,
-      cc: meeting.attendees.map(&:email).uniq,
-      subject: "Meeting Notes: #{meeting.title}"
+      cc:       meeting.attendees.map(&:email).uniq,
+      subject:  "Meeting Notes: #{meeting.title}"
     }
 
-    meeting.agenda.flat_map(&:uploads).each do |upload|
-      file = open(upload.url).read
-      attachments[upload.filename] = file
-    end
+    prepare_attachments meeting
 
     mail(email_options) do |format|
-      format.html { render html: Meeting.to_html(meeting).html_safe }
+      format.html { render html: meeting.to_html.html_safe }
+    end
+  end
+
+  private
+
+  def prepare_attachments(meeting)
+    meeting.uploads.each do |upload|
+      next if meeting.inline_images[upload.id].present?
+
+      file = open(upload.url).read
+      attachments[upload.filename] = file
     end
   end
 end
