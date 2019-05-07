@@ -55,7 +55,10 @@ export default class Attendees extends React.Component {
                 <div className="media">
                   <img src={Utils.getGravatarUrl(attendee.email)} className="avatar" />
                   <div className="media-text">
-                    <span>{attendee.email}</span>
+                    <span className="truncate">
+                      {attendee.email.slice(0, 25)}
+                      {attendee.email.length > 25 && "..."}
+                    </span>
                   </div>
                 </div>
                 <button className="list-floating-content"
