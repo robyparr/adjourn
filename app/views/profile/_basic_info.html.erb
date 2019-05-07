@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row border-b">
   <div class="column md4">
     <img src="<%= gravatar_url(current_user.email, 128) %>" class="avatar" />
   </div>
 
   <div class="column md8">
-    <span class="card-title"><%= current_user.email %></span>
+    <h5><%= current_user.email %></h5>
     <small>
       Adjourn automatically pulls profile pictures from the
       Gravatar service.<br />
