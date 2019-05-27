@@ -21,10 +21,8 @@ module ExportHelper
     inline_image_links_and_upload_ids = text.scan(MARKDOWN_INLINE_LINK_REGEX)
 
     inline_image_links_and_upload_ids.each do |inline_link, upload_id|
-      image_data   = inline_images[upload_id.to_i]
-      base64_image = image_data[:file]
-
-      text.gsub! inline_link, "data:#{image_data[:type]};base64,#{base64_image}"
+      image_data = inline_images[upload_id.to_i]
+      text.gsub! inline_link, image_data[:url]
     end
   end
 end

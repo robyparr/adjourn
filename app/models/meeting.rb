@@ -21,25 +21,14 @@ class Meeting < ApplicationRecord
   validates :end_date,        presence: true
   validate  :end_date_after_start_date
 
-  def inline_images
-    return @inline_images if @inline_images.present?
-
-    full_agenda = agenda.map(&:description).join(' ')
-
-    @inline_images = uploads.each_with_object({}) do |upload, inline_images|
-      next unless full_agenda.include?(download_upload_path(upload))
-      next unless upload.content_type.starts_with?('image/')
-
-      file = open(upload.url).read
-      inline_images[upload.id] = { type: upload.content_type, file: Base64.encode64(file) }
-    end
+  def full_agenda
+    @full_agenda ||= agenda.map(&:description).join(' ')
   end
 
-  def to_html
-    view_variables = { meeting: self, inline_images: inline_images }
+  def inline_image_upload?(upload)
+    return unless upload.content_type.starts_with?('image/')
 
-    controller = ExportController.new
-    controller.render_to_string "meetings/export", locals: view_variables
+    full_agenda.include?(download_upload_path(upload))
   end
 
   # A meeting is recent if it ended less than a week ago
