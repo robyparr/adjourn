@@ -41,6 +41,7 @@
  @import 'components/pagination';
  @import 'components/auth';
  @import 'components/agenda';
+ @import 'components/inlineEdit';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

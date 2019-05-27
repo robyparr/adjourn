@@ -159,13 +159,14 @@ export default class InlineEdit extends Component {
 
   renderMarkdownDisplayElement = (props) => {
     props['dangerouslySetInnerHTML'] = { __html: marked(this.state.value) };
-    props['className'] += " markdown-body";
+    props['className'] += " markdown-body inline-edit display";
 
     return <this.state.displayElement {...props} />;
   }
 
   renderDisplayElement = () => {
     const props = { className: this.props.className || "" };
+    props.className += ' inline-edit display';
 
     if (this.props.singleClickToEdit || screen.width <= 992) {
       props['onClick'] = this.onEditModeActivated;
