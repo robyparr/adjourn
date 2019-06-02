@@ -19,7 +19,7 @@ export default class Meeting extends React.Component {
             name="title"
             onChange={(field, value) => this.props.onFieldsUpdate({ [field]: value} )}
             displayElement='h3'
-            className="mb-1"
+            className="mb-1 meeting-title"
             value={this.props.meeting.title}
             singleClickToEdit={!this.props.meeting.id} />
 
