@@ -13,7 +13,8 @@ const ActionItemContainer = ({
   meetingID,
   addActionItem,
   updateActionItem,
-  deleteActionItem
+  deleteActionItem,
+  index
 }) => {
   const isExistingItem = actionItem && actionItem.id;
 
@@ -23,7 +24,8 @@ const ActionItemContainer = ({
         actionItem={actionItem}
         isExistingItem={false}
         onActionItemChange={addActionItem}
-        meetingID={meetingID} />
+        meetingID={meetingID}
+        index={index} />
     );
   }
 
@@ -33,7 +35,8 @@ const ActionItemContainer = ({
       isExistingItem={true}
       onActionItemChange={partialActionItem => updateActionItem(actionItem.id, partialActionItem)}
       onActionItemDelete={deleteActionItem}
-      meetingID={meetingID} />
+      meetingID={meetingID}
+      index={index} />
   );
 };
 

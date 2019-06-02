@@ -25,9 +25,11 @@ export default class ActionItem extends Component {
   }
 
   render() {
+    const borderClasses = `list-item ${this.props.index == 0 ? "border" : "border-r border-l border-b"}`
+
     if (!this.props.isExistingItem) {
       return (
-        <li className="list-item">
+        <li className={borderClasses}>
           <input
             type="text"
             onKeyUp={this.onNewActionItemFieldChange}
@@ -40,7 +42,7 @@ export default class ActionItem extends Component {
     var descriptionValue = this.props.actionItem.description || "Click here to add a description.";
 
     return(
-      <li className="list-item">
+      <li className={borderClasses}>
         <div className="list-item-content">
           <div className="flex">
             <input type="checkbox"

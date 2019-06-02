@@ -8,12 +8,13 @@ import ActionItemContainer from '../../../containers/ActionItemContainer';
 */
 const ActionItems = (props) => {
   return(
-    <ul className="list action-item-list">
-      {props.actionItems.map((item) => {
+    <ul className="list action-item-list" style={{ borderWidth: 0 }}>
+      {props.actionItems.map((item, index) => {
         return(
           <ActionItemContainer
-          key={item.id}
-          actionItem={item} />
+            key={item.id}
+            actionItem={item}
+            index={index} />
           );
         })
       }
