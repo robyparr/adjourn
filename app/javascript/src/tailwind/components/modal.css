@@ -1,7 +1,7 @@
 .modal-overlay { @apply fixed pin-x pin-y bg-black opacity-25 z-30; }
 
 .modal {
-  @apply hidden bg-white rounded shadow-lg px-6 py-4 relative z-50 m-auto fixed;
+  @apply hidden bg-white rounded shadow-lg relative z-50 m-auto fixed border;
   top: 25%;
   left: 0;
   right: 0;
@@ -9,10 +9,26 @@
   width: fit-content;
   min-width: 300px;
   max-width: calc(100vw - 10%);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s, transform 0.5s;
 
-  .title { @apply font-bold text-xl; }
-  .modal-content { @apply text-base py-4; }
+  .modal-title {
+    @apply font-bold text-xl px-6 py-4;
+
+    h1, h2, h3, h4, h5, h6 { @apply my-0; }
+  }
+
+  .modal-content { @apply text-base px-6 pb-4; }
+
   .modal-footer {
-    @apply rounded text-right py-4 bg-grey-lighter -mx-6 px-6 py-4 absolute w-full;
+    @apply rounded-b text-right py-4 bg-grey-lighter px-6 py-4 w-full;
+
+    * { @apply ml-4; }
+  }
+
+  &.opened {
+    opacity: 1;
+    transform: translateY(0px);
   }
 }

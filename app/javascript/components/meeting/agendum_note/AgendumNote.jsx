@@ -65,7 +65,7 @@ export default class AgendumNote extends Component {
         </button>
 
         <div className={`modal confirm-agendum-note-delete-${this.props.note.id}`}>
-          <div className="title">Are you sure?</div>
+          <div className="modal-title">Are you sure?</div>
           <div className="modal-content">
             Are you sure you want to remove this note?
           </div>
@@ -73,7 +73,7 @@ export default class AgendumNote extends Component {
             <a href="#" data-close-modal={`.confirm-agendum-note-delete-${this.props.note.id}`}>
               No
             </a>
-            <button className="button ml-4" onClick={this.props.onNoteDelete}>
+            <button className="button primary ml-4" onClick={this.props.onNoteDelete}>
               Yes
             </button>
           </div>

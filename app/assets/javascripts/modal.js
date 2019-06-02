@@ -10,7 +10,9 @@ document.addEventListener('click', function(e) {
     modal.parentNode.insertBefore(overlay, modal);
 
     modal.classList.add('block');
-    modal.classList.remove('hidden');
+    setTimeout(function() {
+      modal.classList.add('opened');
+    }, 0);
   }
 });
 
@@ -21,8 +23,11 @@ document.addEventListener('click', function(e) {
     var modalSelector = e.target.dataset.closeModal;
     var modal = document.querySelector(modalSelector);
 
-    modal.classList.add('hidden');
-    modal.classList.remove('block');
+    modal.classList.remove('opened');
+    setTimeout(function() {
+      modal.classList.remove('block');
+    }, 250);
+
     document
       .querySelector('.modal-overlay[data-close-modal="' + modalSelector +'"]')
       .remove();

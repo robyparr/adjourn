@@ -85,7 +85,7 @@ export default class ActionItem extends Component {
           </button>
         }
         <div className={`modal confirm-aa-delete-${this.props.actionItem.id}`}>
-          <div className="title">Are you sure?</div>
+          <div className="modal-title">Are you sure?</div>
           <div className="modal-content">
             Are you sure you want to delete this action item?
           </div>
@@ -94,7 +94,7 @@ export default class ActionItem extends Component {
                 data-close-modal={`.confirm-aa-delete-${this.props.actionItem.id}`}>
               No
             </a>
-            <button className="button ml-4"
+            <button className="button primary ml-4"
                 onClick={() => this.props.onActionItemDelete(this.props.actionItem.id)}>
               Yes
             </button>

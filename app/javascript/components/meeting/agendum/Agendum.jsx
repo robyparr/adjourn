@@ -96,7 +96,7 @@ export default class Agendum extends Component {
         </Dropzone>
 
         <div className={`modal confirm-agendum-delete-${this.props.agendum.id}`}>
-          <div className="title">Are you sure?</div>
+          <div className="modal-title">Are you sure?</div>
           <div className="modal-content">
             Are you sure you want to remove this agendum?
           </div>
@@ -105,7 +105,7 @@ export default class Agendum extends Component {
                 data-close-modal={`.confirm-agendum-delete-${this.props.agendum.id}`}>
               No
             </a>
-            <button className="button ml-4"
+            <button className="button primary ml-4"
                 onClick={() => this.props.onAgendumDelete(this.props.agendum.id)}>
               Yes
             </button>
