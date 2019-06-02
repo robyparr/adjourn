@@ -84,7 +84,7 @@ export default class Agendum extends Component {
           disableClick={true}
           activeClassName="dropzone">
           <InlineEdit
-            className="w-full"
+            className="-mx-4 -mb-4 p-4"
             onChange={this.onFieldChange}
             value={descriptionValue}
             placeholder="Agendum Description"

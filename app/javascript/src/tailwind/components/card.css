@@ -4,8 +4,15 @@
   .card-head {
     @apply flex items-center relative;
 
-    .card-title { @apply font-bold text-lg mb-2 w-full; }
-    .card-actions { @apply absolute pin-t pin-r; }
+    .card-title {
+      @apply font-bold text-lg mb-2 flex-grow;
+
+      p { @apply mb-0; }
+    }
+
+    .card-actions {
+      margin-top: -4px;
+    }
   }
 
   &.selected {

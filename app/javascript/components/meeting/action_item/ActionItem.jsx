@@ -53,7 +53,7 @@ export default class ActionItem extends Component {
                 <InlineEdit
                   onChange={this.onFieldChange}
                   onEditModeChanged={this.onFieldEditModeChange}
-                  displayElement="span"
+                  displayElement="div"
                   value={this.props.actionItem.title}
                   className="w-full"
                   placeholder="Item Title"
