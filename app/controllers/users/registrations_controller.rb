@@ -1,12 +1,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  layout "guest"
-
-  before_action :set_application_layout!, only: %i(edit update)
+  layout :action_layout
   before_action :configure_permitted_parameters
 
   private
-    def set_application_layout!
-      self.class.layout 'application'
+    def action_layout
+      case action_name
+      when 'edit', 'update' then 'application'
+      else 'guest'
+      end
     end
 
   protected
