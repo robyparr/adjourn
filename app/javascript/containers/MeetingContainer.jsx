@@ -24,7 +24,9 @@ const MeetingContainer = ({ meeting, updateMeeting }) => {
     .then(response => {
       showInformationMessage(response.data.message);
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+      showErrorMessage(error.response.data.error);
+    });
   }
 
   return (

@@ -36,3 +36,8 @@ en:
   views:
     pagination:
       truncate: ...
+
+  meetings:
+    email_attendees:
+      success_message: Email successfully sent.
+      error_no_attendees: Please add some attendees to send an email to.
