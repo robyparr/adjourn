@@ -34,7 +34,7 @@ export default class Agendum extends Component {
     */
     if (!this.props.isExistingAgendum) {
       return(
-        <div className="card agendum new-agendum">
+        <div className="card agendum">
           <div className="card-content">
             <span className="card-title" id="new_title">
               <input type="text"
@@ -51,7 +51,7 @@ export default class Agendum extends Component {
     const descriptionValue = this.props.agendum.description || "Click here to add a description.";
 
     return(
-      <div className={`card agendum ${this.props.agendum.selected ? "selected" : ""}`}
+      <div className={`card agendum sortable ${this.props.agendum.selected ? "selected" : ""}`}
         data-id={this.props.agendum.id}
         onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
 
