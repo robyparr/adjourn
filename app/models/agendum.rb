@@ -1,5 +1,5 @@
 class Agendum < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   multisearchable against: %i(title description),
     additional_attributes: ->(agendum) { { user_id: agendum.meeting.user_id } }

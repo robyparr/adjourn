@@ -8,7 +8,7 @@
 #   - agendum: The agendum this note was taken on.
 #
 class AgendumNote < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   multisearchable against: %i(content),
     additional_attributes: ->(note) {

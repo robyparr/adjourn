@@ -25,7 +25,7 @@ class MeetingsController < ApplicationController
     meeting = current_user.meetings.build(meeting_params)
     meeting.start_date = Time.zone.now
     meeting.end_date = meeting.start_date + 1.hours
-    meeting.attendees << current_user.attendees.find_by(email: current_user.email)
+    meeting.attendees << current_user.attendees.find_or_create_by(email: current_user.email)
 
     if meeting.save
       render json: { resource_url: meeting_url(meeting) }, status: :created
