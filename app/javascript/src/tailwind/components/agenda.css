@@ -6,5 +6,10 @@
     height: fit-content;
 
     @screen lg { width: 30%; }
+
+    &.sortable-ghost {
+      opacity: 0.2;
+      border: 1px dashed rgba(0, 0, 0, 0.5);
+    }
   }
 }

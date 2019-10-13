@@ -53,6 +53,10 @@ Rails.application.routes.draw do
         end
       end
 
+      collection do
+        patch '/update_sort', to: 'agenda#update_sort', as: :update_sort
+      end
+
       resources :agendum_notes,
         shallow: true,
         path: 'notes',

@@ -172,10 +172,12 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "can delete meetings" do
+  test 'can delete meetings' do
     sign_in @user
-    assert_difference ['Meeting.count', 'Agendum.count'], -1 do
-      delete meeting_path(@meeting)
+    assert_difference 'Meeting.count', -1 do
+      assert_difference 'Agendum.count', -2 do
+        delete meeting_path(@meeting)
+      end
     end
     assert_redirected_to meetings_path
   end
@@ -186,5 +188,4 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     PgSearch::Multisearch.rebuild(Agendum)
     PgSearch::Multisearch.rebuild(AgendumNote)
   end
-
 end

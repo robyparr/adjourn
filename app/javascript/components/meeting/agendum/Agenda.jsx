@@ -1,20 +1,24 @@
 import React from 'react';
+import Sortable from 'react-sortablejs';
 
 // Controls
 import AgendumContainer from '../../../containers/AgendumContainer';
 
-/*
-* Create a list of Agendums.
-*/
-const Agenda = (props) => {
+const Agenda = ({ agenda, meetingID, onSort }) => {
+  const sortableOptions = {
+    filter:    '.modal, .new-agendum',
+    animation: 150,
+    easing:    'cubic-bezier(1, 0, 0, 1)'
+  };
+
   return(
-    <div className="agenda">
-      {props.agenda.map(agendum => (
+    <Sortable className="agenda" onChange={order => onSort(meetingID, order)} options={sortableOptions}>
+      {agenda.map(agendum => (
         <AgendumContainer key={agendum.id} agendum={agendum} />
       ))}
 
       <AgendumContainer />
-    </div>
+    </Sortable>
   );
 }
 

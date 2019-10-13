@@ -5,7 +5,7 @@ class Meeting < ApplicationRecord
   belongs_to :user
 
   has_many :agenda,
-    -> { order('created_at asc') },
+    -> { order('position asc') },
     foreign_key: 'meeting_id',
     class_name: 'Agendum',
     dependent: :destroy
@@ -63,12 +63,12 @@ class Meeting < ApplicationRecord
   end
 
   private
-    # Add an error to the model unless :end_date
-    # is after :start_date
-    def end_date_after_start_date
-        is_valid = self.end_date && self.start_date && 
-          self.end_date > self.start_date
-      
-        errors.add(:end_date, "must be after #{start_date}") unless is_valid
-    end
+
+  # Add an error to the model unless :end_date is after :start_date
+  def end_date_after_start_date
+    is_valid = self.end_date && self.start_date &&
+      self.end_date > self.start_date
+
+    errors.add(:end_date, "must be after #{start_date}") unless is_valid
+  end
 end

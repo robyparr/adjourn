@@ -1,32 +1,21 @@
-#
-# A single item on a meeting's agenda.
-#
-# Attributes:
-#   - title:string
-#   - description:string
-#
-# Associations
-#   - meeting: The meeting this agendum belongs to.
-#
 class Agendum < ApplicationRecord
   include PgSearch
 
   multisearchable against: %i(title description),
     additional_attributes: ->(agendum) { { user_id: agendum.meeting.user_id } }
 
-  #
   # Relationships
-  #
   belongs_to :meeting
   has_one :user, through: :meeting
   has_many :notes, class_name: 'AgendumNote', dependent: :destroy
   has_many :uploads, dependent: :destroy
 
-  #
   # Validations
-  #
   validates :title, presence: true
   validates :meeting, presence: true
+
+  # Hooks
+  before_create :set_position
 
   def markdown_description
     if description
@@ -63,5 +52,15 @@ class Agendum < ApplicationRecord
       FROM "agendums"
       INNER JOIN "meetings" on "agendums".meeting_id = "meetings".id
     }
+  end
+
+  private
+
+  def next_position
+    meeting.agenda.maximum(:position).to_i + 1
+  end
+
+  def set_position
+    self.position = next_position
   end
 end

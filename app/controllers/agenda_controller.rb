@@ -25,6 +25,18 @@ class AgendaController < ApplicationController
     render json: { message: 'Agendum sucessfully deleted.'}
   end
 
+  def update_sort
+    ActiveRecord::Base.transaction do
+      meeting = current_user.meetings.find(params[:meeting_id])
+      @agenda = meeting.agenda.includes(%i[notes uploads]).map do |agendum|
+        new_position = agenda_ids.index agendum.id
+        agendum.update! position: new_position
+
+        agendum
+      end
+    end
+  end
+
   private
 
   def load_agendum
@@ -33,5 +45,11 @@ class AgendaController < ApplicationController
 
   def agendum_params
     params.require(:agendum).permit(:title, :description)
+  end
+
+  def agenda_ids
+    return [] unless params[:agenda_ids].present?
+
+    params[:agenda_ids].map(&:to_i)
   end
 end

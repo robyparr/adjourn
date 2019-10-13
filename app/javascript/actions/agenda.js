@@ -64,6 +64,20 @@ export function updateAgendum(agendumID, partialAgendum) {
   }
 }
 
+export function updateAgendaSortOrder(meetingID, agendaIDs) {
+  return function(dispatch, getState) {
+    axios({
+      url: `/meetings/${meetingID}/agenda/update_sort`,
+      method: 'PATCH',
+      data: {
+        authenticity_token: Utils.getAuthenticityToken(),
+        agenda_ids:         agendaIDs
+      }
+    })
+    .then(response => dispatch(setAgenda(response.data)));
+  }
+}
+
 /**
 * Receives an updated agendum and updates
 * the state on the frontend.

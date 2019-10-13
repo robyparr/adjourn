@@ -5,9 +5,6 @@ import InlineEdit from '../../common/InlineEdit';
 
 import Dropzone from 'react-dropzone';
 
-/*
-* A single Agendum.
-*/
 export default class Agendum extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +34,7 @@ export default class Agendum extends Component {
     */
     if (!this.props.isExistingAgendum) {
       return(
-        <div className="card agendum">
+        <div className="card agendum new-agendum">
           <div className="card-content">
             <span className="card-title" id="new_title">
               <input type="text"
@@ -55,6 +52,7 @@ export default class Agendum extends Component {
 
     return(
       <div className={`card agendum ${this.props.agendum.selected ? "selected" : ""}`}
+        data-id={this.props.agendum.id}
         onClick={() => this.props.onAgendumSelect(this.props.agendum.id)}>
 
         <div className="card-head">

@@ -5,6 +5,11 @@ one:
   description: This is a string.
   meeting: one
 
+one_two:
+  title: Second Agendum
+  description: Description
+  meeting: one
+
 two:
   title: First Agendum
   description: This is another string.
