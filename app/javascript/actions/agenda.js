@@ -73,8 +73,20 @@ export function updateAgendaSortOrder(meetingID, agendaIDs) {
         authenticity_token: Utils.getAuthenticityToken(),
         agenda_ids:         agendaIDs
       }
-    })
-    .then(response => dispatch(setAgenda(response.data)));
+    });
+
+    // Agenda updated locally so we don't have to wait for
+    // the server response to sort. Otherwise it ends up
+    // with the agendum cards swapping back to their original
+    // positions until the server response.
+    const updatedAgenda = getState().agenda.map(agendum => {
+      const newPosition = agendaIDs.indexOf(agendum.id.toString());
+      agendum.position = newPosition;
+
+      return agendum;
+    });
+
+    dispatch(setAgenda(updatedAgenda))
   }
 }
 

@@ -93,8 +93,8 @@ class AgendaControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response :success
 
-    json_response = JSON.parse(response.body) 
-    assert_equal json_response['message'], 'Agendum sucessfully deleted.'
+    json_response = JSON.parse(response.body)
+    assert_equal json_response['message'], 'Agendum successfully deleted.'
   end
   
   test 'can update the position of agenda items' do
@@ -109,9 +109,10 @@ class AgendaControllerTest < ActionDispatch::IntegrationTest
     patch update_sort_meeting_agenda_index_path(@meeting, agenda_ids: sorted_ids)
     assert_response :success
 
-    response_ids = JSON.parse(response.body)
-      .sort_by { |agendum| agendum['position'] }
-      .map { |agendum| agendum['id'] }
-    assert_equal response_ids, sorted_ids
+    json_response = JSON.parse(response.body)
+    assert_equal json_response['message'], 'Agenda successfully sorted.'
+
+    updated_ids = @meeting.reload.agenda_ids.to_a
+    assert_equal updated_ids, sorted_ids
   end
 end

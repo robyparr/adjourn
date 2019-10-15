@@ -22,19 +22,21 @@ class AgendaController < ApplicationController
 
   def destroy
     @agendum.destroy
-    render json: { message: 'Agendum sucessfully deleted.'}
+    render json: { message: 'Agendum successfully deleted.'}
   end
 
   def update_sort
     ActiveRecord::Base.transaction do
       meeting = current_user.meetings.find(params[:meeting_id])
-      @agenda = meeting.agenda.includes(%i[notes uploads]).map do |agendum|
+      @agenda = meeting.agenda.map do |agendum|
         new_position = agenda_ids.index agendum.id
         agendum.update! position: new_position
 
         agendum
       end
     end
+
+    render json: { message: 'Agenda successfully sorted.' }
   end
 
   private
