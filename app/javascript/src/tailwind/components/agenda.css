@@ -8,8 +8,11 @@
     @screen lg { width: 30%; }
 
     &.sortable-ghost {
+      @apply bg-primary-light p-10;
+      border: 1px dashed black;
       opacity: 0.2;
-      border: 1px dashed rgba(0, 0, 0, 0.5);
+
+      * { visibility: hidden; }
     }
   }
 }
