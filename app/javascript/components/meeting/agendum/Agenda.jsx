@@ -7,9 +7,7 @@ import AgendumContainer from '../../../containers/AgendumContainer';
 const Agenda = ({ agenda, meetingID, onSort }) => {
   const sortableOptions = {
     draggable: '.sortable',
-    filter:    '.modal',
-    animation: 250,
-    easing:    'cubic-bezier(1, 0, 0, 1)'
+    filter:    '.modal'
   };
 
   return(
