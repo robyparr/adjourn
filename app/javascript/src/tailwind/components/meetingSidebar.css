@@ -36,24 +36,10 @@
   }
 
   .meeting-sidebar-contents {
+    @apply overflow-y-auto relative pb-2;
     height: calc(100vh - 105px);
-    position: relative;
 
-    .attendees-list {
-      @apply absolute overflow-y-auto shadow-none;
-      top: 40px;
-      bottom: 5px;
-      left: 8px;
-      right: 8px;
-    }
-
-    .action-item-list {
-      @apply absolute overflow-y-auto shadow-none;
-      top: 0;
-      bottom: 5px;
-      left: 8px;
-      right: 8px;
-    }
+    &:last-child { @apply pb-8; }
   }
 
   &.active {

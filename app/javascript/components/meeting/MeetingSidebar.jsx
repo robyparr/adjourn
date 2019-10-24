@@ -5,7 +5,6 @@ import AttendeesContainer from '../../containers/AttendeesContainer';
 import AgendumDetailsContainer from '../../containers/AgendumDetailsContainer';
 
 export default class MeetingSidebar extends React.Component {
-
   SIDEBAR_TABS = {
     attendees: {
       title: 'Attendees',
