@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import marked from 'marked';
-import Editor from 'tui-editor';
+import Editor from './Editor';
 
 /**
 * Provides inline editing ability.
@@ -32,32 +32,6 @@ export default class InlineEdit extends Component {
     };
   }
 
-  componentDidUpdate() {
-    if (this.state.isEditing && this.state.multilineEditor && !this.editor) {
-      this.editor = new Editor({
-        el:               this.refs.tuiEditor,
-        initialValue:     this.state.value,
-        usageStatistics:  false,
-        previewtype:      'tab',
-        events: {
-          change: () => {
-            this.setState({ value: this.editor.getMarkdown() });
-          }
-        },
-        toolbarItems: [
-          'heading',  'bold',       'italic', 'strike', 'divider',
-          'hr',       'quote',      'divider',
-          'ul',       'ol',         'divider',
-          'table',    'link',       'divider',
-          'code',     'codeblock',
-        ]
-      });
-
-      this.editor.focus();
-      document.addEventListener('keypress', this.handleEditorKeypress);
-    }
-  }
-
   /**
   * Handles activation of edit mode.
   * Calls this.props.onEditModeChanged(true);
@@ -85,7 +59,6 @@ export default class InlineEdit extends Component {
       this.props.onEditModeChanged(false);
     }
 
-    this.editor = null;
     document.removeEventListener('keypress', this.handleEditorKeypress);
   }
 
@@ -115,18 +88,13 @@ export default class InlineEdit extends Component {
     }
   }
 
-  submitEditor = () => {
+  submitEditor = (value) => {
     this.onDisplayModeActivated();
-    if (this.props.onChange != null && this.state.value != this.props.value) {
-      this.props.onChange(this.props.name, this.state.value)
-    }
-  }
-
-  handleEditorKeypress = (e) => {
-    if (this.refs.tuiEditor.contains(e.target) && e.shiftKey && e.key == 'Enter') {
-      e.preventDefault();
-      this.submitEditor();
-    }
+    this.setState({ value: value }, () => {
+      if (this.props.onChange != null && this.state.value != this.props.value) {
+        this.props.onChange(this.props.name, this.state.value)
+      }
+    })
   }
 
   renderEditorElement = () => {
@@ -143,14 +111,7 @@ export default class InlineEdit extends Component {
 
     if (this.state.multilineEditor) {
       return (
-        <div className="text-right">
-          <div className="text-left" ref="tuiEditor"></div>
-          <button
-              className="button outline w-full mt-2"
-              onClick={this.submitEditor}>
-            Save
-          </button>
-        </div>
+        <Editor value={this.state.value} onEditorSubmitted={this.submitEditor} />
       );
     } else {
       return <input type="text" {...props} />;
