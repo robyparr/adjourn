@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 // Controls
 import InlineEdit from '../../common/InlineEdit';
+import Editor from '../../common/Editor';
 
 /*
 * A single Agendum Note.
@@ -18,10 +19,8 @@ export default class AgendumNote extends Component {
   onFieldEditModeChange = (isEditMode) => this.setState({ isEditing: isEditMode});
   onFieldChange = (field,  value) => this.props.onNoteChange({ [field]: value });
 
-  onNewNoteFieldChange = (e) => {
-    if (e.key === 'Enter') {
-      this.props.onNoteChange({ [e.target.name]: e.target.value });
-    }
+  onNewNoteFieldChange = (value) => {
+    this.props.onNoteChange({ content: value });
   }
 
   render() {
@@ -36,12 +35,9 @@ export default class AgendumNote extends Component {
     if (!this.props.isExistingNote) {
       return (
         <li className="list-item">
-          <input
-            type="text"
-            onKeyUp={this.onNewNoteFieldChange}
+          <Editor
             placeholder="Add a new note..."
-            name="content"
-            className="w-full" />
+            onEditorSubmitted={this.onNewNoteFieldChange} />
         </li>
       );
     }

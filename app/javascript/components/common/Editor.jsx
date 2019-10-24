@@ -35,6 +35,7 @@ export default class Editor extends Component {
       ]
     });
 
+    if (this.props.placeholder) this.editor.setPlaceholder(this.props.placeholder);
     document.addEventListener('keypress', this.handleEditorKeypress);
   }
 
