@@ -13,6 +13,10 @@
       }
     }
 
+    .header {
+      @apply p-4 text-grey-dark;
+    }
+
     .selector {
       @apply bg-white shadow-lg border rounded absolute w-full z-10;
 

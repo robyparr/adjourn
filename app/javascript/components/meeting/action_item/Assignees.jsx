@@ -73,6 +73,9 @@ export default class Assignees extends Component {
   renderAssigneeSelector = () => {
     return(
       <div className="selector" ref="selector">
+        <div className="header">
+          <span>Select an attendee to assign to the action item.</span>
+        </div>
         <ul>
           {this.props.attendees.map(attendee => {
             const className = this.state.assignedIDs.includes(attendee.id) ? 'selected' : '';
