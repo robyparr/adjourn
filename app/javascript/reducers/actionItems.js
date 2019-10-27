@@ -13,10 +13,10 @@ export default function actionItems(state = initialState, action) {
       return action.actionItems;
 
     case RECEIVE_NEW_ACTION_ITEM:
-      return [
-        ...state,
-        action.actionItem
-      ];
+      let newActionItem = action.actionItem;
+      newActionItem.attendees = newActionItem.attendees || [];
+
+      return [...state, newActionItem];
 
     case RECEIVE_UPDATED_ACTION_ITEM:
       return state.map(actionItem => {

@@ -1,34 +1,41 @@
 class ActionItemsController < ApplicationController
+  before_action :load_meeting, only: %i[create]
+  before_action :load_item, only: %i[update destroy assign unassign]
 
-  before_action :load_meeting, only: [:create]
-  before_action :load_item, only: [:update, :destroy]
-
-  # POST /meetings/:meeting_id/action_items
   def create
-    item = @meeting.action_items.build(item_params)
+    @item = @meeting.action_items.build(item_params)
 
-    if item.save
-      render json: item, status: :created
+    if @item.save
+      render :show, status: :created
     else
-      render json: item.errors.full_message, status: :unprocessable_entity
+      render json: @item.errors.full_message, status: :unprocessable_entity
     end
   end
 
-  # PUT /action_items/:id
   def update
     if @item.update_attributes(item_params)
-      render json: @item
+      render :show
     else
       render json: @item.errors.full_messages, status: :unprocessable_entity
     end
   end
 
-  # DELETE /action_items/:id
   def destroy
     @item.destroy
     render json: { message: 'Action item successfully deleted.' }
   end
 
+  def assign
+    @item.attendees << attendee
+
+    render :show
+  end
+
+  def unassign
+    @item.attendees.delete attendee
+
+    render :show
+  end
 
   private
 
@@ -40,8 +47,12 @@ class ActionItemsController < ApplicationController
     @meeting = current_user.meetings.find(params[:meeting_id])
   end
 
+  def attendee
+    current_user.attendees.find_or_create_by(email: params[:email])
+  end
+
   def load_item
-    @item = ActionItem.find(params[:id])
+    @item = ActionItem.includes(:attendees).find(params[:id])
     not_found and return unless @item.meeting.user == current_user
   end
 end

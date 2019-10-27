@@ -49,6 +49,7 @@ end
 
 group :test do
   gem 'rails-controller-testing'
+  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

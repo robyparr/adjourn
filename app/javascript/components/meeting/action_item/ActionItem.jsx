@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 
 // Controls
 import InlineEdit from '../../common/InlineEdit';
+import Assignees from './Assignees';
 
-/*
-* A single Action Item.
-*/
 export default class ActionItem extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +41,7 @@ export default class ActionItem extends Component {
 
     return(
       <li className={borderClasses}>
-        <div className="list-item-content">
+        <div className="action-item list-item-content">
           <div className="flex">
             <input type="checkbox"
               id={`item-done-${this.props.actionItem.id}`}
@@ -62,7 +60,13 @@ export default class ActionItem extends Component {
                   name="title" />
               </div>
 
-              <div className="text-grey-darker">
+              <Assignees
+                attendees={this.props.attendees}
+                assignedIDs={this.props.actionItem.attendees.map(attendee => attendee.id)}
+                onAssignToActionItem={this.props.onAssignToActionItem}
+                onUnassignFromActionItem={this.props.onUnassignFromActionItem} />
+
+              <div className="action-item-description">
                 <InlineEdit
                   className="my-0"
                   name="description"

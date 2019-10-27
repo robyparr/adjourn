@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_13_084522) do
+ActiveRecord::Schema.define(version: 2019_10_27_084549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 2019_10_13_084522) do
     t.text "description"
     t.boolean "done", default: false
     t.index ["meeting_id"], name: "index_action_items_on_meeting_id"
+  end
+
+  create_table "action_items_attendees", force: :cascade do |t|
+    t.bigint "action_item_id"
+    t.bigint "attendee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_item_id"], name: "index_action_items_attendees_on_action_item_id"
+    t.index ["attendee_id", "action_item_id"], name: "index_action_items_attendees_on_attendee_id_and_action_item_id", unique: true
+    t.index ["attendee_id"], name: "index_action_items_attendees_on_attendee_id"
   end
 
   create_table "agendum_notes", force: :cascade do |t|
@@ -145,6 +155,8 @@ ActiveRecord::Schema.define(version: 2019_10_13_084522) do
   end
 
   add_foreign_key "action_items", "meetings"
+  add_foreign_key "action_items_attendees", "action_items"
+  add_foreign_key "action_items_attendees", "attendees"
   add_foreign_key "agendum_notes", "agendums"
   add_foreign_key "agendum_notes", "meetings"
   add_foreign_key "agendums", "meetings"

@@ -3,6 +3,6 @@
 
   img.avatar { @apply rounded-full; }
   .media-text {
-    @apply flex flex-col ml-4;
+    @apply flex flex-col ml-2;
   }
 }

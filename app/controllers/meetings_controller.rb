@@ -10,8 +10,8 @@ class MeetingsController < ApplicationController
   def show
     @meeting = current_user.meetings
       .includes(
-        { agenda: [:notes, :uploads] },
-        :action_items, 
+        { agenda: %i[notes uploads] },
+        { action_items: %i[attendees] },
         :attendees
       )
       .find(params[:id])

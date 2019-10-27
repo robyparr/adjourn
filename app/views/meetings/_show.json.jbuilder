@@ -9,9 +9,14 @@ json.action_items meeting.action_items do |item|
   json.title        item.title
   json.description  item.description
   json.done         item.done
+
+  json.attendees item.attendees do |attendee|
+    json.id    attendee.id
+    json.email attendee.email
+  end
 end
 
-json.attendees  meeting.attendees do |attendee|
+json.attendees meeting.attendees do |attendee|
   json.id     attendee.id
   json.email  attendee.email
 end

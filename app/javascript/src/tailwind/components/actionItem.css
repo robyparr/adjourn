@@ -1,0 +1,41 @@
+.action-item {
+  .assignees {
+    @apply relative;
+
+    .selected-assignees {
+      @apply text-grey-dark cursor-pointer;
+
+      img {
+        @apply border-2 border-white;
+      }
+      img:not(:first-child) {
+        margin-left: -15px;
+      }
+    }
+
+    .selector {
+      @apply bg-white shadow-lg border rounded absolute w-full z-10;
+
+      ul {
+        @apply list-reset;
+
+        li {
+          @apply p-4 cursor-pointer;
+
+          &:hover { @apply bg-grey-lighter; }
+
+          &.selected {
+            @apply bg-grey-light;
+            &:hover { @apply bg-grey; }
+          }
+        }
+      }
+    }
+  }
+
+  .action-item-description {
+    @apply mt-4;
+
+    .markdown-body { @apply mb-0; }
+  }
+}

@@ -40,8 +40,10 @@
  @import 'components/toast';
  @import 'components/pagination';
  @import 'components/auth';
- @import 'components/agenda';
  @import 'components/inlineEdit';
+
+ @import 'components/agenda';
+ @import 'components/actionItem';
  
  /**
   * Here you would add any of your custom component classes; stuff that you'd

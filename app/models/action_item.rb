@@ -1,16 +1,6 @@
-#
-# Represents a single Action Item to be taken after a meeting.
-#
-# Attributes:
-#   - title:string
-#   - description:text
-#
-# Relationships
-#   - Meeting:    The meeting this action item belongs to.
-#
 class ActionItem < ApplicationRecord
   belongs_to :meeting
+  has_and_belongs_to_many :attendees, dependent: :destroy
 
   validates :title, presence: true
-
 end

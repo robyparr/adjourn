@@ -63,6 +63,36 @@ export function updateActionItem(actionItemID, partialActionItem) {
   }
 }
 
+export function assignAttendeeToActionItem(actionItemID, email) {
+  return function(dispatch) {
+    axios({
+      url:    `/action_items/${actionItemID}/assign`,
+      method: 'POST',
+      data: {
+        authenticity_token: Utils.getAuthenticityToken(),
+        email:              email
+      }
+    })
+    .then(response => dispatch(receiveUpdatedActionItem(response.data)))
+    .catch(error => console.log(error));
+  }
+}
+
+export function unassignAttendeeFromActionItem(actionItemID, email) {
+  return function(dispatch) {
+    axios({
+      url:    `/action_items/${actionItemID}/unassign`,
+      method: 'POST',
+      data: {
+        authenticity_token: Utils.getAuthenticityToken(),
+        email:              email
+      }
+    })
+    .then(response => dispatch(receiveUpdatedActionItem(response.data)))
+    .catch(error => console.log(error));
+  }
+}
+
 /**
 * Receives an updated action item from the backend and
 * updates it in the application state.

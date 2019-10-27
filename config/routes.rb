@@ -35,7 +35,12 @@ Rails.application.routes.draw do
   end
 
   resources :meetings, except: %w(edit) do
-    resources :action_items, shallow: true, only: [:create, :update, :destroy]
+    resources :action_items, shallow: true, only: %i[create update destroy] do
+      member do
+        post '/assign',   to: 'action_items#assign'
+        post '/unassign', to: 'action_items#unassign'
+      end
+    end
 
     member do
       scope '/attendees' do

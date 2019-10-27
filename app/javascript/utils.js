@@ -33,8 +33,22 @@ export default class Utils {
       .getAttribute('content');
   }
 
-  static getGravatarUrl(email) {
-    var hashedEmail = md5(email.trim().toLowerCase());
-    return `https://www.gravatar.com/avatar/${hashedEmail}.jpg?s=32&d=mm`;
+  static getGravatarUrl(email, options = {}) {
+    const hashedEmail = md5(email.trim().toLowerCase());
+    const size = options.size || 32
+    return `https://www.gravatar.com/avatar/${hashedEmail}.jpg?s=${size}&d=mm`;
+  }
+
+  // Based on https://stackoverflow.com/a/2234986
+  static isDescendantOf(parent, child) {
+    let childParent = child.parentNode;
+
+    while (childParent != null) {
+      if (childParent == parent) return true;
+
+      childParent = childParent.parentNode;
+    }
+
+    return false;
   }
 }
