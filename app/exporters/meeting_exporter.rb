@@ -4,7 +4,7 @@ class MeetingExporter
   end
 
   def meeting
-    includes_params = [{ agenda: [:notes, :uploads] }, :action_items, :attendees]
+    includes_params = [{ agenda: [:notes, :uploads] }, { action_items: :attendees }, :attendees]
     @meeting ||= Meeting.includes(*includes_params).find(meeting_id)
   end
 
