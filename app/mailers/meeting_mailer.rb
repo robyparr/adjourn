@@ -35,5 +35,15 @@ class MeetingMailer < ApplicationMailer
         attachments[upload.filename] = file
       end
     end
+
+    add_adjourn_logo_to_attachments!
+  end
+
+  def add_adjourn_logo_to_attachments!
+    adjourn_logo  = File.read(Rails.root.join('app/assets/images/icon-blue.png'))
+    logo_filename = 'adjourn-logo'
+
+    attachments.inline["#{logo_filename}.png"] = adjourn_logo
+    self.inline_images[logo_filename] = attachments["#{logo_filename}.png"].url
   end
 end
