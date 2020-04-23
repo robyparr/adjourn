@@ -6,7 +6,7 @@ module.exports = {
   use: ExtractTextPlugin.extract({
     fallback: 'style-loader',
     use: [
-      { loader: 'css-loader', options: { minimize: env.NODE_ENV === 'production' } },
+      { loader: 'css-loader' },
       { loader: 'postcss-loader', options: { sourceMap: true } },
       { loader: 'sass-loader', options: { sourceMap: true } }
     ]
