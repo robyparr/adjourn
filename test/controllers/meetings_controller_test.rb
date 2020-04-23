@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MeetingsControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
-  
+
   def setup
     @meeting = meetings(:one)
     @meeting2 = meetings(:two)
@@ -113,7 +113,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
 
     @meeting.attendees << attendees(:one)
-    assert_enqueued_with(job: ActionMailer::DeliveryJob) do
+    assert_enqueued_with(job: ActionMailer::MailDeliveryJob) do
       post email_attendees_meeting_url(@meeting)
       assert_response :success
     end
