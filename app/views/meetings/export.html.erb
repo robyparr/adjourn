@@ -199,7 +199,9 @@
       </tr>
       <tr>
         <td colspan="3" align="center" style="padding-top: 20px;">
-          <%= image_tag inline_images['adjourn-logo'], style: 'height: 20px; margin-right: 5px;' %>
+          <% if inline_images.present? %>
+            <%= image_tag inline_images['adjourn-logo'], style: 'height: 20px; margin-right: 5px;' %>
+          <% end %>
           <a href="https://adjourn.io" style="font-size: 20px; text-decoration: none;">
             Adjourn
           </a>
