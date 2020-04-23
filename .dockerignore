@@ -1,0 +1,15 @@
+.git/
+node_modules/
+
+log/development.log
+log/test.log
+
+tmp/screenshots/
+tmp/sockets
+
+config/master.key
+
+.overmind.sock
+coverage/
+
+.yarn-error.log

@@ -30,3 +30,4 @@
 
 # Local ENV variables
 .env
+.env.*
