@@ -1,7 +1,7 @@
 #
 # Build Step
 #
-FROM ruby:2.6.4-alpine AS build-image
+FROM ruby:2.7.1-alpine AS build-image
 
 RUN apk update \
   && apk upgrade \
@@ -43,7 +43,7 @@ RUN rm -rf node_modules spec
 #
 # Production Image
 #
-FROM ruby:2.6.4-alpine
+FROM ruby:2.7.1-alpine
 
 ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
