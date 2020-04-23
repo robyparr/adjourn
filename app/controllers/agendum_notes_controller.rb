@@ -14,7 +14,7 @@ class AgendumNotesController < ApplicationController
   end
 
   def update
-    if @note.update_attributes(note_params)
+    if @note.update(note_params)
       render json: @note
     else
       render json: @note.errors.full_messages, status: :unprocessable_entity
@@ -30,9 +30,9 @@ class AgendumNotesController < ApplicationController
   def load_note
     @note = current_user.notes.find(params[:id])
   end
-  
+
   def note_params
     params.require(:agendum_note).permit(:content)
   end
-  
+
 end

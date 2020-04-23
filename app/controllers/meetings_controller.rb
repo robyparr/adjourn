@@ -38,7 +38,7 @@ class MeetingsController < ApplicationController
   def update
     meeting = current_user.meetings.find(params[:id])
 
-    if meeting.update_attributes(meeting_params)
+    if meeting.update(meeting_params)
       render json: meeting
     else
       render json: meeting.errors.full_messages, status: :unprocessable_entity

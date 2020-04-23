@@ -13,7 +13,7 @@ class AgendaController < ApplicationController
   end
 
   def update
-    if @agendum.update_attributes(agendum_params)
+    if @agendum.update(agendum_params)
       render json: @agendum
     else
       render json: @agendum.errors.full_messages, status: :unprocessable_item

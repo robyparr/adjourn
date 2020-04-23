@@ -13,7 +13,7 @@ class ActionItemsController < ApplicationController
   end
 
   def update
-    if @item.update_attributes(item_params)
+    if @item.update(item_params)
       render :show
     else
       render json: @item.errors.full_messages, status: :unprocessable_entity
