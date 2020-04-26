@@ -25,7 +25,7 @@
 
     &.visible { transform: translateY(0); }
 
-    &.info { border-left: 4px solid theme('colors.primary'); }
-    &.error { border-left: 4px solid theme('colors.red.500'); }
+    &.info { @apply border-0 border-l-4 border-primary-500; }
+    &.error { @apply border-0 border-l-4 border-red-500; }
   }
 }
