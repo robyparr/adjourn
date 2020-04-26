@@ -18,4 +18,14 @@
   &:hover { @apply border-transparent bg-primary text-white; }
 }
 
+.button.link {
+  @apply bg-transparent border shadow-none border-transparent text-blue-500 uppercase font-normal;
+  &:hover { @apply border-blue-500 bg-transparent text-current; }
+
+  &.danger {
+    @apply text-red-500;
+    &:hover { @apply text-red-500 border-red-500; }
+  }
+}
+
 .button.block { @apply w-full; }
