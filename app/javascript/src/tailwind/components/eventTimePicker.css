@@ -24,8 +24,8 @@
       height: 40px;
 
       &.inactive { @apply text-gray-500; }
-      &.today { @apply text-primary; }
-      &.selected { @apply bg-primary text-white; }
+      &.today { @apply text-primary-500; }
+      &.selected { @apply bg-primary-500 text-white; }
 
       &:not(.inactive):not(.selected) {
         @apply cursor-pointer;
@@ -56,7 +56,7 @@
         &:last-child { @apply rounded-r border-l-0; }
 
         &.selected {
-          @apply bg-primary text-white;
+          @apply bg-primary-500 text-white;
         }
       }
     }

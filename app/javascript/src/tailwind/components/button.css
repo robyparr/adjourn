@@ -3,19 +3,19 @@
          inline-block border border-gray-400;
 
   &.primary {
-    @apply bg-primary border-primary-dark text-white;
+    @apply bg-primary-500 border-primary-600 text-white;
 
-    &:hover { @apply bg-primary-dark; }
+    &:hover { @apply bg-primary-600; }
   }
 
-  &:hover { @apply bg-gray-500 shadow-md border-gray-600; }
+  &:hover { @apply bg-gray-400 shadow-md border-gray-500; }
   &:disabled { @apply opacity-50 cursor-not-allowed; }
 }
 
 .button.outline {
-  @apply bg-transparent border border-primary text-primary-dark;
+  @apply bg-transparent border border-primary-500 text-primary-600;
 
-  &:hover { @apply border-transparent bg-primary text-white; }
+  &:hover { @apply border-transparent bg-primary-500 text-white; }
 }
 
 .button.link {

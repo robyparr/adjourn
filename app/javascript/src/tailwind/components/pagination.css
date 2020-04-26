@@ -7,7 +7,7 @@
     width: 28px;
     line-height: 28px;
 
-    &:not(.gap) { @apply bg-primary-lightest text-white; }
-    &.current { @apply bg-primary-dark; }
+    &:not(.gap) { @apply bg-primary-400 text-white; }
+    &.current { @apply bg-primary-600; }
   }
 }

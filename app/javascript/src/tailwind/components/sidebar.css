@@ -3,7 +3,7 @@
 }
 
 .sidebar {
-  @apply fixed inset-x-0 inset-y-0 z-30 bg-primary shadow-lg ml-0 pt-4;
+  @apply fixed inset-x-0 inset-y-0 z-30 bg-primary-500 shadow-lg ml-0 pt-4;
   transition: 0.5s;
   width: 75%;
   margin-left: -80%;
@@ -19,7 +19,7 @@
 
   a {
     @apply block p-3 text-white;
-    &:hover, &.active { @apply bg-primary-dark; }
+    &:hover, &.active { @apply bg-primary-600; }
   }
 
   .header {

@@ -5,7 +5,7 @@ input:not([type="submit"]):not([type="checkbox"]), select {
   -webkit-appearance: none;
 
   &:focus {
-    @apply outline-none bg-white border-primary;
+    @apply outline-none bg-white border-primary-500;
   }
 
   &.bg-white { @apply bg-white; }
