@@ -28,7 +28,7 @@ const AgendumDetails = ({ agendum, agendumNotes, agendumUploads }) => {
                   <i className={`fa ${determinefileIcon(upload)} fa-lg`}></i>
                   <div className="media-text">
                     <a href={`/uploads/${upload.id}/download`}>{upload.filename}</a>
-                    <span className="text-grey">{humanizedFileSize(upload)} KB</span>
+                    <span className="text-gray-500">{humanizedFileSize(upload)} KB</span>
                   </div>
                 </div>
               </li>

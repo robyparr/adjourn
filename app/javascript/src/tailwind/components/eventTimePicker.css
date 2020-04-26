@@ -2,14 +2,14 @@
   @apply bg-white shadow-lg rounded inline-block absolute z-10;
 
   @media(max-width: 576px) {
-    @apply fixed pin-x pin-y z-30 rounded-none overflow-y-auto;
+    @apply fixed inset-x-0 inset-y-0 z-30 rounded-none overflow-y-auto;
   }
 
   .calendar {
     max-width: 350px;
 
     .header {
-      @apply flex flex-row justify-between border-b border-grey p-4 mb-4;
+      @apply flex flex-row justify-between border-b border-gray-500 p-4 mb-4;
 
       .month-selector { @apply cursor-pointer; }
     }
@@ -23,20 +23,20 @@
       width: 40px;
       height: 40px;
 
-      &.inactive { @apply text-grey; }
+      &.inactive { @apply text-gray-500; }
       &.today { @apply text-primary; }
       &.selected { @apply bg-primary text-white; }
 
       &:not(.inactive):not(.selected) {
         @apply cursor-pointer;
-        &:hover { @apply border-grey; }
+        &:hover { @apply border-gray-500; }
       }
     }
   }
 
   .time-input {
     .inputs {
-      @apply inline-flex items-center bg-grey-lighter rounded;
+      @apply inline-flex items-center bg-gray-200 rounded;
 
       input {
         @apply pr-2 pl-3 text-center;
@@ -63,7 +63,7 @@
   }
 
   .action-buttons {
-    @apply absolute pin-b pin-r pin-l mb-4 mr-4 -mt-4 inline-flex;
+    @apply absolute bottom-0 right-0 left-0 mb-4 mr-4 -mt-4 inline-flex;
 
     @media(max-width: 576px) {
       @apply ml-4;

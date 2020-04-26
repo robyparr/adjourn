@@ -1,9 +1,9 @@
 .sidebar-overlay {
-  @apply hidden w-full fixed pin-x pin-y bg-black opacity-25 z-10 cursor-pointer;
+  @apply hidden w-full fixed inset-x-0 inset-y-0 bg-black opacity-25 z-10 cursor-pointer;
 }
 
 .sidebar {
-  @apply fixed pin-x pin-y z-30 bg-primary shadow-lg ml-0 pt-4;
+  @apply fixed inset-x-0 inset-y-0 z-30 bg-primary shadow-lg ml-0 pt-4;
   transition: 0.5s;
   width: 75%;
   margin-left: -80%;
@@ -39,7 +39,7 @@
     @apply relative p-3;
 
     i.prefix {
-      @apply absolute text-black ml-2 text-grey-dark;
+      @apply absolute text-black ml-2 text-gray-600;
       line-height: 40px;
     }
 
@@ -53,17 +53,17 @@
 
   .collapse-button {
     @apply cursor-pointer;
-    
+
     .collapse { display: initial; }
     .expand { @apply hidden; }
     i { pointer-events: none; }
   }
 
   ul.links {
-    @apply mt-10 text-white list-reset relative;
+    @apply mt-10 text-white relative;
 
     &.bottom {
-      @apply absolute pin-l pin-b w-full;
+      @apply absolute left-0 bottom-0 w-full;
 
       a {
         @apply justify-center text-center;

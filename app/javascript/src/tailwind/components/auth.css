@@ -5,7 +5,7 @@
   width: 20%;
 
   .auth-banner {
-    @apply flex flex-row items-center bg-primary absolute pin-t pin-x mt-0 p-4 justify-center;
+    @apply flex flex-row items-center bg-primary absolute top-0 inset-x-0 mt-0 p-4 justify-center;
 
     img { width: 41px; }
   }

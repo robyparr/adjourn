@@ -1,11 +1,11 @@
 .toast-container {
-  @apply fixed pin-l pin-r z-50 pointer-events-none;
+  @apply fixed left-0 right-0 z-50 pointer-events-none;
   bottom: 0px;
 
   &.with-sidebar { bottom: 60px; }
 
   @screen lg {
-    @apply pin-t;
+    @apply top-0;
     bottom: 0;
   }
 
@@ -25,7 +25,7 @@
 
     &.visible { transform: translateY(0); }
 
-    &.info { border-left: 4px solid config('colors.primary'); }
-    &.error { border-left: 4px solid config('colors.red'); }
+    &.info { border-left: 4px solid theme('colors.primary'); }
+    &.error { border-left: 4px solid theme('colors.red.500'); }
   }
 }

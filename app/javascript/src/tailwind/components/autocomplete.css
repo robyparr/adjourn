@@ -2,12 +2,12 @@
   @apply relative;
 
   input + ul {
-    @apply border bg-white rounded shadow-lg m-auto overflow-hidden list-reset z-50 absolute pin-x;
+    @apply border bg-white rounded shadow-lg m-auto overflow-hidden z-50 absolute inset-x-0;
 
     li {
       @apply px-6 py-4 cursor-pointer;
 
-      &:hover, &.selected { @apply bg-grey-lighter; }
+      &:hover, &.selected { @apply bg-gray-200; }
 
       * { pointer-events: none; }
     }
