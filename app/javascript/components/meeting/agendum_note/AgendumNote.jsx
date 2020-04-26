@@ -44,7 +44,7 @@ export default class AgendumNote extends Component {
 
     return(
       <li className="list-item">
-        <InlineEdit
+        {/* <InlineEdit
           onChange={this.onFieldChange}
           onEditModeChanged={this.onFieldEditModeChange}
           value={this.props.note.content}
@@ -52,7 +52,7 @@ export default class AgendumNote extends Component {
           name="content"
           className="w-full mr-4"
           multilineEditor={true}
-          renderMarkdown={true} />
+          renderMarkdown={true} /> */}
 
         <button className="list-floating-text">
           <i className="fa fa-trash"

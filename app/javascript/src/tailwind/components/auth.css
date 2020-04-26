@@ -13,6 +13,10 @@
   .card-head {
     @apply mt-20;
   }
+}
 
-  @screen md { min-width: 400px; }
+@screen md {
+  .card.auth {
+    min-width: 400px;
+  }
 }

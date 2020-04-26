@@ -5,8 +5,6 @@
     @apply mb-2 mx-2 w-full;
     height: fit-content;
 
-    @screen lg { width: 30%; }
-
     &.sortable-ghost {
       @apply bg-primary-400 p-10;
       border: 1px dashed black;
@@ -14,5 +12,11 @@
 
       * { visibility: hidden; }
     }
+  }
+}
+
+@screen lg {
+  .agenda .agendum {
+    width: 30%;
   }
 }

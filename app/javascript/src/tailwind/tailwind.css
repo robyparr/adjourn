@@ -9,7 +9,7 @@
  *
  * @import "tailwindcss/base";
  */
- @tailwind base;
+ @import "tailwindcss/base";
 
  /**
   * This injects any component classes registered by plugins.
@@ -18,7 +18,7 @@
   *
   * @import "tailwindcss/components";
   */
- @tailwind components;
+ @import "tailwindcss/components";
 
  @import 'components/button';
  @import 'components/heading';
@@ -69,7 +69,7 @@
   *
   * @import "tailwindcss/utilities";
   */
- @tailwind utilities;
+ @import "tailwindcss/utilities";
 
  /**
   * Here you would add any custom utilities you need that don't come out of the

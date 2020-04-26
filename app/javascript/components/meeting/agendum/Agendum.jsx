@@ -57,12 +57,12 @@ export default class Agendum extends Component {
 
         <div className="card-head">
           <span className="card-title" id={`${this.props.agendum.id}_title`}>
-            <InlineEdit
+            {/* <InlineEdit
               onChange={this.onFieldChange}
               onEditModeChanged={this.onFieldEditModeChange}
               value={this.props.agendum.title}
               placeholder="Agendum Title"
-              name="title" />
+              name="title" /> */}
           </span>
 
           {!this.state.isEditing &&
@@ -81,7 +81,7 @@ export default class Agendum extends Component {
           className="card-content"
           disableClick={true}
           activeClassName="dropzone">
-          <InlineEdit
+          {/* <InlineEdit
             className="-mx-4 -mb-4 p-4"
             onChange={this.onFieldChange}
             value={descriptionValue}
@@ -90,7 +90,7 @@ export default class Agendum extends Component {
             name="description"
             multilineEditor={true}
             singleClickToEdit={!this.props.agendum.description}
-            renderMarkdown={true} />
+            renderMarkdown={true} /> */}
         </Dropzone>
 
         <div className={`modal confirm-agendum-delete-${this.props.agendum.id}`}>

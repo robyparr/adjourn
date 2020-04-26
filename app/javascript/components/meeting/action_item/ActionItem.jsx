@@ -50,14 +50,14 @@ export default class ActionItem extends Component {
 
             <div className="flex flex-col mx-4 w-full">
               <div className="font-semibold">
-                <InlineEdit
+                {/* <InlineEdit
                   onChange={this.onFieldChange}
                   onEditModeChanged={this.onFieldEditModeChange}
                   displayElement="div"
                   value={this.props.actionItem.title}
                   className="w-full"
                   placeholder="Item Title"
-                  name="title" />
+                  name="title" /> */}
               </div>
 
               <Assignees
@@ -67,7 +67,7 @@ export default class ActionItem extends Component {
                 onUnassignFromActionItem={this.props.onUnassignFromActionItem} />
 
               <div className="action-item-description">
-                <InlineEdit
+                {/* <InlineEdit
                   className="my-0"
                   name="description"
                   onChange={this.onFieldChange}
@@ -77,7 +77,7 @@ export default class ActionItem extends Component {
                   placeholder="Item Description"
                   multilineEditor={true}
                   className="w-full"
-                  renderMarkdown={true} />
+                  renderMarkdown={true} /> */}
               </div>
             </div>
           </div>

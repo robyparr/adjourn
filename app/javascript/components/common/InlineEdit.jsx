@@ -3,6 +3,14 @@ import React, { Component } from 'react';
 import marked from 'marked';
 import Editor from './Editor';
 
+// export default class InlineEdit extends Component {
+//   render() {
+//     return(
+//       <h1>hi</h1>
+//     )
+//   }
+// }
+
 /**
 * Provides inline editing ability.
 * props.value will be displayed using whatever element
@@ -122,7 +130,9 @@ export default class InlineEdit extends Component {
     props['dangerouslySetInnerHTML'] = { __html: marked(this.state.value) };
     props['className'] += " markdown-body inline-edit display";
 
-    return <this.state.displayElement {...props} />;
+    const displayElement = this.state.displayElement;
+    return React.createElement(displayElement, props)
+    // return <displayElement {...props} />;
   }
 
   renderDisplayElement = () => {
@@ -139,11 +149,13 @@ export default class InlineEdit extends Component {
       return this.renderMarkdownDisplayElement(props);
     }
 
-    return (
-      <this.state.displayElement {...props}>
-        {this.state.value}
-      </this.state.displayElement>
-      );
+    const displayElement = this.state.displayElement;
+    return React.createElement(displayElement, props, this.state.value)
+    // return (
+    //   <displayElement {...props}>
+    //     {this.state.value}
+    //   </displayElement>
+    //   );
     }
 
     render() {

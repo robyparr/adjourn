@@ -1,5 +1,0 @@
-plugins:
-  postcss-smart-import: {}
-  precss: {}
-  autoprefixer: {}
-  tailwindcss: "./app/javascript/src/tailwind/tailwind.config.js"

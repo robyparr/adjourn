@@ -11,7 +11,10 @@ export default class Editor extends Component {
     };
   }
 
-  componentDidMount = () => this.renderEditor();
+  componentDidMount = () => {
+    console.log('did mount')
+    this.renderEditor();
+  }
 
   renderEditor = () => {
     if (this.editor) return;

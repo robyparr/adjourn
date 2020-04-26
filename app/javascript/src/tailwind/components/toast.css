@@ -4,11 +4,6 @@
 
   &.with-sidebar { bottom: 60px; }
 
-  @screen lg {
-    @apply top-0;
-    bottom: 0;
-  }
-
   .toast {
     @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full pointer-events-auto;
     min-width: 300px;
@@ -27,5 +22,12 @@
 
     &.info { @apply border-0 border-l-4 border-primary-500; }
     &.error { @apply border-0 border-l-4 border-red-500; }
+  }
+}
+
+@screen lg {
+  .toast-container {
+    @apply top-0;
+    bottom: 0;
   }
 }

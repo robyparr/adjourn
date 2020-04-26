@@ -8,15 +8,6 @@
   width: 75%;
   margin-left: -80%;
 
-  @screen md {
-    width: 40%;
-  }
-
-  @screen lg {
-    width: 16%;
-    margin-left: 0;
-  }
-
   a {
     @apply block p-3 text-white;
     &:hover, &.active { @apply bg-primary-600; }
@@ -113,4 +104,17 @@
   }
 
   &.sidebar-hidden * { display: none; }
+}
+
+@screen md {
+  .sidebar {
+    width: 40%;
+  }
+}
+
+@screen lg {
+  .sidebar {
+    width: 16%;
+    margin-left: 0;
+  }
 }
