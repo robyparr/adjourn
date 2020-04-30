@@ -1,0 +1,29 @@
+.time-picker {
+  @apply flex;
+
+  .inputs {
+    @apply inline-flex items-center bg-gray-200 rounded;
+
+    input {
+      @apply pr-2 pl-3 text-center;
+      width: 70px !important;
+    }
+
+    .separator { @apply font-bold; }
+  }
+
+  .meridian {
+    @apply inline-flex items-center ml-4;
+
+    .button {
+      @apply rounded-none shadow-none;
+
+      &:first-child { @apply rounded-l border-r-0; }
+      &:last-child { @apply rounded-r border-l-0; }
+
+      &.selected {
+        @apply bg-primary-500 text-white;
+      }
+    }
+  }
+}
