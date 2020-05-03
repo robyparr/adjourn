@@ -39,7 +39,24 @@ export default new Vuex.Store({
 
     REMOVE_ATTENDEE: (state, email) => {
       state.meeting.attendees = state.meeting.attendees.filter(attendee => attendee.email !== email)
-    }
+    },
+
+    ADD_ACTION_ITEM: (state, actionItem) => {
+      state.meeting.action_items = [...state.meeting.action_items, actionItem]
+    },
+
+    UPDATE_ACTION_ITEM: (state, updatedActionItem) => {
+      state.meeting.action_items = state.meeting.action_items.map(actionItem => {
+        if (actionItem.id == updatedActionItem.id)
+          return updatedActionItem
+
+        return actionItem
+      })
+    },
+
+    REMOVE_ACTION_ITEM: (state, actionItemID) => {
+      state.meeting.action_items = state.meeting.action_items.filter(item => item.id !== actionItemID)
+    },
   },
 
   actions: {
@@ -122,6 +139,68 @@ export default new Vuex.Store({
       })
       .then(_response => commit('REMOVE_ATTENDEE', email))
       .catch(error => console.log(error))
-    }
+    },
+
+    addActionItem({ commit, state }, title) {
+      axios({
+        url: `/meetings/${state.meeting.id}/action_items`,
+        method: 'POST',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          action_item: { title: title }
+        }
+      })
+      .then(response => commit('ADD_ACTION_ITEM', response.data))
+      .catch(error => console.log(error))
+    },
+
+    updateActionItem({ commit }, { id, partialActionItem }) {
+      axios({
+        url: `/action_items/${id}`,
+        method: 'PUT',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          action_item: partialActionItem
+        }
+      })
+      .then(response => commit('UPDATE_ACTION_ITEM', response.data))
+      .catch(error => console.log(error))
+    },
+
+    removeActionItem({ commit }, actionItemID) {
+      axios({
+        url: `/action_items/${actionItemID}`,
+        method: 'DELETE',
+        data: { authenticity_token: Utils.getAuthenticityToken() }
+      })
+      .then(_response => commit('REMOVE_ACTION_ITEM', actionItemID))
+      .catch(error => console.log(error))
+    },
+
+    assignAttendeeToActionItem({ commit }, { actionItemID, email }) {
+      axios({
+        url: `/action_items/${actionItemID}/assign`,
+        method: 'POST',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          email: email
+        }
+      })
+      .then(response => commit('UPDATE_ACTION_ITEM', response.data))
+      .catch(error => console.log(error))
+    },
+
+    unassignAttendeeFromActionItem({ commit }, { actionItemID, email }) {
+      axios({
+        url: `/action_items/${actionItemID}/unassign`,
+        method: 'POST',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          email: email
+        }
+      })
+      .then(response => commit('UPDATE_ACTION_ITEM', response.data))
+      .catch(error => console.log(error))
+    },
   }
 })
