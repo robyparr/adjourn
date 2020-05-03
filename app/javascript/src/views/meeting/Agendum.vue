@@ -24,13 +24,11 @@
     </template>
 
     <template v-if="isExistingAgendum" slot="content">
-      <inline-editor editor="textInput"
+      <inline-editor editor="markdownEditor"
                      placeholder="Agendum Details"
                      :value="agendum.description"
                      @editor-changed="updateAgendumDescription">
-        <p slot="display" class="markdown-body">
-          {{ agendum.description || 'no description' }}
-        </p>
+        <p slot="display" class="markdown-body" v-html="agendumDescription" />
       </inline-editor>
 
       <div :class="['modal' , `confirm-agendum-delete-${agendum.id}`]">
@@ -54,9 +52,10 @@
 </template>
 
 <script>
-// TODO: drag & drop, rich editing
 import Card from '../../components/Card'
 import InlineEditor from '../../components/InlineEditor'
+
+import marked from 'marked'
 
 export default {
   components: {
@@ -78,6 +77,10 @@ export default {
 
     isSelected() {
       return this.isExistingAgendum && this.$store.state.selectedAgendumID == this.agendum.id
+    },
+
+    agendumDescription() {
+      return marked(this.agendum.description || 'No description')
     },
   },
 

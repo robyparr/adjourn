@@ -9,13 +9,24 @@
         :placeholder="placeholder"
         :value="value"
         @change="submitEditor($event.target.value)"
+        @blur="submitEditor($event.target.value)"
+        @keypress.enter="submitEditor($event.target.value)"
         autofocus="true" />
+      <markdown-editor v-if="editor === 'markdownEditor'"
+        :value="value"
+        @change="submitEditor" />
     </span>
   </div>
 </template>
 
 <script>
+import MarkdownEditor from './MarkdownEditor'
+
 export default {
+  components: {
+    MarkdownEditor,
+  },
+
   props: {
     editor: {
       type: String,
@@ -40,7 +51,7 @@ export default {
 
     isEditMode() {
       return this.mode === 'edit'
-    }
+    },
   },
 
   methods: {
@@ -68,7 +79,7 @@ export default {
     submitEditor(editorValue) {
       this.$emit('editor-changed', editorValue)
       this.changeMode()
-    }
+    },
   },
 }
 </script>

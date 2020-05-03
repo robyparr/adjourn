@@ -905,6 +905,21 @@
     webpack-cli "^3.3.10"
     webpack-sources "^1.4.3"
 
+"@toast-ui/editor@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-2.1.0.tgz#595a4fc8493d080a35aef47613131ca64e033423"
+  integrity sha512-K29smq637yT8gINnLgWRJqVgiA2Q4HA4B1IwnPhZr0XvdvM+/YEWuDVy/YB7hVghhMKhk+6eYnvn+wLdRjF5bQ==
+  dependencies:
+    "@types/codemirror" "0.0.71"
+    codemirror "^5.48.4"
+
+"@toast-ui/vue-editor@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/vue-editor/-/vue-editor-2.1.0.tgz#22dd3c72787d48bf8623def1d3c56c7c9621397c"
+  integrity sha512-Wfk0xSkOF8MQgyECtSeeHQwwxChN5u5flFB26MwpAbcgUHlUVZn62hb9Ub7cA58Lykq7qr0QAAmvQm/4OjLufw==
+  dependencies:
+    "@toast-ui/editor" "^2.1.0"
+
 "@types/codemirror@0.0.71":
   version "0.0.71"
   resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.71.tgz#861f1bcb3100c0a064567c5400f2981cf4ae8ca7"
@@ -7147,6 +7162,11 @@ sortablejs@1.6.1:
   resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.6.1.tgz#d120d103fbb9f60c7db27814a1384072e6c6e083"
   integrity sha1-0SDRA/u59gx9sngUoThAcubG4IM=
 
+sortablejs@^1.10.1:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
+  integrity sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
@@ -8027,6 +8047,13 @@ vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+
+vuedraggable@^2.23.2:
+  version "2.23.2"
+  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-2.23.2.tgz#0d95d7fdf4f02f56755a26b3c9dca5c7ca9cfa72"
+  integrity sha512-PgHCjUpxEAEZJq36ys49HfQmXglattf/7ofOzUrW2/rRdG7tu6fK84ir14t1jYv4kdXewTEa2ieKEAhhEMdwkQ==
+  dependencies:
+    sortablejs "^1.10.1"
 
 vuex@^3.3.0:
   version "3.3.0"

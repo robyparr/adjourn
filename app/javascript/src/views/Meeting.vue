@@ -15,17 +15,19 @@
 
       <button class="button primary mt-4">Email Attendees</button>
 
-      <!-- {/* Agenda */} -->
       <h4 class="mt-8">Agenda</h4>
-      <div class="agenda">
+      <draggable class="agenda"
+                 v-model="meeting.agenda"
+                 @end="sortAgenda"
+                 draggable=".sortable">
         <agendum
           v-for="agendum in meeting.agenda"
           :key="agendum.id"
+          class="sortable"
           :agendum="agendum" />
 
         <agendum :agendum="{}" />
-      </div>
-      <!-- <AgendaContainer /> -->
+      </draggable>
     </div>
 
     <!-- {/* Sidebar: Action items, Attendees, & Agendum details */} -->
@@ -37,12 +39,14 @@
 import InlineEditor from '../components/InlineEditor'
 import DateTimeRangePicker from '../components/DateTimeRangePicker'
 import Agendum from './meeting/Agendum'
+import Draggable from 'vuedraggable'
 
 export default {
   components: {
     InlineEditor,
     DateTimeRangePicker,
-    Agendum
+    Agendum,
+    Draggable,
   },
 
   data() {
@@ -63,6 +67,11 @@ export default {
       this.meeting.end_date = to.format()
 
       this.$store.dispatch('updateMeeting', this.meeting)
+    },
+
+    sortAgenda() {
+      const agendaIDs = this.meeting.agenda.map(agendum => agendum.id)
+      this.$store.dispatch('sortAgenda', agendaIDs)
     }
   }
 }

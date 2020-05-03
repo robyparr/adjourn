@@ -31,8 +31,9 @@ export default new Vuex.Store({
 
     REMOVE_AGENDUM: (state, agendumID) => {
       state.meeting.agenda = state.meeting.agenda.filter(agendum => agendum.id !== agendumID)
-    }
+    },
   },
+
   actions: {
     updateMeeting({ commit }, meeting) {
       axios({
@@ -74,6 +75,19 @@ export default new Vuex.Store({
         method: 'delete',
         data: { authenticity_token: Utils.getAuthenticityToken() }
       }).then(_response => commit('REMOVE_AGENDUM', agendumID))
+    },
+
+    sortAgenda({ state }, agendaIDs) {
+      // Note: The agenda sort order is calculated locally already
+      // so we don't have to update it again.
+      axios({
+        url: `/meetings/${state.meeting.id}/agenda/update_sort`,
+        method: 'PATCH',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          agenda_ids: agendaIDs
+        }
+      })
     },
   }
 })
