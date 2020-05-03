@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import axios from 'axios'
-import Utils from 'utils';
+import Utils from 'utils'
 
 Vue.use(Vuex)
 
@@ -32,6 +32,14 @@ export default new Vuex.Store({
     REMOVE_AGENDUM: (state, agendumID) => {
       state.meeting.agenda = state.meeting.agenda.filter(agendum => agendum.id !== agendumID)
     },
+
+    ADD_ATTENDEE: (state, attendee) => {
+      state.meeting.attendees = [...state.meeting.attendees, attendee]
+    },
+
+    REMOVE_ATTENDEE: (state, email) => {
+      state.meeting.attendees = state.meeting.attendees.filter(attendee => attendee.email !== email)
+    }
   },
 
   actions: {
@@ -89,5 +97,31 @@ export default new Vuex.Store({
         }
       })
     },
+
+    addAttendee({ commit, state }, email) {
+      axios({
+        method: 'POST',
+        url: `/meetings/${state.meeting.id}/attendees/attend`,
+        data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
+      })
+      .then(response => {
+        const attendee = {
+          id: response.data.id,
+          email: response.data.email
+        }
+        commit('ADD_ATTENDEE', attendee)
+      })
+      .catch(error => console.log(error))
+    },
+
+    removeAttendee({ commit, state }, email) {
+      axios({
+        method: 'DELETE',
+        url: `/meetings/${state.meeting.id}/attendees/unattend`,
+        data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
+      })
+      .then(_response => commit('REMOVE_ATTENDEE', email))
+      .catch(error => console.log(error))
+    }
   }
 })

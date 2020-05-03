@@ -32,6 +32,7 @@
 
     <!-- {/* Sidebar: Action items, Attendees, & Agendum details */} -->
     <!-- <MeetingSidebar /> -->
+    <sidebar />
   </div>
 </template>
 
@@ -40,6 +41,7 @@ import InlineEditor from '../components/InlineEditor'
 import DateTimeRangePicker from '../components/DateTimeRangePicker'
 import Agendum from './meeting/Agendum'
 import Draggable from 'vuedraggable'
+import Sidebar from './meeting/Sidebar'
 
 export default {
   components: {
@@ -47,6 +49,7 @@ export default {
     DateTimeRangePicker,
     Agendum,
     Draggable,
+    Sidebar,
   },
 
   data() {
