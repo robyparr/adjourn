@@ -11,6 +11,8 @@ import store from '../src/stores/meeting'
 
 document.addEventListener('DOMContentLoaded', () => {
   const appRoot = document.getElementById('meeting-root')
+  if (!appRoot) return
+
   const meetingData = JSON.parse(appRoot.getAttribute('data-meeting'))
   store.commit('SET_MEETING', meetingData)
 
