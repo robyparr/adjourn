@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require jquery 
+//= require jquery
 //= require jquery_ujs
-//= require moment/moment
+//= require dayjs/dayjs.min
 //= require_tree .

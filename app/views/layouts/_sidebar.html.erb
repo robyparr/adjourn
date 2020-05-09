@@ -77,7 +77,7 @@
       return (
         "<div class='list-item-content text-black pointer-events-none'>"
           + "<h5 class='my-0'>" + item.meeting.title + "</h5>"
-          + "<small class='list-secondary-text'>" + moment(item.meeting.date).format('LLL') + "</small>"
+          + "<small class='list-secondary-text'>" + dayjs(item.meeting.date).format('MMMM DD, YYYY h:mm A') + "</small>"
           + "<p class='mt-2'>" + item.content + "</p>"
         + "</div>"
         + "<span class='list-floating-text'>"
