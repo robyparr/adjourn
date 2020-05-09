@@ -106,7 +106,7 @@ export default {
 
     deleteAgendum() {
       this.$store.dispatch('deleteAgendum', this.agendum.id)
-    }
+    },
   },
 }
 </script>

@@ -3,11 +3,14 @@
     ref="toastuiEditor"
     :initialValue="value"
     :options="editorOptions"
-    previewStyle="tab" />
+    previewStyle="tab"
+    @focus="addCustomListeners"
+    @blur="removeCustomListeners" />
 </template>
 
 <script>
 import { Editor } from '@toast-ui/vue-editor'
+import { delay } from 'lodash'
 
 export default {
   components: {
@@ -32,25 +35,15 @@ export default {
           'ul',       'ol',         'divider',
           'table',    'link',       'divider',
           'code',     'codeblock',
-        ]
+        ],
       }
     }
-  },
-
-  mounted() {
-    document.addEventListener('click', this.customBlurClick)
-    document.addEventListener('keypress', this.customBlurKeypress)
-  },
-
-  destroyed() {
-    document.removeEventListener('click', this.customBlurClick)
-    document.removeEventListener('keypress', this.customBlurKeypress)
   },
 
   methods: {
     emitChangeEvent() {
       const markdownContent = this.$refs.toastuiEditor.invoke('getMarkdown')
-      this.$emit('change', markdownContent)
+      this.$emit('change', { editor: this, content: markdownContent })
     },
 
     customBlurClick(e) {
@@ -63,6 +56,22 @@ export default {
       if (e.key === 'Enter' && e.shiftKey) {
         this.emitChangeEvent()
       }
+    },
+
+    addCustomListeners() {
+      document.addEventListener('click', this.customBlurClick)
+      document.addEventListener('keypress', this.customBlurKeypress)
+    },
+
+    removeCustomListeners() {
+      delay(() => {
+        document.removeEventListener('click', this.customBlurClick)
+        document.removeEventListener('keypress', this.customBlurKeypress)
+      }, 100)
+    },
+
+    clear() {
+      this.$refs.toastuiEditor.invoke('setMarkdown', '')
     }
   }
 }

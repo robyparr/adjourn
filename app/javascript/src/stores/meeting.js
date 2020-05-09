@@ -57,6 +57,31 @@ export default new Vuex.Store({
     REMOVE_ACTION_ITEM: (state, actionItemID) => {
       state.meeting.action_items = state.meeting.action_items.filter(item => item.id !== actionItemID)
     },
+
+    ADD_AGENDUM_UPLOAD: (state, upload) => {
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === upload.agendum_id)
+      agendum.uploads = [...agendum.uploads, upload]
+    },
+
+    ADD_AGENDUM_NOTE: (state, note) => {
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === note.agendum_id)
+      agendum.notes = [...agendum.notes, note]
+    },
+
+    UPDATE_AGENDUM_NOTE: (state, updatedNote) => {
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === updatedNote.agendum_id)
+      agendum.notes = agendum.notes.map(note => {
+        if (note.id === updatedNote.id)
+          return updatedNote
+
+        return note
+      })
+    },
+
+    REMOVE_AGENDUM_NOTE: (state, { agendumID, id }) => {
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === agendumID)
+      agendum.notes = agendum.notes.filter(item => item.id !== id)
+    },
   },
 
   actions: {
@@ -200,6 +225,71 @@ export default new Vuex.Store({
         }
       })
       .then(response => commit('UPDATE_ACTION_ITEM', response.data))
+      .catch(error => console.log(error))
+    },
+
+    uploadAgendumFiles({ commit }, { agendumID, files }) {
+      const uploadsURL = `/agenda/${agendumID}/uploads`
+
+      files.forEach(file => {
+        let storageKey = ''
+
+        axios.post(`${uploadsURL}/presign`, {
+          authenticity_token: Utils.getAuthenticityToken(),
+          filename: file.name,
+          file_type: file.type
+        }).then(response => {
+          storageKey = response.data.key
+          let headers = response.data.headers
+          return axios.put(response.data.url, file, { headers: headers })
+        })
+        .then(response => {
+          return axios.post(`${uploadsURL}`, {
+            authenticity_token: Utils.getAuthenticityToken(),
+            upload: {
+              storage_key: storageKey,
+              filename: file.name,
+              content_type: file.type,
+              file_size: file.size
+            }
+          })
+        }).then(response => commit('ADD_AGENDUM_UPLOAD', response.data))
+      })
+    },
+
+    addAgendumNote({ commit }, partialNote) {
+      axios({
+        url: `/agenda/${partialNote.agendum_id}/notes/`,
+        method: 'POST',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          agendum_note: partialNote
+        }
+      })
+      .then(response => commit('ADD_AGENDUM_NOTE', response.data))
+      .catch(error => console.log(error))
+    },
+
+    updateAgendumNote({ commit }, partialNote) {
+      axios({
+        url: `/notes/${partialNote.id}`,
+        method: 'PATCH',
+        data: {
+          authenticity_token: Utils.getAuthenticityToken(),
+          agendum_note: partialNote
+        }
+      })
+      .then(response => commit('UPDATE_AGENDUM_NOTE', response.data))
+      .catch(error => console.log(error))
+    },
+
+    deleteAgendumNote({ commit }, { id, agendumID }) {
+      axios({
+        url: `/notes/${id}`,
+        method: 'DELETE',
+        data: { authenticity_token: Utils.getAuthenticityToken() }
+      })
+      .then(_response => commit('REMOVE_AGENDUM_NOTE', { agendumID, id }))
       .catch(error => console.log(error))
     },
   }
