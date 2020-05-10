@@ -2,7 +2,7 @@
   @apply bg-white shadow rounded p-4 border border-gray-400;
 
   .card-head {
-    @apply flex items-center relative;
+    @apply flex items-center;
 
     .card-title {
       @apply font-bold text-lg mb-2 flex-grow;

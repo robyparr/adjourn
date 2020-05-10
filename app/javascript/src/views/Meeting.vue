@@ -19,7 +19,8 @@
       <draggable class="agenda"
                  v-model="meeting.agenda"
                  @end="sortAgenda"
-                 draggable=".sortable">
+                 draggable=".sortable"
+                 handle=".drag-handle">
         <agendum
           v-for="agendum in meeting.agenda"
           :key="agendum.id"

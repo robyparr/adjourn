@@ -1,12 +1,14 @@
 <template>
-  <card :class="['agendum', { selected: isSelected }]"
+  <card :class="['agendum', 'relative', { selected: isSelected }]"
         @click="selectAgendum">
     <template v-if="isExistingAgendum" slot="title">
+      <i class="fas fa-grip-horizontal cursor-move drag-handle
+                absolute pin-t pin-l -ml-3 -mt-3 text-gray-500 hover:text-black"></i>
       <inline-editor editor="textInput"
                      placeholder="Agendum Title"
                      :value="agendum.title"
                      @editor-changed="updateAgendumTitle">
-        <h3 slot="display" class="mb-1 meeting-title">{{ agendum.title }}</h3>
+        <h4 slot="display" class="mt-0 mb-1 meeting-title">{{ agendum.title }}</h4>
       </inline-editor>
     </template>
     <template v-else slot="title">
