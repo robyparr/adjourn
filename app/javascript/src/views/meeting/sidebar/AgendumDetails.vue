@@ -54,7 +54,7 @@
           </div>
         </li>
         <li class="list-item">
-          <markdown-editor @change="addAgendumNote" />
+          <markdown-editor @blur="addAgendumNote" />
         </li>
       </ul>
     </div>
@@ -105,9 +105,9 @@ export default {
       return (upload.file_size / 1024).toFixed(2)
     },
 
-    addAgendumNote({ editor, content }) {
-      editor.clear()
-      this.$store.dispatch('addAgendumNote', { agendum_id: this.agendum.id, content: content })
+    addAgendumNote(e) {
+      this.$store.dispatch('addAgendumNote', { agendum_id: this.agendum.id, content: e.target.value })
+      e.target.clear()
     },
 
     renderedNoteContent(note) {

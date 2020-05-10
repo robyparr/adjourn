@@ -1,11 +1,11 @@
 <template>
   <editor
     ref="toastuiEditor"
-    :initialValue="value"
+    :initialValue="initialValue"
     :options="editorOptions"
     previewStyle="tab"
-    @focus="addCustomListeners"
-    @blur="removeCustomListeners" />
+    @focus="onFocus"
+    @blur="onBlur" />
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
   },
 
   props: {
-    value: {
+    initialValue: {
       type: String,
       required: false,
       default: ''
@@ -42,30 +42,35 @@ export default {
     }
   },
 
+  computed: {
+    value() {
+      return this.$refs.toastuiEditor.invoke('getMarkdown')
+    },
+  },
+
   methods: {
-    emitChangeEvent() {
-      const markdownContent = this.$refs.toastuiEditor.invoke('getMarkdown')
-      this.$emit('change', { editor: this, content: markdownContent })
+    emitBlurEvent() {
+      this.$emit('blur', { target: this })
     },
 
     customBlurClick(e) {
       if (!this.$el.contains(e.target)) {
-        this.emitChangeEvent()
+        this.emitBlurEvent()
       }
     },
 
     customBlurKeypress(e) {
       if (e.key === 'Enter' && e.shiftKey) {
-        this.emitChangeEvent()
+        this.emitBlurEvent()
       }
     },
 
-    addCustomListeners() {
+    onFocus() {
       document.addEventListener('click', this.customBlurClick)
       document.addEventListener('keypress', this.customBlurKeypress)
     },
 
-    removeCustomListeners() {
+    onBlur() {
       delay(() => {
         document.removeEventListener('click', this.customBlurClick)
         document.removeEventListener('keypress', this.customBlurKeypress)

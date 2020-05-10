@@ -8,13 +8,12 @@
         type="text"
         :placeholder="placeholder"
         :value="value"
-        @change="submitEditor($event.target.value)"
-        @blur="submitEditor($event.target.value)"
-        @keypress.enter="submitEditor($event.target.value)"
+        @blur="submitEditor"
+        @keypress.enter="$event.target.blur()"
         ref="editor" />
       <markdown-editor v-if="editor === 'markdownEditor'"
-        :value="value"
-        @change="submitEditor"
+        :initialValue="value"
+        @blur="submitEditor"
         ref="editor" />
     </span>
   </div>
@@ -51,6 +50,10 @@ export default {
     })
   },
 
+  destroyed() {
+    this.removeCustomBlurEventListener()
+  },
+
   data() {
     return {
       mode: 'display',
@@ -84,16 +87,35 @@ export default {
     changeMode() {
       if (this.isDisplayMode) {
         this.mode = 'edit'
+        this.addCustomBlurEventListener()
       } else {
         this.mode = 'display'
+        this.removeCustomBLurEventListener()
       }
       this.longClick = false
       this.$emit('inline-editor:mode-changed')
     },
 
-    submitEditor(editorValue) {
-      this.$emit('editor-changed', editorValue)
+    submitEditor() {
+      this.$emit('editor-changed', this.$refs.editor.value)
       this.changeMode()
+    },
+
+    customBlurClick(e) {
+      if (this.isDisplayMode)
+        return
+
+      if (!this.$el.contains(e.target)) {
+        this.submitEditor()
+      }
+    },
+
+    addCustomBlurEventListener() {
+      document.addEventListener('click', this.customBlurClick)
+    },
+
+    removeCustomBlurEventListener() {
+      document.removeEventListener('click', this.customBlurClick)
     },
   },
 }
