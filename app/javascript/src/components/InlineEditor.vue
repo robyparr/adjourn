@@ -90,7 +90,7 @@ export default {
         this.addCustomBlurEventListener()
       } else {
         this.mode = 'display'
-        this.removeCustomBLurEventListener()
+        this.removeCustomBlurEventListener()
       }
       this.longClick = false
       this.$emit('inline-editor:mode-changed')
