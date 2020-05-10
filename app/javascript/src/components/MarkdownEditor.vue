@@ -74,7 +74,11 @@ export default {
 
     clear() {
       this.$refs.toastuiEditor.invoke('setMarkdown', '')
-    }
+    },
+
+    focus() {
+      this.$refs.toastuiEditor.invoke('focus')
+    },
   }
 }
 </script>

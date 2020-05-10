@@ -11,16 +11,18 @@
         @change="submitEditor($event.target.value)"
         @blur="submitEditor($event.target.value)"
         @keypress.enter="submitEditor($event.target.value)"
-        autofocus="true" />
+        ref="editor" />
       <markdown-editor v-if="editor === 'markdownEditor'"
         :value="value"
-        @change="submitEditor" />
+        @change="submitEditor"
+        ref="editor" />
     </span>
   </div>
 </template>
 
 <script>
 import MarkdownEditor from './MarkdownEditor'
+import { defer } from 'lodash'
 
 export default {
   components: {
@@ -35,6 +37,18 @@ export default {
     },
     placeholder: String,
     value: String,
+  },
+
+  created() {
+    this.$on('inline-editor:mode-changed', () => {
+      if (this.isDisplayMode)
+        return
+
+      defer(() => {
+        if (this.$refs.editor)
+          this.$refs.editor.focus()
+      })
+    })
   },
 
   data() {
@@ -74,6 +88,7 @@ export default {
         this.mode = 'display'
       }
       this.longClick = false
+      this.$emit('inline-editor:mode-changed')
     },
 
     submitEditor(editorValue) {
