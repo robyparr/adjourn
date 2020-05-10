@@ -16,12 +16,12 @@
             @date-selected="updateDate" />
         </div>
         <div class="sm12 md6 column relative">
-          <h5 className="mt-4">From</h5>
+          <h5 class="mt-4">From</h5>
           <time-picker
             :time="selectedFrom"
             @time-selected="updateTime('from', $event)" />
 
-          <h5 className="mt-4">To</h5>
+          <h5 class="mt-4">To</h5>
           <time-picker
             :time="selectedTo"
             @time-selected="updateTime('to', $event)" />

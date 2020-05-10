@@ -7,7 +7,7 @@
       <h6 class="mb-2">Uploads</h6>
       <file-dropzone :uploadFiles="uploadFiles" />
 
-      <ul v-if="agendum.uploads.length" class="list mt-4">
+      <ul v-if="agendum.uploads" class="list mt-4">
         <li v-for="upload in agendum.uploads"
             :key="upload.id"
             class="list-item">

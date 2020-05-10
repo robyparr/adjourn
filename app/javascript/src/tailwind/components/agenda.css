@@ -4,14 +4,6 @@
   .agendum {
     @apply mb-2 mx-2 w-full;
     height: fit-content;
-
-    &.sortable-ghost {
-      @apply bg-primary-400 p-10;
-      border: 1px dashed black;
-      opacity: 0.2;
-
-      * { visibility: hidden; }
-    }
   }
 }
 

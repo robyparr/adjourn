@@ -89,6 +89,7 @@ export default {
       if (!this.isExistingAgendum) return
 
       this.$store.state.selectedAgendumID = this.agendum.id
+      openAgendumDetailsView()
     },
 
     createAgendum(e) {

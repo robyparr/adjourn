@@ -1,6 +1,6 @@
 <template>
-  <div className="row">
-    <div className="column lg9 lg:pr-6">
+  <div class="row">
+    <div class="column lg9 lg:pr-6">
       <inline-editor editor="textInput"
                      placeholder="Meeting title"
                      :value="meeting.title"
@@ -30,8 +30,6 @@
       </draggable>
     </div>
 
-    <!-- {/* Sidebar: Action items, Attendees, & Agendum details */} -->
-    <!-- <MeetingSidebar /> -->
     <sidebar />
   </div>
 </template>

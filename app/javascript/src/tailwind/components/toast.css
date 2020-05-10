@@ -1,33 +1,33 @@
 .toast-container {
-  @apply fixed left-0 right-0 z-50 pointer-events-none;
+  @apply fixed left-0 right-0 z-50 pointer-events-none px-4 pb-4;
   bottom: 0px;
 
   &.with-sidebar { bottom: 60px; }
 
   .toast {
-    @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full pointer-events-auto;
+    @apply bg-white border border-l-2 mx-auto shadow-lg py-4 px-4 rounded cursor-pointer
+           w-full pointer-events-auto flex;
     min-width: 300px;
     max-width: 500px;
 
     transition: transform 0.5s ease;
     transform: translateY(200px);
 
-    @screen lg {
-      @apply mt-4;
-      transform: translateY(-200px);
-      width: fit-content;
-    }
-
     &.visible { transform: translateY(0); }
 
-    &.info { @apply border-0 border-l-4 border-primary-500; }
-    &.error { @apply border-0 border-l-4 border-red-500; }
+    &.info { border-left-color: theme('colors.primary-500') }
+    &.error { border-left-color: theme('colors.red-500') }
   }
 }
 
 @screen lg {
   .toast-container {
-    @apply top-0;
-    bottom: 0;
+    @apply bottom-0 left-auto;
+
+    .toast {
+      @apply mt-4;
+      transform: translateY(200px);
+      width: fit-content;
+    }
   }
 }

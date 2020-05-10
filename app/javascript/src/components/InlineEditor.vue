@@ -46,7 +46,7 @@ export default {
 
   computed: {
     isDisplayMode() {
-      return this.mode === 'display';
+      return this.mode === 'display'
     },
 
     isEditMode() {

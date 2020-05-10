@@ -17,7 +17,7 @@
 
   &.selected {
     @apply border-t-2;
-    border-top-color: theme('colors.primary.500');
+    border-top-color: theme('colors.primary-500');
   }
 
   .dropzone {

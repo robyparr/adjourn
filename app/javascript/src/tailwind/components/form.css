@@ -10,7 +10,7 @@ input:not([type="submit"]):not([type="checkbox"]), select {
 
   &.bg-white { @apply bg-white; }
 
-  &.error { border-bottom-color: theme('colors.red.500'); }
+  &.error { border-bottom-color: theme('colors.red-500'); }
 }
 
 select { @apply cursor-pointer; }
