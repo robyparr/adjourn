@@ -44,7 +44,7 @@ export default {
         return
 
       defer(() => {
-        if (this.$refs.editor)
+        if (this.$refs.editor && this.$refs.editor.focus)
           this.$refs.editor.focus()
       })
     })
