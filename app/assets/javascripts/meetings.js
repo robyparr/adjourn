@@ -20,15 +20,4 @@ $(document).ready(function() {
       Rails.fire(this, 'submit');
     }
   });
-
 });
-
-  function openAgendumDetailsView() {
-    var agendumDetails = $('#agendum-details-tab');
-
-    if (!agendumDetails.hasClass('active')) {
-      if (screen.width > 576) {
-        agendumDetails.click();
-      }
-    }
-  }

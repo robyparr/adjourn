@@ -39,6 +39,7 @@
 import Attendees from './sidebar/Attendees'
 import ActionItems from './sidebar/ActionItems'
 import AgendumDetails from './sidebar/AgendumDetails'
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -62,11 +63,19 @@ export default {
     tabTitle() {
       return this.tabs[this.selectedTab]
     },
+
+    ...mapState(['selectedAgendumID'])
   },
 
   methods: {
     selectTab(tabName) {
       this.selectedTab = tabName
+    }
+  },
+
+  watch: {
+    selectedAgendumID() {
+      this.selectTab('agendumDetails')
     }
   }
 }
