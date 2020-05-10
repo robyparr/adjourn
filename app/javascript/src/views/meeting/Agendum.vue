@@ -7,7 +7,8 @@
       <inline-editor editor="textInput"
                      placeholder="Agendum Title"
                      :value="agendum.title"
-                     @editor-changed="updateAgendumTitle">
+                     @editor-changed="updateAgendumTitle"
+                     @click="selectAgendum">
         <h4 slot="display" class="mt-0 mb-1 meeting-title">{{ agendum.title }}</h4>
       </inline-editor>
     </template>
@@ -29,7 +30,8 @@
       <inline-editor editor="markdownEditor"
                      placeholder="Agendum Details"
                      :value="agendum.description"
-                     @editor-changed="updateAgendumDescription">
+                     @editor-changed="updateAgendumDescription"
+                     @click="selectAgendum">
         <p slot="display" class="markdown-body" v-html="agendumDescription" />
       </inline-editor>
 

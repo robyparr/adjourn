@@ -82,6 +82,7 @@ export default {
         this.changeMode()
       }
       this.longClick = false
+      this.$emit('click')
     },
 
     changeMode() {
