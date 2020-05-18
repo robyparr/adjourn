@@ -1,6 +1,11 @@
 <template>
   <div>
-    <div :class="['column lg3 meeting-sidebar', { active: true }]">
+    <div v-if="active"
+         class="meeting-sidebar-overlay"
+         @click="active = false">
+      &nbsp;
+    </div>
+    <div :class="['column lg3 meeting-sidebar', { active: active }]">
       <div class="row tabs">
         <div id="attendees-tab"
              :class="['tab column sm4', { selected: selectedTab === 'attendees' }]"
@@ -50,6 +55,7 @@ export default {
 
   data() {
     return {
+      active: false,
       selectedTab: 'attendees',
       tabs: {
         attendees: 'Attendees',
@@ -70,6 +76,7 @@ export default {
   methods: {
     selectTab(tabName) {
       this.selectedTab = tabName
+      this.active = true
     }
   },
 
