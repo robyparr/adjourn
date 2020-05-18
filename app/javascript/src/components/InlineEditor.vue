@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="inline-editor">
     <span class="display" @mousedown="mousedown()" @mouseup="mouseup()">
       <slot v-if="isDisplayMode" name="display" />
     </span>

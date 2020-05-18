@@ -5,7 +5,7 @@
         <slot name="title"></slot>
       </span>
 
-      <div class="card-actions">
+      <div v-if="hasActions" class="card-actions">
         <slot name="actions"></slot>
       </div>
     </div>
@@ -18,7 +18,13 @@
 
 <script>
 export default {
-
+  props: {
+    hasActions: {
+      type: Boolean,
+      required: false,
+      default: true,
+    }
+  }
 }
 </script>
 

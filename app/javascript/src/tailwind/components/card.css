@@ -5,15 +5,20 @@
     @apply flex items-center;
 
     .card-title {
-      @apply font-bold text-lg mb-2 flex-grow;
+      @apply font-bold text-lg mb-2;
+      width: calc(100% - 24px);
 
       p { @apply mb-0; }
     }
 
     .card-actions {
+      width: 24px;
       margin-top: -4px;
+      text-align: right;
     }
   }
+
+  &.no-actions .card-head .card-title { width: 100%; }
 
   &.selected {
     @apply border-t-2;

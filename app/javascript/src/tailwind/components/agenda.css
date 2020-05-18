@@ -2,7 +2,7 @@
   @apply flex flex-wrap mb-4;
 
   .agendum {
-    @apply mb-2 mx-2 w-full;
+    @apply mb-2 mr-2 w-full;
     height: fit-content;
 
     &.sortable-ghost {

@@ -41,7 +41,7 @@
  @import 'components/toast';
  @import 'components/pagination';
  @import 'components/auth';
- @import 'components/inlineEdit';
+ @import 'components/inlineEditer';
 
  @import 'components/agenda';
  @import 'components/actionItem';

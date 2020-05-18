@@ -1,0 +1,9 @@
+.inline-editor {
+  .display {
+    @apply block rounded px-2 -mx-2;
+  }
+
+  &:hover {
+    .display { @apply bg-gray-200; }
+  }
+}

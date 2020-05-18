@@ -1,9 +1,10 @@
 <template>
-  <card :class="['agendum', 'relative', { selected: isSelected }]"
+  <card :class="['agendum', 'relative', { selected: isSelected, 'no-actions': !isExistingAgendum }]"
+        :hasActions="isExistingAgendum"
         @click="selectAgendum">
     <template v-if="isExistingAgendum" slot="title">
       <i class="fas fa-grip-horizontal cursor-move drag-handle
-                absolute pin-t pin-l -ml-3 -mt-3 text-gray-500 hover:text-black"></i>
+                absolute pin-t pin-l -ml-3 -mt-4 text-gray-500 hover:text-black"></i>
       <inline-editor editor="textInput"
                      placeholder="Agendum Title"
                      :value="agendum.title"
@@ -18,7 +19,7 @@
              @change="createAgendum" />
     </template>
 
-    <template v-if="isExistingAgendum" slot="actions">
+    <template slot="actions">
       <button>
         <i class="fa fa-trash"
           :data-modal="`.confirm-agendum-delete-${agendum.id}`">
