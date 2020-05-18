@@ -6,6 +6,8 @@ import Utils from 'utils'
 
 Vue.use(Vuex)
 
+import uploadService from '../services/uploadService'
+
 export default new Vuex.Store({
   state: {
     meeting: {},
@@ -231,30 +233,12 @@ export default new Vuex.Store({
     uploadAgendumFiles({ commit }, { agendumID, files }) {
       const uploadsURL = `/agenda/${agendumID}/uploads`
 
-      files.forEach(file => {
-        let storageKey = ''
-
-        axios.post(`${uploadsURL}/presign`, {
-          authenticity_token: Utils.getAuthenticityToken(),
-          filename: file.name,
-          file_type: file.type
-        }).then(response => {
-          storageKey = response.data.key
-          let headers = response.data.headers
-          return axios.put(response.data.url, file, { headers: headers })
+      return Promise.all(uploadService.uploadFiles(uploadsURL, files))
+        .then(uploadResponses => {
+          for (const response of uploadResponses) {
+            commit('ADD_AGENDUM_UPLOAD', response.data)
+          }
         })
-        .then(response => {
-          return axios.post(`${uploadsURL}`, {
-            authenticity_token: Utils.getAuthenticityToken(),
-            upload: {
-              storage_key: storageKey,
-              filename: file.name,
-              content_type: file.type,
-              file_size: file.size
-            }
-          })
-        }).then(response => commit('ADD_AGENDUM_UPLOAD', response.data))
-      })
     },
 
     addAgendumNote({ commit }, partialNote) {

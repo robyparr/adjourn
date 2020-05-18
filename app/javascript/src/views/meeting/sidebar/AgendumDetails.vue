@@ -91,10 +91,7 @@ export default {
 
   methods: {
     uploadFiles(files) {
-      return new Promise((resolve, reject) => {
-        this.$store.dispatch('uploadAgendumFiles', { agendumID: this.agendum.id, files })
-        resolve()
-      })
+      return this.$store.dispatch('uploadAgendumFiles', { agendumID: this.agendum.id, files })
     },
 
     uploadIcon(upload) {
