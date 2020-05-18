@@ -1,4 +1,7 @@
 module.exports = {
+  purge: [
+    './app/**/*.*',
+  ],
   theme: {
     extend: {
       colors: {
