@@ -38,12 +38,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Utils from '../../../../../utils'
 
 export default {
   props: {
     assignedIDs: Array,
-    attendees: Array,
   },
 
   data() {
@@ -53,6 +53,10 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      attendees: state => state.meeting.attendees
+    }),
+
     assignees() {
       return this.attendees.filter(attendee => this.assignedIDs.includes(attendee.id))
     }
