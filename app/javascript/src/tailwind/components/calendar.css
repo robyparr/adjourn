@@ -1,0 +1,28 @@
+.calendar {
+  max-width: 350px;
+
+  .header {
+    @apply flex flex-row justify-between border-b border-gray-500 p-4 mb-4;
+
+    .month-selector { @apply cursor-pointer; }
+  }
+
+  .week {
+    @apply flex flex-row justify-between;
+  }
+
+  .day {
+    @apply flex items-center justify-center border border-transparent rounded;
+    width: 40px;
+    height: 40px;
+
+    &.inactive { @apply text-gray-500; }
+    &.today { @apply text-primary-500; }
+    &.selected { @apply bg-primary-500 text-white; }
+
+    &:not(.inactive):not(.selected) {
+      @apply cursor-pointer;
+      &:hover { @apply border-gray-500; }
+    }
+  }
+}

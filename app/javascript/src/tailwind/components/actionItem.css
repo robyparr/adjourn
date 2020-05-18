@@ -3,7 +3,7 @@
     @apply relative;
 
     .selected-assignees {
-      @apply text-grey-dark cursor-pointer;
+      @apply text-gray-600 cursor-pointer;
 
       img {
         @apply border-2 border-white;
@@ -14,23 +14,21 @@
     }
 
     .header {
-      @apply p-4 text-grey-dark;
+      @apply p-4 text-gray-600;
     }
 
     .selector {
       @apply bg-white shadow-lg border rounded absolute w-full z-10;
 
       ul {
-        @apply list-reset;
-
         li {
           @apply p-4 cursor-pointer;
 
-          &:hover { @apply bg-grey-lighter; }
+          &:hover { @apply bg-gray-200; }
 
           &.selected {
-            @apply bg-grey-light;
-            &:hover { @apply bg-grey; }
+            @apply bg-gray-400;
+            &:hover { @apply bg-gray-500; }
           }
         }
       }

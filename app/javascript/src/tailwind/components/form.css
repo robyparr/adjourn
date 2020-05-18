@@ -1,16 +1,16 @@
 label { @apply block text-sm font-bold mb-2; }
 
 input:not([type="submit"]):not([type="checkbox"]), select {
-  @apply bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight;
+  @apply bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight;
   -webkit-appearance: none;
 
   &:focus {
-    @apply outline-none bg-white border-primary;
+    @apply outline-none bg-white border-primary-500;
   }
 
   &.bg-white { @apply bg-white; }
 
-  &.error { border-bottom-color: config('colors.red'); }
+  &.error { border-bottom-color: theme('colors.red-500'); }
 }
 
 select { @apply cursor-pointer; }

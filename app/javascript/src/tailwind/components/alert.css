@@ -1,5 +1,5 @@
 .alert {
-  @apply bg-blue-lightest border-l-4 border-blue text-blue-dark p-4 mb-1;
+  @apply bg-blue-100 border-l-4 border-blue-500 text-blue-600 p-4 mb-1;
 
-  &.error { @apply bg-red-lightest border-red text-red-dark; }
+  &.error { @apply bg-red-100 border-red-500 text-red-600; }
 }

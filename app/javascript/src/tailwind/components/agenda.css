@@ -2,17 +2,20 @@
   @apply flex flex-wrap mb-4;
 
   .agendum {
-    @apply mb-2 mx-2 w-full;
+    @apply mb-2 mr-2 w-full;
     height: fit-content;
 
-    @screen lg { width: 30%; }
-
     &.sortable-ghost {
-      @apply bg-primary-light p-10;
+      @apply bg-primary-400 p-10;
       border: 1px dashed black;
       opacity: 0.2;
-
       * { visibility: hidden; }
     }
+  }
+}
+
+@screen lg {
+  .agenda .agendum {
+    width: 30%;
   }
 }

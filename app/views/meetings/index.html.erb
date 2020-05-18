@@ -1,19 +1,23 @@
 <div class="row">
-  <div class="column sm12 pl-0">
+  <div class="column sm12">
     <h3>Meetings</h3>
   </div>
 </div>
 
-<button class="button primary" data-modal="#new-meeting-modal">
-  New Meeting
-</button>
+<div class="row">
+  <div class="column sm12">
+    <button class="button primary" data-modal="#new-meeting-modal">
+      New Meeting
+    </button>
+  </div>
+</div>
 
 <div class="row">
-  <div class="column sm12 md8 px-0">
+  <div class="column sm12 md8">
     <% unless @meetings.present? %>
-      <div class="vertical-center text-muted">
+      <div class="flex flex-col items-center text-muted mt-20">
         <i class="fa fa-inbox fa-3x"></i>
-        <h5>There's Nothing Here</h5>
+        <h5 class="mb-0">There's Nothing Here</h5>
         <p>
           Why don't you go ahead and add a meeting by clicking the 'New Meeting'
           button?

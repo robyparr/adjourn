@@ -1,4 +1,4 @@
-.modal-overlay { @apply fixed pin-x pin-y bg-black opacity-25 z-30; }
+.modal-overlay { @apply fixed inset-x-0 inset-y-0 bg-black opacity-25 z-30; }
 
 .modal {
   @apply hidden bg-white rounded shadow-lg relative z-50 m-auto fixed border;
@@ -22,7 +22,7 @@
   .modal-content { @apply text-base px-6 pb-4; }
 
   .modal-footer {
-    @apply rounded-b text-right py-4 bg-grey-lighter px-6 py-4 w-full;
+    @apply rounded-b text-right py-4 bg-gray-200 px-6 py-4 w-full;
 
     * { @apply ml-4; }
   }

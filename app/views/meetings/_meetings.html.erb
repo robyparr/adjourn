@@ -21,9 +21,9 @@
           <td><%= link_to meeting.title, meeting_path(meeting) %></td>
           <td><%= formatted_date_time meeting.start_date %></td>
           <td><%= formatted_date_time meeting.end_date %></td>
-          <td class="text-right">
+          <td class="flex justify-end">
             <%= link_to "Delete", meeting_path(meeting),
-              class: "btn-flat red-text",
+              class: "button link danger",
               method: :delete,
               data: { confirm: "Are you sure you want to delete this meeting?" } %>
           </td>

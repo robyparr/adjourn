@@ -1,37 +1,24 @@
 .meeting-sidebar-overlay {
-  @apply fixed pin-x pin-y bg-black opacity-25 z-10;
+  @apply fixed inset-x-0 inset-y-0 bg-black opacity-25 z-10;
+}
 
-  @screen lg { @apply hidden; }
+@screen lg {
+  .meeting-sidebar-overlay {
+    @apply hidden;
+  }
 }
 
 .meeting-sidebar {
-  @apply fixed pin-b pin-x bg-white z-20 p-0 shadow-lg;
+  @apply fixed bottom-0 inset-x-0 bg-white z-20 p-0 shadow-lg;
   height: 48px;
   transition: height 0.5s;
   background-color: #fafafa;
 
-  @screen lg {
-    @apply pin-y pin-r pr-0 py-0 z-10;
-    left: inherit;
-    height: 100%;
-  }
-
   .tabs {
     @apply p-0 m-0 text-center bg-white border-t;
 
-    @screen lg { @apply border-t-0; }
-
     .tab {
       @apply p-4 border-b;
-
-      @screen lg {
-        &.selected {
-          @apply border border-b-0;
-
-          &:first-child { @apply border-l-0; }
-          &:last-child { @apply border-r-0; }
-        }
-      }
     }
   }
 
@@ -44,8 +31,32 @@
 
   &.active {
     height: 75%;
-    @screen lg { height: 100%; }
 
     .tabs .tab.selected { @apply border border-b-0; }
+  }
+}
+
+@screen lg {
+  .meeting-sidebar {
+    @apply inset-y-0 right-0 pr-0 py-0 z-10;
+    left: inherit;
+    height: 100%;
+
+    .tabs {
+      @apply border-t-0;
+
+      .tab {
+        &.selected {
+          @apply border border-b-0;
+
+          &:first-child { @apply border-l-0; }
+          &:last-child { @apply border-r-0; }
+        }
+      }
+    }
+
+    &.active {
+      height: 100%;
+    }
   }
 }

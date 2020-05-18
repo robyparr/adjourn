@@ -7,9 +7,9 @@
  *
  * If using `postcss-import`, use this import instead:
  *
- * @import "tailwindcss/preflight";
+ * @import "tailwindcss/base";
  */
- @tailwind preflight;
+ @import "tailwindcss/base";
 
  /**
   * This injects any component classes registered by plugins.
@@ -18,7 +18,7 @@
   *
   * @import "tailwindcss/components";
   */
- @tailwind components;
+ @import "tailwindcss/components";
 
  @import 'components/button';
  @import 'components/heading';
@@ -28,7 +28,9 @@
  @import 'components/meetingSidebar';
  @import 'components/modal';
  @import 'components/autocomplete';
- @import 'components/eventTimePicker';
+ @import 'components/calendar';
+ @import 'components/timePicker';
+ @import 'components/dateTimeRangePicker';
  @import 'components/link';
  @import 'components/form';
  @import 'components/list';
@@ -40,11 +42,11 @@
  @import 'components/toast';
  @import 'components/pagination';
  @import 'components/auth';
- @import 'components/inlineEdit';
+ @import 'components/inlineEditer';
 
  @import 'components/agenda';
  @import 'components/actionItem';
- 
+
  /**
   * Here you would add any of your custom component classes; stuff that you'd
   * want loaded *before* the utilities so that the utilities could still
@@ -60,7 +62,7 @@
   * @import "components/buttons";
   * @import "components/forms";
   */
- 
+
  /**
   * This injects all of Tailwind's utility classes, generated based on your
   * config file.
@@ -69,8 +71,8 @@
   *
   * @import "tailwindcss/utilities";
   */
- @tailwind utilities;
- 
+ @import "tailwindcss/utilities";
+
  /**
   * Here you would add any custom utilities you need that don't come out of the
   * box with Tailwind.
@@ -85,4 +87,3 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
- 

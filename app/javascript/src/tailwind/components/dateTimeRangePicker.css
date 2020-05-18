@@ -1,0 +1,25 @@
+.date-time-range-picker {
+  @apply relative;
+
+  .picker {
+    @apply bg-white shadow-lg rounded inline-block fixed inset-0 z-10 mt-8 overflow-y-auto;
+    top: 64px;
+
+    .actions {
+      @apply fixed inset-x-0;
+      bottom: 52px;
+    }
+  }
+}
+
+@screen md {
+  .date-time-range-picker {
+    .picker {
+      @apply absolute inset-auto left-0;
+
+      .actions {
+        @apply absolute bottom-0 inset-x-0;
+      }
+    }
+  }
+}

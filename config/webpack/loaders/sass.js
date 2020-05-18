@@ -1,14 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const { env } = require('../configuration.js')
-
 module.exports = {
-  test: /\.(scss|sass|css)$/i,
-  use: ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: [
-      { loader: 'css-loader' },
-      { loader: 'postcss-loader', options: { sourceMap: true } },
-      { loader: 'sass-loader', options: { sourceMap: true } }
-    ]
-  })
+  test: /\.scss$/,
+  use: [
+    'vue-style-loader',
+    'css-loader',
+    'sass-loader'
+  ]
 }

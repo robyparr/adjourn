@@ -1,20 +1,33 @@
+button.button { @apply outline-none; }
+
 .button {
-  @apply bg-grey-light text-black text-center font-bold py-2 px-4 rounded shadow cursor-pointer inline-block;
+  @apply bg-gray-300 text-black text-center font-bold py-2 px-4 rounded shadow cursor-pointer
+         inline-block border border-gray-400 outline-none;
 
   &.primary {
-    @apply bg-primary text-white;
+    @apply bg-primary-500 border-primary-600 text-white;
 
-    &:hover { @apply bg-primary-light; }
+    &:hover { @apply bg-primary-600; }
   }
 
-  &:hover { @apply bg-grey shadow-md; }
+  &:hover { @apply bg-gray-400 shadow-md border-gray-500; }
   &:disabled { @apply opacity-50 cursor-not-allowed; }
 }
 
 .button.outline {
-  @apply bg-transparent border border-primary text-primary-dark;
+  @apply bg-transparent border border-primary-500 text-primary-600;
 
-  &:hover { @apply border-transparent bg-primary text-white; }
+  &:hover { @apply border-transparent bg-primary-500 text-white; }
+}
+
+.button.link {
+  @apply bg-transparent border shadow-none border-transparent text-blue-500 uppercase font-normal;
+  &:hover { @apply border-blue-500 bg-transparent text-current; }
+
+  &.danger {
+    @apply text-red-500;
+    &:hover { @apply text-red-500 border-red-500; }
+  }
 }
 
 .button.block { @apply w-full; }

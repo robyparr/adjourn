@@ -1,31 +1,33 @@
 .toast-container {
-  @apply fixed pin-l pin-r z-50 pointer-events-none;
+  @apply fixed left-0 right-0 z-50 pointer-events-none px-4 pb-4;
   bottom: 0px;
 
   &.with-sidebar { bottom: 60px; }
 
-  @screen lg {
-    @apply pin-t;
-    bottom: 0;
-  }
-
   .toast {
-    @apply bg-white border mx-auto shadow-lg py-4 px-4 rounded cursor-pointer w-full pointer-events-auto;
+    @apply bg-white border border-l-2 mx-auto shadow-lg py-4 px-4 rounded cursor-pointer
+           w-full pointer-events-auto flex;
     min-width: 300px;
     max-width: 500px;
 
     transition: transform 0.5s ease;
     transform: translateY(200px);
 
-    @screen lg {
-      @apply mt-4;
-      transform: translateY(-200px);
-      width: fit-content;
-    }
-
     &.visible { transform: translateY(0); }
 
-    &.info { border-left: 4px solid config('colors.primary'); }
-    &.error { border-left: 4px solid config('colors.red'); }
+    &.info { border-left-color: theme('colors.primary-500') }
+    &.error { border-left-color: theme('colors.red.500') }
+  }
+}
+
+@screen lg {
+  .toast-container {
+    @apply bottom-0 left-auto;
+
+    .toast {
+      @apply mt-4;
+      transform: translateY(200px);
+      width: fit-content;
+    }
   }
 }

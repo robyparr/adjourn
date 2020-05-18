@@ -1,5 +1,5 @@
 .list {
-  @apply list-reset rounded shadow border;
+  @apply rounded shadow border;
 
   li.list-item {
     @apply flex items-center justify-between p-4 border-b bg-white relative;
@@ -11,11 +11,11 @@
     .list-item-content {
       @apply flex flex-col w-full;
 
-      .list-secondary-text { @apply block text-grey-dark; }
+      .list-secondary-text { @apply block text-gray-600; }
     }
 
     .list-floating-text {
-      @apply absolute pin-t pin-r mt-4 mr-4;
+      @apply absolute top-0 right-0 mt-4 mr-4;
     }
   }
 }
