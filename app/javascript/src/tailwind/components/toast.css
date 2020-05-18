@@ -16,7 +16,7 @@
     &.visible { transform: translateY(0); }
 
     &.info { border-left-color: theme('colors.primary-500') }
-    &.error { border-left-color: theme('colors.red-500') }
+    &.error { border-left-color: theme('colors.red.500') }
   }
 }
 
