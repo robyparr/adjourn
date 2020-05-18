@@ -17,10 +17,6 @@ class MeetingsController < ApplicationController
       .find(params[:id])
   end
 
-  def new
-    @meeting = Meeting.new
-  end
-
   def create
     meeting = current_user.meetings.build(meeting_params)
     meeting.start_date = Time.zone.now

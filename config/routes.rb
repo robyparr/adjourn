@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       as: 'attendee_autocomplete'
   end
 
-  resources :meetings, except: %w(edit) do
+  resources :meetings, except: %w(new edit) do
     resources :action_items, shallow: true, only: %i[create update destroy] do
       member do
         post '/assign',   to: 'action_items#assign'

@@ -17,7 +17,6 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
     requests = [
       { method: :delete, url: meeting_url(@meeting) },
       { method: :get, url: meetings_url },
-      { method: :get, url: new_meeting_path },
       { method: :get, url: meeting_path(@meeting) }
     ]
 
@@ -41,25 +40,6 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
       assert meetings.include? meeting if meeting.user == @user
       assert_not meetings.include? meeting unless meeting.user == @user
     end
-  end
-
-  test "can create a new meeting" do
-    # Authorized user
-    sign_in @user
-    get new_meeting_path
-    assert_response :success
-
-    assert_difference ['Meeting.count', '@user.meetings.count'], 1 do
-      post meetings_path, params: {
-        meeting: {
-          title: 'the title',
-          start_date: Time.zone.now,
-          end_date: Time.zone.now + 1,
-          user: @user
-        }
-      }
-    end
-    assert_response :created
   end
 
   test "can update an existing meeting" do
