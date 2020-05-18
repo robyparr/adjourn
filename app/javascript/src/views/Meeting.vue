@@ -13,7 +13,10 @@
         :to="meeting.end_date"
         @date-time-updated="updateMeetingFromTo" />
 
-      <button class="button primary mt-4">Email Attendees</button>
+      <button @click="emailAttendees"
+              class="button primary mt-4">
+        Email Attendees
+      </button>
 
       <h4 class="mt-8">Agenda</h4>
       <draggable class="agenda"
@@ -41,6 +44,7 @@ import DateTimeRangePicker from '../components/DateTimeRangePicker'
 import Agendum from './meeting/Agendum'
 import Draggable from 'vuedraggable'
 import Sidebar from './meeting/Sidebar'
+import meetingService from '../services/meetingService'
 
 export default {
   components: {
@@ -74,7 +78,13 @@ export default {
     sortAgenda() {
       const agendaIDs = this.meeting.agenda.map(agendum => agendum.id)
       this.$store.dispatch('sortAgenda', agendaIDs)
-    }
+    },
+
+    emailAttendees() {
+      meetingService.emailAttendees(this.meeting.id)
+        .then(({ message }) => showInformationMessage(message))
+        .catch(({ message }) => showErrorMessage(message))
+    },
   }
 }
 </script>

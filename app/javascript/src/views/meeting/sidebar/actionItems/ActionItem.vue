@@ -15,7 +15,6 @@
         </inline-editor>
 
         <assignees
-          :attendees="attendees"
           :assignedIDs="actionItem.attendees.map(attendee => attendee.id)"
           @assign-attendee="assignAttendee(actionItem, $event)"
           @unassign-attendee="unassignAttendee(actionItem, $event)" />
