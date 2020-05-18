@@ -50,12 +50,12 @@
         const firstDayOfFirstWeekOfMonth = this.currentMonth.startOf('month').startOf('week')
         const lastDayOfLastWeekOfMonth = this.currentMonth.endOf('month').endOf('week')
 
-        var currentDay = firstDayOfFirstWeekOfMonth;
+        var currentDay = firstDayOfFirstWeekOfMonth
         while (currentDay <= lastDayOfLastWeekOfMonth) {
           var days = []
 
           for (var i = 0; i < 7; i++) {
-            var dayClasses = ['day'];
+            var dayClasses = ['day']
 
             if (currentDay.month() != this.currentMonth.month()) {
               dayClasses.push('inactive')
@@ -86,7 +86,7 @@
       },
 
       selectDate(date) {
-        this.currentDate = date;
+        this.selectedDate = date
         this.$emit('date-selected', date.format('YYYY-MM-DD'))
       }
     }

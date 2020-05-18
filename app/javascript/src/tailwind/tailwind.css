@@ -30,6 +30,7 @@
  @import 'components/autocomplete';
  @import 'components/calendar';
  @import 'components/timePicker';
+ @import 'components/dateTimeRangePicker';
  @import 'components/link';
  @import 'components/form';
  @import 'components/list';

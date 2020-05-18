@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="date-time-range-picker">
     <span class="text-gray-800 cursor-pointer"
           @click="pickerOpen ? cancel() : pickerOpen = true">
       <span slot="date">{{ selectedFrom.format('MMMM DD, YYYY') }}</span>
@@ -8,7 +8,7 @@
       </span>
     </span>
 
-    <div v-if="pickerOpen" class="bg-white shadow-lg rounded inline-block absolute z-10 left-0 mt-8">
+    <div v-if="pickerOpen" class="picker">
       <div class="row">
         <div class="sm12 md6 column">
           <date-picker
@@ -34,7 +34,7 @@
               </div>
           </div>
 
-          <div class="row absolute bottom-0 inset-x-0">
+          <div class="row actions">
             <div class="column md12 inline-flex">
               <button class="button flex-grow" @click="cancel">Cancel</button>
               <button class="button primary flex-grow ml-4" @click="submitDateTimes">Save</button>
