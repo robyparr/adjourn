@@ -67,6 +67,8 @@ export default new Vuex.Store({
 
     ADD_AGENDUM_NOTE: (state, note) => {
       const agendum = state.meeting.agenda.find(agendum => agendum.id === note.agendum_id)
+      if (!agendum.notes) Vue.set(agendum, 'notes', [])
+
       agendum.notes = [...agendum.notes, note]
     },
 
