@@ -1,9 +1,8 @@
 require 'test_helper'
 
 class AttendeeTest < ActiveSupport::TestCase
-  
   def setup
-    @attendee = attendees(:one)
+    @attendee = create :attendee
   end
 
   test "is valid" do

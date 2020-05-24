@@ -25,7 +25,7 @@ module Meetings
       end
 
       test 'Adding previously existant attendees' do
-        attendee_email = attendees(:one).email
+        attendee_email = create(:attendee).email
 
         sign_in @user
         visit meeting_url @meeting
@@ -43,7 +43,7 @@ module Meetings
         sign_in @user
         visit meeting_url @meeting
 
-        @meeting.attendees << attendees(:one)
+        @meeting.attendees << create(:attendee)
 
         find('.button.primary').click
         assert find('.toast.info').present?

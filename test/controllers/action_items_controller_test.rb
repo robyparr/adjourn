@@ -2,9 +2,9 @@ require 'test_helper'
 
 class ActionItemsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:one)
-    @meeting = meetings(:one)
-    @item = action_items(:one)
+    @user = create :user
+    @meeting = create :meeting, user: @user
+    @item = create :action_item, meeting: @meeting
 
     @item_params = {
       action_item: {
@@ -24,7 +24,7 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "unauthorized users can't create action items" do
-    sign_in users(:two)
+    sign_in create :user
 
     assert_no_difference 'ActionItem.count' do
       post meeting_action_items_url(@meeting), params: @item_params
@@ -62,7 +62,7 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "unauthorized users can't modify action items" do
-    sign_in users(:two)
+    sign_in create :user
     current_title = @item.title
 
     put action_item_url(@item), params: @item_params
@@ -74,7 +74,7 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
   test "can modify action items" do
     sign_in @user
     current_title = @item.title
-    
+
     put action_item_url(@item), params: @item_params
 
     @item.reload
@@ -170,8 +170,8 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "unauthorized users can't delete action items" do
-    sign_in users(:two)
-    
+    sign_in create :user
+
     assert_no_difference 'ActionItem.count' do
       delete action_item_url(@item), params: @item_params
     end
@@ -180,7 +180,7 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "can modify delete items" do
     sign_in @user
-    
+
     assert_difference 'ActionItem.count', -1 do
       delete action_item_url(@item), params: @item_params
     end

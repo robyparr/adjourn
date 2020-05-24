@@ -3,6 +3,7 @@ require 'rails/test_help'
 
 import_globs = [
   Rails.root.join('test', 'exporters', '*.rb'),
+  Rails.root.join('test', 'support', '**', '*.rb'),
 ]
 
 import_globs.each do |glob|
@@ -12,9 +13,7 @@ end
 
 class ActiveSupport::TestCase
   include FactoryBot::Syntax::Methods
-
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  include Support::Helpers::ResponseHelpers
 
   # Add more helper methods to be used by all tests here...
 end

@@ -2,8 +2,8 @@ require 'test_helper'
 
 class GoogleCalendarTest < ActiveSupport::TestCase
   setup do
-    @account = google_accounts(:one)
-    @account_cal = @account.google_calendars.first
+    @account = create :google_account
+    @account_cal = create :google_calendar, google_account: @account
     @non_account_cal = GoogleCalendar.where('google_account_id != ?', @account.id).first
   end
 

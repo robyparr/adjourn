@@ -2,8 +2,9 @@ require 'test_helper'
 
 class MeetingTest < ActiveSupport::TestCase
   def setup
-    @meeting = meetings(:one)
-    @meeting.user = users(:one)
+    @user = create :user
+    @meeting = create :meeting, user: @user
+    create_list :agendum, 2, meeting: @meeting
   end
 
   test 'meeting is valid' do
@@ -19,7 +20,7 @@ class MeetingTest < ActiveSupport::TestCase
     @meeting.start_date = nil
     assert_not @meeting.valid?
   end
-  
+
   test 'meeting must have an end_date after the start_date' do
     @meeting.start_date = DateTime.now
     @meeting.end_date = @meeting.start_date + 1
@@ -94,7 +95,7 @@ class MeetingTest < ActiveSupport::TestCase
   end
 
   test "add_attendee adds an existing attendee to the meeting" do
-    attendee_email = attendees(:one).email
+    attendee_email = create(:attendee).email
     @meeting.attendees.delete_all
     assert_difference '@meeting.attendees.count', 1 do
       @meeting.add_attendee(attendee_email)
@@ -114,7 +115,7 @@ class MeetingTest < ActiveSupport::TestCase
   end
 
   test "add_attendee returns an error when adding the same email twice" do
-    attendee_email = attendees(:one).email
+    attendee_email = create(:attendee).email
     @meeting.attendees.delete_all
     @meeting.add_attendee(attendee_email)
 

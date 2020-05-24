@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GoogleAccountTest < ActiveSupport::TestCase
   setup do
-    @account = google_accounts(:one)
+    @account = create :google_account
   end
 
   test "is valid" do
@@ -15,7 +15,7 @@ class GoogleAccountTest < ActiveSupport::TestCase
   end
 
   test "email must be unique" do
-    @account.email = google_accounts(:two).email
+    @account.email = create(:google_account).email
     assert_not @account.valid?
   end
 end

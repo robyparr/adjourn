@@ -2,7 +2,7 @@ require 'test_helper'
 
 class AgendumTest < ActiveSupport::TestCase
   def setup
-    @agendum = agendums(:one)
+    @agendum = create :agendum
   end
 
   test 'agendum is valid' do
@@ -20,7 +20,7 @@ class AgendumTest < ActiveSupport::TestCase
   end
 
   test 'agendum can have notes' do
+    create :agendum_note, agendum: @agendum
     assert_not_empty @agendum.notes
   end
-  
 end

@@ -2,10 +2,12 @@ require 'test_helper'
 
 class AttendeesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:one)
-    @meeting = meetings(:one)
+    @user = create :user
+    @meeting = create :meeting, user: @user
+    @attendee = create :attendee, user: @user
+
     @autocomplete_params = { email: 'attendee' }
-    @attend_existing_params = { email: attendees(:one).email }
+    @attend_existing_params = { email: @attendee.email }
     @attend_new_params = { email: 'attendee3@example.com' }
   end
 
@@ -21,9 +23,8 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     get attendee_autocomplete_url, params: @autocomplete_params
     assert_response :success
 
-    result = JSON.parse(response.body)
-    assert_equal 1, result.size
-    assert_equal attendees(:one).email, result.first['email']
+    assert_equal 1, response_json.size
+    assert_equal @attendee.email, response_json.dig(0, :email)
   end
 
   #  Attend tests
@@ -34,13 +35,13 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     ] do
       post attend_meeting_url(@meeting),
         params: @attend_existing_params
-      
+
       assert_redirected_to new_user_session_url
     end
   end
 
   test "users can't add attendees to another user's meeting" do
-    sign_in users(:two)
+    sign_in create :user
 
     assert_no_difference [
       '@meeting.attendees.count',
@@ -48,7 +49,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     ] do
       post attend_meeting_url(@meeting),
         params: @attend_existing_params
-      
+
       assert_response :not_found
     end
   end
@@ -60,7 +61,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
       assert_no_difference '@user.attendees.count' do
         post attend_meeting_url(@meeting),
           params: @attend_existing_params
-          
+
         assert_response :success
       end
     end
@@ -100,13 +101,13 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     ] do
       delete unattend_meeting_url(@meeting),
         params: @attend_existing_params
-      
+
       assert_redirected_to new_user_session_url
     end
   end
 
   test "users can't deleete attendees of another user's meeting" do
-    sign_in users(:two)
+    sign_in create :user
 
     assert_no_difference [
       '@meeting.attendees.count',
@@ -114,7 +115,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
     ] do
       delete unattend_meeting_url(@meeting),
         params: @attend_existing_params
-      
+
       assert_response :not_found
     end
   end
@@ -122,8 +123,7 @@ class AttendeesControllerTest < ActionDispatch::IntegrationTest
   test "an attendee can be removed from a meeting" do
     sign_in @user
 
-    @meeting.attendees << attendees(:one)
-
+    @meeting.attendees << @attendee
     assert_difference '@meeting.attendees.count', -1 do
       assert_no_difference ['@user.attendees.count', 'Attendee.count'] do
         delete unattend_meeting_url(@meeting),

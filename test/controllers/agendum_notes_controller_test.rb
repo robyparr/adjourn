@@ -2,44 +2,42 @@ require 'test_helper'
 
 class AgendumNotesControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:one)
-    @meeting = meetings(:one)
-    @agendum = @meeting.agenda.first
-    @note = @agendum.notes.first
+    @user = create :user
+    @meeting = create :meeting, user: @user
+    @agendum = create :agendum, meeting: @meeting
+    @note = create :agendum_note, meeting: @meeting, agendum: @agendum
 
-    @user.meetings << @meeting
-
-    @meeting2 = meetings(:two)
-    @agendum2 = @meeting2.agenda.first
-    @note2 = @agendum2.notes.first
+    @meeting2 = create :meeting
+    @agendum2 = create :agendum, meeting: @meeting2
+    @note2 = create :agendum_note, meeting: @meeting2, agendum: @agendum2
   end
-  
+
   test 'can create an agendum note' do
     params = { agendum_note: { content: "Hey, I'm a note!" } }
 
     # Non authorized user
     assert_no_difference 'AgendumNote.count' do
-      post agenda_agendum_notes_url(@meeting, @agendum), params: params
+      post agenda_agendum_notes_url(@agendum), params: params
     end
-    assert_response :unauthorized
+    assert_redirected_to new_user_session_url
 
     sign_in @user
-    
+
     # Another user's agendum
     assert_no_difference 'AgendumNote.count' do
-      post agenda_agendum_notes_url(@meeting2, @agendum2), params: params
+      post agenda_agendum_notes_url(@agendum2), params: params
     end
     assert_response :not_found
 
     # Authorized user
     assert_difference ['AgendumNote.count', '@agendum.notes.count'], 1 do
-      post agenda_agendum_notes_url(@meeting, @agendum), params: params
+      post agenda_agendum_notes_url(@agendum), params: params
     end
     assert_response :success
 
     # Make sure that the agendum note has its meeting ID set
     # for search cacheing.
-    note = AgendumNote.find_by_content(params[:agendum_note][:content])
+    note = AgendumNote.find_by(content: params[:agendum_note][:content])
     assert_equal @meeting.id, note.meeting_id
   end
 
@@ -49,17 +47,17 @@ class AgendumNotesControllerTest < ActionDispatch::IntegrationTest
     }
 
     # Non authorized user
-    put agendum_note_url(@meeting, @agendum, @note), params: params
-    assert_response :unauthorized
+    put agendum_note_url(@note), params: params
+    assert_redirected_to new_user_session_url
 
     sign_in @user
 
     # Another user's note
-    put agendum_note_url(@meeting2, @agendum2, @note2), params: params
+    put agendum_note_url(@note2), params: params
     assert_response :not_found
 
     # Current user's note
-    put agendum_note_url(@meeting, @agendum, @note), params: params
+    put agendum_note_url(@note), params: params
 
     assert_response :success
     updated_note = assigns(:note)
@@ -69,23 +67,22 @@ class AgendumNotesControllerTest < ActionDispatch::IntegrationTest
   test 'can delete an agendum note' do
     # Non authorized user
     assert_no_difference 'AgendumNote.count' do
-      delete agendum_note_url(@meeting, @agendum, @note)
+      delete agendum_note_url(@note)
     end
-    assert_response :unauthorized
+    assert_redirected_to new_user_session_url
 
     sign_in @user
 
     # Another user's note
     assert_no_difference 'AgendumNote.count' do
-      delete agendum_note_url(@meeting2, @agendum2, @note2)
+      delete agendum_note_url(@note2)
     end
     assert_response :not_found
 
     # Current user's note
     assert_difference ['AgendumNote.count', '@agendum.notes.count'], -1 do
-      delete agendum_note_url(@meeting, @agendum, @note)
+      delete agendum_note_url(@note)
     end
     assert_response :success
   end
-  
 end

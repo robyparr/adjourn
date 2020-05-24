@@ -2,12 +2,12 @@ require 'test_helper'
 
 class MeetingsHelperTest < ActionView::TestCase
   setup do
-    @recent_meeting = meetings(:one).tap do |meeting|
+    @recent_meeting = create(:meeting).tap do |meeting|
       meeting.start_date = Time.zone.now - 2.days
       meeting.end_date = meeting.start_date + 1.hour
     end
 
-    @upcoming_meeting = meetings(:two).tap do |meeting|
+    @upcoming_meeting = create(:meeting).tap do |meeting|
       meeting.start_date = Time.zone.now + 2.days
       meeting.end_date = meeting.start_date + 1.hour
     end

@@ -4,10 +4,9 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   include ActiveJob::TestHelper
 
   def setup
-    @meeting = meetings(:one)
-    @meeting2 = meetings(:two)
-
-    @user = users(:one)
+    @user = create :user
+    @meeting = create :meeting, user: @user
+    @meeting2 = create :meeting
 
     @user.meetings << @meeting
     ActionMailer::Base.deliveries.clear
@@ -81,7 +80,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "users can't send emails from other users' meetings" do
-    sign_in users(:two)
+    sign_in create :user
 
     assert_no_enqueued_jobs do
       post email_attendees_meeting_url(@meeting)
@@ -92,7 +91,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   test "users can send emails to attendees" do
     sign_in @user
 
-    @meeting.attendees << attendees(:one)
+    @meeting.attendees << create(:attendee)
     assert_enqueued_with(job: ActionMailer::MailDeliveryJob) do
       post email_attendees_meeting_url(@meeting)
       assert_response :success
@@ -110,41 +109,41 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "users can search for meetings by the agenda" do
+    create :agendum, meeting: @meeting, title: 'first agenda item'
+
     rebuild_search_cache
     sign_in @user
 
     # Search by agenda
     get search_url(q: 'first')
-    json_response = JSON.parse(response.body)
-    assert_equal 1, json_response.size
-    assert_equal @meeting.title, json_response.first['meeting']['title']
+    assert_equal 1, response_json.size
+    assert_equal @meeting.title, response_json.dig(0, :meeting, :title)
 
-    # Search by agenda, partial word (full word is 'first')
-    get search_url(q: 'st')
-    json_response = JSON.parse(response.body)
-    assert_equal 1, json_response.size
-    assert_equal @meeting.title, json_response.first['meeting']['title']
+    # Search by agenda, partial word (full word is 'agenda')
+    get search_url(q: 'agen')
+    assert_equal 1, response_json.size
+    assert_equal @meeting.title, response_json.dig(0, :meeting, :title)
   end
 
   test "users can search for meetings by the agenda notes" do
+    create :agendum_note, meeting: @meeting, content: 'example note'
+
     rebuild_search_cache
     sign_in @user
 
     # Search by agenda notes
     get search_url(q: 'example')
-    json_response = JSON.parse(response.body)
-    assert_equal 1, json_response.size
-    assert_equal @meeting.title, json_response.first['meeting']['title']
+    assert_equal 1, response_json.size
+    assert_equal @meeting.title, response_json.dig(0, :meeting, :title)
 
     # Search by agenda notes, partial word (full word is 'example')
     get search_url(q: 'exam')
-    json_response = JSON.parse(response.body)
-    assert_equal 1, json_response.size
-    assert_equal @meeting.title, json_response.first['meeting']['title']
+    assert_equal 1, response_json.size
+    assert_equal @meeting.title, response_json.dig(0, :meeting, :title)
   end
 
   test "can't delete another users meetings" do
-    sign_in users(:two)
+    sign_in create :user
 
     assert_no_difference 'Meeting.count' do
       delete meeting_path(@meeting)
@@ -153,9 +152,11 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'can delete meetings' do
+    create :agendum, meeting: @meeting
+
     sign_in @user
     assert_difference 'Meeting.count', -1 do
-      assert_difference 'Agendum.count', -2 do
+      assert_difference 'Agendum.count', -1 do
         delete meeting_path(@meeting)
       end
     end

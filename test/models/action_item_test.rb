@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ActionItemTest < ActiveSupport::TestCase
   def setup
-    @action_item = action_items(:one)
+    @action_item = create :action_item
   end
 
   test "is valid" do

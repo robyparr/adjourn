@@ -2,9 +2,9 @@ require 'test_helper'
 
 class AgendumNoteTest < ActiveSupport::TestCase
   def setup
-    @note = agendum_notes(:one)
+    @note = create :agendum_note
   end
-  
+
   test "agendum note is valid" do
     assert @note.valid?
   end
@@ -13,6 +13,4 @@ class AgendumNoteTest < ActiveSupport::TestCase
     @note.content = " "
     assert_not @note.valid?
   end
-  
-  
 end

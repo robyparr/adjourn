@@ -8,10 +8,11 @@ class ProfileControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "show's the user's profile" do
-    sign_in users(:one)
+    user = create :user
+    sign_in user
 
     get profile_url
     assert_response :success
-    assert_match users(:one).email, response.body
+    assert_match user.email, response.body
   end
 end

@@ -2,8 +2,8 @@ require 'test_helper'
 
 class GoogleCalendarsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    @google_account = google_accounts(:one)
+    @user = create :user
+    @google_account = create :google_account, user: @user
   end
 
   test "guests can't access google calendars" do
@@ -40,9 +40,10 @@ class GoogleCalendarsControllerTest < ActionDispatch::IntegrationTest
 
   test "deletes sync record for google calendar" do
     sign_in @user
+    calendar = create(:google_calendar, google_account: @google_account)
     assert_difference 'GoogleCalendar.count', -1 do
       delete google_calendars_url, params: {
-        google_id: google_calendars(:one).google_id,
+        google_id: calendar.google_id,
         google_account_id: @google_account.id
       }
     end
