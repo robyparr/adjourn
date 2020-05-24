@@ -3,9 +3,10 @@
     <div class="column lg9 lg:pr-6">
       <inline-editor editor="textInput"
                      placeholder="Meeting title"
+                     class="meeting-title"
                      :value="meeting.title"
                      @editor-changed="updateMeetingTitle">
-        <h3 slot="display" class="mb-1 meeting-title">{{ meeting.title }}</h3>
+        <h3 slot="display" class="mb-1">{{ meeting.title }}</h3>
       </inline-editor>
 
       <date-time-range-picker

@@ -34,9 +34,18 @@ end
 group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug',             platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara',           '~> 2.13'
+  gem 'capybara',           '~> 3.29'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'shoulda-matchers',           '~> 4.1', '>= 4.1.2'
+  gem 'shoulda-callback-matchers',  '~> 1.1', '>= 1.1.4'
+  gem 'webdrivers',                 '~> 4.1', '>= 4.1.3'
+  gem 'test-prof',                  '~> 0.10.2'
+  gem 'webmock',                    '~> 3.8', '>= 3.8.2'
+  gem 'simplecov',                  '~> 0.18.5'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails',          '~> 5.1', '>= 5.1.1'
+  gem 'pry',                        '~> 0.13.1'
 end
 
 group :development do
@@ -45,11 +54,6 @@ group :development do
   gem 'listen',                 '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen',  '~> 2.0.0'
-end
-
-group :test do
-  gem 'rails-controller-testing'
-  gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

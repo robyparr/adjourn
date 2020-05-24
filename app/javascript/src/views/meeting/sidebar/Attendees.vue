@@ -19,8 +19,7 @@
           <img :src="attendeeAvatarUrl(attendee)" class="avatar" />
           <div class="media-text">
             <span class="truncate">
-              {{ attendee.email.slice(0, 25) }}
-              <span v-if="attendee.email.length > 25">...</span>
+              {{ attendee.email.slice(0, 25) }}<span v-if="attendee.email.length > 25">...</span>
             </span>
           </div>
         </div>

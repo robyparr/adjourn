@@ -2,7 +2,7 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
 import_globs = [
-  Rails.root.join('test', 'exporters', '*.rb')
+  Rails.root.join('test', 'exporters', '*.rb'),
 ]
 
 import_globs.each do |glob|

@@ -1,40 +1,48 @@
-require "application_system_test_case"
+require 'application_system_test_case'
 
 module Meetings
   module Show
     class AgendaTest < ApplicationSystemTestCase
+      attr_reader :user,
+                  :meeting
+
       setup do
-        @user = users(:one)
-        @meeting = @user.meetings.first
+        @user = create :user
+        @meeting = create :meeting, user: @user
       end
 
       test 'adding an agendum' do
-        sign_in @user
-  
-        visit meeting_url @meeting
-        assert_equal 2, all('.agenda .agendum').count
-  
-        fill_in 'New Agendum', with: 'test'
-        find('#new_title input').send_keys :enter
-  
+        sign_in user
+        visit meeting_url meeting
+        assert_equal 0, all('.agenda .agendum:not([data-testid="agendum-new"]').count
+
+        new_agendum_input = find_by_testid('agendum-new').find('input')
+        new_agendum_input.send_keys 'test'
+        new_agendum_input.send_keys :enter
+
         sleep 0.1
-        assert_equal 3, all('.agendum').count
-        assert_equal 'test', all('.agendum .card-title p').last.text
+        assert_equal 1, all('.agenda .agendum:not([data-testid="agendum-new"]').count
+
+        new_agendum = meeting.agenda.last
+        new_agendum_card_title = find_by_testid("agendum-#{new_agendum.id}").find('.card-title')
+        assert_equal 'test', new_agendum_card_title.text
       end
 
       test "Editing an agendum's title" do
-        sign_in @user
-        visit meeting_url @meeting
-        assert @meeting.agenda.any?
+        agendum = create :agendum, meeting: meeting
 
-        title_display_el = find('.agendum .card-head .card-title .inline-edit')
-        title_display_el.double_click
+        sign_in user
+        visit meeting_url meeting
 
-        updated_title = "#{@meeting.agenda.first.title} (updated)"
-        title_input = find('.agendum .card-head .card-title input')
-        title_input.send_keys(updated_title).send_keys :enter
+        agendum_card = find_by_testid("agendum-#{agendum.id}")
+        title_el = agendum_card.find('.card-title .inline-editor')
+        title_el.click
+        title_el.find('input').send_keys(' updated').send_keys :enter
 
-        assert_equal updated_title, title_display_el.text
+        sleep 0.1
+        updated_title = "#{agendum.title} updated"
+        assert_equal updated_title, title_el.text
+        assert_equal updated_title, agendum.reload.title
       end
     end
   end

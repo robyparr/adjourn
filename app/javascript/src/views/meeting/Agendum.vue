@@ -1,7 +1,8 @@
 <template>
   <card :class="['agendum', 'relative', { selected: isSelected, 'no-actions': !isExistingAgendum }]"
         :hasActions="isExistingAgendum"
-        @click="selectAgendum">
+        @click="selectAgendum"
+        :data-testid="`agendum-${agendum.id || 'new'}`">
     <template v-if="isExistingAgendum" slot="title">
       <i class="fas fa-grip-horizontal cursor-move drag-handle
                 absolute pin-t pin-l -ml-3 -mt-4 text-gray-500 hover:text-black"></i>
@@ -10,7 +11,7 @@
                      :value="agendum.title"
                      @editor-changed="updateAgendumTitle"
                      @click="selectAgendum">
-        <h4 slot="display" class="mt-0 mb-1 meeting-title">{{ agendum.title }}</h4>
+        <h4 slot="display" class="mt-0 mb-1">{{ agendum.title }}</h4>
       </inline-editor>
     </template>
     <template v-else slot="title">
