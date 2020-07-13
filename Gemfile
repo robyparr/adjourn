@@ -36,7 +36,6 @@ group :development, :test do
   gem 'byebug',             platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara',                   '~> 3.29'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
   gem 'webdrivers',                 '~> 4.1', '>= 4.1.3'
   gem 'test-prof',                  '~> 0.10.2'
   gem 'webmock',                    '~> 3.8', '>= 3.8.2'
