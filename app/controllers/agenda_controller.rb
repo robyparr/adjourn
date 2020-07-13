@@ -1,6 +1,4 @@
 class AgendaController < ApplicationController
-  before_action :load_agendum, only: [:update, :destroy]
-
   def create
     meeting = current_user.meetings.find(params[:meeting_id])
     agendum = meeting.agenda.build(agendum_params)
@@ -13,27 +11,28 @@ class AgendaController < ApplicationController
   end
 
   def update
-    if @agendum.update(agendum_params)
-      render json: @agendum
+    if agendum.update(agendum_params)
+      render json: agendum
     else
-      render json: @agendum.errors.full_messages, status: :unprocessable_item
+      render json: agendum.errors.full_messages, status: :unprocessable_item
     end
   end
 
   def destroy
-    @agendum.destroy
+    agendum.destroy
     render json: { message: 'Agendum successfully deleted.'}
   end
 
   def update_sort
+    meeting = current_user.meetings.find(params[:meeting_id])
     ActiveRecord::Base.transaction do
-      meeting = current_user.meetings.find(params[:meeting_id])
-      @agenda = meeting.agenda.map do |agendum|
-        new_position = agenda_ids.index agendum.id
-        agendum.update! position: new_position
+      @agenda =
+        meeting.agenda.map do |agendum|
+          new_position = agenda_ids.index agendum.id
+          agendum.update! position: new_position
 
-        agendum
-      end
+          agendum
+        end
     end
 
     render json: { message: 'Agenda successfully sorted.' }
@@ -41,8 +40,8 @@ class AgendaController < ApplicationController
 
   private
 
-  def load_agendum
-    @agendum = current_user.agenda.find(params[:id])
+  def agendum
+    @agendum ||= current_user.agenda.find(params[:id])
   end
 
   def agendum_params

@@ -1,16 +1,7 @@
-#
-# A single note taken on an agendum.
-#
-# Attributes:
-#   - content:string
-#
-# Associations:
-#   - agendum: The agendum this note was taken on.
-#
 class AgendumNote < ApplicationRecord
   include PgSearch::Model
 
-  multisearchable against: %i(content),
+  multisearchable against: %i[content],
     additional_attributes: ->(note) {
       { user_id: note.meeting.user_id }
     }

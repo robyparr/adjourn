@@ -1,33 +1,28 @@
 class MeetingsController < ApplicationController
   def index
     @meeting = Meeting.new
-    @meetings = current_user
-      .meetings
-      .order(start_date: :desc)
-      .page(params[:page])
+    @meetings = current_user.meetings.order(start_date: :desc).page(params[:page])
   end
 
   def show
-    @meeting = current_user.meetings
-      .includes(
-        { agenda: %i[notes uploads] },
-        { action_items: %i[attendees] },
-        :attendees
-      )
-      .find(params[:id])
+    includes = [
+      { agenda: %i[notes uploads] },
+      { action_items: %i[attendees] },
+      :attendees,
+    ]
+    @meeting = current_user.meetings.includes(*includes).find(params[:id])
   end
 
   def create
     meeting = current_user.meetings.build(meeting_params)
     meeting.start_date = Time.zone.now
     meeting.end_date = meeting.start_date + 1.hours
-    meeting.attendees << current_user.attendees.find_or_create_by(email: current_user.email)
 
     if meeting.save
+      meeting.add_attendee current_user.email
       render json: { resource_url: meeting_url(meeting) }, status: :created
     else
-      render json: { errors: meeting.errors.full_messages },
-        status: :unprocessable_entity
+      render json: { errors: meeting.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -57,14 +52,15 @@ class MeetingsController < ApplicationController
     meeting = current_user.meetings.find(params[:id])
     meeting.destroy
 
-    flash[:notice] = "Meeting successfully deleted."
+    flash[:notice] = 'Meeting successfully deleted.'
     redirect_to meetings_path
   end
 
   def search
-    @results = PgSearch.multisearch(params[:q])
-      .where(user_id: current_user.id)
-      .includes(searchable: :meeting)
+    @results =
+      PgSearch.multisearch(params[:q])
+        .where(user_id: current_user.id)
+        .includes(searchable: :meeting)
 
     render 'search.json'
   end
@@ -73,9 +69,13 @@ class MeetingsController < ApplicationController
 
   def meeting_params
     params.require(:meeting).permit(
-      :id,:title, :description,
-      :start_date, :end_date, :created_at,
-      :updated_at
+      :id,
+      :title,
+      :description,
+      :start_date,
+      :end_date,
+      :created_at,
+      :updated_at,
     )
   end
 end

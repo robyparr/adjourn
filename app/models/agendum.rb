@@ -1,7 +1,7 @@
 class Agendum < ApplicationRecord
   include PgSearch::Model
 
-  multisearchable against: %i(title description),
+  multisearchable against: %i[title description],
     additional_attributes: ->(agendum) { { user_id: agendum.meeting.user_id } }
 
   # Relationships
@@ -21,7 +21,7 @@ class Agendum < ApplicationRecord
     if description
       MarkdownRenderer.render(description)
     else
-      ""
+      ''
     end
   end
 

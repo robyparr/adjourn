@@ -98,7 +98,9 @@ class MeetingTest < ActiveSupport::TestCase
     attendee_email = create(:attendee).email
     @meeting.attendees.delete_all
     assert_difference '@meeting.attendees.count', 1 do
-      @meeting.add_attendee(attendee_email)
+      result = @meeting.add_attendee(attendee_email)
+      assert_kind_of AttendeesMeeting, result
+      assert_equal @meeting.id, result.meeting_id
     end
 
     assert @meeting.attendees.where(email: attendee_email).any?
@@ -109,19 +111,24 @@ class MeetingTest < ActiveSupport::TestCase
     @meeting.attendees.delete_all
 
     assert_difference ['@meeting.attendees.count', 'Attendee.count'], 1 do
-      @meeting.add_attendee(attendee_email)
+      result = @meeting.add_attendee(attendee_email)
+      assert_kind_of(AttendeesMeeting, result)
+      assert_equal @meeting.id, result.meeting_id
     end
     assert @meeting.attendees.where(email: attendee_email).any?
   end
 
   test "add_attendee returns an error when adding the same email twice" do
-    attendee_email = create(:attendee).email
-    @meeting.attendees.delete_all
-    @meeting.add_attendee(attendee_email)
+    meeting = create(:meeting, user: @user)
+    attendee = create(:attendee)
+    meeting.add_attendee(attendee.email)
 
-    assert_no_difference '@meeting.attendees.count' do
-      response = @meeting.add_attendee(attendee_email)
-      assert_equal 'Attendee is already attending this meeting.', response
+    assert_no_difference 'meeting.attendees.count' do
+      result = meeting.add_attendee(attendee.email)
+      assert_kind_of AttendeesMeeting, result
+      assert_equal meeting.id, result.meeting_id
+      assert_equal false, result.persisted?
+      assert_equal({ attendee: ['is already attending this meeting'] }, result.errors.messages)
     end
   end
 end

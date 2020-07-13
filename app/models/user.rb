@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :uploads, through: :agenda
   has_many :notes, class_name: 'AgendumNote', through: :meetings
   has_many :google_accounts, dependent: :destroy
-
+  has_many :action_items, through: :meetings
 
   def load_calendar_events
     accounts = google_accounts.includes(:google_calendars)

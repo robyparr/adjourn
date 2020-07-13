@@ -1,9 +1,9 @@
-json.id          @item.id
-json.title       @item.title
-json.description @item.description
-json.done        @item.done
+json.id          @action_item.id
+json.title       @action_item.title
+json.description @action_item.description
+json.done        @action_item.done
 
-json.attendees @item.attendees do |attendee|
+json.attendees @action_item.attendees do |attendee|
   json.id    attendee.id
   json.email attendee.email
 end

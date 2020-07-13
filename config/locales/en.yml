@@ -41,3 +41,10 @@ en:
     email_attendees:
       success_message: Email successfully sent.
       error_no_attendees: Please add some attendees to send an email to.
+  activerecord:
+    errors:
+      models:
+        attendees_meeting:
+          attributes:
+            attendee:
+              taken: is already attending this meeting

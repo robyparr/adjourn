@@ -51,15 +51,8 @@ class Meeting < ApplicationRecord
   end
 
   def add_attendee(email)
-    attendee = user.attendees.find_by_email email
-    attendee ||= user.attendees.create(email: email)
-
-    begin
-      attendees << attendee
-      attendee
-    rescue ActiveRecord::RecordNotUnique
-      'Attendee is already attending this meeting.'
-    end
+    attendee = user.attendees.find_or_create_by email: email
+    AttendeesMeeting.create attendee_id: attendee.id, meeting_id: id
   end
 
   private

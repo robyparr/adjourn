@@ -1,35 +1,33 @@
 class AttendeesController < ApplicationController
-
-  before_action :load_meeting, except: [:autocomplete]
-  
   def autocomplete
-    matching_attendees = current_user.attendees.where(
-      "email LIKE ?",
-      "%#{params[:email].downcase}%"
-    ).limit(10)
-    .select(:id, :email)
+    autocomplete_email = params[:email].downcase
+    matching_attendees =
+      current_user.attendees.where("email LIKE ?", "%#{autocomplete_email}%")
+        .limit(10)
+        .select(:id, :email)
 
     render json: matching_attendees
   end
 
   def attend
-    add_attendee = @meeting.add_attendee params[:email]
+    meeting_attendee = meeting.add_attendee params[:email]
 
-    return render(json: add_attendee) if add_attendee.respond_to? :email
-    render json: { message: add_attendee }, status: :unprocessable_entity
+    if meeting_attendee.persisted?
+      render json: meeting_attendee
+    else
+      render json: { errors: meeting_attendee.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def remove
-    attendee = current_user.attendees.find_by_email params[:email]
-    @meeting.attendees.delete attendee
+    attendee = current_user.attendees.find_by email: params[:email]
+    meeting.attendees.delete attendee
     render json: { message: 'Attendee sucessfully removed.' }
   end
 
-
   private
 
-  def load_meeting
-    @meeting = current_user.meetings.find(params[:id])
+  def meeting
+    @meeting ||= current_user.meetings.find(params[:id])
   end
-
 end

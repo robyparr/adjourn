@@ -1,38 +1,35 @@
 class ActionItemsController < ApplicationController
-  before_action :load_meeting, only: %i[create]
-  before_action :load_item, only: %i[update destroy assign unassign]
-
   def create
-    @item = @meeting.action_items.build(item_params)
+    @action_item = meeting.action_items.build(item_params)
 
-    if @item.save
+    if @action_item.save
       render :show, status: :created
     else
-      render json: @item.errors.full_message, status: :unprocessable_entity
+      render json: @action_item.errors.full_message, status: :unprocessable_entity
     end
   end
 
   def update
-    if @item.update(item_params)
+    if action_item.update(item_params)
       render :show
     else
-      render json: @item.errors.full_messages, status: :unprocessable_entity
+      render json: action_item.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @item.destroy
+    action_item.destroy
     render json: { message: 'Action item successfully deleted.' }
   end
 
   def assign
-    @item.attendees << attendee
+    action_item.attendees << attendee
 
     render :show
   end
 
   def unassign
-    @item.attendees.delete attendee
+    action_item.attendees.delete attendee
 
     render :show
   end
@@ -43,16 +40,15 @@ class ActionItemsController < ApplicationController
     params.require(:action_item).permit(:title, :description, :done)
   end
 
-  def load_meeting
-    @meeting = current_user.meetings.find(params[:meeting_id])
+  def meeting
+    @meeting ||= current_user.meetings.find params[:meeting_id]
   end
 
   def attendee
-    current_user.attendees.find_or_create_by(email: params[:email])
+    @attendee ||= current_user.attendees.find_or_create_by email: params[:email]
   end
 
-  def load_item
-    @item = ActionItem.includes(:attendees).find(params[:id])
-    not_found and return unless @item.meeting.user == current_user
+  def action_item
+    @action_item ||= current_user.action_items.includes(:attendees).find(params[:id])
   end
 end
