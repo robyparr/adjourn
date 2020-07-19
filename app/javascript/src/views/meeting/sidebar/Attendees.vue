@@ -60,8 +60,8 @@ export default {
     },
 
     parseAutocompleteResults(autocompleteResults) {
-      const attendeeIDs = this.meeting.attendees.map(attendee => attendee.id)
-      return autocompleteResults.filter(result => attendeeIDs.indexOf(result.id) === -1)
+      const contactIDs = this.meeting.attendees.map(attendee => attendee.contact_id)
+      return autocompleteResults.filter(result => !contactIDs.includes(result.id))
     },
 
     renderNoResultsMessage(autocompleteText) {
