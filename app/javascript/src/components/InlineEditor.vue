@@ -21,7 +21,7 @@
 
 <script>
 import MarkdownEditor from './MarkdownEditor'
-import { defer } from 'lodash'
+import _defer from 'lodash/defer'
 
 export default {
   components: {
@@ -43,7 +43,7 @@ export default {
       if (this.isDisplayMode)
         return
 
-      defer(() => {
+      _defer(() => {
         if (this.$refs.editor && this.$refs.editor.focus)
           this.$refs.editor.focus()
       })

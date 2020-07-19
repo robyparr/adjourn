@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import { debounce, isObject } from 'lodash'
+import _debounce from 'lodash/debounce'
+import _isObject from 'lodash/isObject'
 import axios from 'axios'
 
 const UP_ARROW_KEY_CODE = 38
@@ -76,7 +77,7 @@ export default {
   },
 
   methods: {
-    fetchResults: debounce(function(e) {
+    fetchResults: _debounce(function(e) {
       if (e.target.value.length <= 3) return
 
       const url = this.url(e.target.value)
@@ -93,7 +94,7 @@ export default {
     }, 500),
 
     selectResult(result) {
-      this.$emit('select-result', isObject(result) ? result : this.autocompleteText)
+      this.$emit('select-result', _isObject(result) ? result : this.autocompleteText)
       this.reset()
     },
 

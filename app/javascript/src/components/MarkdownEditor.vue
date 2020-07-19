@@ -12,7 +12,7 @@
 import 'codemirror/lib/codemirror.css'
 import '@toast-ui/editor/dist/toastui-editor.css'
 import { Editor } from '@toast-ui/vue-editor'
-import { delay } from 'lodash'
+import _delay from 'lodash/delay'
 
 export default {
   components: {
@@ -71,7 +71,7 @@ export default {
     },
 
     onBlur() {
-      delay(() => {
+      _delay(() => {
         document.removeEventListener('click', this.customBlurClick)
         document.removeEventListener('keypress', this.customBlurKeypress)
       }, 100)
