@@ -36,18 +36,6 @@ class MeetingsController < ApplicationController
     end
   end
 
-  def email_attendees
-    meeting = current_user.meetings.find(params[:id])
-
-    if meeting.attendees.any?
-      MeetingMailer.attendees_email(meeting.id).deliver_later
-      render json: { message: t('meetings.email_attendees.success_message') }
-    else
-      error_message = t('meetings.email_attendees.error_no_attendees')
-      render json: { error: error_message }, status: :unprocessable_entity
-    end
-  end
-
   def destroy
     meeting = current_user.meetings.find(params[:id])
     meeting.destroy

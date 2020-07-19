@@ -149,7 +149,7 @@ export default new Vuex.Store({
     addAttendee({ commit, state }, email) {
       axios({
         method: 'POST',
-        url: `/meetings/${state.meeting.id}/contacts/attend`,
+        url: `/meetings/${state.meeting.id}/attendees`,
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(response => {
@@ -166,7 +166,7 @@ export default new Vuex.Store({
     removeAttendee({ commit, state }, email) {
       axios({
         method: 'DELETE',
-        url: `/meetings/${state.meeting.id}/contacts/unattend`,
+        url: `/meetings/${state.meeting.id}/attendees`,
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(_response => commit('REMOVE_ATTENDEE', email))

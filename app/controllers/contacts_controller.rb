@@ -9,25 +9,4 @@ class ContactsController < ApplicationController
 
     render json: matching_contacts
   end
-
-  def attend
-    @attendee = meeting.add_attendee params[:email]
-
-    if @attendee.persisted?
-      render 'show.json'
-    else
-      render json: { errors: @attendee.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
-
-  def remove
-    meeting.remove_attendee params[:email]
-    render json: { message: 'Attendee sucessfully removed.' }
-  end
-
-  private
-
-  def meeting
-    @meeting ||= current_user.meetings.find(params[:id])
-  end
 end
