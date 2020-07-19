@@ -7,6 +7,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   ActionController::Base.allow_forgery_protection = true
 
   include Devise::Test::IntegrationHelpers
+  include Support::Helpers::CapybaraHelpers
 
   def find_by_testid(test_id)
     find("[data-testid='#{test_id}'")

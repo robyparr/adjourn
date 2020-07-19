@@ -9,6 +9,16 @@ class Meeting::AttendeesController < ApplicationController
     end
   end
 
+  def update
+    @attendee = meeting.attendees.find(params[:id])
+
+    if @attendee.update update_attendee_params
+      render 'show.json'
+    else
+      render json: { errors: @attendee.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     meeting.remove_attendee params[:email]
     render json: { message: 'Attendee sucessfully removed.' }
@@ -28,5 +38,9 @@ class Meeting::AttendeesController < ApplicationController
 
   def meeting
     @meeting ||= current_user.meetings.find(params[:meeting_id])
+  end
+
+  def update_attendee_params
+    params.require(:attendee).permit(:attended)
   end
 end

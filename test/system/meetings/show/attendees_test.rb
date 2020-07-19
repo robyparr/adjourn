@@ -58,6 +58,24 @@ module Meetings
         find('.button.primary').click
         assert find('.toast.error').present?
       end
+
+      test 'mark attendees as attended/not attended' do
+        attendee = create(:attendee, user: @user, meeting: @meeting)
+        assert attendee.attended?
+
+        sign_in @user
+        visit meeting_url @meeting
+
+        attend_button = find_by_testid('attendee-attend-buton')
+
+        assert attend_button.find('i').class.include?('fa-user-minus')
+        attend_button.click
+        assert_not attendee.reload.attended?
+
+        assert attend_button.find('i').class.include?('fa-user-plus')
+        attend_button.click
+        assert attendee.reload.attended?
+      end
     end
   end
 end

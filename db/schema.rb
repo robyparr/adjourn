@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_19_082310) do
+ActiveRecord::Schema.define(version: 2020_07_19_113848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2020_07_19_082310) do
     t.bigint "meeting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "attended", default: true
     t.index ["contact_id", "meeting_id"], name: "index_meeting_attendees_on_contact_id_and_meeting_id", unique: true
     t.index ["contact_id"], name: "index_meeting_attendees_on_contact_id"
     t.index ["meeting_id"], name: "index_meeting_attendees_on_meeting_id"

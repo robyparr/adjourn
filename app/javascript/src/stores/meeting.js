@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import Utils from 'utils'
 import _extend from 'lodash/extend'
+import _defaults from 'lodash/defaults'
 
 Vue.use(Vuex)
 
@@ -43,6 +44,16 @@ export default new Vuex.Store({
 
     REMOVE_ATTENDEE: (state, email) => {
       state.meeting.attendees = state.meeting.attendees.filter(attendee => attendee.email !== email)
+    },
+
+    UPDATE_ATTENDEE: (state, updatedAttendee) => {
+      state.meeting.attendees =
+        state.meeting.attendees.map(attendee => {
+          if (attendee.id === updatedAttendee.id)
+            return updatedAttendee
+
+          return attendee
+        })
     },
 
     ADD_ACTION_ITEM: (state, actionItem) => {
@@ -153,11 +164,13 @@ export default new Vuex.Store({
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(response => {
-        const attendee = {
+        const attendee = _defaults({
           id: response.data.id,
           email: response.data.email,
           contact_id: response.data.contact_id,
-        }
+        }, {
+          attended: true,
+        })
         commit('ADD_ATTENDEE', attendee)
       })
       .catch(error => console.log(error))
@@ -170,6 +183,19 @@ export default new Vuex.Store({
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(_response => commit('REMOVE_ATTENDEE', email))
+      .catch(error => console.log(error))
+    },
+
+    updateAttendee({ commit, state }, { id, partialAttendee }) {
+      axios({
+        method: 'PUT',
+        url: `/meetings/${state.meeting.id}/attendees/${id}`,
+        data: {
+          attendee: partialAttendee,
+          authenticity_token: Utils.getAuthenticityToken(),
+        }
+      })
+      .then(response => commit('UPDATE_ATTENDEE', response.data))
       .catch(error => console.log(error))
     },
 

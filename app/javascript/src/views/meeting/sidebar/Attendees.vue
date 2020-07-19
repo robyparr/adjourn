@@ -18,14 +18,22 @@
         <div class="media">
           <img :src="attendeeAvatarUrl(attendee)" class="avatar" />
           <div class="media-text">
-            <span class="truncate">
+            <span :class="['truncate', { 'line-through': !attendee.attended }]">
               {{ attendee.email.slice(0, 25) }}<span v-if="attendee.email.length > 25">...</span>
             </span>
           </div>
         </div>
-        <button class="list-floating-content" @click="removeAttendee(attendee)">
-          <i class="fa fa-trash"></i>
-        </button>
+        <div class="list-floating-content">
+          <button type="button"
+                  @click="toggleAttended(attendee)"
+                  :title="attendButtonTitle(attendee)"
+                  data-testid="attendee-attend-btn">
+            <i :class="['fa', { 'fa-user-minus': attendee.attended, 'fa-user-plus': !attendee.attended }]"></i>
+          </button>
+          <button type="button" @click="removeAttendee(attendee)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
       </li>
     </ul>
   </div>
@@ -66,6 +74,18 @@ export default {
 
     renderNoResultsMessage(autocompleteText) {
       return `No attendees found. Click here to add '${autocompleteText}'`
+    },
+
+    toggleAttended(attendee) {
+      const partialAttendee = { attended: !attendee.attended }
+      this.$store.dispatch('updateAttendee', { id: attendee.id, partialAttendee })
+    },
+
+    attendButtonTitle(attendee) {
+      if (attendee.attended)
+        return 'Mark as not attended.'
+
+      return 'Mark as attended.'
     },
   }
 }

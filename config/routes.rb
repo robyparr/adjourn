@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     end
 
     scope module: :meeting do
-      resources :attendees, only: %i[create] do
+      resources :attendees, only: %i[create update] do
         collection do
           delete :destroy
           post :email

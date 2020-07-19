@@ -16,11 +16,9 @@ json.action_items meeting.action_items do |item|
   end
 end
 
-json.attendees meeting.attendees do |attendee|
-  json.id         attendee.id
-  json.email      attendee.email
-  json.contact_id attendee.contact_id
-end
+json.attendees meeting.attendees,
+  partial: 'meeting/attendees/attendee.json',
+  as: :attendee
 
 json.agenda meeting.agenda do |agendum|
   json.id           agendum.id
