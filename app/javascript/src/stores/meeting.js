@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import axios from 'axios'
 import Utils from 'utils'
+import _extend from 'lodash/extend'
 
 Vue.use(Vuex)
 
@@ -24,8 +25,9 @@ export default new Vuex.Store({
 
     UPDATE_AGENDUM: (state, updatedAgendum) => {
       state.meeting.agenda = state.meeting.agenda.map(agendum => {
-        if (agendum.id == updatedAgendum.id)
-          return updatedAgendum
+        if (agendum.id == updatedAgendum.id) {
+          return _extend({}, agendum, updatedAgendum)
+        }
 
         return agendum
       })
