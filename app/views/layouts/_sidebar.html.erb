@@ -33,6 +33,12 @@
       <% end %>
     </li>
     <li>
+      <%= active_link_to contacts_path do %>
+        <i class="fa fa-address-book"></i>
+        <span class="text">Contacts</span>
+      <% end %>
+    </li>
+    <li>
       <%= active_link_to profile_path do %>
         <i class="fa fa-user-cog"></i>
         <span class="text">My Profile</span>

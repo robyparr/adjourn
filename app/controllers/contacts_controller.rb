@@ -1,4 +1,11 @@
 class ContactsController < ApplicationController
+  def index
+    @contacts = current_user.contacts
+      .includes(:meeting_attendees)
+      .order(:email)
+      .page(params[:page])
+  end
+
   def autocomplete
     autocomplete_email = params[:email].downcase
     matching_contacts =

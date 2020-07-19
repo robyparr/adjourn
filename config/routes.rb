@@ -28,8 +28,10 @@ Rails.application.routes.draw do
 
   resources :calendar_events, only: %w(index create)
 
-  scope '/contacts' do
-    get :autocomplete, to: 'contacts#autocomplete', as: 'contacts_autocomplete'
+  resources :contacts, only: %i[index] do
+    collection do
+      get :autocomplete
+    end
   end
 
   resources :meetings, except: %w(new edit) do

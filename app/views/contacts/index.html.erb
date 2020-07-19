@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="column sm12">
+    <h3>Contacts</h3>
+  </div>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Created</th>
+        <th>Attended Meetings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% unless @contacts.present? %>
+        <tr>
+          <td colspan="3">
+            You haven't added any contacts yet.
+          </td>
+        </tr>
+      <% end %>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.email %></td>
+          <td><%= formatted_date_time contact.created_at %></td>
+          <td><%= contact.meeting_attendees.size %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-4">
+  <%= paginate @contacts %>
+</div>
