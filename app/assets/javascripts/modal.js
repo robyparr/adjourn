@@ -12,6 +12,7 @@ document.addEventListener('click', function(e) {
     modal.classList.add('block');
     setTimeout(function() {
       modal.classList.add('opened');
+      modal.querySelector('[autofocus]').focus()
     }, 0);
   }
 });
