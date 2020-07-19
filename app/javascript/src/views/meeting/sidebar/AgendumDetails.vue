@@ -111,7 +111,7 @@ export default {
       return marked(note.content || '')
     },
 
-    updateAgendumNote(note, { content }) {
+    updateAgendumNote(note, content) {
       this.$store.dispatch('updateAgendumNote', { id: note.id, content: content })
     },
 
