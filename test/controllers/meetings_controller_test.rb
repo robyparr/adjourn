@@ -91,7 +91,7 @@ class MeetingsControllerTest < ActionDispatch::IntegrationTest
   test "users can send emails to attendees" do
     sign_in @user
 
-    @meeting.attendees << create(:attendee)
+    @meeting.add_attendee create(:contact).email
     assert_enqueued_with(job: ActionMailer::MailDeliveryJob) do
       post email_attendees_meeting_url(@meeting)
       assert_response :success

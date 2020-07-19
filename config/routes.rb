@@ -28,10 +28,8 @@ Rails.application.routes.draw do
 
   resources :calendar_events, only: %w(index create)
 
-  scope '/attendees' do
-    get 'autocomplete',
-      to: 'attendees#autocomplete',
-      as: 'attendee_autocomplete'
+  scope '/contacts' do
+    get :autocomplete, to: 'contacts#autocomplete', as: 'contacts_autocomplete'
   end
 
   resources :meetings, except: %w(new edit) do
@@ -43,9 +41,9 @@ Rails.application.routes.draw do
     end
 
     member do
-      scope '/attendees' do
-        post '/attend', to: 'attendees#attend'
-        delete '/unattend', to: 'attendees#remove'
+      scope '/contacts' do
+        post '/attend', to: 'contacts#attend'
+        delete '/unattend', to: 'contacts#remove'
       end
       post '/email_attendees', to: 'meetings#email_attendees'
     end

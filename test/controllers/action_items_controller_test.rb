@@ -84,11 +84,11 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "Unauthorized users can't assign action items" do
     action_item = create(:action_item, user: @user)
-    attendee    = create(:attendee, user: @user)
+    contact     = create(:contact, user: @user)
 
     # Guests
-    assert_no_difference 'action_item.attendees.count' do
-      post assign_action_item_url(action_item), params: { email: attendee.email }
+    assert_no_difference 'action_item.contacts.count' do
+      post assign_action_item_url(action_item), params: { email: contact.email }
       assert_redirected_to new_user_session_url
     end
 
@@ -96,32 +96,32 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
     other_user = create(:user)
     sign_in other_user
 
-    assert_no_difference 'action_item.attendees.count' do
-      post assign_action_item_url(action_item), params: { email: attendee.email }
+    assert_no_difference 'action_item.contacts.count' do
+      post assign_action_item_url(action_item), params: { email: contact.email }
       assert_response :not_found
     end
   end
 
-  test 'can assign an attendee to an action item' do
+  test 'can assign an contact to an action item' do
     action_item = create(:action_item, user: @user)
-    attendee    = create(:attendee, user: @user)
+    contact     = create(:contact, user: @user)
 
     sign_in @user
-    assert_difference 'action_item.attendees.count', 1 do
-      assert_no_difference 'Attendee.count' do
-        post assign_action_item_url(action_item), params: { email: attendee.email }
+    assert_difference 'action_item.contacts.count', 1 do
+      assert_no_difference 'Contact.count' do
+        post assign_action_item_url(action_item), params: { email: contact.email }
         assert_response :ok
       end
     end
   end
 
-  test 'can assign create a previously non-existing attendee and assign to action item' do
+  test 'can assign create a previously non-existing contact and assign to action item' do
     action_item        = create(:action_item, user: @user)
-    non_existing_email = build(:attendee).email
+    non_existing_email = build(:contact).email
 
     sign_in @user
-    assert_difference 'action_item.attendees.count', 1 do
-      assert_difference 'Attendee.count', 1 do
+    assert_difference 'action_item.contacts.count', 1 do
+      assert_difference 'Contact.count', 1 do
         post assign_action_item_url(action_item), params: { email: non_existing_email }
         assert_response :ok
       end
@@ -130,11 +130,11 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "Unauthorized users can't unassign action items" do
     action_item = create(:action_item, user: @user)
-    attendee    = create(:attendee, user: @user)
+    contact     = create(:contact, user: @user)
 
     # Guests
-    assert_no_difference 'action_item.attendees.count' do
-      post unassign_action_item_url(action_item), params: { email: attendee.email }
+    assert_no_difference 'action_item.contacts.count' do
+      post unassign_action_item_url(action_item), params: { email: contact.email }
       assert_redirected_to new_user_session_url
     end
 
@@ -142,20 +142,20 @@ class ActionItemsControllerTest < ActionDispatch::IntegrationTest
     other_user = create(:user)
     sign_in other_user
 
-    assert_no_difference 'action_item.attendees.count' do
-      post unassign_action_item_url(action_item), params: { email: attendee.email }
+    assert_no_difference 'action_item.contacts.count' do
+      post unassign_action_item_url(action_item), params: { email: contact.email }
       assert_response :not_found
     end
   end
 
-  test 'can unassign an attendee to an action item' do
-    attendee    = create(:attendee, user: @user)
-    action_item = create(:action_item, user: @user, attendees: [attendee])
+  test 'can unassign an contact to an action item' do
+    contact     = create(:contact, user: @user)
+    action_item = create(:action_item, user: @user, contacts: [contact])
 
     sign_in @user
-    assert_difference 'action_item.attendees.count', -1 do
-      assert_no_difference 'Attendee.count' do
-        post unassign_action_item_url(action_item), params: { email: attendee.email }
+    assert_difference 'action_item.contacts.count', -1 do
+      assert_no_difference 'Contact.count' do
+        post unassign_action_item_url(action_item), params: { email: contact.email }
         assert_response :ok
       end
     end

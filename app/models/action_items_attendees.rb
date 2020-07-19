@@ -1,4 +1,4 @@
 class ActionItemsAttendees < ApplicationRecord
-  belongs_to :attendee
+  belongs_to :contact
   belongs_to :action_item
 end

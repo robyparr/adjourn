@@ -10,15 +10,16 @@ json.action_items meeting.action_items do |item|
   json.description  item.description
   json.done         item.done
 
-  json.attendees item.attendees do |attendee|
-    json.id    attendee.id
-    json.email attendee.email
+  json.contacts item.contacts do |contact|
+    json.id    contact.id
+    json.email contact.email
   end
 end
 
 json.attendees meeting.attendees do |attendee|
-  json.id     attendee.id
-  json.email  attendee.email
+  json.id         attendee.id
+  json.email      attendee.email
+  json.contact_id attendee.contact_id
 end
 
 json.agenda meeting.agenda do |agendum|

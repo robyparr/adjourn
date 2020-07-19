@@ -46,5 +46,5 @@ en:
       models:
         attendees_meeting:
           attributes:
-            attendee:
+            contact:
               taken: is already attending this meeting

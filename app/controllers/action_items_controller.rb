@@ -23,13 +23,13 @@ class ActionItemsController < ApplicationController
   end
 
   def assign
-    action_item.attendees << attendee
+    action_item.contacts << contact
 
     render :show
   end
 
   def unassign
-    action_item.attendees.delete attendee
+    action_item.contacts.delete contact
 
     render :show
   end
@@ -44,11 +44,11 @@ class ActionItemsController < ApplicationController
     @meeting ||= current_user.meetings.find params[:meeting_id]
   end
 
-  def attendee
-    @attendee ||= current_user.attendees.find_or_create_by email: params[:email]
+  def contact
+    @contact ||= current_user.contacts.find_or_create_by email: params[:email]
   end
 
   def action_item
-    @action_item ||= current_user.action_items.includes(:attendees).find(params[:id])
+    @action_item ||= current_user.action_items.includes(:contacts).find(params[:id])
   end
 end

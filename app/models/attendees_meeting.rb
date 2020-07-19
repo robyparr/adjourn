@@ -1,6 +1,8 @@
 class AttendeesMeeting < ApplicationRecord
-  belongs_to :attendee
+  belongs_to :contact
   belongs_to :meeting
 
-  validates :attendee, uniqueness: { scope: :meeting }
+  validates :contact, uniqueness: { scope: :meeting }
+
+  delegate :email, to: :contact
 end

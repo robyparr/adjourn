@@ -8,34 +8,34 @@ module Meetings
         @meeting = create :meeting, user: @user
       end
 
-      test 'Adding previously non-existant attendees' do
-        attendee_email = 'non_existant_attendee@example.com'
+      test 'Adding previously non-existant contacts' do
+        contact_email = 'non_existant_attendee@example.com'
         sign_in @user
         visit meeting_url @meeting
 
         assert @meeting.attendees.empty?
 
-        fill_in 'Add Attendee', with: attendee_email
-        no_attendees_found_el = find('.autocomplete ul li')
-        assert_match 'No attendees found.', no_attendees_found_el.text
+        fill_in 'Add Attendee', with: contact_email
+        no_contacts_found_el = find('.autocomplete ul li')
+        assert_match 'No contacts found.', no_contacts_found_el.text
 
-        no_attendees_found_el.click
-        assert_equal "#{attendee_email[0..24]}...", find('.attendees-list .media-text').text
+        no_contacts_found_el.click
+        assert_equal "#{contact_email[0..24]}...", find('.attendees-list .media-text').text
         assert_equal 1, @meeting.reload.attendees.count
       end
 
-      test 'Adding previously existant attendees' do
-        attendee_email = create(:attendee).email
+      test 'Adding previously existant contact' do
+        contact_email = create(:contact).email
 
         sign_in @user
         visit meeting_url @meeting
 
-        fill_in 'Add Attendee', with: attendee_email
-        attendees_found_el = find('.autocomplete ul li')
-        assert_match attendee_email, attendees_found_el.text
+        fill_in 'Add Attendee', with: contact_email
+        contacts_found_el = find('.autocomplete ul li')
+        assert_match contact_email, contacts_found_el.text
 
-        attendees_found_el.click
-        assert_equal attendee_email, find('.attendees-list .media-text').text
+        contacts_found_el.click
+        assert_equal contact_email, find('.attendees-list .media-text').text
         assert_equal 1, @meeting.reload.attendees.count
       end
 
@@ -43,7 +43,7 @@ module Meetings
         sign_in @user
         visit meeting_url @meeting
 
-        @meeting.attendees << create(:attendee)
+        @meeting.add_attendee create(:contact).email
 
         find('.button.primary').click
         assert find('.toast.info').present?

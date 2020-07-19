@@ -147,7 +147,7 @@ export default new Vuex.Store({
     addAttendee({ commit, state }, email) {
       axios({
         method: 'POST',
-        url: `/meetings/${state.meeting.id}/attendees/attend`,
+        url: `/meetings/${state.meeting.id}/contacts/attend`,
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(response => {
@@ -163,7 +163,7 @@ export default new Vuex.Store({
     removeAttendee({ commit, state }, email) {
       axios({
         method: 'DELETE',
-        url: `/meetings/${state.meeting.id}/attendees/unattend`,
+        url: `/meetings/${state.meeting.id}/contacts/unattend`,
         data: { email: email, authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(_response => commit('REMOVE_ATTENDEE', email))
@@ -206,7 +206,7 @@ export default new Vuex.Store({
       .catch(error => console.log(error))
     },
 
-    assignAttendeeToActionItem({ commit }, { actionItemID, email }) {
+    assignContactToActionItem({ commit }, { actionItemID, email }) {
       axios({
         url: `/action_items/${actionItemID}/assign`,
         method: 'POST',
@@ -219,7 +219,7 @@ export default new Vuex.Store({
       .catch(error => console.log(error))
     },
 
-    unassignAttendeeFromActionItem({ commit }, { actionItemID, email }) {
+    unassignContactFromActionItem({ commit }, { actionItemID, email }) {
       axios({
         url: `/action_items/${actionItemID}/unassign`,
         method: 'POST',

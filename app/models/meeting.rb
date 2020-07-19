@@ -11,7 +11,7 @@ class Meeting < ApplicationRecord
     dependent: :destroy
 
   has_many :action_items, dependent: :destroy
-  has_and_belongs_to_many :attendees, dependent: :destroy
+  has_many :attendees, class_name: 'AttendeesMeeting', dependent: :destroy
   has_many :notes, class_name: 'AgendumNote'
   has_many :uploads, through: :agenda
 
@@ -51,8 +51,14 @@ class Meeting < ApplicationRecord
   end
 
   def add_attendee(email)
-    attendee = user.attendees.find_or_create_by email: email
-    AttendeesMeeting.create attendee_id: attendee.id, meeting_id: id
+    contact = user.contacts.find_or_create_by email: email
+    attendees.create contact_id: contact.id
+  end
+
+  def remove_attendee(email)
+    contact  = user.contacts.find_by(email: email)
+    attendee = attendees.find_by(contact_id: contact.id)
+    attendee.destroy
   end
 
   private

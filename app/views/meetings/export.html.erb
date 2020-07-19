@@ -160,8 +160,8 @@
                 <% meeting.action_items.each do |item| %>
                   <li>
                     <h3 class="sub-header"><%= item.title %></h3>
-                    <% if item.attendees.present? %>
-                      <span class="text-muted"><%= item.attendees.map(&:email).join(', ') %></span>
+                    <% if item.contacts.present? %>
+                      <span class="text-muted"><%= item.contacts.map(&:email).join(', ') %></span>
                     <% end %>
                     <div class="markdown-body">
                       <%= markdown_text item.description %>

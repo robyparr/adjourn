@@ -1,6 +1,6 @@
-class Attendee < ApplicationRecord
+class Contact < ApplicationRecord
   belongs_to :user
-  has_and_belongs_to_many :meetings
+  has_many :attendees_meetings
 
   validates :email,
     presence: true,

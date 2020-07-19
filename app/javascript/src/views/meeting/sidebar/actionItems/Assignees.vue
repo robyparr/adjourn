@@ -1,8 +1,8 @@
 <template>
   <div class="assignees">
     <div class="selected-assignees">
-      <div v-if="!assignedIDs.length" @click="openSelector">No assignees</div>
-      <div v-else-if="assignedIDs.length == 1" @click="openSelector" class="media">
+      <div v-if="!assignedContactIDs.length" @click="openSelector">No assignees</div>
+      <div v-else-if="assignedContactIDs.length == 1" @click="openSelector" class="media">
         <img :src="attendeeAvatar(assignees[0])" class="avatar" />
         <div class="media-text">
           {{ assignees[0].email }}
@@ -25,7 +25,7 @@
       <ul>
         <li v-for="attendee in attendees"
             :key="attendee.id"
-            :class="{ selected: assignedIDs.includes(attendee.id) }"
+            :class="{ selected: assignedContactIDs.includes(attendee.contact_id) }"
             @click="selectAttendee(attendee)">
           <div class="media">
             <img :src="attendeeAvatar(attendee)" class="avatar" />
@@ -43,7 +43,7 @@ import Utils from '../../../../../utils'
 
 export default {
   props: {
-    assignedIDs: Array,
+    assignedContactIDs: Array,
   },
 
   data() {
@@ -58,7 +58,7 @@ export default {
     }),
 
     assignees() {
-      return this.attendees.filter(attendee => this.assignedIDs.includes(attendee.id))
+      return this.attendees.filter(attendee => this.assignedContactIDs.includes(attendee.contact_id))
     }
   },
 
@@ -83,7 +83,7 @@ export default {
     },
 
     selectAttendee(attendee) {
-      if (this.assignedIDs.includes(attendee.id)) {
+      if (this.assignedContactIDs.includes(attendee.contact_id)) {
         this.$emit('unassign-attendee', attendee)
       } else {
         this.$emit('assign-attendee', attendee)

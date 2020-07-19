@@ -15,9 +15,9 @@
         </inline-editor>
 
         <assignees
-          :assignedIDs="actionItem.attendees.map(attendee => attendee.id)"
-          @assign-attendee="assignAttendee(actionItem, $event)"
-          @unassign-attendee="unassignAttendee(actionItem, $event)" />
+          :assignedContactIDs="actionItem.contacts.map(contact => contact.id)"
+          @assign-attendee="assignContact(actionItem, $event)"
+          @unassign-attendee="unassignContact(actionItem, $event)" />
 
         <div class="action-item-description">
           <inline-editor editor="markdownEditor"
@@ -69,12 +69,12 @@ export default {
       this.$store.dispatch('updateActionItem', { id: actionItem.id, partialActionItem })
     },
 
-    assignAttendee(actionItem, attendee) {
-      this.$store.dispatch('assignAttendeeToActionItem', { actionItemID: actionItem.id, email: attendee.email })
+    assignContact(actionItem, contact) {
+      this.$store.dispatch('assignContactToActionItem', { actionItemID: actionItem.id, email: contact.email })
     },
 
-    unassignAttendee(actionItem, attendee) {
-      this.$store.dispatch('unassignAttendeeFromActionItem', { actionItemID: actionItem.id, email: attendee.email })
+    unassignContact(actionItem, contact) {
+      this.$store.dispatch('unassignContactFromActionItem', { actionItemID: actionItem.id, email: contact.email })
     },
   },
 }

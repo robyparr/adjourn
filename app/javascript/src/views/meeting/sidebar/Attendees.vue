@@ -5,7 +5,7 @@
       class="autocomplete bg-white flex-no-shrink"
       placeholder="Add Attendee"
       method="GET"
-      :url="value => `/attendees/autocomplete?email=${encodeURIComponent(value)}`"
+      :url="value => `/contacts/autocomplete?email=${encodeURIComponent(value)}`"
       :parseResponse="parseAutocompleteResults"
       :renderResultItem="item => item.email || item"
       @select-result="addAttendee"
