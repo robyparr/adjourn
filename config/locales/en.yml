@@ -44,7 +44,7 @@ en:
   activerecord:
     errors:
       models:
-        attendees_meeting:
+        meeting/attendee:
           attributes:
             contact:
               taken: is already attending this meeting

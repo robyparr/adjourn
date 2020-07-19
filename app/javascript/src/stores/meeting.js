@@ -153,7 +153,8 @@ export default new Vuex.Store({
       .then(response => {
         const attendee = {
           id: response.data.id,
-          email: response.data.email
+          email: response.data.email,
+          contact_id: response.data.contact_id,
         }
         commit('ADD_ATTENDEE', attendee)
       })

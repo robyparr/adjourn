@@ -11,7 +11,7 @@ class Meeting < ApplicationRecord
     dependent: :destroy
 
   has_many :action_items, dependent: :destroy
-  has_many :attendees, class_name: 'AttendeesMeeting', dependent: :destroy
+  has_many :attendees, class_name: 'Meeting::Attendee', dependent: :destroy
   has_many :notes, class_name: 'AgendumNote'
   has_many :uploads, through: :agenda
 

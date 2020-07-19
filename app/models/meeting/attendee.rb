@@ -1,4 +1,4 @@
-class AttendeesMeeting < ApplicationRecord
+class Meeting::Attendee < ApplicationRecord
   belongs_to :contact
   belongs_to :meeting
 

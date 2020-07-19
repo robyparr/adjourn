@@ -99,7 +99,7 @@ class MeetingTest < ActiveSupport::TestCase
     @meeting.attendees.delete_all
     assert_difference '@meeting.attendees.count', 1 do
       result = @meeting.add_attendee(contact.email)
-      assert_kind_of AttendeesMeeting, result
+      assert_kind_of Meeting::Attendee, result
       assert_equal @meeting.id, result.meeting_id
     end
 
@@ -112,7 +112,7 @@ class MeetingTest < ActiveSupport::TestCase
 
     assert_difference ['@meeting.attendees.count', 'Contact.count'], 1 do
       result = @meeting.add_attendee(contact_email)
-      assert_kind_of(AttendeesMeeting, result)
+      assert_kind_of(Meeting::Attendee, result)
       assert_equal @meeting.id, result.meeting_id
     end
     contact = Contact.find_by(email: contact_email)
@@ -126,7 +126,7 @@ class MeetingTest < ActiveSupport::TestCase
 
     assert_no_difference 'meeting.attendees.count' do
       result = meeting.add_attendee(contact.email)
-      assert_kind_of AttendeesMeeting, result
+      assert_kind_of Meeting::Attendee, result
       assert_equal meeting.id, result.meeting_id
       assert_equal false, result.persisted?
       assert_equal({ contact: ['is already attending this meeting'] }, result.errors.messages)
