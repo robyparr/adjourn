@@ -14,6 +14,7 @@
       <markdown-editor v-if="editor === 'markdownEditor'"
         :initialValue="value"
         @blur="submitEditor"
+        :class="editorClass"
         ref="editor" />
     </span>
   </div>
@@ -33,6 +34,11 @@ export default {
       type: String,
       required: false,
       default: 'textInput'
+    },
+    editorClass: {
+      type: String,
+      required: false,
+      default: '',
     },
     placeholder: String,
     value: String,

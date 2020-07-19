@@ -21,13 +21,15 @@
         </li>
       </ul>
       <h6 class="mt-4 mb-2">Agendum Notes</h6>
-      <ul class="list">
+      <ul v-if="agendum.notes.length" class="list">
         <li v-for="note in agendum.notes"
             :key="note.id"
             class="list-item">
           <inline-editor editor="markdownEditor"
                          placeholder="Agendum note"
                          :value="note.content"
+                         class="w-full"
+                         editorClass="-mx-4 -mb-4"
                          @editor-changed="updateAgendumNote(note, $event)">
             <p slot="display" class="markdown-body" v-html="renderedNoteContent(note)" />
           </inline-editor>
@@ -53,10 +55,10 @@
             </div>
           </div>
         </li>
-        <li class="list-item">
-          <markdown-editor @blur="addAgendumNote" />
-        </li>
       </ul>
+      <markdown-editor class="mt-4"
+                       placeholder="New agendum note"
+                       @blur="addAgendumNote" />
     </div>
   </div>
 </template>

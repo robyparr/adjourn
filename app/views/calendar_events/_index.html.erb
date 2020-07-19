@@ -6,8 +6,8 @@
         to sync your Google Calendar events.
       </p>
       <p>
-        You can connect your account by clicking your email in the top-right and
-        selecting "Google Accounts" from the menu.
+        You can connect your Google account by clicking "Google Accounts"
+        in the sidebar.
       </p>
     </div>
   </li>
@@ -32,16 +32,16 @@
 <% end %>
 
 <% events.each do |event| %>
-    <li class="list-item" title="<%= event[:summary] %>">
-      <div class="list-item-content">
-        <div><%= event[:summary] %></div>
-        <div class="list-secondary-text">
-          in <%= time_ago_in_words(event[:start]) %>
-        </div>
+  <li class="list-item" title="<%= event[:summary] %>">
+    <div class="list-item-content">
+      <div><%= event[:summary] %></div>
+      <div class="list-secondary-text">
+        in <%= time_ago_in_words(event[:start]) %>
       </div>
-      <%= link_to "Add",
-        add_event_url(event),
-        remote: false,
-        method: :post %>
-    </li>
+    </div>
+    <%= link_to "Add",
+      add_event_url(event),
+      remote: false,
+      method: :post %>
+  </li>
 <% end %>

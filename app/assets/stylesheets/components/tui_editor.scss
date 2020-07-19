@@ -1,3 +1,9 @@
+.tui-editor-defaultUI {
+  pre.CodeMirror-line {
+    padding-left: 10px !important;
+    padding-right:10px !important;
+  }
+}
 .tui-toolbar-icons {
   background: image-url("tui-editor.png");
 }

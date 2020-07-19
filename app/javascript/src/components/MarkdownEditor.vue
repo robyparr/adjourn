@@ -25,6 +25,11 @@ export default {
       required: false,
       default: ''
     },
+    placeholder: {
+      type: String,
+      required: false,
+      default: null,
+    },
   },
 
   data() {
@@ -38,6 +43,7 @@ export default {
           'table',    'link',       'divider',
           'code',     'codeblock',
         ],
+        placeholder: this.placeholder,
       }
     }
   },

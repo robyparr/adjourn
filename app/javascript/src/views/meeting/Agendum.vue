@@ -32,6 +32,7 @@
       <inline-editor editor="markdownEditor"
                      placeholder="Agendum Details"
                      :value="agendum.description"
+                     editorClass="-mx-4 -mb-4"
                      @editor-changed="updateAgendumDescription"
                      @click="selectAgendum">
         <p slot="display" class="markdown-body" v-html="agendumDescription" />
