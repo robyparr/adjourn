@@ -1,0 +1,19 @@
+.omniauth-button {
+  img {
+    display: inline-block;
+    width: 250px;
+  }
+
+  &:not(:hover) .hover { display: none; }
+  &:not(:focus) .pressed { display: none; }
+
+  &:hover {
+    .normal { display: none; }
+    .focus { display: none; }
+  }
+
+  &:focus {
+    .normal { display: none; }
+    .hover { display: none; }
+  }
+}

@@ -7,7 +7,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: %i[google_oauth2]
 
   # Relationships
   has_many :meetings, dependent: :destroy
@@ -17,6 +18,19 @@ class User < ApplicationRecord
   has_many :notes, class_name: 'AgendumNote', through: :meetings
   has_many :google_accounts, dependent: :destroy
   has_many :action_items, through: :meetings
+
+  class << self
+    def from_omniauth(auth)
+      existing_password_user = link_oauth_to_existing_password_user(auth)
+      return existing_password_user if existing_password_user.present?
+
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+        user.email = auth.info.email
+        user.password = Devise.friendly_token[0, 20]
+        user.skip_confirmation!
+      end
+    end
+  end
 
   def load_calendar_events
     accounts = google_accounts.includes(:google_calendars)
@@ -48,5 +62,15 @@ class User < ApplicationRecord
     added_event_ids = meetings.where('google_event_id IS NOT NULL')
       .pluck :google_event_id
     events.reject { |it| added_event_ids.include? it[:id] }
+  end
+
+  class << self
+    def link_oauth_to_existing_password_user(auth)
+      existing_password_user = find_by(email: auth.info.email, provider: nil, uid: nil)
+      return if existing_password_user.blank?
+
+      existing_password_user.update_attributes(provider: auth.provider, uid: auth.uid)
+      existing_password_user
+    end
   end
 end

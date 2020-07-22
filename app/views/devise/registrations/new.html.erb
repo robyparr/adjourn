@@ -41,6 +41,8 @@
 
     <div class="text-center">
       <%= link_to "Log in", new_session_path(resource_name) %>
+
+      <%= render 'devise/shared/oauth_providers' %>
     </div>
   </div>
   <%= render "devise/shared/links" %>
