@@ -53,6 +53,14 @@ class MeetingsController < ApplicationController
     render 'search.json'
   end
 
+  def download
+    exporter = MeetingExporter.new(params[:id])
+    send_data exporter.to_pdf,
+      filename: "#{exporter.meeting.title.gsub(' ', '_')}.pdf",
+      type: 'application/pdf',
+      disposition: 'inline'
+  end
+
   private
 
   def meeting_params

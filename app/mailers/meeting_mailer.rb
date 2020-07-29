@@ -26,7 +26,7 @@ class MeetingMailer < ApplicationMailer
     self.inline_images ||= {}
 
     meeting.uploads.each do |upload|
-      file = open(upload.url).read
+      file = URI.open(upload.url).read
 
       if meeting.inline_image_upload?(upload)
         attachments.inline[upload.filename] = file

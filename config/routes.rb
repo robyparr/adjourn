@@ -36,6 +36,10 @@ Rails.application.routes.draw do
   end
 
   resources :meetings, except: %w(new edit) do
+    member do
+      get :download
+    end
+
     resources :action_items, shallow: true, only: %i[create update destroy] do
       member do
         post :assign

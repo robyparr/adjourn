@@ -5,12 +5,15 @@
       <%# Note that adding CSS to the <body> tag causes some styles
           to fail in gmail. So using the table as the body is
           recommended here. %>
-      table.body {
-        background-color: #fafafa;
-        padding: 20px;
-        margin: 0;
-        width: 100%;
-      }
+
+      <% unless base_formatting %>
+        table.body {
+          background-color: #fafafa;
+          padding: 20px;
+          margin: 0;
+          width: 100%;
+        }
+      <% end %>
 
       td.wrapper {
         width: 80%;
@@ -20,10 +23,13 @@
         max-width: 700px;
         margin: auto;
         padding: 20px;
-        background-color: white;
-        border-radius: 5px;
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-        border-top: 2px solid #2196f3;
+
+        <% unless base_formatting %>
+          background-color: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+          border-top: 2px solid #2196f3;
+        <% end %>
       }
 
       .main-header {

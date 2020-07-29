@@ -19,6 +19,13 @@
         Email Attendees
       </button>
 
+      <a target="_blank"
+         rel="noopener noreferrer"
+         class="button primary mt-4"
+         :href="`/meetings/${meeting.id}/download`">
+        Download
+      </a>
+
       <h4 class="mt-8">Agenda</h4>
       <draggable class="agenda"
                  v-model="meeting.agenda"

@@ -10,7 +10,7 @@ module ExportHelper
     renderer = Redcarpet::Render::HTML.new(renderer_options)
     markdown = Redcarpet::Markdown.new(renderer, markdown_extensions)
 
-    replace_inline_upload_links! text, inline_images
+    replace_inline_upload_links! text, inline_images if inline_images.present?
 
     markdown.render(text).html_safe
   end
