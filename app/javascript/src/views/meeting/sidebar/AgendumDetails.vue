@@ -21,7 +21,7 @@
         </li>
       </ul>
       <h6 class="mt-4 mb-2">Agendum Notes</h6>
-      <ul v-if="agendum.notes.length" class="list">
+      <ul v-if="agendum.notes" class="list">
         <li v-for="note in agendum.notes"
             :key="note.id"
             class="list-item">
