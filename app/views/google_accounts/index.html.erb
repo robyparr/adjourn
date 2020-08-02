@@ -1,7 +1,11 @@
 <div class="container">
   <h3>Google Accounts</h3>
 
-  <%= link_to "Add Account", new_google_account_path, class: "button primary" %>
+  <%= link_to new_google_account_path, class: "omniauth-button" do %>
+    <%= image_tag "btn_google_oauth2.png", class: 'normal' %>
+    <%= image_tag "btn_google_oauth2_hover.png", class: 'hover' %>
+    <%= image_tag "btn_google_oauth2_focus.png", class: 'pressed' %>
+  <% end %>
 
   <% unless @accounts.present? %>
     <div class="flex flex-col items-center text-gray-600 mt-20">
@@ -9,12 +13,11 @@
         <h5>There's Nothing Here</h5>
         <p class="text-center">
           You have no Google accounts connected.<br />
-          You can add one by clicking the button to the bottom-right.
+          You can add one by clicking the "Sign in with Google" button.
         </p>
       </div>
-    <div></div>
   <% else %>
-    <div class="table-container">
+    <div class="table-container mt-8">
       <table>
         <thead>
           <tr>
