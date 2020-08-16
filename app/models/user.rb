@@ -70,7 +70,7 @@ class User < ApplicationRecord
   class << self
     def link_oauth_to_existing_password_user(auth)
       existing_password_user = find_by(email: auth.info.email, provider: nil, uid: nil)
-      return if existing_password_user.blank?
+      return if existing_password_user.blank? || !existing_password_user.confirmed?
 
       existing_password_user.update_attributes(provider: auth.provider, uid: auth.uid)
       existing_password_user
