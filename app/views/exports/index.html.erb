@@ -27,6 +27,11 @@
                 <% if export.complete? %>
                   <%= link_to 'Download', download_export_url(export) %>
                 <% end %>
+                <%= link_to 'Delete',
+                            export_url(export),
+                            class: 'button link danger',
+                            method: :delete,
+                            data: { confirm: 'Are you sure?' } %>
               </td>
             </tr>
           <% end %>
