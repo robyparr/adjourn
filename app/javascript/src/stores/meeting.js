@@ -101,6 +101,11 @@ export default new Vuex.Store({
       const agendum = state.meeting.agenda.find(agendum => agendum.id === agendumID)
       agendum.notes = agendum.notes.filter(item => item.id !== id)
     },
+
+    REMOVE_UPLOAD: (state, { id, uploadable_id }) => {
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === uploadable_id)
+      agendum.uploads = agendum.uploads.filter(item => item.id !== id)
+    },
   },
 
   actions: {
@@ -307,6 +312,16 @@ export default new Vuex.Store({
         data: { authenticity_token: Utils.getAuthenticityToken() }
       })
       .then(_response => commit('REMOVE_AGENDUM_NOTE', { agendumID, id }))
+      .catch(error => console.log(error))
+    },
+
+    deleteUpload({ commit }, { id, uploadable_id }) {
+      axios({
+        url: `/uploads/${id}.json`,
+        method: 'DELETE',
+        data: { authenticity_token: Utils.getAuthenticityToken() }
+      })
+      .then(_response => commit('REMOVE_UPLOAD', { id, uploadable_id }))
       .catch(error => console.log(error))
     },
   }

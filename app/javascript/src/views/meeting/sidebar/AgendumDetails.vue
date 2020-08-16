@@ -15,7 +15,26 @@
             <i :class="['fa', 'fa-lg', `${uploadIcon(upload)}`]"></i>
             <div class="media-text">
               <a :href="`/uploads/${upload.id}/download`">{{ upload.filename }}</a>
-              <span class="text-gray-500">{{ humanizedFileSize(upload) }} KB</span>
+              <span class="text-gray-500 -mt-2">{{ humanizedFileSize(upload) }} KB</span>
+            </div>
+          </div>
+          <button class="list-floating-text">
+            <i class="fa fa-trash"
+               :data-modal="`.confirm-agendum-upload-delete-${upload.id}`">
+            </i>
+          </button>
+          <div :class="`modal confirm-agendum-upload-delete-${upload.id}`">
+            <div class="modal-title">Are you sure?</div>
+            <div class="modal-content">
+              Are you sure you want to remove this upload?
+            </div>
+            <div class="modal-footer">
+              <a href="#" :data-close-modal="`.confirm-agendum-upload-delete-${upload.id}`">
+                No
+              </a>
+              <button class="button primary ml-4" @click="deleteUpload(upload, agendum)">
+                Yes
+              </button>
             </div>
           </div>
         </li>
@@ -119,6 +138,10 @@ export default {
 
     deleteNote(note) {
       this.$store.dispatch('deleteAgendumNote', { id: note.id, agendumID: note.agendum_id })
+    },
+
+    deleteUpload(upload, uploadable) {
+      this.$store.dispatch('deleteUpload', { id: upload.id, uploadable_id: uploadable.id })
     },
   },
 }

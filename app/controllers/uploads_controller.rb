@@ -18,8 +18,17 @@ class UploadsController < ApplicationController
     upload = current_user.uploads.find(params[:id])
     upload.destroy
 
-    flash[:notice] = "Upload successfully deleted."
-    redirect_to uploads_url
+    notice = 'Upload successfully deleted.'
+
+    respond_to do |format|
+      format.html do
+        flash[:notice] = notice
+        redirect_to uploads_url
+      end
+      format.json do
+        render json: { message: notice }
+      end
+    end
   end
 
   def presigned_url
