@@ -1,0 +1,7 @@
+showInformationMessage('Your export is complete.');
+
+var exportWrapper = $('#' + '<%= dom_id @export %>');
+exportWrapper.replaceWith("<%= j render 'exports/export', export: @export %>");
+
+clearInterval(statusUpdateInterval);
+bannerWrap.innerHTML = '';

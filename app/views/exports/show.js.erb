@@ -1,0 +1,15 @@
+showInformationMessage('<%= @notice %>');
+
+var noExportMessage = document.querySelector('#no-exports-message');
+if (noExportMessage) noExportMessage.remove();
+
+var exportsTable = document.querySelector('#exports-table tbody');
+exportsTable.innerHTML += "<%= j render 'exports/export', export: @export %>";
+
+var bannerWrap = document.querySelector('#banner-wrap');
+bannerWrap.innerHTML = "<%= j render 'exporting_banner' %>";
+
+var statusUpdateInterval =
+  setInterval(function() {
+    $.ajax({ url: 'exports/' + '<%= @export.id %>' });
+  }, 5000);

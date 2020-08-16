@@ -15,4 +15,24 @@ module ApplicationHelper
 
     date_time.in_time_zone(user.time_zone).strftime(format_string)
   end
+
+  def classes(classes)
+    classes_array =
+      classes.map do |item|
+        case item
+        when Array
+          class_string, apply_class = item
+          apply_class ? class_string : nil
+        when Hash
+          item
+            .map { |class_string, apply_class| apply_class ? class_string : nil }
+            .compact
+            .join(' ')
+        else
+          item
+        end
+      end
+
+    classes_array.compact.join(' ')
+  end
 end

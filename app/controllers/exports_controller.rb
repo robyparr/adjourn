@@ -1,11 +1,24 @@
 class ExportsController < ApplicationController
   def index
-    @exports = current_user.exports
+    @exports = current_user.exports.order(:id)
+  end
+
+  def show
+    @export = current_user.exports.find params[:id]
+    render "exports/status_updates/#{@export.status}.js"
   end
 
   def create
-    User::Export.generate current_user.id
-    redirect_to exports_url, notice: 'Your export is being generated.'
+    @export = current_user.exports.build
+    @export.start_processing
+
+    @notice = 'Your export is being generated.'
+    respond_to do |format|
+      format.html { redirect_to exports_url, notice: @notice }
+      format.js do
+        render :show
+      end
+    end
   end
 
   def destroy

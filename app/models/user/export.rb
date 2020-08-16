@@ -10,14 +10,8 @@ class User::Export < ApplicationRecord
     'error' => 'error',
   }
 
-  class << self
-    def generate(user_id)
-      export = create user_id: user_id, status: 'processing'
-      export.start_processing
-    end
-  end
-
   def start_processing
+    update status: 'processing'
     CreateExportJob.perform_later id
   end
 
@@ -38,7 +32,6 @@ class User::Export < ApplicationRecord
 
       upload.upload_file_and_save! tempfile.path
     end
-
   end
 
   def download_url

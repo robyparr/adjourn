@@ -6,7 +6,7 @@ class Upload < ApplicationRecord
 
   before_destroy :delete_file
 
-  scope :uploads_size_total, ->(user) { user.uploads.sum(:file_size) }
+  scope :listable, -> { where(uploadable_type: ['Agendum']) }
 
   def storage_key
     super || generate_storage_key
@@ -73,15 +73,11 @@ class Upload < ApplicationRecord
     storage_object.delete
   end
 
-  def storage_bucket
-    return @storage_bucket if @storage_bucket.present?
-
-    s3 = Aws::S3::Resource.new
-    @storage_bucket = s3.bucket(ENV['AWS_S3_BUCKET'])
-  end
-
   def storage_object
-    storage_bucket.object storage_key
+    return @storage_object if @storage_object.present?
+
+    storage_bucket = Aws::S3::Resource.new.bucket(ENV['AWS_S3_BUCKET'])
+    @storage_object = storage_bucket.object storage_key
   end
 
   def file_ext

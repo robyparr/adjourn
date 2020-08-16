@@ -6,5 +6,7 @@ class CreateExportJob < ApplicationJob
     else
       export.error!
     end
+  rescue
+    export.error!
   end
 end

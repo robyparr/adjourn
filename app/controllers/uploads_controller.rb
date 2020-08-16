@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   def index
-    @uploads = current_user.uploads.includes(agendum: :meeting).page(params[:page])
-    @storage_used = current_user.uploads.sum(:file_size)
+    @uploads = current_user.uploads.includes(uploadable: :meeting).listable.page(params[:page])
+    @storage_used = current_user.uploads.listable.sum(:file_size)
   end
 
   def upload

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :exports, only: %i[index create destroy] do
+  resources :exports, only: %i[index create destroy show] do
     member do
       get :download
     end
