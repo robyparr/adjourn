@@ -1,4 +1,6 @@
 class User::Export < ApplicationRecord
+  EXPIRES_AFTER_DAYS = 7
+
   belongs_to :user
   has_one :upload, as: :uploadable, dependent: :destroy
 
@@ -9,6 +11,8 @@ class User::Export < ApplicationRecord
     'complete' => 'complete',
     'error' => 'error',
   }
+
+  scope :expired, -> { where("NOW() >= created_at + INTERVAL '? day'", EXPIRES_AFTER_DAYS) }
 
   def start_processing
     update status: 'processing'
@@ -36,6 +40,14 @@ class User::Export < ApplicationRecord
 
   def download_url
     upload.url
+  end
+
+  def expires_at
+    created_at + EXPIRES_AFTER_DAYS.days
+  end
+
+  def expired?
+    expires_at <= Time.zone.now
   end
 
   private

@@ -29,6 +29,7 @@ gem 'bootsnap',               '~> 1.3'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'wicked_pdf',             '~> 2.1'
 gem 'after_party',            '~> 1.11', '>= 1.11.2'
+gem 'clockwork',              '~> 2.0', '>= 2.0.4'
 
 group :production do
   gem 'scout_apm'
