@@ -74,8 +74,8 @@ export default new Vuex.Store({
     },
 
     ADD_AGENDUM_UPLOAD: (state, upload) => {
-      const agendum = state.meeting.agenda.find(agendum => agendum.id === upload.agendum_id)
-      if (!agendum.notes) Vue.set(agendum, 'uploads', [])
+      const agendum = state.meeting.agenda.find(agendum => agendum.id === upload.uploadable_id)
+      if (!agendum.uploads) Vue.set(agendum, 'uploads', [])
 
       agendum.uploads = [...agendum.uploads, upload]
     },
