@@ -90,6 +90,7 @@ class Upload < ApplicationRecord
 
   def generate_storage_key
     uuid = SecureRandom.uuid
-    self.storage_key = "#{user.id}/agendum_uploads/#{uploadable.id}/#{file_basename}-#{uuid}#{file_ext}"
+    upload_type = uploadable.class.to_s.parameterize.underscore
+    self.storage_key = "#{user.id}/#{upload_type}_uploads/#{uploadable.id}/#{file_basename}-#{uuid}#{file_ext}"
   end
 end

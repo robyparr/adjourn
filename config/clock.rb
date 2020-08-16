@@ -8,5 +8,5 @@ module Clockwork
     job.constantize.perform_later
   end
 
-  every 10.seconds, 'CleanupExpiredUserExportsJob'
+  every 1.day, 'CleanupExpiredUserExportsJob'
 end
