@@ -10,6 +10,6 @@ class ExportsController < ApplicationController
 
   def download
     export = current_user.exports.find(params[:id])
-    redirect_to FileStorageService.presigned_url(:get, export.storage_key)
+    redirect_to export.download_url
   end
 end

@@ -23,11 +23,18 @@ class UploadsController < ApplicationController
   end
 
   def presigned_url
-    storage_key = Upload.storage_key(agendum, params[:filename])
-    headers = Upload.upload_headers(params[:filename], params[:file_type])
-    url = Upload.presigned_url(:put, storage_key, headers)
+    upload =
+      agendum.uploads.new(
+        filename: params[:filename],
+        content_type: params[:file_type],
+        user: current_user,
+      )
 
-    render json: { key: storage_key, url: url, headers: headers }
+    render json: {
+      key: upload.storage_key,
+      url: upload.presigned_url(:put),
+      headers: upload.upload_headers
+    }
   end
 
   def download

@@ -1,47 +1,52 @@
 class Upload < ApplicationRecord
   include JsonExportable
 
-  belongs_to :agendum
   belongs_to :user
+  belongs_to :uploadable, polymorphic: true
 
   before_destroy :delete_file
 
   scope :uploads_size_total, ->(user) { user.uploads.sum(:file_size) }
 
-  def url
-    Upload.presigned_url(:get, self.storage_key)
+  def storage_key
+    super || generate_storage_key
   end
 
-  def delete_file
-    s3 = Aws::S3::Resource.new
-    object = s3.bucket(ENV['AWS_S3_BUCKET']).object(self.storage_key)
-    object.delete
+  def presigned_url(method)
+    options =
+      if method == :get
+        { expires_in: 5.minutes.to_i }
+      else
+        upload_headers symbolize: true
+      end
+
+    storage_object.presigned_url method, options
   end
 
-  class << self
-    def storage_key(agendum, filename)
-      file_ext = File.extname(filename)
-      file_basename = File.basename(filename, file_ext)
-      uuid = SecureRandom.uuid
-      "#{agendum.user.id}/agendum_uploads/#{agendum.id}/#{file_basename}-#{uuid}#{file_ext}"
-    end
-
-    def presigned_url(method, storage_key, headers = nil)
-      s3 = Aws::S3::Resource.new
-      object = s3.bucket(ENV['AWS_S3_BUCKET']).object(storage_key)
-      object.presigned_url(method, symbolize_headers(headers))
-    end
-
-    def upload_headers(filename, file_type)
+  def upload_headers(symbolize: false)
+    headers =
       {
         "Content-Disposition" => "inline; filename=\"#{filename}\"",
-        "Content-Type" => file_type
+        "Content-Type" => content_type
       }
-    end
 
-    def symbolize_headers(raw_headers)
-      return {} if raw_headers.nil?
-      raw_headers.map { |k, v| [k.parameterize.underscore, v] }.to_h
+    if symbolize
+      headers.map { |k, v| [k.parameterize.underscore, v] }.to_h
+    else
+      headers
+    end
+  end
+
+  def url
+    presigned_url :get
+  end
+
+  def upload_file_and_save!(file_path)
+    transaction do
+      file_uploaded = storage_object.upload_file(file_path)
+      raise RuntimeError unless file_uploaded
+
+      save!
     end
   end
 
@@ -62,5 +67,33 @@ class Upload < ApplicationRecord
   def base64_encoded_file
     file = URI.open(url).read
     Base64.encode64 file
+  end
+
+  def delete_file
+    storage_object.delete
+  end
+
+  def storage_bucket
+    return @storage_bucket if @storage_bucket.present?
+
+    s3 = Aws::S3::Resource.new
+    @storage_bucket = s3.bucket(ENV['AWS_S3_BUCKET'])
+  end
+
+  def storage_object
+    storage_bucket.object storage_key
+  end
+
+  def file_ext
+    File.extname filename
+  end
+
+  def file_basename
+    File.basename filename, file_ext
+  end
+
+  def generate_storage_key
+    uuid = SecureRandom.uuid
+    self.storage_key = "#{user.id}/agendum_uploads/#{uploadable.id}/#{file_basename}-#{uuid}#{file_ext}"
   end
 end

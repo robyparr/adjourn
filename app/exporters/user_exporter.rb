@@ -7,13 +7,13 @@ class UserExporter < BaseExporter
     render_view_to_string 'exports/_export.json', user: user
   end
 
-  private
-
-  attr_reader :user_id
-
   def user
     @user ||= User.includes(user_includes).find(user_id)
   end
+
+  private
+
+  attr_reader :user_id
 
   def user_includes
     [

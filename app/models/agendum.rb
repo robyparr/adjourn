@@ -9,7 +9,7 @@ class Agendum < ApplicationRecord
   belongs_to :meeting
   has_one :user, through: :meeting
   has_many :notes, class_name: 'AgendumNote', dependent: :destroy
-  has_many :uploads, dependent: :destroy
+  has_many :uploads, as: :uploadable, dependent: :destroy
 
   # Validations
   validates :title, presence: true

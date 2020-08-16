@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_111803) do
+ActiveRecord::Schema.define(version: 2020_08_16_084704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,10 @@ ActiveRecord::Schema.define(version: 2020_08_02_111803) do
     t.index ["user_id"], name: "index_pg_search_documents_on_user_id"
   end
 
+  create_table "task_records", id: false, force: :cascade do |t|
+    t.string "version", null: false
+  end
+
   create_table "uploads", force: :cascade do |t|
     t.bigint "agendum_id"
     t.string "filename"
@@ -128,14 +132,16 @@ ActiveRecord::Schema.define(version: 2020_08_02_111803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "uploadable_id"
+    t.string "uploadable_type"
     t.index ["agendum_id"], name: "index_uploads_on_agendum_id"
+    t.index ["uploadable_id", "uploadable_type"], name: "index_uploads_on_uploadable_id_and_uploadable_type"
     t.index ["user_id"], name: "index_uploads_on_user_id"
   end
 
   create_table "user_exports", force: :cascade do |t|
     t.bigint "user_id"
     t.string "status", null: false
-    t.string "storage_key"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_exports_on_user_id"
