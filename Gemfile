@@ -48,6 +48,7 @@ group :development, :test do
   gem 'factory_bot_rails',          '~> 5.1', '>= 5.1.1'
   gem 'pry',                        '~> 0.12.2'
   gem 'pry-nav',                    '~> 0.3.0'
+  gem 'brakeman'
 end
 
 group :development do
