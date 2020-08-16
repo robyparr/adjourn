@@ -4,6 +4,8 @@ if Rails.env.development?
 end
 
 class User < ApplicationRecord
+  include JsonExportable
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,
@@ -18,6 +20,7 @@ class User < ApplicationRecord
   has_many :notes, class_name: 'AgendumNote', through: :meetings
   has_many :google_accounts, dependent: :destroy
   has_many :action_items, through: :meetings
+  has_many :exports, class_name: 'User::Export'
 
   class << self
     def from_omniauth(auth)

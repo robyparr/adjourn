@@ -1,4 +1,6 @@
 class GoogleAccount < ApplicationRecord
+  include JsonExportable
+
   belongs_to :user
   has_many :google_calendars, dependent: :destroy
 

@@ -35,6 +35,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :exports, only: %i[index create] do
+    member do
+      get :download
+    end
+  end
+
   resources :meetings, except: %w(new edit) do
     member do
       get :download

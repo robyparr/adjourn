@@ -1,0 +1,37 @@
+<div class="container">
+  <h3>Exports</h3>
+
+  <%= button_to 'Create Export', exports_path, method: :post, class: 'button primary' %>
+
+  <% if @exports.blank? %>
+    <div class="flex flex-col items-center text-muted mt-20">
+      <i class="fa fa-download fa-3x"></i>
+      <h5 class="mb-0">There's Nothing Here</h5>
+    </div>
+  <% else %>
+    <div class="table-container mt-4">
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Created</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @exports.each do |export| %>
+            <tr>
+              <td><%= export.status %></td>
+              <td><%= export.created_at %></td>
+              <td>
+                <% if export.complete? %>
+                  <%= link_to 'Download', download_export_url(export) %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

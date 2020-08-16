@@ -1,4 +1,5 @@
 class Meeting < ApplicationRecord
+  include JsonExportable
   include Rails.application.routes.url_helpers
 
   # Relationships

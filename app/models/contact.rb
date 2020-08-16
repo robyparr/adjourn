@@ -1,4 +1,6 @@
 class Contact < ApplicationRecord
+  include JsonExportable
+
   belongs_to :user
   has_many :meeting_attendees, class_name: 'Meeting::Attendee'
 

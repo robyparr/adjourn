@@ -1,4 +1,6 @@
 class Upload < ApplicationRecord
+  include JsonExportable
+
   belongs_to :agendum
   belongs_to :user
 
@@ -41,5 +43,24 @@ class Upload < ApplicationRecord
       return {} if raw_headers.nil?
       raw_headers.map { |k, v| [k.parameterize.underscore, v] }.to_h
     end
+  end
+
+  private
+
+  def rejected_attributes_for_json_export
+    super + %w[
+      storage_key
+    ]
+  end
+
+  def extra_attributes_for_json_export
+    {
+      base64_encoded_file: base64_encoded_file
+    }
+  end
+
+  def base64_encoded_file
+    file = URI.open(url).read
+    Base64.encode64 file
   end
 end

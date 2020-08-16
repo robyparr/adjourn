@@ -1,5 +1,6 @@
 class Agendum < ApplicationRecord
   include PgSearch::Model
+  include JsonExportable
 
   multisearchable against: %i[title description],
     additional_attributes: ->(agendum) { { user_id: agendum.meeting.user_id } }
