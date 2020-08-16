@@ -30,7 +30,7 @@
         <% @uploads.each do |upload| %>
           <tr class="collection-item">
             <td><%= upload.filename %></td>
-            <td><%= upload.agendum.meeting.title %> / <%= upload.agendum.title %></td>
+            <td><%= upload.uploadable.meeting.title %> / <%= upload.uploadable.title %></td>
             <td><%= number_to_human_size upload.file_size %></td>
             <td><%= formatted_date_time upload.created_at %></td>
             <td class="text-right inline-flex">

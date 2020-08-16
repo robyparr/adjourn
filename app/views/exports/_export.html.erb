@@ -1,0 +1,25 @@
+<tr id="<%= dom_id export %>">
+  <td>
+    <span class="<%= classes(['badge', { error: export.error?, success: export.complete?, primary: export.processing? }]) %>">
+      <%= export.status.capitalize %>
+    </span>
+  </td>
+  <td><%= formatted_date_time export.created_at %></td>
+  <td>
+    <% if export.expired? %>
+      Today
+    <% else %>
+      in <%= time_ago_in_words formatted_date_time export.expires_at %>
+    <% end %>
+  </td>
+  <td class="actions">
+    <% if export.complete? %>
+      <%= link_to 'Download', download_export_url(export), class: 'button link' %>
+    <% end %>
+    <%= link_to 'Delete',
+                export_url(export),
+                class: 'button link danger',
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </td>
+</tr>

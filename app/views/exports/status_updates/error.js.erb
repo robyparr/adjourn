@@ -1,0 +1,7 @@
+showErrorMessage('There was an error creating your export.');
+
+var exportWrapper = $('#' + '<%= dom_id @export %>');
+exportWrapper.replaceWith("<%= j render 'exports/export', export: @export %>");
+
+clearInterval(statusUpdateInterval);
+bannerWrap.innerHTML = '';

@@ -1,4 +1,4 @@
-class MeetingExporter
+class MeetingExporter < BaseExporter
   include ApplicationHelper
 
   def initialize(meeting_id)
@@ -17,7 +17,7 @@ class MeetingExporter
       base_formatting: false,
     }
 
-    view_renderer.render_to_string 'meetings/export', locals: view_variables
+    render_view_to_string 'meetings/export', view_variables
   end
 
   def to_pdf
@@ -35,7 +35,7 @@ class MeetingExporter
       inline_images: inline_images,
       base_formatting: true
     }
-    html_to_pdf view_renderer.render_to_string('meetings/export', locals: view_variables)
+    render_view_to_pdf 'meetings/export', view_variables
   end
 
   def inline_images=(inline_images)
@@ -46,23 +46,6 @@ class MeetingExporter
 
   attr_reader :meeting_id,
               :inline_images
-
-  PDF_OPTIONS = {
-    margin: {
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0
-    },
-  }
-
-  def view_renderer
-    ExportController.new
-  end
-
-  def html_to_pdf(html)
-    WickedPdf.new.pdf_from_string(html, PDF_OPTIONS)
-  end
 
   def add_adjourn_logo_to_inline_images!(inline_images)
     adjourn_logo  = File.read(Rails.root.join('app/assets/images/icon-blue.png'))

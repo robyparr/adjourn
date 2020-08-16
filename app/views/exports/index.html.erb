@@ -1,0 +1,38 @@
+<div class="container">
+  <div id="banner-wrap"></div>
+
+  <h3>Exports</h3>
+  <p class="-mt-4 text-muted">
+    Export all your data in Adjourn in JSON format. In the future you will be able to re-import
+    that data into Adjourn if you wish.
+  </p>
+  <%= button_to 'Create Export', exports_path(format: :js), method: :post, remote: true, class: 'button primary' %>
+
+  <div class="table-container mt-4">
+    <table id="exports-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Expires</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @exports.blank? %>
+          <tr id="no-exports-message">
+            <td colspan="4" class="text-muted">
+              <div class="media">
+                <i class="fa fa-download fa-3x"></i>
+                <h5 class="mb-0 media-text">There's Nothing Here</h5>
+              </div>
+            </td>
+          </tr>
+        <% else %>
+          <% @exports.each do |export| %>
+            <%= render 'exports/export', export: export %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

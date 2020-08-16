@@ -1,2 +1,3 @@
 web: rails s
 webpacker: ./bin/webpack-dev-server
+clock: bundle exec clockwork ./config/clock.rb

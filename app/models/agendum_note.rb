@@ -1,5 +1,6 @@
 class AgendumNote < ApplicationRecord
   include PgSearch::Model
+  include JsonExportable
 
   multisearchable against: %i[content],
     additional_attributes: ->(note) {

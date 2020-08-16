@@ -9,6 +9,12 @@
     td:last-child, th:last-child { @apply pr-4; }
 
     &:not(:last-child) { @apply border-b; }
+
+    .actions {
+      @apply text-right;
+
+      > * { @apply ml-4; }
+    }
   }
 }
 
