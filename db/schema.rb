@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_084704) do
+ActiveRecord::Schema.define(version: 2020_08_16_131400) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_084704) do
   end
 
   create_table "uploads", force: :cascade do |t|
-    t.bigint "agendum_id"
     t.string "filename"
     t.string "content_type"
     t.integer "file_size"
@@ -134,7 +133,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_084704) do
     t.bigint "user_id"
     t.bigint "uploadable_id"
     t.string "uploadable_type"
-    t.index ["agendum_id"], name: "index_uploads_on_agendum_id"
     t.index ["uploadable_id", "uploadable_type"], name: "index_uploads_on_uploadable_id_and_uploadable_type"
     t.index ["user_id"], name: "index_uploads_on_user_id"
   end
@@ -184,7 +182,6 @@ ActiveRecord::Schema.define(version: 2020_08_16_084704) do
   add_foreign_key "meeting_attendees", "contacts"
   add_foreign_key "meeting_attendees", "meetings"
   add_foreign_key "meetings", "users"
-  add_foreign_key "uploads", "agendums"
   add_foreign_key "uploads", "users"
   add_foreign_key "user_exports", "users"
 end
