@@ -1,22 +1,18 @@
-class UserExporter
-  def initialize(export)
-    @export = export
+class UserExporter < BaseExporter
+  def initialize(user_id)
+    @user_id = user_id
   end
 
   def to_json
-    view_renderer.render_to_string('exports/_export', locals: { user: user })
+    render_view_to_string 'exports/_export.json', user: user
   end
 
   private
 
-  attr_reader :export
-
-  def view_renderer
-    ExportController.new
-  end
+  attr_reader :user_id
 
   def user
-    @user ||= User.includes(user_includes).find(export.user_id)
+    @user ||= User.includes(user_includes).find(user_id)
   end
 
   def user_includes

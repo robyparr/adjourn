@@ -20,7 +20,7 @@ class User::Export < ApplicationRecord
   end
 
   def build_json_export(exporter: UserExporter)
-    json = exporter.new(self).to_json
+    json = exporter.new(user_id).to_json
     tempfile = Tempfile.new(['user-export', '.json'])
     tempfile.write json
     tempfile.rewind
