@@ -27,7 +27,7 @@ var Toast = (function() {
 
     setTimeout(function() {
       removeToast(toast);
-    }, 5000);
+    }, 20000);
 
     document.addEventListener('click', function(e) {
       if (e.target === toast) {
