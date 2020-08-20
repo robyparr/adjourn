@@ -74,7 +74,9 @@ export default {
       this.removeDraggingOver()
       this.files = Array.from(files)
 
-      this.uploadFiles(this.files).then(() => this.files = [])
+      this.uploadFiles(this.files)
+        .then(() => this.files = [])
+        .catch(() => this.files = [])
     }
   }
 }

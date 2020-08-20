@@ -32,18 +32,16 @@ class UploadsController < ApplicationController
   end
 
   def presigned_url
-    upload =
-      agendum.uploads.new(
-        filename: params[:filename],
-        content_type: params[:file_type],
-        user: current_user,
-      )
-
-    render json: {
-      key: upload.storage_key,
-      url: upload.presigned_url(:put),
-      headers: upload.upload_headers
-    }
+    upload = agendum.uploads.new(presign_params.merge(user: current_user))
+    if upload.valid?
+      render json: {
+        key: upload.storage_key,
+        url: upload.presigned_url(:put),
+        headers: upload.upload_headers
+      }
+    else
+      render json: upload.errors.full_messages, status: :unprocessable_entity
+    end
   end
 
   def download
@@ -55,6 +53,14 @@ class UploadsController < ApplicationController
 
   def agendum
     @agendum ||= current_user.agenda.find(params[:id])
+  end
+
+  def presign_params
+    params.permit(
+      :filename,
+      :content_type,
+      :file_size,
+    )
   end
 
   def upload_params

@@ -4,8 +4,10 @@ import axios from 'axios'
 export default {
   uploadFiles(uploadsURL, files) {
     return files.map(file => {
-      return new Promise(async (resolve) => {
+      return new Promise(async (resolve, reject) => {
         const presignResponse = await this.fetchPresignURL(`${uploadsURL}/presign`, file)
+        if (!presignResponse) reject()
+
         await this.putToS3(presignResponse.data.url, file, presignResponse.data.headers )
         const uploadResponse = await this.createUpload(uploadsURL, presignResponse.data.key, file)
 
@@ -18,7 +20,10 @@ export default {
     return axios.post(presignURL, {
       authenticity_token: Utils.getAuthenticityToken(),
       filename: file.name,
-      file_type: file.type
+      content_type: file.type,
+      file_size: file.size,
+    }).catch(error => {
+      error.response.data.map(error => showErrorMessage(error))
     })
   },
 

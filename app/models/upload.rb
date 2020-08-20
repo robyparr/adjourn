@@ -1,10 +1,18 @@
 class Upload < ApplicationRecord
   include JsonExportable
+  include ContentTypes
 
   belongs_to :user
   belongs_to :uploadable, polymorphic: true
 
   before_destroy :delete_file
+
+  validates :file_size, numericality: {
+    greater_than: 500.bytes,
+    less_than: 20.megabytes,
+    message: 'Must be between 500 bytes and 20 megabytes'
+  }
+  validates :content_type, inclusion: { in: CONTENT_TYPES }
 
   scope :listable, -> { where(uploadable_type: ['Agendum']) }
 

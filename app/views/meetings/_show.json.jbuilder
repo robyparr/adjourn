@@ -36,10 +36,11 @@ json.agenda meeting.agenda do |agendum|
   end
 
   json.uploads agendum.uploads do |upload|
-    json.id           upload.id
-    json.filename     upload.filename
-    json.content_type upload.content_type
-    json.file_size    upload.file_size
-    json.agendum_id   upload.agendum_id
+    json.id              upload.id
+    json.filename        upload.filename
+    json.content_type    upload.content_type
+    json.file_size       upload.file_size
+    json.uploadable_id   upload.uploadable_id
+    json.uploadable_type upload.uploadable_type
   end
 end
