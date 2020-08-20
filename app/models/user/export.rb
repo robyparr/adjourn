@@ -31,7 +31,8 @@ class User::Export < ApplicationRecord
         build_upload(
           filename: filename_and_extension.join,
           content_type: 'application/json',
-          user: exporter.user
+          user: exporter.user,
+          system_upload: true,
         )
 
       upload.upload_file_and_save! tempfile.path

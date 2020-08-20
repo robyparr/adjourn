@@ -2,6 +2,8 @@ class Upload < ApplicationRecord
   include JsonExportable
   include ContentTypes
 
+  attr_accessor :system_upload
+
   belongs_to :user
   belongs_to :uploadable, polymorphic: true
 
@@ -11,8 +13,8 @@ class Upload < ApplicationRecord
     greater_than: 500.bytes,
     less_than: 20.megabytes,
     message: 'Must be between 500 bytes and 20 megabytes'
-  }
-  validates :content_type, inclusion: { in: CONTENT_TYPES }
+  }, unless: :system_upload
+  validates :content_type, inclusion: { in: CONTENT_TYPES }, unless: :system_upload
 
   scope :listable, -> { where(uploadable_type: ['Agendum']) }
 
