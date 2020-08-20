@@ -5,7 +5,7 @@
   &.with-sidebar { bottom: 60px; }
 
   .toast {
-    @apply bg-white border border-l-2 mx-auto shadow-lg py-4 px-4 rounded cursor-pointer
+    @apply bg-white border border-l-2 shadow-lg py-4 px-4 rounded cursor-pointer
            w-full pointer-events-auto flex;
     min-width: 300px;
     max-width: 500px;
