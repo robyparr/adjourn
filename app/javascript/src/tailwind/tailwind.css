@@ -41,6 +41,7 @@
  @import 'components/media';
  @import 'components/toast';
  @import 'components/badge';
+ @import 'components/menu';
  @import 'components/pagination';
  @import 'components/auth';
  @import 'components/inlineEditer';
