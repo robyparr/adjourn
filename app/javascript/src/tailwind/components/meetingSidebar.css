@@ -9,10 +9,10 @@
 }
 
 .meeting-sidebar {
-  @apply fixed bottom-0 inset-x-0 bg-white z-20 p-0 shadow-lg;
+  @apply fixed bottom-0 inset-x-0 bg-white z-20 p-0 shadow-inner border-l;
   height: 48px;
   transition: height 0.5s;
-  background-color: #fafafa;
+  background-color: #f9f9f9;
 
   .tabs {
     @apply p-0 m-0 text-center bg-white border-t;
