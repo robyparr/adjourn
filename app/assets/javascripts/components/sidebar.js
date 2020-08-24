@@ -1,6 +1,5 @@
 $(document).ready(function() {
   Sidebar = (function() {
-    var mainContent = $('.content');
     var sidebar = $('.sidebar');
     var sidebarOverlay = $('.sidebar-overlay');
 
@@ -14,25 +13,19 @@ $(document).ready(function() {
 
       collapse: function() {
         sidebar.addClass('collapsed');
-        mainContent.addClass('with-collapsed-sidebar');
       },
 
       expand: function() {
         sidebar.removeClass('collapsed');
-        mainContent.removeClass('with-collapsed-sidebar');
       },
 
       show: function() {
-        sidebar.removeClass('sidebar-hidden');
-        sidebar.css('margin-left', '0');
+        sidebar.addClass('shown');
         sidebarOverlay.css('display', 'block');
       },
 
       hide: function() {
-        setTimeout(function() {
-          sidebar.addClass('sidebar-hidden');
-        }, 500);
-        sidebar.css('margin-left', '-80%');
+        sidebar.removeClass('shown')
         sidebarOverlay.css('display', 'none');
       }
     };

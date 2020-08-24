@@ -2,16 +2,14 @@
 
 <div class="sidebar">
   <%= link_to root_url, class: "header" do %>
-    <div class="icon">
-      <%= image_tag 'icon.png' %>
-    </div>
-    <div class="text">Adjourn</div>
+    <%= image_tag 'icon.png', class: 'icon' %>
   <% end %>
 
-  <%= link_to profile_path, class: 'user-info' do %>
-    <img src="<%= gravatar_url(current_user.email) %>"
-      class="avatar profile-picture" />
-    <div class="email"><%= current_user.email %></div>
+  <%= link_to profile_path do %>
+    <div class="media">
+      <img src="<%= gravatar_url(current_user.email) %>" class="avatar" />
+      <div class="media-text"><%= current_user.email %></div>
+    </div>
   <% end %>
 
   <div class="search">
@@ -19,56 +17,56 @@
     <div id="sidebar-search"></div>
   </div>
 
-  <ul class="links">
+  <ul class="navigation">
     <li>
-      <%= active_link_to meetings_url, active: [['meetings'], []] do %>
+      <%= active_link_to meetings_url, active: [['meetings'], []], class: 'media' do %>
         <i class="fa fa-clipboard"></i>
-        <span class="text">Meetings</span>
+        <span class="media-text">Meetings</span>
       <% end %>
     </li>
     <li>
-      <%= active_link_to uploads_url do %>
+      <%= active_link_to uploads_url, class: 'media' do %>
         <i class="fa fa-file-upload"></i>
-        <span class="text">Uploads</span>
+        <span class="media-text">Uploads</span>
       <% end %>
     </li>
     <li>
-      <%= active_link_to contacts_path do %>
+      <%= active_link_to contacts_path, class: 'media' do %>
         <i class="fa fa-address-book"></i>
-        <span class="text">Contacts</span>
+        <span class="media-text">Contacts</span>
       <% end %>
     </li>
     <li>
-      <%= active_link_to profile_path do %>
+      <%= active_link_to profile_path, class: 'media' do %>
         <i class="fa fa-user-cog"></i>
-        <span class="text">My Profile</span>
+        <span class="media-text">My Profile</span>
       <% end %>
     </li>
     <li>
-      <%= active_link_to google_accounts_path do %>
+      <%= active_link_to google_accounts_path, class: 'media' do %>
         <i class="fa fa-code-branch"></i>
-        <span class="text">Integrations</span>
+        <span class="media-text">Integrations</span>
       <% end %>
     </li>
     <li>
-      <%= active_link_to exports_path do %>
+      <%= active_link_to exports_path, class: 'media' do %>
         <i class="fa fa-download fa-3x"></i>
-        <span class="text">Exports</span>
+        <span class="media-text">Exports</span>
       <% end %>
     </li>
   </ul>
 
-  <ul class="links bottom">
-    <li class="hidden md:block">
-      <a class="collapse-button">
+  <ul class="navigation bottom">
+    <li>
+      <a class="collapse-button hidden md:block">
         <i class="fa fa-chevron-left collapse"></i>
         <i class="fa fa-chevron-right expand"></i>
       </a>
     </li>
     <li>
-      <%= link_to destroy_user_session_path, method: :delete, class: "sign-out-link" do %>
+      <%= link_to destroy_user_session_path, method: :delete, class: 'media' do %>
         <i class="fa fa-sign-out-alt"></i>
-        <span class="text">Sign Out</span>
+        <span class="media-text">Sign Out</span>
       <% end %>
     </li>
   </ul>

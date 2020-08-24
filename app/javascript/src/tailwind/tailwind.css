@@ -25,7 +25,6 @@
  @import 'components/table';
  @import 'components/grid';
  @import 'components/sidebar';
- @import 'components/meetingSidebar';
  @import 'components/modal';
  @import 'components/autocomplete';
  @import 'components/calendar';
@@ -48,6 +47,9 @@
 
  @import 'components/agenda';
  @import 'components/actionItem';
+ @import 'components/meetingSidebar';
+
+ @import 'layouts/sidebarLayout';
 
  /**
   * Here you would add any of your custom component classes; stuff that you'd

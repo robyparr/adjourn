@@ -1,0 +1,3 @@
+.sidebar-layout {
+  @apply absolute inset-0 flex;
+}
