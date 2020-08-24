@@ -10,14 +10,20 @@ button.button { @apply outline-none; }
     &:hover { @apply bg-primary-600; }
   }
 
+  &.small { @apply px-2 py-1; }
+
   &:hover { @apply bg-gray-400 shadow-md border-gray-500; }
   &:disabled { @apply opacity-50 cursor-not-allowed; }
 }
 
 .button.outline {
-  @apply bg-transparent border border-primary-500 text-primary-600;
+  @apply bg-transparent border border-gray-300 text-black;
+  &:hover { @apply border-transparent bg-gray-400; }
 
-  &:hover { @apply border-transparent bg-primary-500 text-white; }
+  &.primary {
+    @apply border-primary-500 text-primary-600;
+    &:hover { @apply bg-primary-500 text-white; }
+  }
 }
 
 .button.link {

@@ -21,11 +21,11 @@
     </div>
 
     <div class="meridian">
-      <button :class="['button', 'outline', { selected: meridian == 'AM' }]"
+      <button :class="['button', 'outline', 'primary', { selected: meridian == 'AM' }]"
               @click="changeMeridian('AM')">
         AM
       </button>
-      <button :class="['button', 'outline', { selected: meridian == 'PM' }]"
+      <button :class="['button', 'outline', 'primary', { selected: meridian == 'PM' }]"
               @click="changeMeridian('PM')">
         PM
       </button>

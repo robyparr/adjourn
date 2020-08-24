@@ -5,7 +5,7 @@
     @apply flex items-center;
 
     .card-title {
-      @apply font-bold text-lg mb-2;
+      @apply font-bold text-lg;
       width: calc(100% - 24px);
 
       p { @apply mb-0; }
