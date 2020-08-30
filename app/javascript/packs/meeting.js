@@ -9,12 +9,17 @@ import Vue from 'vue'
 import Meeting from '../src/views/Meeting'
 import store from '../src/stores/meeting'
 
+import _omit from 'lodash/omit'
+
 document.addEventListener('DOMContentLoaded', () => {
   const appRoot = document.getElementById('meeting-root')
   if (!appRoot) return
 
   const meetingData = JSON.parse(appRoot.getAttribute('data-meeting'))
-  store.commit('SET_MEETING', meetingData)
+  store.commit('SET_AGENDA', meetingData.agenda)
+  store.commit('SET_ACTION_ITEMS', meetingData.action_items)
+  store.commit('SET_ATTENDEES', meetingData.attendees)
+  store.commit('SET_MEETING', _omit(meetingData, ['agenda', 'action_items', 'attendees']))
 
   if (appRoot) {
     const app = new Vue({

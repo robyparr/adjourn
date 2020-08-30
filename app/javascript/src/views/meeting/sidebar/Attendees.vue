@@ -13,7 +13,7 @@
 
     <ul class="list mt-4 attendees-list" :style="{ borderWidth: 0 }">
       <attendee
-        v-for="(attendee, index) in meeting.attendees"
+        v-for="(attendee, index) in attendees"
         :key="attendee.id"
         :index="index"
         :attendee="attendee" />
@@ -26,6 +26,8 @@ import Utils from '../../../../utils'
 import Autocomplete from '../../../components/Autocomplete'
 import Attendee from './attendees/Attendee'
 
+import { mapState } from 'vuex'
+
 export default {
   components: {
     Autocomplete,
@@ -34,8 +36,13 @@ export default {
 
   data() {
     return {
-      meeting: this.$store.state.meeting,
     }
+  },
+
+  computed: {
+    ...mapState({
+      attendees: state => state.attendees.attendees
+    })
   },
 
   methods: {
@@ -44,7 +51,7 @@ export default {
     },
 
     parseAutocompleteResults(autocompleteResults) {
-      const contactIDs = this.meeting.attendees.map(attendee => attendee.contact_id)
+      const contactIDs = this.attendees.map(attendee => attendee.contact_id)
       return autocompleteResults.filter(result => !contactIDs.includes(result.id))
     },
 

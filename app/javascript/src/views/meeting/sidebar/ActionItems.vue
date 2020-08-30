@@ -50,7 +50,7 @@ export default {
 
   computed: {
     ...mapState({
-      actionItems: state => state.meeting.action_items
+      actionItems: state => state.action_items.action_items
     }),
   },
 

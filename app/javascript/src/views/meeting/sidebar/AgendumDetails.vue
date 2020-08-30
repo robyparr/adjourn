@@ -88,6 +88,8 @@ import InlineEditor from '../../../components/InlineEditor'
 import MarkdownEditor from '../../../components/MarkdownEditor'
 import marked from 'marked'
 
+import { mapState } from 'vuex'
+
 export default {
   components: {
     FileDropzone,
@@ -102,11 +104,13 @@ export default {
   },
 
   computed: {
-    agendum() {
-      const agenda = this.$store.state.meeting.agenda
-      const selectedAgendumID = this.$store.state.selectedAgendumID
+    ...mapState({
+      agenda: state => state.agenda.agenda,
+      selectedAgendumID: state => state.selectedAgendumID,
+    }),
 
-      return agenda.find(agendum => agendum.id === selectedAgendumID)
+    agendum() {
+      return this.agenda.find(agendum => agendum.id === this.selectedAgendumID)
     },
   },
 
