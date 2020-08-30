@@ -1,18 +1,22 @@
 export default class BaseComponent {
   transitionIn(transitionStartedClasses, transitionFinishedClasses, afterTransition) {
-    this.el.classList.add(transitionStartedClasses)
-    setTimeout(() => {
-      this.el.classList.add(transitionFinishedClasses)
-      if (afterTransition) afterTransition()
-    }, 0)
+    return new Promise((resolve) => {
+      this.el.classList.add(transitionStartedClasses)
+      setTimeout(() => {
+        this.el.classList.add(transitionFinishedClasses)
+        resolve()
+      }, 0)
+    })
   }
 
-  transitionOut(transitionStartedClasses, transitionFinishedClasses, afterTransition) {
-    this.el.classList.remove(transitionStartedClasses)
-    setTimeout(() => {
+  transitionOut(transitionStartedClasses, transitionFinishedClasses) {
+    return new Promise((resolve) => {
       this.el.classList.remove(transitionFinishedClasses)
-      if (afterTransition) afterTransition()
-    }, 10)
+      setTimeout(() => {
+        this.el.classList.remove(transitionStartedClasses)
+        resolve()
+      }, 100)
+    })
   }
 
   isComponentBlurred = (clickTarget) => {

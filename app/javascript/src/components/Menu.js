@@ -12,14 +12,14 @@ export default class Menu extends BaseComponent {
   }
 
   show = () => {
-    this.transitionIn(this.openingClass, this.openClass, () => {
+    this.transitionIn(this.openingClass, this.openClass).then(() => {
       this.isOpen = true
       this.addComponentBlurEvent()
     })
   }
 
   hide = () => {
-    this.transitionOut(this.openClass, this.openingClass, () => {
+    this.transitionOut(this.openingClass, this.openClass).then(() => {
       this.isOpen = false
       this.removeComponentBlurEvent()
     })
