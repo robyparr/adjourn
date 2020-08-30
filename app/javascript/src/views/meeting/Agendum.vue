@@ -21,10 +21,8 @@
     </template>
 
     <template slot="actions">
-    <button class="button icon">
-        <i class="fa fa-trash"
-          :data-modal="`.confirm-agendum-delete-${agendum.id}`">
-        </i>
+      <button class="button icon" :data-modal="`.confirm-agendum-delete-${agendum.id}`">
+        <i class="fa fa-trash"></i>
       </button>
     </template>
 

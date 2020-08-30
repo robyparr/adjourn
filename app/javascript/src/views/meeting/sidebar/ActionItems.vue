@@ -11,24 +11,6 @@
           :key="actionItem.id">
 
         <action-item :actionItem="actionItem" />
-
-        <button class="list-floating-text">
-          <i class="fa fa-trash" :data-modal="`.confirm-aa-delete-${actionItem.id}`"></i>
-        </button>
-        <div :class="`modal confirm-aa-delete-${actionItem.id}`">
-          <div class="modal-title">Are you sure?</div>
-          <div class="modal-content">
-            Are you sure you want to delete this action item?
-          </div>
-          <div class="modal-footer">
-            <a href="#" :data-close-modal="`.confirm-aa-delete-${actionItem.id}`">
-              No
-            </a>
-            <button class="button primary ml-4" @click="removeActionItem(actionItem)">
-              Yes
-            </button>
-          </div>
-        </div>
       </li>
     </ul>
   </div>

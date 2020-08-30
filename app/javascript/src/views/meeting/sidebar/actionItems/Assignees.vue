@@ -20,7 +20,7 @@
     </div>
     <div v-if="selectorOpen" class="selector" ref="selector">
       <div class="header">
-        <span>Select an attendee to assign to the action item.</span>
+        <span>Assign an attendee:</span>
       </div>
       <ul>
         <li v-for="attendee in attendees"
