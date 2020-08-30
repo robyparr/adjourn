@@ -28,12 +28,12 @@
 
       <h4 class="mt-8">Agenda</h4>
       <draggable class="agenda"
-                 v-model="meeting.agenda"
+                 v-model="agenda"
                  @end="sortAgenda"
                  draggable=".sortable"
                  handle=".drag-handle">
         <agendum
-          v-for="agendum in meeting.agenda"
+          v-for="agendum in agenda"
           :key="agendum.id"
           class="sortable"
           :agendum="agendum" />
@@ -54,6 +54,8 @@ import Draggable from 'vuedraggable'
 import Sidebar from './meeting/Sidebar'
 import meetingService from '../services/meetingService'
 
+import { mapState } from 'vuex'
+
 export default {
   components: {
     InlineEditor,
@@ -65,9 +67,23 @@ export default {
 
   data() {
     return {
-      meeting: this.$store.state.meeting,
-      calendarData: {}
     }
+  },
+
+  computed: {
+    ...mapState({
+      meeting: state => state.meeting.meeting,
+    }),
+
+    agenda: {
+      get() {
+        return this.$store.state.agenda.agenda
+      },
+
+      set(agenda) {
+        this.$store.commit('SET_AGENDA', agenda)
+      },
+    },
   },
 
   methods: {
@@ -84,7 +100,7 @@ export default {
     },
 
     sortAgenda() {
-      const agendaIDs = this.meeting.agenda.map(agendum => agendum.id)
+      const agendaIDs = this.agenda.map(agendum => agendum.id)
       this.$store.dispatch('sortAgenda', agendaIDs)
     },
 

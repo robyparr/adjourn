@@ -54,7 +54,7 @@ export default {
 
   computed: {
     ...mapState({
-      attendees: state => state.meeting.attendees
+      attendees: state => state.attendees.attendees
     }),
 
     assignees() {
