@@ -55,7 +55,9 @@ RUN apk update \
       tzdata \
       postgresql-client \
       nodejs \
-      bash
+      bash \
+      ttf-ubuntu-font-family \
+      wkhtmltopdf \
 
 COPY --from=build-image /usr/local/bundle/ /usr/local/bundle/
 COPY --from=build-image $INSTALL_PATH $INSTALL_PATH
