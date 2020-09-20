@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="column sm12 md8">
+  <div class="column sm12 md9">
     <% unless @meetings.present? %>
       <div class="flex flex-col items-center text-muted mt-20">
         <i class="fa fa-inbox fa-3x"></i>
@@ -31,7 +31,7 @@
       </div>
     <% end %>
   </div>
-  <div class="column sm12 ml-auto md3">
+  <div class="column sm12 md3 mt-4">
     <%= render 'calendar_events' %>
   </div>
 </div>

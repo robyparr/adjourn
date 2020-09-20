@@ -5,9 +5,8 @@
         Connect your Google Account to Adjourn
         to sync your Google Calendar events.
       </p>
-      <p>
-        You can connect your Google account by clicking "Google Accounts"
-        in the sidebar.
+      <p class="text-center">
+        <%= link_to 'Connect Google Account', google_accounts_path, class: 'button primary' %>
       </p>
     </div>
   </li>
@@ -19,7 +18,7 @@
       </p>
       <p>
         You can choose calendars to sync by clicking the "Synced Calendars" link
-        on your connected account in your profile.
+        on your <%= link_to 'connected Google account(s)', google_accounts_path %>.
       </p>
     <div class="list-item-content">
   </li>
