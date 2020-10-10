@@ -1,3 +1,4 @@
+# typed: ignore
 require_relative 'boot'
 
 # Pick the frameworks you want:

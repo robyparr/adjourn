@@ -1,3 +1,4 @@
+# typed: true
 module GoogleService
   class Calendar < GoogleService::Base
     include HTTParty

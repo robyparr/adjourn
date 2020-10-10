@@ -1,3 +1,4 @@
+# typed: strict
 class GoogleAccount < ApplicationRecord
   include JsonExportable
 

@@ -1,3 +1,4 @@
+# typed: strict
 ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
   tag_fragment = Nokogiri::HTML::DocumentFragment.parse(html_tag).css('*')[0]
   tag_id = tag_fragment[:id]

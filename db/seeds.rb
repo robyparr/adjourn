@@ -1,3 +1,4 @@
+# typed: strict
 if Rails.env.development?
   email = "roby.parr@gmail.com".freeze
   unless User.exists? email: email

@@ -1,3 +1,4 @@
+# typed: false
 class Users::RegistrationsController < Devise::RegistrationsController
   layout :action_layout
   before_action :configure_permitted_parameters

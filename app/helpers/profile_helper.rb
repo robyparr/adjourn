@@ -1,3 +1,4 @@
+# typed: true
 module ProfileHelper
   # Following three methods are to allow the use of some
   # devise forms loaded from non-devise controllers (specifically, the profile).

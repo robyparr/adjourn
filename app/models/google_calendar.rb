@@ -1,3 +1,4 @@
+# typed: strict
 class GoogleCalendar < ApplicationRecord
   include JsonExportable
 

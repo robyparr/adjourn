@@ -1,3 +1,4 @@
+# typed: true
 module JsonExportable
   extend ActiveSupport::Concern
 

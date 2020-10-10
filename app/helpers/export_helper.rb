@@ -1,3 +1,4 @@
+# typed: true
 module ExportHelper
   MARKDOWN_INLINE_LINK_REGEX = /!\[.*\]\((http[s]?:\/\/.+\/uploads\/(\d+)\/download)\)/
 

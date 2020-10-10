@@ -1,3 +1,4 @@
+# typed: false
 class MeetingsController < ApplicationController
   def index
     @meeting = Meeting.new

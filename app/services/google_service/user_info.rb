@@ -1,3 +1,4 @@
+# typed: true
 module GoogleService
   class UserInfo < GoogleService::Base
     include HTTParty

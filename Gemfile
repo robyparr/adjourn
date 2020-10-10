@@ -30,6 +30,8 @@ gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'wicked_pdf',             '~> 2.1'
 gem 'after_party',            '~> 1.11', '>= 1.11.2'
 gem 'clockwork',              '~> 2.0', '>= 2.0.4'
+gem 'sorbet-runtime',         '~> 0.5.5943'
+gem 'sorbet-rails',           '~> 0.7.1'
 
 group :production do
   gem 'scout_apm'
@@ -58,6 +60,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen',  '~> 2.0.0'
   gem 'bullet',                 '~> 6.1'
+  gem 'sorbet',                 '~> 0.5.5943'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

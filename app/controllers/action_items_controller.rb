@@ -1,3 +1,4 @@
+# typed: false
 class ActionItemsController < ApplicationController
   def create
     @action_item = meeting.action_items.build(item_params)

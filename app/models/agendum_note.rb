@@ -1,3 +1,4 @@
+# typed: true
 class AgendumNote < ApplicationRecord
   include PgSearch::Model
   include JsonExportable

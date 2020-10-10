@@ -1,3 +1,4 @@
+# typed: true
 class Agendum < ApplicationRecord
   include PgSearch::Model
   include JsonExportable
@@ -17,14 +18,6 @@ class Agendum < ApplicationRecord
 
   # Hooks
   before_create :set_position
-
-  def markdown_description
-    if description
-      MarkdownRenderer.render(description)
-    else
-      ''
-    end
-  end
 
   # The SQL to execute when rebuilding the search
   # document. This is needed to add the user's ID

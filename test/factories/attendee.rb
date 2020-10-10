@@ -1,3 +1,4 @@
+# typed: false
 FactoryBot.define do
   factory :attendee do
     transient do

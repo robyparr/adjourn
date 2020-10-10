@@ -1,3 +1,4 @@
+# typed: false
 class AgendumNotesController < ApplicationController
   def create
     agendum = current_user.agenda.find(params[:agenda_id])

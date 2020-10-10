@@ -1,3 +1,4 @@
+# typed: false
 module Support
   module Helpers
     module ResponseHelpers

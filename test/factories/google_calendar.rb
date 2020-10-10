@@ -1,3 +1,4 @@
+# typed: false
 FactoryBot.define do
   factory :google_calendar do
     google_account

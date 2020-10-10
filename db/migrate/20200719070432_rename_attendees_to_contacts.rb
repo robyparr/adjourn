@@ -1,3 +1,4 @@
+# typed: true
 class RenameAttendeesToContacts < ActiveRecord::Migration[6.0]
   def change
     rename_table :attendees, :contacts

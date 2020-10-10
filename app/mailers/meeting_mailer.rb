@@ -1,3 +1,4 @@
+# typed: true
 class MeetingMailer < ApplicationMailer
   attr_accessor :inline_images
 

@@ -1,3 +1,4 @@
+# typed: false
 class AgendaController < ApplicationController
   def create
     meeting = current_user.meetings.find(params[:meeting_id])

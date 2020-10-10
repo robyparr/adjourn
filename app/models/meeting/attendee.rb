@@ -1,3 +1,4 @@
+# typed: strict
 class Meeting::Attendee < ApplicationRecord
   include JsonExportable
 

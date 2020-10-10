@@ -1,3 +1,4 @@
+# typed: false
 module ApplicationHelper
   def page_title(default_title)
     # Idea for compacting array: https://stackoverflow.com/a/185980
