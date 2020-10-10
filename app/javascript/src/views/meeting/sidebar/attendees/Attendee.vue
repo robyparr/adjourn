@@ -10,7 +10,7 @@
     </div>
     <div class="list-floating-content">
       <div :id="`menu-${attendee.id}`" class="menu">
-        <button type="button" class="button icon">
+        <button type="button" class="button icon" :data-testid="`attendee-${attendee.id}-menu`">
           <i class="fa fa-ellipsis-v"></i>
         </button>
         <ul class="menu-items">
@@ -18,7 +18,7 @@
             <button type="button"
                     @click="toggleAttended()"
                     :title="attendButtonTitle()"
-                    data-testid="attendee-attend-btn">
+                    data-testid="attendee-attend-button">
               <i :class="['fa', { 'fa-user-minus': attendee.attended, 'fa-user-plus': !attendee.attended }]"></i>
               {{ attendee.attended ? 'Unattend' : 'Attend' }}
             </button>

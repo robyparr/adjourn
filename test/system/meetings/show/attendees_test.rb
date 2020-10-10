@@ -18,7 +18,7 @@ module Meetings
 
         fill_in 'Add Attendee', with: contact_email
         no_contacts_found_el = find('.autocomplete ul li')
-        assert_match 'No contacts found.', no_contacts_found_el.text
+        assert_match 'No attendees found.', no_contacts_found_el.text
 
         no_contacts_found_el.click
         assert_equal "#{contact_email[0..24]}...", find('.attendees-list .media-text').text
@@ -46,7 +46,7 @@ module Meetings
 
         @meeting.add_attendee create(:contact).email
 
-        find('.button.primary').click
+        find_by_testid('email-attendees-button').click
         assert find('.toast.info').present?
       end
 
@@ -56,7 +56,7 @@ module Meetings
 
         assert @meeting.attendees.empty?
 
-        find('.button.primary').click
+        find_by_testid('email-attendees-button').click
         assert find('.toast.error').present?
       end
 
@@ -67,14 +67,19 @@ module Meetings
         sign_in @user
         visit meeting_url @meeting
 
-        attend_button = find_by_testid('attendee-attend-buton')
+        attendee_menu = find_by_testid("attendee-#{attendee.id}-menu")
+        attendee_menu.click
+        attend_button = find_by_testid('attendee-attend-button')
 
-        assert attend_button.find('i').class.include?('fa-user-minus')
+        assert attend_button.find('i')[:class].include?('fa-user-minus')
         attend_button.click
+        wait_for_ajax
         assert_not attendee.reload.attended?
 
-        assert attend_button.find('i').class.include?('fa-user-plus')
+        attendee_menu.click
+        assert attend_button.find('i')[:class].include?('fa-user-plus')
         attend_button.click
+        wait_for_ajax
         assert attendee.reload.attended?
       end
     end

@@ -15,7 +15,8 @@
         @date-time-updated="updateMeetingFromTo" />
 
       <button @click="emailAttendees"
-              class="button primary mt-4">
+              class="button primary mt-4"
+              data-testid="email-attendees-button">
         Email Attendees
       </button>
 
