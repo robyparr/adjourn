@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class GoogleAccountsController < ApplicationController
   def index
     @accounts = current_user.google_accounts

@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class AddMeetingToAgendumNote < ActiveRecord::Migration[5.1]
   def change
     add_reference :agendum_notes, :meeting, foreign_key: true

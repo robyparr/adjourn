@@ -31,6 +31,7 @@ gem 'wicked_pdf',             '~> 2.1'
 gem 'after_party',            '~> 1.11', '>= 1.11.2'
 gem 'clockwork',              '~> 2.0', '>= 2.0.4'
 gem 'sorbet-runtime',         '~> 0.5.5943'
+gem 'sorbet-rails',           '~> 0.7.1'
 
 group :production do
   gem 'scout_apm'

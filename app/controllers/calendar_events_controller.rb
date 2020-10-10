@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class CalendarEventsController < ApplicationController
   def index
     calendar_events_hash = current_user.load_calendar_events

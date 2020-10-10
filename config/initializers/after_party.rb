@@ -1,4 +1,4 @@
-# typed: strict
+# typed: false
 AfterParty.setup do |config|
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
