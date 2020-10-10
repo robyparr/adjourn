@@ -1,3 +1,4 @@
+# typed: true
 class AddConfirmableToDevise < ActiveRecord::Migration[5.1]
   def change
     # Code taken from db/migrate/20170701094837_devise_create_users.rb

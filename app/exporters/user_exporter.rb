@@ -1,3 +1,4 @@
+# typed: true
 class UserExporter < BaseExporter
   def initialize(user_id)
     @user_id = user_id

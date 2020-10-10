@@ -1,3 +1,4 @@
+# typed: false
 module CalendarEventsHelper
   def add_event_url(event)
     calendar_events_url(

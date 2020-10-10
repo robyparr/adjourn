@@ -1,3 +1,4 @@
+# typed: strict
 # This controller exists simply to
 # render partials from models (Meeting).
 # Using ActionController::Base directly resulted

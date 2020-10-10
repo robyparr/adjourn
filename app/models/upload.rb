@@ -1,3 +1,4 @@
+# typed: false
 class Upload < ApplicationRecord
   include JsonExportable
   include ContentTypes

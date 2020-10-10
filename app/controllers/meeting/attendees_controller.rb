@@ -1,3 +1,4 @@
+# typed: false
 class Meeting::AttendeesController < ApplicationController
   def create
     @attendee = meeting.add_attendee params[:email]

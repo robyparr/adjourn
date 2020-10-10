@@ -1,3 +1,4 @@
+# typed: strict
 require 'clockwork'
 require 'active_support/time'
 require './config/boot'

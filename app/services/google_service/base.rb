@@ -1,3 +1,4 @@
+# typed: true
 module GoogleService
   class Base
     def initialize(google_account)

@@ -1,3 +1,4 @@
+# typed: false
 class UploadsController < ApplicationController
   def index
     @uploads = current_user.uploads.includes(uploadable: :meeting).listable.page(params[:page])

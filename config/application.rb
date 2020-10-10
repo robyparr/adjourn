@@ -1,3 +1,4 @@
+# typed: strict
 require_relative 'boot'
 
 # Pick the frameworks you want:

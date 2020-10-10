@@ -1,3 +1,4 @@
+# typed: true
 module ContentTypes
   extend ActiveSupport::Concern
 

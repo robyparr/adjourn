@@ -1,3 +1,4 @@
+# typed: true
 module GoogleService
   class Authorization
     def initialize(callback_url)

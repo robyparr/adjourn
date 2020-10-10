@@ -1,3 +1,4 @@
+# typed: true
 require 'signet/oauth_2/client'
 
 module GoogleService

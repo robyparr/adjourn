@@ -1,3 +1,4 @@
+# typed: true
 class CreateAgendumNotes < ActiveRecord::Migration[5.1]
   def change
     create_table :agendum_notes do |t|

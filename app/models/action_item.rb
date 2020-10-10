@@ -1,3 +1,4 @@
+# typed: false
 class ActionItem < ApplicationRecord
   include JsonExportable
 

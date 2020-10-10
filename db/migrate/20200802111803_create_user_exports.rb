@@ -1,3 +1,4 @@
+# typed: true
 class CreateUserExports < ActiveRecord::Migration[6.0]
   def change
     create_table :user_exports do |t|

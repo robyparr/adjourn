@@ -1,3 +1,4 @@
+# typed: true
 class MeetingExporter < BaseExporter
   include ApplicationHelper
 

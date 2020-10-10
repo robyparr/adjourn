@@ -1,3 +1,4 @@
+# typed: false
 class ExportsController < ApplicationController
   def index
     @exports = current_user.exports.order(:id)

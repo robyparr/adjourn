@@ -309,6 +309,10 @@ GEM
       docile (~> 1.1)
       simplecov-html (~> 0.11)
     simplecov-html (0.12.2)
+    sorbet (0.5.5943)
+      sorbet-static (= 0.5.5943)
+    sorbet-runtime (0.5.5943)
+    sorbet-static (0.5.5943-universal-darwin-14)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -395,6 +399,8 @@ DEPENDENCIES
   selenium-webdriver
   signet (~> 0.8.1)
   simplecov (~> 0.18.5)
+  sorbet (~> 0.5.5943)
+  sorbet-runtime (~> 0.5.5943)
   spring
   spring-watcher-listen (~> 2.0.0)
   test-prof (~> 0.10.2)

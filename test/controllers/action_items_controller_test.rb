@@ -1,3 +1,4 @@
+# typed: false
 require 'test_helper'
 
 class ActionItemsControllerTest < ActionDispatch::IntegrationTest

@@ -1,3 +1,4 @@
+# typed: strict
 class Contact < ApplicationRecord
   include JsonExportable
 

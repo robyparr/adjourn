@@ -1,3 +1,4 @@
+# typed: true
 if Rails.env.development?
   require_dependency 'google_service'
   require_dependency 'google_service/calendar_event'

@@ -1,3 +1,4 @@
+# typed: false
 module MeetingsHelper
 
   def recent_meetings(meetings)

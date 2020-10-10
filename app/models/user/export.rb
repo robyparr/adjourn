@@ -1,3 +1,4 @@
+# typed: false
 class User::Export < ApplicationRecord
   EXPIRES_AFTER_DAYS = 7
 

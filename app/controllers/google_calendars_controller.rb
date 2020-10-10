@@ -1,3 +1,4 @@
+# typed: false
 class GoogleCalendarsController < ApplicationController
   layout false
 
