@@ -18,7 +18,6 @@ RUN apk update \
 ENV RAILS_ENV production
 ENV NODE_ENV production
 
-
 ENV INSTALL_PATH /app
 RUN mkdir -p $INSTALL_PATH
 WORKDIR $INSTALL_PATH
@@ -57,7 +56,7 @@ RUN apk update \
       nodejs \
       bash \
       ttf-ubuntu-font-family \
-      wkhtmltopdf \
+      wkhtmltopdf
 
 COPY --from=build-image /usr/local/bundle/ /usr/local/bundle/
 COPY --from=build-image $INSTALL_PATH $INSTALL_PATH
