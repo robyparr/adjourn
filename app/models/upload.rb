@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class Upload < ApplicationRecord
   include JsonExportable
   include ContentTypes
@@ -61,6 +61,10 @@ class Upload < ApplicationRecord
     end
   end
 
+  def download_path
+    "/uploads/#{id}/download"
+  end
+
   private
 
   def rejected_attributes_for_json_export
@@ -92,11 +96,15 @@ class Upload < ApplicationRecord
   end
 
   def file_ext
-    File.extname filename
+    return if filename.blank?
+
+    File.extname T.must(filename)
   end
 
   def file_basename
-    File.basename filename, file_ext
+    return if filename.blank?
+
+    File.basename T.must(filename), file_ext
   end
 
   def generate_storage_key

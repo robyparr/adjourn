@@ -1,7 +1,6 @@
-# typed: ignore
+# typed: true
 class Meeting < ApplicationRecord
   include JsonExportable
-  include Rails.application.routes.url_helpers
 
   # Relationships
   belongs_to :user
@@ -18,9 +17,9 @@ class Meeting < ApplicationRecord
   has_many :uploads, through: :agenda
 
   # Validations
-  validates :title,           presence: true
-  validates :start_date,      presence: true
-  validates :end_date,        presence: true
+  validates :title,      presence: true
+  validates :start_date, presence: true
+  validates :end_date,   presence: true
   validate  :end_date_after_start_date
 
   def full_agenda
@@ -30,7 +29,7 @@ class Meeting < ApplicationRecord
   def inline_image_upload?(upload)
     return unless upload.content_type.starts_with?('image/')
 
-    full_agenda.include?(download_upload_path(upload))
+    full_agenda.include?(upload.download_path)
   end
 
   # A meeting is recent if it ended less than a week ago
@@ -59,17 +58,16 @@ class Meeting < ApplicationRecord
 
   def remove_attendee(email)
     contact  = user.contacts.find_by(email: email)
-    attendee = attendees.find_by(contact_id: contact.id)
-    attendee.destroy
+    attendee = attendees.find_by(contact_id: contact&.id)
+    attendee&.destroy
   end
 
   private
 
-  # Add an error to the model unless :end_date is after :start_date
   def end_date_after_start_date
-    is_valid = self.end_date && self.start_date &&
-      self.end_date > self.start_date
+    return if start_date.blank? || end_date.blank?
 
+    is_valid = end_date > start_date
     errors.add(:end_date, "must be after #{start_date}") unless is_valid
   end
 end

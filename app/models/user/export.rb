@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 class User::Export < ApplicationRecord
   EXPIRES_AFTER_DAYS = 7
 
@@ -41,7 +41,7 @@ class User::Export < ApplicationRecord
   end
 
   def download_url
-    upload.url
+    upload&.url
   end
 
   def expires_at
@@ -58,7 +58,7 @@ class User::Export < ApplicationRecord
     tempfile = Tempfile.new(filename)
     block.call tempfile
   ensure
-    tempfile.close
-    tempfile.unlink
+    tempfile&.close
+    tempfile&.unlink
   end
 end
