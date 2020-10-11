@@ -1,0 +1,14 @@
+.tag {
+  @apply inline-block bg-white border shadow rounded bg-gray-300;
+
+  >* { @apply inline-block py-1; }
+
+  .name { @apply font-bold text-gray-800 px-1; }
+  .value { @apply px-1; }
+
+  .action {
+    @apply w-8 h-8;
+
+    &:not(:hover) { @apply opacity-25; }
+  }
+}

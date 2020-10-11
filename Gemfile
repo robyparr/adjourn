@@ -51,6 +51,7 @@ group :development, :test do
   gem 'pry',                        '~> 0.12.2'
   gem 'pry-nav',                    '~> 0.3.0'
   gem 'brakeman'
+  gem 'minitest-spec-rails',        '~> 6.0', '>= 6.0.3'
 end
 
 group :development do

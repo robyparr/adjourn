@@ -40,6 +40,8 @@
  @import 'components/media';
  @import 'components/toast';
  @import 'components/badge';
+ @import 'components/tag';
+ @import 'components/tooltip';
  @import 'components/menu';
  @import 'components/pagination';
  @import 'components/auth';

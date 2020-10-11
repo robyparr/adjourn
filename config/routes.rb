@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'profile#show'
   get '/search', to: 'meetings#search', as: 'search'
+  get '/name-search', to: 'meetings#name_search', as: 'name_search'
 
   resources :uploads, only: %i(index destroy) do
     member do
@@ -61,6 +62,8 @@ Rails.application.routes.draw do
           post :email
         end
       end
+
+      resources :links, only: %i[index create destroy], shallow: true
     end
 
     resources :agenda, shallow: true, only: [:create, :update, :destroy] do

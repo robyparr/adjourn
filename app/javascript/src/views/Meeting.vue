@@ -22,10 +22,18 @@
 
       <a target="_blank"
          rel="noopener noreferrer"
-         class="button primary mt-4"
+         class="button mt-4"
          :href="`/meetings/${meeting.id}/download`">
         Download
       </a>
+
+      <button class="button mt-4" @click="addNewLink = !addNewLink">
+        Link Meeting
+      </button>
+
+      <links
+        :addNewLink="addNewLink"
+        @link-created="addNewLink = false" />
 
       <h4 class="mt-8">Agenda</h4>
       <draggable class="agenda"
@@ -53,6 +61,7 @@ import DateTimeRangePicker from '../components/DateTimeRangePicker'
 import Agendum from './meeting/Agendum'
 import Draggable from 'vuedraggable'
 import Sidebar from './meeting/Sidebar'
+import Links from './meeting/Links'
 import meetingService from '../services/meetingService'
 
 import { mapState } from 'vuex'
@@ -64,10 +73,12 @@ export default {
     Agendum,
     Draggable,
     Sidebar,
+    Links,
   },
 
   data() {
     return {
+      addNewLink: false,
     }
   },
 

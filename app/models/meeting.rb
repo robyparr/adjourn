@@ -15,6 +15,15 @@ class Meeting < ApplicationRecord
   has_many :attendees, class_name: 'Meeting::Attendee', dependent: :destroy
   has_many :notes, class_name: 'AgendumNote'
   has_many :uploads, through: :agenda
+  has_many :links, T.unsafe(
+    ->(meeting) do
+      # https://stackoverflow.com/a/41978449
+      unscope(:where)
+        .where(from_meeting: meeting).or(
+          where(to_meeting: meeting)
+        )
+    end
+  )
 
   # Validations
   validates :title,      presence: true

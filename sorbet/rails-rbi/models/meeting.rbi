@@ -118,6 +118,15 @@ module Meeting::GeneratedAssociationMethods
   sig { params(value: T::Enumerable[::Meeting::Attendee]).void }
   def attendees=(value); end
 
+  sig { returns(::Meeting::Link::ActiveRecord_Associations_CollectionProxy) }
+  def links; end
+
+  sig { returns(T::Array[Integer]) }
+  def link_ids; end
+
+  sig { params(value: T::Enumerable[::Meeting::Link]).void }
+  def links=(value); end
+
   sig { returns(::AgendumNote::ActiveRecord_Associations_CollectionProxy) }
   def notes; end
 

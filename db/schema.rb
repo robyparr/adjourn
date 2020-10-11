@@ -1,4 +1,3 @@
-# typed: strict
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_16_131400) do
+ActiveRecord::Schema.define(version: 2020_10_10_090247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +94,19 @@ ActiveRecord::Schema.define(version: 2020_08_16_131400) do
     t.index ["contact_id", "meeting_id"], name: "index_meeting_attendees_on_contact_id_and_meeting_id", unique: true
     t.index ["contact_id"], name: "index_meeting_attendees_on_contact_id"
     t.index ["meeting_id"], name: "index_meeting_attendees_on_meeting_id"
+  end
+
+  create_table "meeting_links", force: :cascade do |t|
+    t.bigint "from_meeting_id", null: false
+    t.bigint "to_meeting_id", null: false
+    t.bigint "user_id", null: false
+    t.string "link_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from_meeting_id", "to_meeting_id", "link_type"], name: "index_link_uniqueness", unique: true
+    t.index ["from_meeting_id"], name: "index_meeting_links_on_from_meeting_id"
+    t.index ["to_meeting_id"], name: "index_meeting_links_on_to_meeting_id"
+    t.index ["user_id"], name: "index_meeting_links_on_user_id"
   end
 
   create_table "meetings", force: :cascade do |t|
@@ -182,6 +194,9 @@ ActiveRecord::Schema.define(version: 2020_08_16_131400) do
   add_foreign_key "google_calendars", "google_accounts"
   add_foreign_key "meeting_attendees", "contacts"
   add_foreign_key "meeting_attendees", "meetings"
+  add_foreign_key "meeting_links", "meetings", column: "from_meeting_id"
+  add_foreign_key "meeting_links", "meetings", column: "to_meeting_id"
+  add_foreign_key "meeting_links", "users"
   add_foreign_key "meetings", "users"
   add_foreign_key "uploads", "users"
   add_foreign_key "user_exports", "users"

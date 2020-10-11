@@ -1,0 +1,29 @@
+/* https://blog.logrocket.com/creating-beautiful-tooltips-with-only-css/ */
+[data-tooltip] {
+  @apply relative inline-block;
+
+  /* Tooptip */
+  &::before {
+    content: attr(data-tooltip);
+    @apply block absolute transform -translate-x-1/2 p-2 mt-4
+           rounded bg-black text-white text-center z-50 w-full hidden;
+    left: 50%;
+    top: 50%;
+    min-width: 75px;
+    max-width: 200px
+  }
+
+  /* Arrow */
+  &::after {
+    content: "";
+    @apply absolute left-0 transform -translate-x-1/2 hidden;
+    top: 50%;
+    left: 50%;
+    border: 10px solid #000;
+    border-color: transparent transparent black transparent;
+  }
+
+  &:hover {
+    &::before, &::after { @apply block opacity-100; }
+  }
+}

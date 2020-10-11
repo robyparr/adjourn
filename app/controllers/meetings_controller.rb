@@ -54,6 +54,11 @@ class MeetingsController < ApplicationController
     render 'search.json'
   end
 
+  def name_search
+    @results = current_user.meetings.where('title LIKE ?', "%#{params[:q].to_s.downcase}%")
+    render 'name_search.json'
+  end
+
   def download
     exporter = MeetingExporter.new(params[:id])
     send_data exporter.to_pdf,

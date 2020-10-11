@@ -133,4 +133,17 @@ class MeetingTest < ActiveSupport::TestCase
       assert_equal({ contact: ['is already attending this meeting'] }, result.errors.messages)
     end
   end
+
+  describe '#links' do
+    it 'returns all links pointing to a meeting' do
+      meeting   = create(:meeting, user: @user)
+      meeting_2 = create(:meeting, user: @user)
+
+      link   = create(:meeting_link, user: @user, from_meeting: meeting, to_meeting: meeting_2)
+      link_2 = create(:meeting_link, user: @user)
+
+      assert_equal [link], meeting.links
+      assert_equal [link], meeting_2.links
+    end
+  end
 end

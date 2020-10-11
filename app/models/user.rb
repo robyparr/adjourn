@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :google_accounts, dependent: :destroy
   has_many :action_items, through: :meetings
   has_many :exports, class_name: 'User::Export'
+  has_many :meeting_links, class_name: 'Meeting::Link'
 
   class << self
     def from_omniauth(auth)
