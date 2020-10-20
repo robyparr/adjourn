@@ -22,12 +22,12 @@
 
       <a target="_blank"
          rel="noopener noreferrer"
-         class="button mt-4"
+         class="button outline mt-4"
          :href="`/meetings/${meeting.id}/download`">
         Download
       </a>
 
-      <button class="button mt-4" @click="addNewLink = !addNewLink">
+      <button class="button outline mt-4" @click="addNewLink = !addNewLink">
         Link Meeting
       </button>
 

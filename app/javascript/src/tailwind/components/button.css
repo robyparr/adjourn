@@ -17,12 +17,12 @@ button.button { @apply outline-none; }
 }
 
 .button.outline {
-  @apply bg-transparent border border-gray-300 text-black;
-  &:hover { @apply border-transparent bg-gray-400; }
+  @apply bg-transparent border border-gray-400 text-black;
+  &:hover { @apply bg-gray-300; }
 
   &.primary {
     @apply border-primary-500 text-primary-600;
-    &:hover { @apply bg-primary-500 text-white; }
+    &:hover { @apply border-transparent bg-primary-500 text-white; }
   }
 }
 
