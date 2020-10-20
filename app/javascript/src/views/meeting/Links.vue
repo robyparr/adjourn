@@ -1,36 +1,40 @@
 <template>
   <div>
     <h4 v-if="addNewLink || links.length" class="mt-8">Links</h4>
-    <div v-if="addNewLink" class="card mb-2">
-      <div class="card-content">
-        <div class="row mb-0">
-          <div class="column md5">
-            <select @change="(e) => newLink.link_type = e.target.value">
-              <option value="relates_to" :selected="newLink.link_type == 'relates_to'">Relates to</option>
-              <option value="follows_up" :selected="newLink.link_type == 'follows_up'">Follows up</option>
-              <option value="followed_up_by" :selected="newLink.link_type == 'followed_up_by'">Followed up by</option>
-            </select>
-          </div>
-          <div class="column md5">
-            <div v-if="selectedMeeting">
-              <strong class="block -mb-2">{{selectedMeeting.title}}</strong>
-              <span class="text-muted text-sm">{{selectedMeetingDate()}}</span>
+    <div v-if="addNewLink" class="row">
+      <div class="column md6">
+        <div class="card mb-2">
+          <div class="card-content">
+            <div class="row mb-0">
+              <div class="column md5">
+                <select @change="(e) => newLink.link_type = e.target.value">
+                  <option value="relates_to" :selected="newLink.link_type == 'relates_to'">Relates to</option>
+                  <option value="follows_up" :selected="newLink.link_type == 'follows_up'">Follows up</option>
+                  <option value="followed_up_by" :selected="newLink.link_type == 'followed_up_by'">Followed up by</option>
+                </select>
+              </div>
+              <div class="column md5">
+                <div v-if="selectedMeeting">
+                  <strong class="block -mb-2">{{selectedMeeting.title}}</strong>
+                  <span class="text-muted text-sm">{{selectedMeetingDate()}}</span>
+                </div>
+                <autocomplete
+                  v-else
+                  placeholder="Search meeting..."
+                  :url="(q) => `/name-search?q=${encodeURIComponent(q)}`"
+                  :parseResponse="(response) => response.filter(meetingResult => meetingResult.id !== meeting.id)"
+                  :renderResultItem="renderMeetingAutocompleteResultItem"
+                  @select-result="selectMeeting" />
+              </div>
+              <div class="column md2 text-right">
+                <button type="button"
+                        class="button primary"
+                        :disabled="selectedMeeting == null"
+                        @click="createLink">
+                  Link
+                </button>
+              </div>
             </div>
-            <autocomplete
-              v-else
-              placeholder="Search meeting..."
-              :url="(q) => `/name-search?q=${encodeURIComponent(q)}`"
-              :parseResponse="(response) => response.filter(meetingResult => meetingResult.id !== meeting.id)"
-              :renderResultItem="renderMeetingAutocompleteResultItem"
-              @select-result="selectMeeting" />
-          </div>
-          <div class="column md2 text-right">
-            <button type="button"
-                    class="button primary"
-                    :disabled="selectedMeeting == null"
-                    @click="createLink">
-              Link
-            </button>
           </div>
         </div>
       </div>
