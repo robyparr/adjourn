@@ -1,5 +1,5 @@
 <template>
-  <card :class="['agendum', 'relative', { selected: isSelected, 'no-actions': !isExistingAgendum }]"
+  <card :class="['agendum', 'relative', 'overflow-hidden', { selected: isSelected, 'no-actions': !isExistingAgendum }]"
         :hasActions="isExistingAgendum"
         :hasSecondaryInfo="isExistingAgendum"
         @click="selectAgendum"

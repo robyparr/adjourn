@@ -2,7 +2,7 @@
   <div>
     <h4 v-if="addNewLink || links.length" class="mt-8">Links</h4>
     <div v-if="addNewLink" class="row">
-      <div class="column md6">
+      <div class="column md8">
         <div class="card mb-2">
           <div class="card-content">
             <div class="row mb-0">
