@@ -9,6 +9,9 @@
         <slot name="actions"></slot>
       </div>
     </div>
+    <div v-if="hasSecondaryInfo" class="card-secondary-info">
+      <slot name="secondary-info"></slot>
+    </div>
 
     <div class="card-content">
       <slot name="content"></slot>
@@ -23,8 +26,13 @@ export default {
       type: Boolean,
       required: false,
       default: true,
-    }
-  }
+    },
+    hasSecondaryInfo: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
 }
 </script>
 

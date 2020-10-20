@@ -1,6 +1,7 @@
 <template>
   <card :class="['agendum', 'relative', { selected: isSelected, 'no-actions': !isExistingAgendum }]"
         :hasActions="isExistingAgendum"
+        :hasSecondaryInfo="isExistingAgendum"
         @click="selectAgendum"
         :data-testid="`agendum-${agendum.id || 'new'}`">
     <template v-if="isExistingAgendum" slot="title">
@@ -23,6 +24,15 @@
       <button class="button icon" :data-modal="`.confirm-agendum-delete-${agendum.id}`">
         <i class="fa fa-trash"></i>
       </button>
+    </template>
+
+    <template slot="secondary-info">
+      <span v-if="agendumNoteCount" class="space-x-2">
+        <i class="fa fa-xs fa-comment-dots"></i> {{agendumNoteCount}}
+      </span>
+      <span v-if="agendumUploadCount" class="space-x-2">
+        <i class="fa fa-xs fa-paperclip"></i> {{agendumUploadCount}}
+      </span>
     </template>
 
     <template v-if="isExistingAgendum" slot="content">
@@ -85,6 +95,14 @@ export default {
 
     agendumDescription() {
       return marked(this.agendum.description || 'No description')
+    },
+
+    agendumNoteCount() {
+      return this.agendum?.notes?.length
+    },
+
+    agendumUploadCount() {
+      return this.agendum?.uploads?.length
     },
   },
 

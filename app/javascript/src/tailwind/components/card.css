@@ -17,6 +17,12 @@
     }
   }
 
+  .card-secondary-info {
+    @apply flex items-center -mt-2 opacity-50;
+
+    >*:not(:last-child) { @apply mr-2; }
+  }
+
   &.no-actions .card-head .card-title { width: 100%; }
 
   &.selected {
