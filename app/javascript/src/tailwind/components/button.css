@@ -43,4 +43,8 @@ button.button { @apply outline-none; }
   i { @apply pointer-events-none; }
 }
 
+.button.with-icon {
+  .icon { @apply mr-2; }
+}
+
 .button.block { @apply w-full; }

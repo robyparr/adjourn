@@ -15,19 +15,22 @@
         @date-time-updated="updateMeetingFromTo" />
 
       <button @click="emailAttendees"
-              class="button primary mt-4"
+              class="button primary with-icon mt-4"
               data-testid="email-attendees-button">
+        <i class="icon fa fa-paper-plane"></i>
         Email Attendees
       </button>
 
       <a target="_blank"
          rel="noopener noreferrer"
-         class="button outline mt-4"
+         class="button outline with-icon mt-4"
          :href="`/meetings/${meeting.id}/download`">
+        <i class="icon fa fa-file-pdf"></i>
         Download
       </a>
 
-      <button class="button outline mt-4" @click="addNewLink = !addNewLink">
+      <button class="button outline with-icon mt-4" @click="addNewLink = !addNewLink">
+        <i class="icon fa fa-link"></i>
         Link Meeting
       </button>
 
@@ -126,5 +129,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .button.outline:not(:hover) { background-color: white; }
 </style>

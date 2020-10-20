@@ -6,7 +6,7 @@
         <div class="card mb-2">
           <div class="card-content">
             <div class="row mb-0">
-              <div class="column md5">
+              <div class="column md4">
                 <select @change="(e) => newLink.link_type = e.target.value">
                   <option value="relates_to" :selected="newLink.link_type == 'relates_to'">Relates to</option>
                   <option value="follows_up" :selected="newLink.link_type == 'follows_up'">Follows up</option>
@@ -26,11 +26,12 @@
                   :renderResultItem="renderMeetingAutocompleteResultItem"
                   @select-result="selectMeeting" />
               </div>
-              <div class="column md2 text-right">
+              <div class="column md3 text-right">
                 <button type="button"
-                        class="button primary"
+                        class="button primary with-icon"
                         :disabled="selectedMeeting == null"
                         @click="createLink">
+                  <i class="icon fa fa-link"></i>
                   Link
                 </button>
               </div>
