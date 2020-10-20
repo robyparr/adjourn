@@ -26,7 +26,7 @@ module Meetings
 
         new_agendum = meeting.agenda.last
         new_agendum_card_title = find_by_testid("agendum-#{new_agendum.id}").find('.card-title')
-        assert_equal 'test', new_agendum_card_title.text
+        assert_equal 'test', new_agendum_card_title.text.strip
       end
 
       test "Editing an agendum's title" do
