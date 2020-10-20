@@ -55,7 +55,7 @@ class MeetingsController < ApplicationController
   end
 
   def name_search
-    @results = current_user.meetings.where('title LIKE ?', "%#{params[:q].to_s.downcase}%")
+    @results = current_user.meetings.where('title ILIKE ?', "%#{params[:q].to_s}%")
     render 'name_search.json'
   end
 
