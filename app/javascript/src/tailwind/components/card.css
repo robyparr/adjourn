@@ -1,5 +1,5 @@
 .card {
-  @apply bg-white shadow rounded p-4 border border-gray-400;
+  @apply bg-white shadow rounded p-4 border border-gray-400 overflow-hidden;
 
   .card-head {
     @apply flex items-center justify-between;

@@ -5,6 +5,8 @@
     @apply mb-2 mr-2 w-full;
     height: fit-content;
 
+    &:not(.selected) { max-height: 107px; }
+
     &.sortable-ghost {
       @apply bg-primary-400 p-10;
       border: 1px dashed black;
