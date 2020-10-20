@@ -41,10 +41,6 @@ export default {
       this.$store.dispatch('addActionItem', e.target.value)
       e.target.value = ''
     },
-
-    removeActionItem(actionItem) {
-      this.$store.dispatch('removeActionItem', actionItem.id)
-    },
   },
 }
 </script>

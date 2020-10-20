@@ -43,7 +43,7 @@
         <a href="#" :data-close-modal="`.confirm-aa-delete-${actionItem.id}`">
           No
         </a>
-        <button class="button primary ml-4" @click="removeActionItem(actionItem)">
+        <button class="button primary ml-4" @click="removeActionItem">
           Yes
         </button>
       </div>
@@ -94,6 +94,10 @@ export default {
 
     unassignContact(actionItem, contact) {
       this.$store.dispatch('unassignContactFromActionItem', { actionItemID: actionItem.id, email: contact.email })
+    },
+
+    removeActionItem() {
+      this.$store.dispatch('removeActionItem', this.actionItem.id)
     },
   },
 }
