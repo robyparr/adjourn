@@ -4,4 +4,6 @@
   &.primary { @apply bg-primary-100 text-primary-800; }
   &.error { @apply bg-red-200 text-red-600; }
   &.success { @apply bg-green-200 text-green-600; }
+
+  &.small { @apply flex items-center justify-center text-xs w-5 h-5 p-0; }
 }

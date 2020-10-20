@@ -8,19 +8,24 @@
     <div :class="['column lg3 meeting-sidebar', { active: active }]">
       <div class="row tabs">
         <div id="attendees-tab"
-             :class="['tab column sm4', { selected: selectedTab === 'attendees' }]"
-             @click="selectTab('attendees')">
-          <i class="fa fa-users"></i>
+             :class="['tab column sm4 relative', { selected: selectedTab === 'attendees' }]"
+             @click="selectTab('attendees')"
+             data-tooltip="Attendees">
+          <i :class="['fa fa-lg fa-users', { 'opacity-50': selectedTab !== 'attendees' }]"></i>
+          <span class="badge small absolute" style="top: 10%; left: 55%;">{{attendees.length}}</span>
         </div>
         <div id="action-items-tab"
-             :class="['tab column sm4', { selected: selectedTab === 'actionItems' }]"
-             @click="selectTab('actionItems')">
-          <i class="fa fa-check"></i>
+             :class="['tab column sm4 relative', { selected: selectedTab === 'actionItems' }]"
+             @click="selectTab('actionItems')"
+             data-tooltip="Action Items">
+          <i :class="['fa fa-lg fa-check', { 'opacity-50': selectedTab !== 'actionItems' }]"></i>
+          <span class="badge small absolute" style="top: 10%; left: 55%;">{{actionItems.length}}</span>
         </div>
         <div id="agendum-details-tab"
              :class="['tab column sm4', { selected: selectedTab === 'agendumDetails' }]"
-             @click="selectTab('agendumDetails')">
-          <i class="fa fa-book-open"></i>
+             @click="selectTab('agendumDetails')"
+             data-tooltip="Agendum Details">
+          <i :class="['fa fa-lg fa-book-open', { 'opacity-50': selectedTab !== 'agendumDetails' }]"></i>
         </div>
       </div>
       <div class="row">
@@ -70,7 +75,11 @@ export default {
       return this.tabs[this.selectedTab]
     },
 
-    ...mapState(['selectedAgendumID'])
+    ...mapState({
+      selectedAgendumID: state => state.selectedAgendumID,
+      actionItems: state => state.action_items.action_items,
+      attendees: state => state.attendees.attendees,
+    })
   },
 
   methods: {

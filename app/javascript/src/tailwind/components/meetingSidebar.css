@@ -15,10 +15,12 @@
   background-color: #f9f9f9;
 
   .tabs {
-    @apply p-0 m-0 text-center bg-white border-t;
+    @apply p-0 m-0 bg-white border-t;
 
     .tab {
-      @apply p-4 border-b;
+      @apply flex items-center justify-center p-4 border-b;
+
+      &:not(.selected) { @apply cursor-pointer; }
     }
   }
 
