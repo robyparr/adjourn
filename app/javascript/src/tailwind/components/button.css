@@ -37,8 +37,8 @@ button.button { @apply outline-none; }
 }
 
 .button.icon {
-  @apply bg-transparent border-none shadow-none px-2 py-1;
-  &:hover { @apply bg-gray-300 border-gray-400 shadow; }
+  @apply bg-transparent border-none shadow-none px-2 py-1 opacity-50;
+  &:hover { @apply bg-gray-300 border-gray-400 shadow opacity-100; }
 
   i { @apply pointer-events-none; }
 }

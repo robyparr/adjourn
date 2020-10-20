@@ -42,7 +42,8 @@
                      editorClass="-mx-4 -mb-4"
                      @editor-changed="updateAgendumDescription"
                      @click="selectAgendum">
-        <p slot="display" class="markdown-body" v-html="agendumDescription" />
+        <p v-if="isSelected" slot="display" class="markdown-body" v-html="agendumDescription" />
+        <p v-else slot="display">{{strippedAgendumDescription}}</p>
       </inline-editor>
 
       <div :class="['modal' , `confirm-agendum-delete-${agendum.id}`]">
@@ -95,6 +96,13 @@ export default {
 
     agendumDescription() {
       return marked(this.agendum.description || 'No description')
+    },
+
+    strippedAgendumDescription() {
+      const htmlEl = document.createElement('div')
+      htmlEl.innerHTML = this.agendumDescription
+
+      return htmlEl.innerText
     },
 
     agendumNoteCount() {

@@ -129,5 +129,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .button.outline:not(:hover) { background-color: white; }
+  .button.outline {
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.80);
+
+    &:not(:hover) {
+      background-color: white;
+    }
+  }
 </style>

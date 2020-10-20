@@ -11,21 +11,21 @@
              :class="['tab column sm4 relative', { selected: selectedTab === 'attendees' }]"
              @click="selectTab('attendees')"
              data-tooltip="Attendees">
-          <i :class="['fa fa-lg fa-users', { 'opacity-50': selectedTab !== 'attendees' }]"></i>
+          <i class="fa fa-lg fa-users"></i>
           <span class="badge small absolute" style="top: 10%; left: 55%;">{{attendees.length}}</span>
         </div>
         <div id="action-items-tab"
              :class="['tab column sm4 relative', { selected: selectedTab === 'actionItems' }]"
              @click="selectTab('actionItems')"
              data-tooltip="Action Items">
-          <i :class="['fa fa-lg fa-check', { 'opacity-50': selectedTab !== 'actionItems' }]"></i>
+          <i class="fa fa-lg fa-check"></i>
           <span class="badge small absolute" style="top: 10%; left: 55%;">{{actionItems.length}}</span>
         </div>
         <div id="agendum-details-tab"
              :class="['tab column sm4', { selected: selectedTab === 'agendumDetails' }]"
              @click="selectTab('agendumDetails')"
              data-tooltip="Agendum Details">
-          <i :class="['fa fa-lg fa-book-open', { 'opacity-50': selectedTab !== 'agendumDetails' }]"></i>
+          <i class="fa fa-lg fa-book-open"></i>
         </div>
       </div>
       <div class="row">

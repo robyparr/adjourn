@@ -53,7 +53,7 @@
             <p slot="display" class="markdown-body" v-html="renderedNoteContent(note)" />
           </inline-editor>
 
-          <button class="list-floating-text">
+          <button class="button icon list-floating-text">
             <i class="fa fa-trash"
                :data-modal="`.confirm-agendum-note-delete-${note.id}`">
             </i>
