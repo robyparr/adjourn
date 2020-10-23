@@ -5,6 +5,7 @@
 # This workflow will download a prebuilt Ruby version, install dependencies and run tests with Rake
 # For more information see: https://github.com/marketplace/actions/setup-ruby-jruby-and-truffleruby
 
+# Reference: https://medium.com/@OwenTran/github-workflow-for-rails-ci-34209a53d19e
 name: Run Tests
 
 on:
@@ -24,11 +25,11 @@ jobs:
         env:
           POSTGRES_PASSWORD: password
         options: >-
-          --health-cmd pg_isready 
-          --health-interval 10s 
-          --health-timeout 5s 
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
           --health-retries 5
-           
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -43,7 +44,7 @@ jobs:
         PG_DATABASE: postgres
         PG_HOST: localhost
         PG_USER: postgres
-        PG_PASSWORD: postgres
+        PG_PASSWORD: password
         RAILS_ENV: test
         DISABLE_SPRING: 1
       run: bundle exec rails test && bundle exec rails test:system
