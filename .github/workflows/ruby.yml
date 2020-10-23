@@ -67,3 +67,6 @@ jobs:
     - name: Security Checks
       run: |
         bundle exec brakeman -z
+        gem install bundle-audit
+        bundle-audit update
+        bundle-audit --ignore CVE-2015-9284

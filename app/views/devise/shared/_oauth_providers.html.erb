@@ -4,7 +4,7 @@
 </div>
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to omniauth_authorize_path(resource_name, provider), class: "omniauth-button" do %>
+    <%= link_to omniauth_authorize_path(resource_name, provider), class: "omniauth-button", method: :post do %>
       <%= image_tag "btn_#{provider}.png", class: 'normal' %>
       <%= image_tag "btn_#{provider}_hover.png", class: 'hover' %>
       <%= image_tag "btn_#{provider}_focus.png", class: 'pressed' %>
