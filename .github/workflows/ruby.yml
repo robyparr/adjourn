@@ -37,8 +37,16 @@ jobs:
       with:
        # ruby-version: 2.7.1 # Note: Not needed because we have a .ruby-version file
         bundler-cache: true
+    - name: Set up Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.13.0
     - name: Install dependencies
-      run: bundle install
+      run: |
+        bundle install
+        yarn install
+    - name: Build assets
+      run: SECRET_KEY_BASE=test bundle exec rake assets:precompile
     - name: Run tests
       env:
         PG_DATABASE: postgres
