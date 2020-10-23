@@ -138,7 +138,7 @@ export default {
 
       const templateData = {
         title: _truncate(meeting.title),
-        start_date: dayjs(meeting.start_date).format('MMMM DD, YYYY hh:mm A'),
+        start_date: dayjs(meeting.start_date).format('MMM DD, YYYY hh:mm A'),
       }
       return template(templateData)
     },
