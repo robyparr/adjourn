@@ -55,7 +55,12 @@ class MeetingsController < ApplicationController
   end
 
   def name_search
-    @results = current_user.meetings.where('title ILIKE ?', "%#{params[:q].to_s}%")
+    @results =
+      current_user
+        .meetings
+        .where('title ILIKE ?', "%#{params[:q].to_s}%")
+        .order(start_date: :desc)
+        .limit(10)
     render 'name_search.json'
   end
 
