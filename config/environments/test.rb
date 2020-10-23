@@ -36,6 +36,7 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
   config.action_mailer.default_url_options = {
+    from: 'adjourn@example.com',
     host: 'localhost',
     port: 5000
   }
