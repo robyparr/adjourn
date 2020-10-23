@@ -64,3 +64,6 @@ jobs:
       with:
         name: code-coverage
         path: coverage/
+    - name: Security Checks
+      run: |
+        bundle exec brakeman -z
