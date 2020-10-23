@@ -17,8 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :google_accounts, only: %w(index new destroy) do
+  resources :google_accounts, only: %w(index destroy) do
     collection do
+      post '/new', to: 'google_accounts#new'
       get '/callback', to: 'google_accounts#create'
     end
   end
