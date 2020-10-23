@@ -59,3 +59,8 @@ jobs:
       run: |
         bin/rails db:setup
         bundle exec rails test && bundle exec rails test:system
+    - name: Upload Code Coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: code-coverage
+        path: coverage/
