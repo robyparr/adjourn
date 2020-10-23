@@ -47,4 +47,6 @@ jobs:
         PG_PASSWORD: password
         RAILS_ENV: test
         DISABLE_SPRING: 1
-      run: bundle exec rails test && bundle exec rails test:system
+      run: |
+        bin/rails db:setup
+        bundle exec rails test && bundle exec rails test:system
