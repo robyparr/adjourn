@@ -35,7 +35,7 @@ gem 'sorbet-runtime',                 '~> 0.5.5943'
 gem 'sorbet-rails',                   '~> 0.7.1'
 
 group :production do
-  gem 'scout_apm'
+  gem 'skylight', '~> 4.3', '>= 4.3.1'
 end
 
 group :development, :test do
