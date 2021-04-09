@@ -276,7 +276,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redcarpet (3.5.0)
+    redcarpet (3.5.1)
     regexp_parser (1.7.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -340,6 +340,13 @@ GEM
       sorbet-runtime (>= 0.5)
     sorbet-runtime (0.5.5943)
     sorbet-static (0.5.5943-universal-darwin-14)
+    sorbet-static (0.5.5943-universal-darwin-15)
+    sorbet-static (0.5.5943-universal-darwin-16)
+    sorbet-static (0.5.5943-universal-darwin-17)
+    sorbet-static (0.5.5943-universal-darwin-18)
+    sorbet-static (0.5.5943-universal-darwin-19)
+    sorbet-static (0.5.5943-universal-darwin-20)
+    sorbet-static (0.5.5943-x86_64-linux)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -421,7 +428,7 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 6.0, >= 6.0.2.2)
   rails-controller-testing
-  redcarpet (~> 3.3, >= 3.3.4)
+  redcarpet (~> 3.5)
   rubocop
   sass-rails (~> 5.0)
   selenium-webdriver
