@@ -8,7 +8,7 @@ end
 ruby '~> 2.7.1'
 
 gem 'rails',              '~> 6.0', '>= 6.0.2.2'
-gem 'puma',               '~> 3.7'
+gem 'puma',               '~> 4.3'
 gem 'sass-rails',         '~> 5.0'
 gem 'uglifier',           '>= 1.3.0'
 gem 'webpacker',          '~> 4.0'
